@@ -1,0 +1,3 @@
+# Tài liệu dự án
+
+Tiên phụ trách Project Scope, kiến trúc và quy ước chung; Hồng bổ sung Data Dictionary và manifest nguồn. Scope v1.1 vẫn chờ nhóm phê duyệt; snapshot và thiết kế chi tiết phải được xác nhận bằng dữ liệu thực tế.
