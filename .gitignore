@@ -1,0 +1,33 @@
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Local data; keep folder documentation
+/data/raw/*
+!/data/raw/README.md
+/data/processed/*
+!/data/processed/README.md
+
+# Logs, database exports and local Power BI cache
+*.log
+*.sql.gz
+*.dump
+*.pbix.autosave
+~$*
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
