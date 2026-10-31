@@ -1,0 +1,124 @@
+﻿source,file_name,column,dtype_initial,rows_in_source,columns_in_source,null_count,null_pct,unique_non_null,sample_values,date_min,date_max
+Listings,listings.csv.gz,id,int64,3208,90,0,0.0,3208,71609 | 71896 | 71903,,
+Listings,listings.csv.gz,listing_url,str,3208,90,0,0.0,3208,https://www.airbnb.com/rooms/71609 | https://www.airbnb.com/rooms/71896 | https://www.airbnb.com/rooms/71903,,
+Listings,listings.csv.gz,scrape_id,int64,3208,90,0,0.0,1,20260923225116,,
+Listings,listings.csv.gz,last_scraped,str,3208,90,0,0.0,2,2026-09-26 | 2026-09-25,2026-09-25,2026-09-26
+Listings,listings.csv.gz,source,str,3208,90,1470,45.8229,1,previous scrape,,
+Listings,listings.csv.gz,name,str,3208,90,0,0.0,3122,Ensuite Room (Room 1 & 2) near EXPO | B&B  Room 1 near Airport & EXPO | Room 2-near Airport & EXPO,,
+Listings,listings.csv.gz,description,str,3208,90,21,0.6546,1972,"For 3 rooms.Book room 1&2 and room 4 | <b>The space</b><br />Vocational Stay Deluxe Bedroom in Singapore.(Near Airport) <br /> <br />Located Between  <br /> - Simei and Expo Mrt  <br /> - 2 bustop distance or 10-15min walking distant to Simei MRT. <br /> - Bus no 2,5,9,12,24 38. <br /> <br />Services provided <br /> - Daily Cleaning of Room <br /> - Free Usage of Ironing and Washing Machine (Detergent is not provided) <br /> - Laundry (Additional Charges) <br /> - Dryer (Additional Charges)  <br /> - Change of towels, toiletries & change of bedding for extended stay.  <br /> <br />Neighbourhood Consists of <br /> -A residential area <br /> -Neighbourhood Schools  <br /> -East Point Shopping Mall <br />-Changi City Point (Near Expo)  <br />-Tampines Business & Shopping District (Tampines Mall, Tampines 1 & Century Square) <br /> -Tampines Block 201, Housing Estate (Singaporean Cultural Spot) <br /> -Changi Simei Community Centre <br />   ~ Gym (S$3.50 per entry) <br />   ~ Badminton Court (S$3 per hour) <br /> -Neighbourhood | Like your own home, 24hrs access.",,
+Listings,listings.csv.gz,neighborhood_overview,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,picture_url,str,3208,90,0,0.0,3037,https://a0.muscache.com/pictures/24453191/35803acb_original.jpg | https://a0.muscache.com/pictures/2440674/ac4f4442_original.jpg | https://a0.muscache.com/pictures/568743/7bc623e9_original.jpg,,
+Listings,listings.csv.gz,host_id,int64,3208,90,0,0.0,761,367042 | 1521514 | 1975201,,
+Listings,listings.csv.gz,host_url,str,3208,90,0,0.0,761,https://www.airbnb.com/users/show/367042 | https://www.airbnb.com/users/show/1521514 | https://www.airbnb.com/users/show/1975201,,
+Listings,listings.csv.gz,host_profile_id,int64,3208,90,0,0.0,761,1462516725725391209 | 1462518637211194506 | 1462583187367506541,,
+Listings,listings.csv.gz,host_profile_url,str,3208,90,0,0.0,761,https://www.airbnb.com/users/profile/1462516725725391209 | https://www.airbnb.com/users/profile/1462518637211194506 | https://www.airbnb.com/users/profile/1462583187367506541,,
+Listings,listings.csv.gz,host_name,str,3208,90,0,0.0,655,Belinda | Elizbeth | Adi,,
+Listings,listings.csv.gz,host_since,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,hosts_time_as_user_years,int64,3208,90,0,0.0,17,15 | 14 | 13,,
+Listings,listings.csv.gz,hosts_time_as_user_months,int64,3208,90,0,0.0,12,7 | 9 | 6,,
+Listings,listings.csv.gz,hosts_time_as_host_years,int64,3208,90,0,0.0,16,15 | 14 | 13,,
+Listings,listings.csv.gz,hosts_time_as_host_months,int64,3208,90,0,0.0,12,7 | 9 | 6,,
+Listings,listings.csv.gz,host_location,str,3208,90,1322,41.2095,32,"Singapore | Barcelona, Spain | Berlin, Germany",,
+Listings,listings.csv.gz,host_about,str,3208,90,1292,40.2743,343,"Hi My name is Belinda -Housekeeper 
+
+I would like to welcome you to my ""Homestay Website"" 
+
+
+Accomodation for: 
+
+- an extended stay for studies, min 3 months
+- business,
+- training in singapore
+ 
+
+Room rental are available for min 3month or longer .Room rental depending on the choice of a common sharing room (family suite) ,a standard room,a deluxe room or a triplet room which varies in sizes. We hope to give you a warm home feeling here with sweet dreams. Please forgive us if we cannot meet your  high expectations.We will try our best to make your stay as comfortable as a homestay.
+
+Regards
+Belinda | Hello !
+I am Elizabeth from Singapore.
+
+Looking forward to hosting you in our lovely little sunny island. | I like travelling a lot, as well as good food. 
+
+Singapore is not only a place for the future, but has an incredible rich history, which I think people should know about. Contact me if you have any questions!",,
+Listings,listings.csv.gz,host_response_time,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,host_response_rate,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,host_acceptance_rate,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,host_is_superhost,str,3208,90,0,0.0,2,f | t,,
+Listings,listings.csv.gz,host_thumbnail_url,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,host_picture_url,str,3208,90,0,0.0,753,https://a0.muscache.com/im/users/367042/profile_pic/1382521511/original.jpg?aki_policy=profile_x_medium | https://a0.muscache.com/im/users/1521514/profile_pic/1324398791/original.jpg?aki_policy=profile_x_medium | https://a0.muscache.com/im/users/1975201/profile_pic/1407484173/original.jpg?aki_policy=profile_x_medium,,
+Listings,listings.csv.gz,host_neighbourhood,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,host_listings_count,int64,3208,90,0,0.0,39,6 | 7 | 1,,
+Listings,listings.csv.gz,host_total_listings_count,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,host_verifications,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,host_has_profile_pic,str,3208,90,0,0.0,2,t | f,,
+Listings,listings.csv.gz,host_identity_verified,str,3208,90,0,0.0,2,t | f,,
+Listings,listings.csv.gz,neighbourhood,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,neighbourhood_cleansed,str,3208,90,0,0.0,42,Tampines | Newton | River Valley,,
+Listings,listings.csv.gz,neighbourhood_group_cleansed,str,3208,90,0,0.0,5,East Region | Central Region | North-East Region,,
+Listings,listings.csv.gz,latitude,float64,3208,90,0,0.0,2170,1.34537 | 1.34754 | 1.34531,,
+Listings,listings.csv.gz,longitude,float64,3208,90,0,0.0,2252,103.95887 | 103.95958 | 103.961,,
+Listings,listings.csv.gz,property_type,str,3208,90,0,0.0,43,Private room in villa | Private room in home | Private room in rental unit,,
+Listings,listings.csv.gz,room_type,str,3208,90,0,0.0,4,Private room | Entire home/apt | Hotel room,,
+Listings,listings.csv.gz,accommodates,int64,3208,90,0,0.0,14,2 | 1 | 4,,
+Listings,listings.csv.gz,bathrooms,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,bathrooms_text,str,3208,90,10,0.3117,36,1 private bath | Shared half-bath | 1 shared bath,,
+Listings,listings.csv.gz,bedrooms,float64,3208,90,2,0.0623,10,2.0 | 1.0 | 3.0,,
+Listings,listings.csv.gz,beds,float64,3208,90,154,4.8005,16,3.0 | 1.0 | 2.0,,
+Listings,listings.csv.gz,amenities,str,3208,90,0,0.0,2137,"[""Refrigerator"", ""Kitchen"", ""Luggage dropoff allowed"", ""Smoke alarm"", ""Washer"", ""Fire extinguisher"", ""Free parking on premises"", ""Wifi"", ""Dryer"", ""Private backyard \u2013 Fully fenced"", ""TV"", ""Fire pit"", ""Keypad"", ""Children\u2019s books and toys"", ""Air conditioning"", ""Hair dryer"", ""Shampoo"", ""Outdoor dining area"", ""Essentials"", ""Outdoor kitchen"", ""Long term stays allowed"", ""Hangers"", ""Hot water"", ""BBQ grill"", ""Iron"", ""Free street parking"", ""Private entrance"", ""Self check-in"", ""Outdoor furniture"", ""Cooking basics"", ""Dedicated workspace"", ""Shared hot tub""] | [""Refrigerator"", ""Kitchen"", ""Smoke alarm"", ""Washer"", ""Lock on bedroom door"", ""AC - split type ductless system"", ""Free parking on premises"", ""Cleaning products"", ""Wifi"", ""Dryer"", ""Coffee maker"", ""TV"", ""Private backyard \u2013 Fully fenced"", ""Fire pit"", ""Keypad"", ""Hair dryer"", ""Shampoo"", ""Outdoor dining area"", ""Dishes and silverware"", ""Shower gel"", ""Essentials"", ""Outdoor kitchen"", ""Hangers"", ""Bed linens"", ""Hot water"", ""BBQ grill"", ""Paid parking on premises"", ""Extra pillows and blankets"", ""Iron"", ""Free street parking"", ""Private entrance"", ""Self check-in"", ""Outdoor furniture"", ""Drying rack for clothing"", ""Cooking basics"", ""Dedicated workspace"", ""Shared hot tub""] | [""Kitchen"", ""Smoke alarm"", ""Washer"", ""Lock on bedroom door"", ""AC - split type ductless system"", ""Free parking on premises"", ""Wifi"", ""Dryer"", ""Coffee maker"", ""TV"", ""Fire pit"", ""Keypad"", ""Hair dryer"", ""Shampoo"", ""Outdoor dining area"", ""Essentials"", ""Outdoor kitchen"", ""Hot water"", ""BBQ grill"", ""Heating"", ""Free street parking"", ""Self check-in"", ""Outdoor furniture"", ""Cooking basics"", ""Shared hot tub""]",,
+Listings,listings.csv.gz,price,str,3208,90,480,14.9626,1872,$86.63 | $44.26 | $80.86,,
+Listings,listings.csv.gz,price_quote_checkin_date,str,3208,90,318,9.9127,133,2026-09-26 | 2026-10-03 | 2026-10-01,,
+Listings,listings.csv.gz,price_quote_checkout_date,str,3208,90,318,9.9127,191,2026-12-27 | 2027-01-03 | 2027-01-01,,
+Listings,listings.csv.gz,price_quote_total_price,float64,3208,90,483,15.0561,2011,7969.93 | 4072.04 | 7438.72,,
+Listings,listings.csv.gz,price_quote_price_per_night,float64,3208,90,483,15.0561,1871,86.63 | 44.26 | 80.86,,
+Listings,listings.csv.gz,price_quote_raw,str,3208,90,318,9.9127,2485,"{""quote"": {""taxes"": null, ""currency"": ""SGD"", ""date_match"": null, ""service_fee"": null, ""total_price"": ""7969.929333333333333333333334"", ""cleaning_fee"": null, ""is_available"": true, ""discount_amount"": null, ""price_per_night"": ""86.62966666666666666666666667"", ""nightly_subtotal"": null, ""is_monthly_priced"": true, ""discounted_subtotal"": ""2598.89"", ""raw_price_line_items"": [{""amount"": ""2687.32"", ""item_type"": ""other"", ""description"": ""Average monthly price"", ""price_string"": ""$2,687.32 SGD""}, {""amount"": ""-88.43"", ""item_type"": ""other"", ""description"": ""Airbnb monthly stay savings"", ""price_string"": ""-$88.43 SGD""}, {""amount"": ""2598.89"", ""item_type"": ""discounted_subtotal"", ""description"": ""Price after discount"", ""price_string"": ""$2,598.89 SGD""}], ""returned_checkin_date"": null, ""requested_checkin_date"": ""2026-09-26"", ""returned_checkout_date"": null, ""requested_checkout_date"": ""2026-12-27""}} | {""quote"": {""taxes"": null, ""currency"": ""SGD"", ""date_match"": null, ""service_fee"": null, ""total_price"": ""4072.042666666666666666666666"", ""cleaning_fee"": null, ""is_available"": true, ""discount_amount"": ""239.73"", ""price_per_night"": ""44.26133333333333333333333333"", ""nightly_subtotal"": null, ""is_monthly_priced"": true, ""discounted_subtotal"": ""1327.84"", ""raw_price_line_items"": [{""amount"": ""1612.72"", ""item_type"": ""other"", ""description"": ""Average monthly price"", ""price_string"": ""$1,612.72 SGD""}, {""amount"": ""-239.73"", ""item_type"": ""discount_amount"", ""description"": ""Monthly stay discount"", ""price_string"": ""-$239.73 SGD""}, {""amount"": ""-45.15"", ""item_type"": ""other"", ""description"": ""Airbnb monthly stay savings"", ""price_string"": ""-$45.15 SGD""}, {""amount"": ""1327.84"", ""item_type"": ""discounted_subtotal"", ""description"": ""Price after discount"", ""price_string"": ""$1,327.84 SGD""}], ""returned_checkin_date"": null, ""requested_checkin_date"": ""2026-09-26"", ""returned_checkout_date"": null, ""requested_checkout_date"": ""2026-12-27""}} | {""quote"": {""taxes"": null, ""currency"": ""SGD"", ""date_match"": null, ""service_fee"": null, ""total_price"": ""7438.721333333333333333333334"", ""cleaning_fee"": null, ""is_available"": true, ""discount_amount"": ""276.32"", ""price_per_night"": ""80.85566666666666666666666667"", ""nightly_subtotal"": null, ""is_monthly_priced"": true, ""discounted_subtotal"": ""2425.67"", ""raw_price_line_items"": [{""amount"": ""2784.78"", ""item_type"": ""other"", ""description"": ""Average monthly price"", ""price_string"": ""$2,784.78 SGD""}, {""amount"": ""-276.32"", ""item_type"": ""discount_amount"", ""description"": ""Monthly stay discount"", ""price_string"": ""-$276.32 SGD""}, {""amount"": ""-82.79"", ""item_type"": ""other"", ""description"": ""Airbnb monthly stay savings"", ""price_string"": ""-$82.79 SGD""}, {""amount"": ""2425.67"", ""item_type"": ""discounted_subtotal"", ""description"": ""Price after discount"", ""price_string"": ""$2,425.67 SGD""}], ""returned_checkin_date"": null, ""requested_checkin_date"": ""2026-09-26"", ""returned_checkout_date"": null, ""requested_checkout_date"": ""2026-12-27""}}",,
+Listings,listings.csv.gz,minimum_nights,float64,3208,90,197,6.1409,46,92.0 | 93.0 | 730.0,,
+Listings,listings.csv.gz,maximum_nights,float64,3208,90,197,6.1409,61,1125.0 | 180.0 | 365.0,,
+Listings,listings.csv.gz,minimum_minimum_nights,float64,3208,90,197,6.1409,46,92.0 | 93.0 | 730.0,,
+Listings,listings.csv.gz,maximum_minimum_nights,float64,3208,90,197,6.1409,40,92.0 | 93.0 | 730.0,,
+Listings,listings.csv.gz,minimum_maximum_nights,float64,3208,90,197,6.1409,62,1125.0 | 180.0 | 365.0,,
+Listings,listings.csv.gz,maximum_maximum_nights,float64,3208,90,197,6.1409,61,1125.0 | 180.0 | 365.0,,
+Listings,listings.csv.gz,minimum_nights_avg_ntm,float64,3208,90,0,0.0,80,92.0 | 93.0 | 730.0,,
+Listings,listings.csv.gz,maximum_nights_avg_ntm,float64,3208,90,0,0.0,215,1125.0 | 180.0 | 365.0,,
+Listings,listings.csv.gz,calendar_updated,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,has_availability,str,3208,90,42,1.3092,2,t | f,,
+Listings,listings.csv.gz,availability_30,int64,3208,90,0,0.0,31,30 | 23 | 0,,
+Listings,listings.csv.gz,availability_60,int64,3208,90,0,0.0,61,60 | 53 | 0,,
+Listings,listings.csv.gz,availability_90,int64,3208,90,0,0.0,91,90 | 83 | 0,,
+Listings,listings.csv.gz,availability_365,int64,3208,90,0,0.0,287,90 | 365 | 83,,
+Listings,listings.csv.gz,calendar_last_scraped,str,3208,90,0,0.0,2,2026-09-26 | 2026-09-25,2026-09-25,2026-09-26
+Listings,listings.csv.gz,number_of_reviews,int64,3208,90,0,0.0,170,19 | 24 | 46,,
+Listings,listings.csv.gz,number_of_reviews_ltm,int64,3208,90,0,0.0,76,0 | 17 | 43,,
+Listings,listings.csv.gz,number_of_reviews_l30d,int64,3208,90,0,0.0,25,0 | 4 | 1,,
+Listings,listings.csv.gz,availability_eoy,int64,3208,90,0,0.0,97,90 | 97 | 83,,
+Listings,listings.csv.gz,number_of_reviews_ly,int64,3208,90,0,0.0,69,0 | 1 | 18,,
+Listings,listings.csv.gz,estimated_occupancy_l365d,int64,3208,90,0,0.0,51,0 | 102 | 255,,
+Listings,listings.csv.gz,estimated_revenue_l365d,float64,3208,90,480,14.9626,709,0.0 | 24072.0 | 37187.0,,
+Listings,listings.csv.gz,first_review,str,3208,90,1369,42.6746,1300,2011-12-19 | 2011-07-30 | 2011-05-04,2011-05-04,2026-09-21
+Listings,listings.csv.gz,last_review,str,3208,90,1369,42.6746,1039,2020-01-17 | 2019-10-13 | 2020-01-09,2015-06-08,2026-09-25
+Listings,listings.csv.gz,review_scores_rating,float64,3208,90,1369,42.6746,130,4.44 | 4.16 | 4.41,,
+Listings,listings.csv.gz,review_scores_accuracy,float64,3208,90,1369,42.6746,130,4.37 | 4.22 | 4.39,,
+Listings,listings.csv.gz,review_scores_cleanliness,float64,3208,90,1369,42.6746,133,4.0 | 4.09 | 4.52,,
+Listings,listings.csv.gz,review_scores_checkin,float64,3208,90,1369,42.6746,88,4.63 | 4.43 | 4.5,,
+Listings,listings.csv.gz,review_scores_communication,float64,3208,90,1369,42.6746,114,4.78 | 4.43 | 4.64,,
+Listings,listings.csv.gz,review_scores_location,float64,3208,90,1370,42.7057,115,4.26 | 4.17 | 4.5,,
+Listings,listings.csv.gz,review_scores_value,float64,3208,90,1370,42.7057,137,4.32 | 4.04 | 4.36,,
+Listings,listings.csv.gz,license,str,3208,90,1471,45.8541,138,S0399 | S0448 | Authorised Serviced Apartment,,
+Listings,listings.csv.gz,instant_bookable,float64,3208,90,3208,100.0,0,,,
+Listings,listings.csv.gz,calculated_host_listings_count,int64,3208,90,0,0.0,34,5 | 7 | 1,,
+Listings,listings.csv.gz,calculated_host_listings_count_entire_homes,int64,3208,90,0,0.0,23,0 | 1 | 2,,
+Listings,listings.csv.gz,calculated_host_listings_count_private_rooms,int64,3208,90,0,0.0,26,5 | 6 | 1,,
+Listings,listings.csv.gz,calculated_host_listings_count_shared_rooms,int64,3208,90,0,0.0,9,0 | 4 | 1,,
+Listings,listings.csv.gz,reviews_per_month,float64,3208,90,1369,42.6746,276,0.11 | 0.13 | 0.25,,
+Calendar,calendar.csv.gz,listing_id,int64,1170950,5,0,0.0,3208,71609 | 71896 | 71903,,
+Calendar,calendar.csv.gz,date,str,1170950,5,0,0.0,366,2026-09-26 | 2026-09-27 | 2026-09-28,2026-09-25,2027-09-25
+Calendar,calendar.csv.gz,available,str,1170950,5,0,0.0,2,t | f,,
+Calendar,calendar.csv.gz,minimum_nights,int64,1170950,5,0,0.0,51,92 | 93 | 730,,
+Calendar,calendar.csv.gz,maximum_nights,int64,1170950,5,0,0.0,496,1125 | 180 | 365,,
+Reviews,reviews.csv.gz,listing_id,int64,46000,6,0,0.0,1839,71609 | 71896 | 7250803,,
+Reviews,reviews.csv.gz,id,int64,46000,6,0,0.0,41191,793880 | 1731810 | 2162194,,
+Reviews,reviews.csv.gz,date,str,46000,6,0,0.0,4517,2011-12-19 | 2012-07-17 | 2012-09-01,2011-05-04,2026-09-25
+Reviews,reviews.csv.gz,reviewer_id,int64,46000,6,0,0.0,38863,1456140 | 1804182 | 3113461,,
+Reviews,reviews.csv.gz,reviewer_name,str,46000,6,0,0.0,17583,Max | Jaiya | Zahra,,
+Reviews,reviews.csv.gz,comments,str,46000,6,17,0.037,39417,"The rooms were clean and tidy. Beds very comfortable.<br/>Thank you Belinda. | Good space and quite an interesting home in a quiet location - a lovely park across the road which is rare in Singapore. Nice place to stay if you are in big group as we were. | It was a comfortable place. Belinda was a kind and helpful woman who helped us have a nice accommodation there and find tourism sites easily. The place was beautiful and calm. The maids were helpful too.<br/>Totally it was very nice trip. BEAUTIFUL SINGAPORE",,
+Neighbourhoods,neighbourhoods.csv,neighbourhood_group,str,55,2,0,0.0,5,Central Region | East Region | North-East Region,,
+Neighbourhoods,neighbourhoods.csv,neighbourhood,str,55,2,0,0.0,55,Bishan | Bukit Merah | Bukit Timah,,
