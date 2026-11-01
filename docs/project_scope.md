@@ -169,7 +169,7 @@ Nguồn: Inside Airbnb – Singapore.
 | Tập dữ liệu | Vai trò |
 | --- | --- |
 | Listings | Đặc điểm tin đăng, loại phòng, khu vực, giá niêm yết và các thông tin đánh giá |
-| Calendar | Dữ liệu theo ngày, trạng thái sẵn có và giá theo ngày |
+| Calendar | Dữ liệu listing theo ngày: trạng thái sẵn có và số đêm lưu trú tối thiểu/tối đa; file đã tải không có cột giá |
 | Reviews | Các đánh giá lịch sử liên quan đến tin đăng |
 | Neighbourhoods | Thông tin phân loại khu vực địa lý |
 
@@ -277,7 +277,7 @@ Quy ước tính toán:
 
 - Mỗi KPI cần có tên, định nghĩa, công thức, đơn vị, nguồn, grain, phạm vi lọc và quy tắc xử lý NULL.
 
-- Median Listed Price sử dụng giá niêm yết từ Listings; giá thay đổi theo ngày trong Calendar chỉ được khai thác riêng nếu nhóm quyết định mở rộng.
+- Median Listed Price sử dụng giá niêm yết từ Listings. Calendar trong bộ dữ liệu đã tải không có cột giá, nên dự án không phân tích giá theo ngày từ Calendar.
 
 - Average Review Score không được suy ra trực tiếp từ số lượng review hoặc nội dung bình luận.
 
