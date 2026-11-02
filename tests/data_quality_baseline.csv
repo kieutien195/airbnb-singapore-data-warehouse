@@ -1,0 +1,147 @@
+﻿quality_dimension,dataset,field_or_key,check_name,observed_value,total_records,percentage,status,note
+NULL,Listings,id,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,listing_url,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,scrape_id,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,last_scraped,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,source,NULL count,1470,3208,45.8229,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,name,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,description,NULL count,21,3208,0.6546,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,neighborhood_overview,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,picture_url,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_id,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_url,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_profile_id,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_profile_url,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_name,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_since,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,hosts_time_as_user_years,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,hosts_time_as_user_months,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,hosts_time_as_host_years,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,hosts_time_as_host_months,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_location,NULL count,1322,3208,41.2095,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_about,NULL count,1292,3208,40.2743,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_response_time,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_response_rate,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_acceptance_rate,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_is_superhost,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_thumbnail_url,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_picture_url,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_neighbourhood,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_listings_count,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_total_listings_count,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_verifications,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_has_profile_pic,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,host_identity_verified,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,neighbourhood,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,neighbourhood_cleansed,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,neighbourhood_group_cleansed,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,latitude,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,longitude,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,property_type,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,room_type,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,accommodates,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,bathrooms,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,bathrooms_text,NULL count,10,3208,0.3117,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,bedrooms,NULL count,2,3208,0.0623,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,beds,NULL count,154,3208,4.8005,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,amenities,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,price,NULL count,480,3208,14.9626,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,price_quote_checkin_date,NULL count,318,3208,9.9127,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,price_quote_checkout_date,NULL count,318,3208,9.9127,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,price_quote_total_price,NULL count,483,3208,15.0561,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,price_quote_price_per_night,NULL count,483,3208,15.0561,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,price_quote_raw,NULL count,318,3208,9.9127,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,minimum_nights,NULL count,197,3208,6.1409,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,maximum_nights,NULL count,197,3208,6.1409,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,minimum_minimum_nights,NULL count,197,3208,6.1409,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,maximum_minimum_nights,NULL count,197,3208,6.1409,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,minimum_maximum_nights,NULL count,197,3208,6.1409,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,maximum_maximum_nights,NULL count,197,3208,6.1409,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,minimum_nights_avg_ntm,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,maximum_nights_avg_ntm,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,calendar_updated,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,has_availability,NULL count,42,3208,1.3092,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,availability_30,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,availability_60,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,availability_90,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,availability_365,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,calendar_last_scraped,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,number_of_reviews,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,number_of_reviews_ltm,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,number_of_reviews_l30d,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,availability_eoy,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,number_of_reviews_ly,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,estimated_occupancy_l365d,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,estimated_revenue_l365d,NULL count,480,3208,14.9626,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,first_review,NULL count,1369,3208,42.6746,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,last_review,NULL count,1369,3208,42.6746,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,review_scores_rating,NULL count,1369,3208,42.6746,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,review_scores_accuracy,NULL count,1369,3208,42.6746,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,review_scores_cleanliness,NULL count,1369,3208,42.6746,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,review_scores_checkin,NULL count,1369,3208,42.6746,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,review_scores_communication,NULL count,1369,3208,42.6746,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,review_scores_location,NULL count,1370,3208,42.7057,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,review_scores_value,NULL count,1370,3208,42.7057,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,license,NULL count,1471,3208,45.8541,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,instant_bookable,NULL count,3208,3208,100.0,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,calculated_host_listings_count,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,calculated_host_listings_count_entire_homes,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,calculated_host_listings_count_private_rooms,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,calculated_host_listings_count_shared_rooms,NULL count,0,3208,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Listings,reviews_per_month,NULL count,1369,3208,42.6746,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Calendar,listing_id,NULL count,0,1170950,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Calendar,date,NULL count,0,1170950,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Calendar,available,NULL count,0,1170950,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Calendar,minimum_nights,NULL count,0,1170950,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Calendar,maximum_nights,NULL count,0,1170950,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Reviews,listing_id,NULL count,0,46000,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Reviews,id,NULL count,0,46000,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Reviews,date,NULL count,0,46000,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Reviews,reviewer_id,NULL count,0,46000,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Reviews,reviewer_name,NULL count,0,46000,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Reviews,comments,NULL count,17,46000,0.037,WARN,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Neighbourhoods,neighbourhood_group,NULL count,0,55,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+NULL,Neighbourhoods,neighbourhood,NULL count,0,55,0.0,PASS,Số lượng giá trị NULL tại trường dữ liệu.
+Duplicates,Listings,id,Duplicate by grain,0,3208,0.0,PASS,Số bản ghi trùng theo grain của bảng.
+Duplicates,Calendar,listing_id + date,Duplicate by grain,0,1170950,0.0,PASS,Số bản ghi trùng theo grain của bảng.
+Duplicates,Reviews,listing_id + id,Duplicate by grain,0,46000,0.0,PASS,Số bản ghi trùng theo grain của bảng.
+Duplicates,Neighbourhoods,neighbourhood_group + neighbourhood,Duplicate by grain,0,55,0.0,PASS,Số bản ghi trùng theo grain của bảng.
+Out of domain,Listings,id,Numeric domain validation,0,3208,0.0,PASS,Listing ID phải lớn hơn 0.
+Out of domain,Listings,host_id,Numeric domain validation,0,3208,0.0,PASS,Host ID phải lớn hơn 0.
+Out of domain,Listings,accommodates,Numeric domain validation,0,3208,0.0,PASS,Sức chứa phải lớn hơn 0.
+Out of domain,Listings,minimum_nights,Numeric domain validation,0,3011,0.0,PASS,Số đêm tối thiểu phải lớn hơn 0.
+Out of domain,Listings,maximum_nights,Numeric domain validation,0,3011,0.0,PASS,Số đêm tối đa phải lớn hơn 0.
+Out of domain,Listings,review_scores_rating,Numeric domain validation,0,1839,0.0,PASS,Điểm đánh giá phải nằm trong khoảng 0 đến 5.
+Out of domain,Listings,latitude,Numeric domain validation,0,3208,0.0,PASS,Latitude phải nằm trong khoảng -90 đến 90.
+Out of domain,Listings,longitude,Numeric domain validation,0,3208,0.0,PASS,Longitude phải nằm trong khoảng -180 đến 180.
+Out of domain,Listings,price_quote_price_per_night,Numeric domain validation,0,2725,0.0,PASS,Giá thuê mỗi đêm không được âm.
+Out of domain,Calendar,listing_id,Numeric domain validation,0,1170950,0.0,PASS,listing_id phải lớn hơn 0.
+Out of domain,Calendar,minimum_nights,Numeric domain validation,0,1170950,0.0,PASS,minimum_nights phải lớn hơn 0.
+Out of domain,Calendar,maximum_nights,Numeric domain validation,0,1170950,0.0,PASS,maximum_nights phải lớn hơn 0.
+Out of domain,Reviews,listing_id,Numeric domain validation,0,46000,0.0,PASS,listing_id phải lớn hơn 0.
+Out of domain,Reviews,id,Numeric domain validation,0,46000,0.0,PASS,Review ID phải lớn hơn 0.
+Out of domain,Reviews,reviewer_id,Numeric domain validation,0,46000,0.0,PASS,Reviewer ID phải lớn hơn 0.
+Out of domain,Listings,last_scraped,Date validation,0,3208,0.0,PASS,Số giá trị ngày tháng không thể chuyển đổi.
+Out of domain,Listings,host_since,Date validation,0,0,0.0,N/A,Số giá trị ngày tháng không thể chuyển đổi.
+Out of domain,Listings,first_review,Date validation,0,1839,0.0,PASS,Số giá trị ngày tháng không thể chuyển đổi.
+Out of domain,Listings,last_review,Date validation,0,1839,0.0,PASS,Số giá trị ngày tháng không thể chuyển đổi.
+Out of domain,Calendar,date,Date validation,0,1170950,0.0,PASS,Số giá trị ngày tháng không thể chuyển đổi.
+Out of domain,Reviews,date,Date validation,0,46000,0.0,PASS,Số giá trị ngày tháng không thể chuyển đổi.
+Out of domain,Calendar,available,Allowed values,0,1170950,0.0,PASS,Giá trị hợp lệ được ghi nhận là t hoặc f.
+Out of domain,Neighbourhoods,neighbourhood_group,Empty string validation,0,55,0.0,PASS,Số giá trị chuỗi rỗng.
+Out of domain,Neighbourhoods,neighbourhood,Empty string validation,0,55,0.0,PASS,Số giá trị chuỗi rỗng.
+Out of domain,Listings,room_type,Allowed values,0,3208,0.0,PASS,Kiểm tra bốn loại phòng; NULL được thống kê riêng.
+Outliers,Listings,price_quote_price_per_night,IQR outlier detection,134,2725,4.9174,WARN,Q1=99.9000; Median=202.8300; Q3=333.3100; IQR=233.4100; lower=-250.2150; upper=683.4250. Outliers không tự động bị loại bỏ.
+Outliers,Listings,accommodates,IQR outlier detection,56,3208,1.7456,WARN,Q1=2.0000; Median=2.0000; Q3=4.0000; IQR=2.0000; lower=-1.0000; upper=7.0000. Outliers không tự động bị loại bỏ.
+Outliers,Listings,bedrooms,IQR outlier detection,758,3206,23.6432,WARN,Q1=1.0000; Median=1.0000; Q3=1.0000; IQR=0.0000; lower=1.0000; upper=1.0000. Outliers không tự động bị loại bỏ.
+Outliers,Listings,beds,IQR outlier detection,203,3054,6.647,WARN,Q1=1.0000; Median=1.0000; Q3=2.0000; IQR=1.0000; lower=-0.5000; upper=3.5000. Outliers không tự động bị loại bỏ.
+Outliers,Listings,minimum_nights,IQR outlier detection,19,3011,0.631,WARN,Q1=1.0000; Median=22.0000; Q3=92.0000; IQR=91.0000; lower=-135.5000; upper=228.5000. Outliers không tự động bị loại bỏ.
+Outliers,Listings,maximum_nights,IQR outlier detection,13,3011,0.4318,WARN,Q1=365.0000; Median=365.0000; Q3=1125.0000; IQR=760.0000; lower=-775.0000; upper=2265.0000. Outliers không tự động bị loại bỏ.
+Outliers,Listings,number_of_reviews,IQR outlier detection,460,3208,14.3392,WARN,Q1=0.0000; Median=1.0000; Q3=8.0000; IQR=8.0000; lower=-12.0000; upper=20.0000. Outliers không tự động bị loại bỏ.
+Outliers,Listings,reviews_per_month,IQR outlier detection,250,1839,13.5943,WARN,Q1=0.0500; Median=0.1700; Q3=0.6100; IQR=0.5600; lower=-0.7900; upper=1.4500. Outliers không tự động bị loại bỏ.
+Referential integrity,Calendar,listing_id -> Listings.id,Orphan listing_id,0,1170950,0.0,PASS,Số dòng Calendar có listing_id không tồn tại trong Listings.
+Referential integrity,Reviews,listing_id -> Listings.id,Orphan listing_id,0,46000,0.0,PASS,Số dòng Reviews có listing_id không tồn tại trong Listings.
+Referential integrity,Listings,neighbourhood_group_cleansed + neighbourhood_cleansed,Neighbourhood matching,0,42,0.0,PASS,Số cặp khu vực trong Listings không tìm thấy trong bảng Neighbourhoods.
+Data coverage,Calendar,listing_id,Listing coverage,3208,3208,100.0,INFO,Tỷ lệ listing xuất hiện trong Calendar.
+Data coverage,Reviews,listing_id,Listing coverage,1839,3208,57.3254,INFO,Tỷ lệ listing có ít nhất một review.
+JOIN fan-out,Listings - Calendar - Reviews,listing_id,Estimated join rows,16791449,3208,,INFO,Ước lượng số dòng sau khi JOIN Calendar và Reviews theo listing_id. Nên tổng hợp bảng con trước khi JOIN.
