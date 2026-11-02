@@ -52,7 +52,16 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Sao chép `.env.example` thành `.env` và điền kết nối MySQL cục bộ. Không commit `.env`, mật khẩu hoặc thông tin đăng nhập. Hiện chưa có lệnh chạy pipeline vì mã ETL chưa được triển khai.
+Sao chép `.env.example` thành `.env` và điền kết nối MySQL cục bộ. Không commit `.env`, mật khẩu hoặc thông tin đăng nhập. Hướng dẫn cài đặt/khởi tạo MySQL, tạo tài khoản giới hạn quyền, kiểm tra kết nối và sao lưu nằm trong [`docs/mysql_setup.md`](docs/mysql_setup.md).
+
+### Kiểm tra môi trường (Smoke Test)
+
+Sau khi cài đặt thư viện và cấu hình `.env`, chạy script kiểm thử:
+
+```bash
+python smoke_test.py            # Kiểm tra Python, thư viện và đọc dữ liệu thô
+python smoke_test.py --mysql    # Bắt buộc kiểm tra thêm kết nối MySQL (Task 1.5)
+```
 
 ## Dữ liệu và phạm vi
 
