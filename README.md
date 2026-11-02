@@ -52,7 +52,7 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Sao chép `.env.example` thành `.env` và điền kết nối MySQL cục bộ. Không commit `.env`, mật khẩu hoặc thông tin đăng nhập.
+Sao chép `.env.example` thành `.env` và điền kết nối MySQL cục bộ. Không commit `.env`, mật khẩu hoặc thông tin đăng nhập. Hướng dẫn cài đặt/khởi tạo MySQL, tạo tài khoản giới hạn quyền, kiểm tra kết nối và sao lưu nằm trong [`docs/mysql_setup.md`](docs/mysql_setup.md).
 
 ### Kiểm tra môi trường (Smoke Test)
 
