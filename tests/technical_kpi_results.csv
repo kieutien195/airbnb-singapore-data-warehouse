@@ -1,0 +1,6 @@
+﻿technical_kpi_id,technical_kpi_name,ket_qua,don_vi,trang_thai,dien_giai
+TQ-01,Tỷ lệ thiếu dữ liệu,0.0,%,Đã tính,"0/3,657,376 ô ở các trường bắt buộc bị thiếu."
+TQ-02,Số bản ghi trùng khóa,0.0,Dòng trùng dư,Đã tính,Tổng số dòng trùng dư theo khóa/grain đã xác định. Khóa thiếu được báo cáo riêng.
+TQ-03,Tỷ lệ toàn vẹn tham chiếu,100.0,%,Đã tính,"1,220,158/1,220,158 khóa con có giá trị liên kết được."
+TQ-04,Tỷ lệ bản ghi hợp lệ,100.0,%,Đã tính theo luật tối thiểu công bố,"1,220,213/1,220,213 dòng đạt luật kiểm tra tối thiểu."
+TQ-05,Tính nhất quán khi chạy lại pipeline,,PASS/FAIL,CHƯA ĐÁNH GIÁ,Cần log của ít nhất hai lần chạy ETL với cùng dữ liệu và cấu hình.
