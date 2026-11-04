@@ -1,0 +1,3209 @@
+﻿listing_id,neighbourhood_cleansed,room_type,listing_review_count,observed_review_records,difference_listing_minus_file,comparison_status
+71609,Tampines,Private room,19,19,0,MATCH
+71896,Tampines,Private room,24,24,0,MATCH
+71903,Tampines,Private room,46,46,0,MATCH
+294281,Newton,Private room,131,131,0,MATCH
+344803,Tampines,Private room,60,60,0,MATCH
+369141,Newton,Private room,81,81,0,MATCH
+369145,Newton,Private room,163,163,0,MATCH
+395191,River Valley,Private room,27,27,0,MATCH
+468782,Serangoon,Private room,83,83,0,MATCH
+696136,Bukit Timah,Private room,26,26,0,MATCH
+747813,Downtown Core,Private room,68,68,0,MATCH
+747816,Downtown Core,Private room,25,25,0,MATCH
+756267,Marine Parade,Private room,70,70,0,MATCH
+765579,Outram,Private room,2,2,0,MATCH
+819034,Marine Parade,Entire home/apt,40,40,0,MATCH
+819044,Marine Parade,Private room,70,70,0,MATCH
+833289,Bukit Merah,Private room,2,2,0,MATCH
+881253,Outram,Private room,3,3,0,MATCH
+904378,River Valley,Entire home/apt,34,34,0,MATCH
+962594,Kallang,Private room,2,2,0,MATCH
+1024986,River Valley,Entire home/apt,258,258,0,MATCH
+1160252,Serangoon,Private room,43,43,0,MATCH
+1242205,Marine Parade,Entire home/apt,8,8,0,MATCH
+1261443,Outram,Private room,2,2,0,MATCH
+1363204,Outram,Private room,3,3,0,MATCH
+1495386,Pasir Ris,Private room,10,10,0,MATCH
+1508829,Kallang,Private room,7,7,0,MATCH
+1581224,Kallang,Entire home/apt,0,0,0,MATCH
+1615074,Outram,Private room,5,5,0,MATCH
+1710048,Outram,Private room,0,0,0,MATCH
+1719704,Outram,Private room,3,3,0,MATCH
+1766900,Newton,Private room,12,12,0,MATCH
+1928296,Ang Mo Kio,Private room,79,79,0,MATCH
+1941719,Downtown Core,Private room,73,73,0,MATCH
+2129215,Bedok,Entire home/apt,368,368,0,MATCH
+2142826,Novena,Private room,21,21,0,MATCH
+2547778,Kallang,Private room,1,1,0,MATCH
+2922184,Queenstown,Private room,18,18,0,MATCH
+3034137,Hougang,Private room,9,9,0,MATCH
+3304326,Tampines,Private room,8,8,0,MATCH
+3382337,Serangoon,Entire home/apt,0,0,0,MATCH
+3667894,Outram,Private room,2,2,0,MATCH
+4054698,Outram,Hotel room,49,49,0,MATCH
+4069756,Outram,Hotel room,20,20,0,MATCH
+4211375,Jurong West,Private room,0,0,0,MATCH
+4271250,Tanglin,Entire home/apt,170,170,0,MATCH
+4441346,Kallang,Entire home/apt,4,4,0,MATCH
+4499317,Downtown Core,Entire home/apt,301,301,0,MATCH
+4541183,Singapore River,Entire home/apt,386,386,0,MATCH
+4619928,Geylang,Private room,3,3,0,MATCH
+4712676,Ang Mo Kio,Private room,4,4,0,MATCH
+4741630,Kallang,Private room,1,1,0,MATCH
+4862396,Hougang,Private room,0,0,0,MATCH
+4863317,Outram,Private room,1,1,0,MATCH
+4869221,Outram,Private room,2,2,0,MATCH
+4926170,Bishan,Private room,3,3,0,MATCH
+4973227,Singapore River,Entire home/apt,184,184,0,MATCH
+4989903,Bukit Timah,Private room,6,6,0,MATCH
+5040689,Ang Mo Kio,Private room,5,5,0,MATCH
+5052014,Outram,Entire home/apt,16,16,0,MATCH
+5116961,Bukit Merah,Private room,1,1,0,MATCH
+5129422,Bedok,Private room,58,58,0,MATCH
+5186159,Bedok,Private room,72,72,0,MATCH
+5233415,Bukit Merah,Entire home/apt,38,38,0,MATCH
+5253599,Kallang,Entire home/apt,11,11,0,MATCH
+5339318,Rochor,Entire home/apt,2,2,0,MATCH
+5446857,Bukit Merah,Entire home/apt,10,10,0,MATCH
+5448209,Bukit Merah,Entire home/apt,23,23,0,MATCH
+5464246,Geylang,Private room,11,11,0,MATCH
+5494971,Novena,Private room,208,208,0,MATCH
+5529062,Bukit Merah,Entire home/apt,0,0,0,MATCH
+5551665,Bukit Timah,Private room,15,15,0,MATCH
+5573458,Sembawang,Private room,3,3,0,MATCH
+5634851,Kallang,Entire home/apt,2,2,0,MATCH
+5698633,Downtown Core,Entire home/apt,0,0,0,MATCH
+5798211,Tampines,Private room,151,151,0,MATCH
+5827713,Tampines,Private room,286,286,0,MATCH
+5827998,Tampines,Private room,296,296,0,MATCH
+5889741,Rochor,Entire home/apt,212,212,0,MATCH
+5919270,Tampines,Private room,248,248,0,MATCH
+6020248,Bukit Timah,Private room,7,7,0,MATCH
+6261313,Bukit Timah,Private room,10,10,0,MATCH
+6287204,Woodlands,Entire home/apt,10,10,0,MATCH
+6300577,Geylang,Private room,25,25,0,MATCH
+6317686,Outram,Private room,1,1,0,MATCH
+6453321,Ang Mo Kio,Private room,2,2,0,MATCH
+6529707,Clementi,Private room,42,42,0,MATCH
+6547248,Bukit Timah,Private room,1,1,0,MATCH
+6603464,Sembawang,Private room,9,9,0,MATCH
+6620261,Novena,Entire home/apt,3,3,0,MATCH
+6693516,Bedok,Entire home/apt,9,9,0,MATCH
+6831622,Queenstown,Entire home/apt,23,23,0,MATCH
+6837947,Hougang,Entire home/apt,0,0,0,MATCH
+6959265,Ang Mo Kio,Private room,0,0,0,MATCH
+7162659,Queenstown,Entire home/apt,8,8,0,MATCH
+7250709,Queenstown,Private room,5,5,0,MATCH
+7250803,Jurong East,Private room,27,27,0,MATCH
+7296138,Geylang,Private room,27,27,0,MATCH
+7321238,Jurong West,Private room,35,35,0,MATCH
+7398096,Bedok,Private room,22,22,0,MATCH
+7399281,Queenstown,Private room,0,0,0,MATCH
+7466596,Kallang,Entire home/apt,0,0,0,MATCH
+7653937,Kallang,Private room,1,1,0,MATCH
+7667016,Kallang,Private room,2,2,0,MATCH
+7720994,Kallang,Entire home/apt,2,2,0,MATCH
+7776711,Queenstown,Private room,0,0,0,MATCH
+7905972,Marine Parade,Private room,4,4,0,MATCH
+7927886,Jurong East,Private room,31,31,0,MATCH
+7946472,Kallang,Private room,1,1,0,MATCH
+7994039,Kallang,Private room,2,2,0,MATCH
+8004063,Kallang,Private room,8,8,0,MATCH
+8007663,Kallang,Private room,3,3,0,MATCH
+8017511,Bedok,Entire home/apt,33,33,0,MATCH
+8038199,Downtown Core,Entire home/apt,258,258,0,MATCH
+8111502,Bedok,Private room,8,8,0,MATCH
+8111607,Bedok,Private room,1,1,0,MATCH
+8113569,Bedok,Private room,6,6,0,MATCH
+8113712,Bedok,Private room,7,7,0,MATCH
+8113821,Bedok,Private room,6,6,0,MATCH
+8113893,Bedok,Private room,9,9,0,MATCH
+8113936,Bedok,Private room,8,8,0,MATCH
+8114003,Bedok,Private room,16,16,0,MATCH
+8160733,Geylang,Private room,3,3,0,MATCH
+8180346,Tampines,Private room,203,203,0,MATCH
+8256942,Sembawang,Private room,6,6,0,MATCH
+8508225,Downtown Core,Entire home/apt,34,34,0,MATCH
+8800763,Marine Parade,Private room,214,214,0,MATCH
+8890247,Kallang,Private room,45,45,0,MATCH
+9032240,Outram,Private room,1,1,0,MATCH
+9216943,Bukit Batok,Private room,25,25,0,MATCH
+9268058,Kallang,Private room,34,34,0,MATCH
+9268500,Kallang,Private room,8,8,0,MATCH
+9268680,Kallang,Private room,15,15,0,MATCH
+9269260,Kallang,Private room,9,9,0,MATCH
+9269637,Kallang,Private room,1,1,0,MATCH
+9269848,Kallang,Private room,4,4,0,MATCH
+9269981,Kallang,Private room,7,7,0,MATCH
+9320962,Bedok,Private room,95,95,0,MATCH
+9351647,Bukit Batok,Private room,8,8,0,MATCH
+9397355,Outram,Private room,0,0,0,MATCH
+9398808,Bukit Merah,Entire home/apt,0,0,0,MATCH
+9532788,Outram,Private room,206,206,0,MATCH
+9635192,Outram,Private room,187,187,0,MATCH
+9746208,Outram,Private room,157,157,0,MATCH
+9828451,Novena,Private room,10,10,0,MATCH
+9857050,Geylang,Entire home/apt,2,2,0,MATCH
+9872354,Marine Parade,Private room,33,33,0,MATCH
+9887900,Sengkang,Entire home/apt,13,13,0,MATCH
+9942594,Queenstown,Private room,0,0,0,MATCH
+9986864,Marine Parade,Private room,2,2,0,MATCH
+10210475,Sembawang,Private room,0,0,0,MATCH
+10427701,Outram,Private room,2,2,0,MATCH
+10440235,Geylang,Private room,0,0,0,MATCH
+10626378,Museum,Private room,15,15,0,MATCH
+10668368,Bedok,Entire home/apt,0,0,0,MATCH
+10669564,Bukit Timah,Entire home/apt,0,0,0,MATCH
+10708117,Novena,Private room,0,0,0,MATCH
+11465411,Queenstown,Private room,39,39,0,MATCH
+11496278,Choa Chu Kang,Private room,4,4,0,MATCH
+11581560,Downtown Core,Entire home/apt,9,9,0,MATCH
+11660178,Bedok,Private room,6,6,0,MATCH
+11679272,Bedok,Private room,0,0,0,MATCH
+11679463,Bedok,Private room,8,8,0,MATCH
+11760026,Queenstown,Private room,2,2,0,MATCH
+11860123,Pasir Ris,Private room,68,68,0,MATCH
+11980197,Punggol,Private room,71,71,0,MATCH
+12162272,Kallang,Entire home/apt,256,256,0,MATCH
+12213801,Outram,Private room,1,1,0,MATCH
+12261620,Jurong West,Entire home/apt,0,0,0,MATCH
+12317780,Bukit Panjang,Private room,1,1,0,MATCH
+12367245,Kallang,Hotel room,73,73,0,MATCH
+12367388,Kallang,Hotel room,156,156,0,MATCH
+12484261,Rochor,Private room,274,274,0,MATCH
+12556334,Bedok,Private room,2,2,0,MATCH
+12702541,Rochor,Entire home/apt,26,26,0,MATCH
+12738797,Southern Islands,Entire home/apt,5,5,0,MATCH
+12738896,Ang Mo Kio,Private room,6,6,0,MATCH
+12801097,Downtown Core,Entire home/apt,2,2,0,MATCH
+12904788,Kallang,Private room,2,2,0,MATCH
+13183241,Bedok,Private room,3,3,0,MATCH
+13274269,Outram,Hotel room,16,16,0,MATCH
+13274598,Outram,Hotel room,17,17,0,MATCH
+13286282,Jurong West,Private room,51,51,0,MATCH
+13317120,Queenstown,Private room,9,9,0,MATCH
+13396802,Queenstown,Private room,18,18,0,MATCH
+13454638,Bukit Merah,Entire home/apt,7,7,0,MATCH
+13556435,Woodlands,Private room,33,33,0,MATCH
+13559548,Woodlands,Private room,7,7,0,MATCH
+13659860,Downtown Core,Entire home/apt,0,0,0,MATCH
+13703898,Pasir Ris,Private room,58,58,0,MATCH
+13809823,Tanglin,Private room,20,20,0,MATCH
+13834039,Bukit Timah,Private room,1,1,0,MATCH
+13952292,Bedok,Private room,5,5,0,MATCH
+13965663,Kallang,Private room,12,12,0,MATCH
+13966783,Outram,Private room,2,2,0,MATCH
+13967083,Outram,Private room,2,2,0,MATCH
+13967760,Bedok,Private room,1,1,0,MATCH
+14020127,Bedok,Entire home/apt,17,17,0,MATCH
+14029416,Kallang,Private room,1,1,0,MATCH
+14099732,Tampines,Private room,2,2,0,MATCH
+14157765,Western Water Catchment,Private room,0,0,0,MATCH
+14158971,Bedok,Private room,0,0,0,MATCH
+14196212,Downtown Core,Entire home/apt,0,0,0,MATCH
+14211027,Tanglin,Entire home/apt,43,43,0,MATCH
+14213091,Downtown Core,Entire home/apt,0,0,0,MATCH
+14226426,Downtown Core,Entire home/apt,2,2,0,MATCH
+14226658,Downtown Core,Entire home/apt,1,1,0,MATCH
+14407337,Outram,Private room,1,1,0,MATCH
+14435012,Bukit Timah,Private room,5,5,0,MATCH
+14530157,Geylang,Entire home/apt,9,9,0,MATCH
+14558461,Bedok,Private room,1,1,0,MATCH
+14577360,Outram,Private room,2,2,0,MATCH
+14582945,Bukit Batok,Private room,1,1,0,MATCH
+14583967,Kallang,Private room,4,4,0,MATCH
+14901562,Kallang,Private room,1,1,0,MATCH
+14902239,Kallang,Private room,1,1,0,MATCH
+14953906,Outram,Private room,2,2,0,MATCH
+15100514,Kallang,Entire home/apt,2,2,0,MATCH
+15229173,Bedok,Private room,0,0,0,MATCH
+15238692,Jurong West,Private room,0,0,0,MATCH
+15274648,Marine Parade,Entire home/apt,11,11,0,MATCH
+15310627,Outram,Entire home/apt,70,70,0,MATCH
+15364942,Bedok,Private room,8,8,0,MATCH
+15365213,Bedok,Private room,0,0,0,MATCH
+15367409,Geylang,Private room,4,4,0,MATCH
+15389076,Jurong West,Private room,22,22,0,MATCH
+15402563,Ang Mo Kio,Entire home/apt,0,0,0,MATCH
+15406706,Kallang,Private room,1,1,0,MATCH
+15441196,Kallang,Private room,6,6,0,MATCH
+15454153,Pasir Ris,Entire home/apt,20,20,0,MATCH
+15487894,Kallang,Private room,2,2,0,MATCH
+15508557,Bukit Batok,Private room,5,5,0,MATCH
+15538540,Geylang,Private room,1,1,0,MATCH
+15539906,Kallang,Private room,0,0,0,MATCH
+15589669,Tampines,Entire home/apt,4,4,0,MATCH
+15722252,Bedok,Private room,0,0,0,MATCH
+15773382,Novena,Private room,2,2,0,MATCH
+15775439,Bukit Panjang,Private room,2,2,0,MATCH
+15792137,Outram,Entire home/apt,173,173,0,MATCH
+15792808,Outram,Entire home/apt,264,264,0,MATCH
+15813099,Newton,Entire home/apt,1,1,0,MATCH
+15933531,Outram,Private room,1,1,0,MATCH
+15965563,Jurong West,Private room,1,1,0,MATCH
+15991345,Newton,Private room,28,28,0,MATCH
+16006904,Newton,Private room,12,12,0,MATCH
+16007139,Novena,Private room,12,12,0,MATCH
+16110969,Kallang,Private room,9,9,0,MATCH
+16118606,Kallang,Entire home/apt,15,15,0,MATCH
+16149105,Bedok,Private room,1,1,0,MATCH
+16149534,Bedok,Private room,0,0,0,MATCH
+16149684,Bedok,Private room,1,1,0,MATCH
+16150227,Bedok,Private room,4,4,0,MATCH
+16150642,Bedok,Private room,4,4,0,MATCH
+16155549,Toa Payoh,Private room,0,0,0,MATCH
+16185665,Outram,Private room,0,0,0,MATCH
+16209070,Outram,Private room,1,1,0,MATCH
+16213115,Kallang,Private room,25,25,0,MATCH
+16220808,Kallang,Private room,1,1,0,MATCH
+16243464,Bedok,Entire home/apt,0,0,0,MATCH
+16260783,Bedok,Private room,5,5,0,MATCH
+16309636,Outram,Private room,68,68,0,MATCH
+16370834,Serangoon,Private room,37,37,0,MATCH
+16424205,Bukit Batok,Private room,9,9,0,MATCH
+16462052,Bukit Batok,Private room,17,17,0,MATCH
+16477283,Bukit Batok,Private room,19,19,0,MATCH
+16502098,Bedok,Private room,139,139,0,MATCH
+16519375,River Valley,Private room,19,19,0,MATCH
+16552273,Kallang,Private room,1,1,0,MATCH
+16578603,Yishun,Private room,0,0,0,MATCH
+16606463,Kallang,Entire home/apt,41,41,0,MATCH
+16621264,River Valley,Entire home/apt,13,13,0,MATCH
+16650721,Sembawang,Private room,1,1,0,MATCH
+16742820,River Valley,Hotel room,12,12,0,MATCH
+16743909,River Valley,Hotel room,21,21,0,MATCH
+16744167,River Valley,Hotel room,19,19,0,MATCH
+16745292,River Valley,Entire home/apt,19,19,0,MATCH
+16750061,Orchard,Entire home/apt,19,19,0,MATCH
+16798945,Kallang,Private room,1,1,0,MATCH
+16846533,River Valley,Entire home/apt,26,26,0,MATCH
+16848828,River Valley,Hotel room,12,12,0,MATCH
+16891958,Kallang,Private room,233,233,0,MATCH
+16966634,Serangoon,Private room,30,30,0,MATCH
+17053896,Geylang,Private room,5,5,0,MATCH
+17179470,Woodlands,Private room,16,16,0,MATCH
+17442010,Outram,Private room,1,1,0,MATCH
+17488373,Kallang,Private room,1,1,0,MATCH
+17519803,Outram,Private room,1,1,0,MATCH
+17601150,Geylang,Private room,24,24,0,MATCH
+17615250,Kallang,Private room,1,1,0,MATCH
+17626886,Kallang,Private room,4,4,0,MATCH
+17643521,Kallang,Private room,0,0,0,MATCH
+17740089,Newton,Private room,7,7,0,MATCH
+17766467,Kallang,Private room,2,2,0,MATCH
+17780022,River Valley,Private room,0,0,0,MATCH
+17927897,Singapore River,Entire home/apt,59,59,0,MATCH
+17928170,Singapore River,Entire home/apt,190,190,0,MATCH
+17928273,Singapore River,Entire home/apt,82,82,0,MATCH
+17929045,Downtown Core,Hotel room,4,4,0,MATCH
+17929052,Downtown Core,Hotel room,0,0,0,MATCH
+17929053,Downtown Core,Hotel room,8,8,0,MATCH
+17929054,Downtown Core,Hotel room,3,3,0,MATCH
+17929055,Downtown Core,Hotel room,11,11,0,MATCH
+17929480,Outram,Private room,0,0,0,MATCH
+17947055,Outram,Private room,0,0,0,MATCH
+17949590,Bedok,Private room,47,47,0,MATCH
+17951810,Jurong West,Private room,12,12,0,MATCH
+18052476,Newton,Private room,50,50,0,MATCH
+18109887,Clementi,Private room,15,15,0,MATCH
+18151459,Jurong West,Private room,5,5,0,MATCH
+18169687,Bedok,Private room,6,6,0,MATCH
+18199481,Singapore River,Entire home/apt,40,40,0,MATCH
+18202395,Outram,Entire home/apt,71,71,0,MATCH
+18235755,Newton,Private room,134,134,0,MATCH
+18253219,Downtown Core,Entire home/apt,3,3,0,MATCH
+18342015,Bedok,Private room,0,0,0,MATCH
+18388608,Geylang,Entire home/apt,45,45,0,MATCH
+18421322,Kallang,Private room,1,1,0,MATCH
+18434466,Kallang,Private room,68,68,0,MATCH
+18452100,Kallang,Private room,2,2,0,MATCH
+18508828,Woodlands,Private room,39,39,0,MATCH
+18513959,Kallang,Private room,1,1,0,MATCH
+18674998,River Valley,Hotel room,8,8,0,MATCH
+18675202,Orchard,Hotel room,22,22,0,MATCH
+18858584,Orchard,Hotel room,16,16,0,MATCH
+18899288,Bukit Batok,Private room,6,6,0,MATCH
+18905203,Clementi,Private room,38,38,0,MATCH
+19218794,Bedok,Private room,31,31,0,MATCH
+19231371,Bedok,Private room,2,2,0,MATCH
+19438458,Bishan,Private room,0,0,0,MATCH
+19534648,Downtown Core,Entire home/apt,0,0,0,MATCH
+19535251,Downtown Core,Entire home/apt,0,0,0,MATCH
+19595827,Orchard,Entire home/apt,29,29,0,MATCH
+19652882,Downtown Core,Entire home/apt,2,2,0,MATCH
+19774490,Kallang,Private room,2,2,0,MATCH
+19774868,Ang Mo Kio,Private room,0,0,0,MATCH
+19801431,Kallang,Private room,1,1,0,MATCH
+20003123,Geylang,Private room,1,1,0,MATCH
+20084815,Orchard,Entire home/apt,40,40,0,MATCH
+20192517,Bishan,Private room,0,0,0,MATCH
+20395120,Punggol,Private room,3,3,0,MATCH
+20512779,Bukit Timah,Private room,38,38,0,MATCH
+20625688,Geylang,Private room,0,0,0,MATCH
+20625726,Geylang,Private room,1,1,0,MATCH
+20625773,Geylang,Private room,1,1,0,MATCH
+20631625,Queenstown,Entire home/apt,0,0,0,MATCH
+20698050,Geylang,Private room,122,122,0,MATCH
+20778113,Marine Parade,Private room,1,1,0,MATCH
+20791161,Tuas,Entire home/apt,5,5,0,MATCH
+20806898,Orchard,Entire home/apt,11,11,0,MATCH
+20824274,Outram,Private room,3,3,0,MATCH
+20856422,Outram,Private room,0,0,0,MATCH
+20877332,Outram,Private room,1,1,0,MATCH
+20888336,Bukit Timah,Private room,100,100,0,MATCH
+21013726,Kallang,Private room,4,4,0,MATCH
+21015410,Kallang,Private room,1,1,0,MATCH
+21015787,Kallang,Private room,0,0,0,MATCH
+21015821,Bukit Timah,Entire home/apt,0,0,0,MATCH
+21015873,Rochor,Entire home/apt,13,13,0,MATCH
+21015876,Rochor,Entire home/apt,34,34,0,MATCH
+21145943,Outram,Private room,0,0,0,MATCH
+21154124,Rochor,Private room,1,1,0,MATCH
+21214988,River Valley,Private room,0,0,0,MATCH
+21227203,Bukit Timah,Private room,36,36,0,MATCH
+21283595,River Valley,Hotel room,9,9,0,MATCH
+21398866,Kallang,Private room,0,0,0,MATCH
+21402272,Bedok,Entire home/apt,3,3,0,MATCH
+21415749,Rochor,Hotel room,242,242,0,MATCH
+21416331,Rochor,Hotel room,57,57,0,MATCH
+21416445,Downtown Core,Hotel room,16,16,0,MATCH
+21419965,Choa Chu Kang,Private room,2,2,0,MATCH
+21420790,Singapore River,Hotel room,37,37,0,MATCH
+21428446,Singapore River,Hotel room,203,203,0,MATCH
+21462227,Downtown Core,Hotel room,1,1,0,MATCH
+21605333,Singapore River,Hotel room,153,153,0,MATCH
+21650745,Choa Chu Kang,Private room,1,1,0,MATCH
+21670282,Orchard,Entire home/apt,32,32,0,MATCH
+21703476,Kallang,Private room,1,1,0,MATCH
+21722898,Geylang,Private room,2,2,0,MATCH
+21772057,Geylang,Private room,2,2,0,MATCH
+21793363,Geylang,Private room,1,1,0,MATCH
+21803237,Geylang,Private room,1,1,0,MATCH
+21854678,Kallang,Entire home/apt,167,167,0,MATCH
+21854687,Kallang,Entire home/apt,318,318,0,MATCH
+21854697,Kallang,Entire home/apt,32,32,0,MATCH
+21887155,Geylang,Private room,90,90,0,MATCH
+21913744,Outram,Private room,1,1,0,MATCH
+21915252,Tampines,Private room,64,64,0,MATCH
+21916263,Kallang,Private room,3,3,0,MATCH
+21927257,Geylang,Private room,1,1,0,MATCH
+21970302,Outram,Private room,1,1,0,MATCH
+22007320,Bukit Panjang,Private room,0,0,0,MATCH
+22019165,Outram,Private room,1,1,0,MATCH
+22021287,Jurong East,Private room,10,10,0,MATCH
+22051870,Bedok,Private room,159,159,0,MATCH
+22051992,Outram,Private room,1,1,0,MATCH
+22214451,Kallang,Private room,1,1,0,MATCH
+22230934,Outram,Private room,1,1,0,MATCH
+22233862,Bukit Timah,Private room,62,62,0,MATCH
+22267147,Geylang,Private room,2,2,0,MATCH
+22345943,Kallang,Private room,2,2,0,MATCH
+22376153,Kallang,Private room,2,2,0,MATCH
+22395492,Kallang,Private room,2,2,0,MATCH
+22561172,River Valley,Hotel room,6,6,0,MATCH
+22577896,Bukit Batok,Private room,9,9,0,MATCH
+22588306,Queenstown,Private room,3,3,0,MATCH
+22590845,Outram,Private room,2,2,0,MATCH
+22594189,River Valley,Hotel room,12,12,0,MATCH
+22620261,Bukit Panjang,Private room,0,0,0,MATCH
+22720008,Outram,Private room,0,0,0,MATCH
+22745179,Downtown Core,Entire home/apt,145,145,0,MATCH
+22798533,River Valley,Entire home/apt,24,24,0,MATCH
+22826338,Queenstown,Entire home/apt,0,0,0,MATCH
+22874441,Singapore River,Entire home/apt,3,3,0,MATCH
+22890318,Queenstown,Private room,8,8,0,MATCH
+22912035,Orchard,Entire home/apt,9,9,0,MATCH
+22912163,Newton,Entire home/apt,9,9,0,MATCH
+22971370,Queenstown,Private room,2,2,0,MATCH
+22979766,Choa Chu Kang,Private room,32,32,0,MATCH
+22990388,Orchard,Entire home/apt,11,11,0,MATCH
+22990457,Orchard,Entire home/apt,12,12,0,MATCH
+23045739,Rochor,Entire home/apt,11,11,0,MATCH
+23048720,Outram,Private room,1,1,0,MATCH
+23063409,Rochor,Entire home/apt,3,3,0,MATCH
+23070167,Geylang,Private room,6,6,0,MATCH
+23070535,Outram,Private room,0,0,0,MATCH
+23080358,Outram,Private room,0,0,0,MATCH
+23094299,Orchard,Entire home/apt,14,14,0,MATCH
+23097015,Geylang,Private room,5,5,0,MATCH
+23258478,Novena,Private room,0,0,0,MATCH
+23279111,Toa Payoh,Private room,12,12,0,MATCH
+23315012,Singapore River,Entire home/apt,45,45,0,MATCH
+23318905,Bukit Timah,Private room,0,0,0,MATCH
+23348921,Outram,Private room,2,2,0,MATCH
+23360633,Bukit Timah,Private room,2,2,0,MATCH
+23361035,Bukit Timah,Private room,4,4,0,MATCH
+23362375,Newton,Private room,0,0,0,MATCH
+23362544,Newton,Private room,10,10,0,MATCH
+23380199,Orchard,Hotel room,3,3,0,MATCH
+23509109,Sengkang,Private room,0,0,0,MATCH
+23598682,Tampines,Private room,28,28,0,MATCH
+23613551,Toa Payoh,Private room,0,0,0,MATCH
+23733935,Tanglin,Private room,8,8,0,MATCH
+23861900,Queenstown,Private room,5,5,0,MATCH
+23862116,Newton,Private room,2,2,0,MATCH
+24161078,Queenstown,Private room,7,7,0,MATCH
+24170288,Newton,Private room,3,3,0,MATCH
+24211014,Bedok,Entire home/apt,10,10,0,MATCH
+24222226,Geylang,Private room,0,0,0,MATCH
+24300044,Outram,Private room,0,0,0,MATCH
+24379397,Downtown Core,Private room,0,0,0,MATCH
+24420175,Newton,Private room,7,7,0,MATCH
+24434472,Downtown Core,Entire home/apt,1,1,0,MATCH
+24447655,Queenstown,Private room,5,5,0,MATCH
+24500374,Pasir Ris,Entire home/apt,0,0,0,MATCH
+24528929,Geylang,Private room,76,76,0,MATCH
+24546514,Geylang,Private room,83,83,0,MATCH
+24569607,Geylang,Private room,0,0,0,MATCH
+24571017,Geylang,Private room,89,89,0,MATCH
+24586538,Geylang,Private room,88,88,0,MATCH
+24606096,Queenstown,Private room,8,8,0,MATCH
+24618190,Clementi,Entire home/apt,2,2,0,MATCH
+24635669,Outram,Private room,1,1,0,MATCH
+24636266,Outram,Private room,2,2,0,MATCH
+24636530,Outram,Private room,1,1,0,MATCH
+24659042,Bukit Merah,Entire home/apt,181,181,0,MATCH
+24682695,River Valley,Hotel room,3,3,0,MATCH
+24707713,Bukit Merah,Private room,129,129,0,MATCH
+24720145,Geylang,Private room,69,69,0,MATCH
+24725185,Newton,Private room,3,3,0,MATCH
+24741587,Museum,Private room,6,6,0,MATCH
+24761439,Rochor,Private room,22,22,0,MATCH
+24763374,Rochor,Private room,5,5,0,MATCH
+24763494,Downtown Core,Private room,3,3,0,MATCH
+24763572,Downtown Core,Private room,2,2,0,MATCH
+24765067,Rochor,Private room,2,2,0,MATCH
+24765195,Downtown Core,Private room,0,0,0,MATCH
+24785006,Kallang,Private room,1,1,0,MATCH
+24785613,Kallang,Private room,1,1,0,MATCH
+24855606,Queenstown,Private room,10,10,0,MATCH
+24900530,Kallang,Private room,0,0,0,MATCH
+24919927,Kallang,Private room,5,5,0,MATCH
+24972169,Outram,Private room,1,1,0,MATCH
+24979153,Bukit Merah,Private room,113,113,0,MATCH
+24984672,Bukit Merah,Entire home/apt,110,110,0,MATCH
+25087117,Kallang,Private room,2,2,0,MATCH
+25141849,Bedok,Entire home/apt,2,2,0,MATCH
+25183317,Bedok,Private room,1,1,0,MATCH
+25183623,Bedok,Private room,6,6,0,MATCH
+25183926,Bedok,Private room,0,0,0,MATCH
+25184205,Bedok,Private room,4,4,0,MATCH
+25282863,Serangoon,Private room,102,102,0,MATCH
+25300648,Jurong West,Private room,3,3,0,MATCH
+25324517,Queenstown,Private room,3,3,0,MATCH
+25353206,Outram,Private room,1,1,0,MATCH
+25366424,Serangoon,Private room,84,84,0,MATCH
+25402824,Rochor,Private room,4,4,0,MATCH
+25435388,Bedok,Private room,57,57,0,MATCH
+25797887,Outram,Private room,1,1,0,MATCH
+25815030,River Valley,Private room,16,16,0,MATCH
+25860399,Outram,Private room,1,1,0,MATCH
+25899420,Bukit Batok,Entire home/apt,0,0,0,MATCH
+25909373,Geylang,Private room,2,2,0,MATCH
+25927281,Novena,Entire home/apt,0,0,0,MATCH
+25953564,Rochor,Hotel room,1,1,0,MATCH
+25963531,Outram,Private room,2,2,0,MATCH
+26018504,Jurong West,Private room,2,2,0,MATCH
+26093121,Bedok,Private room,0,0,0,MATCH
+26108482,Bukit Merah,Private room,0,0,0,MATCH
+26183286,Rochor,Private room,1,1,0,MATCH
+26207243,Queenstown,Entire home/apt,0,0,0,MATCH
+26290123,Geylang,Private room,1,1,0,MATCH
+26290281,Geylang,Private room,2,2,0,MATCH
+26293068,Kallang,Private room,2,2,0,MATCH
+26369349,Bedok,Entire home/apt,61,61,0,MATCH
+26382243,Outram,Private room,1,1,0,MATCH
+26435923,Kallang,Private room,34,34,0,MATCH
+26583889,Tanglin,Private room,11,11,0,MATCH
+26722862,Geylang,Private room,2,2,0,MATCH
+26965345,Newton,Private room,0,0,0,MATCH
+27125463,Kallang,Private room,1,1,0,MATCH
+27173843,Outram,Private room,1,1,0,MATCH
+27174440,Outram,Private room,0,0,0,MATCH
+27343211,Newton,Private room,0,0,0,MATCH
+27513236,Bedok,Private room,6,6,0,MATCH
+27513625,Bedok,Private room,5,5,0,MATCH
+27581596,Bedok,Private room,2,2,0,MATCH
+28000993,Jurong East,Entire home/apt,1,1,0,MATCH
+28114931,Bishan,Private room,0,0,0,MATCH
+28115820,Bishan,Private room,1,1,0,MATCH
+28116713,Bishan,Entire home/apt,0,0,0,MATCH
+28522862,Kallang,Private room,1,1,0,MATCH
+28536238,Singapore River,Hotel room,34,34,0,MATCH
+28649449,Queenstown,Private room,1,1,0,MATCH
+28700151,Outram,Private room,1,1,0,MATCH
+28772425,Outram,Private room,2,2,0,MATCH
+28788262,Kallang,Hotel room,1,1,0,MATCH
+28789540,Novena,Private room,0,0,0,MATCH
+28794509,Kallang,Hotel room,22,22,0,MATCH
+28998042,Rochor,Shared room,7,7,0,MATCH
+28998072,Rochor,Private room,14,14,0,MATCH
+28998095,Rochor,Private room,6,6,0,MATCH
+28998145,Rochor,Shared room,3,3,0,MATCH
+28998161,Rochor,Shared room,59,59,0,MATCH
+28998181,Rochor,Shared room,7,7,0,MATCH
+28998191,Rochor,Shared room,8,8,0,MATCH
+29015768,Geylang,Private room,65,65,0,MATCH
+29020376,Outram,Hotel room,29,29,0,MATCH
+29072228,Outram,Private room,0,0,0,MATCH
+29076794,Geylang,Private room,5,5,0,MATCH
+29078458,Geylang,Private room,0,0,0,MATCH
+29180163,Woodlands,Private room,0,0,0,MATCH
+29319213,Kallang,Hotel room,6,6,0,MATCH
+29319686,Kallang,Hotel room,2,2,0,MATCH
+29320487,Kallang,Hotel room,2,2,0,MATCH
+29325647,Geylang,Private room,1,1,0,MATCH
+29344002,Kallang,Private room,0,0,0,MATCH
+29355663,Geylang,Private room,2,2,0,MATCH
+29525240,Outram,Hotel room,2,2,0,MATCH
+29525299,Outram,Hotel room,8,8,0,MATCH
+29525922,Outram,Hotel room,0,0,0,MATCH
+29525951,Outram,Hotel room,33,33,0,MATCH
+29526045,Outram,Hotel room,38,38,0,MATCH
+29546144,Rochor,Entire home/apt,0,0,0,MATCH
+29547507,Rochor,Entire home/apt,2,2,0,MATCH
+29548114,Rochor,Entire home/apt,1,1,0,MATCH
+29548473,Rochor,Entire home/apt,2,2,0,MATCH
+29552115,Outram,Entire home/apt,91,91,0,MATCH
+29552643,Outram,Entire home/apt,127,127,0,MATCH
+29579499,Outram,Entire home/apt,268,268,0,MATCH
+29580481,Outram,Entire home/apt,43,43,0,MATCH
+29581373,Outram,Entire home/apt,89,89,0,MATCH
+29634299,Kallang,Private room,0,0,0,MATCH
+29665238,Toa Payoh,Private room,0,0,0,MATCH
+29768671,Kallang,Private room,1,1,0,MATCH
+29977663,Outram,Private room,1,1,0,MATCH
+29996505,Geylang,Private room,1,1,0,MATCH
+30017848,Bukit Merah,Private room,0,0,0,MATCH
+30031199,Bedok,Private room,0,0,0,MATCH
+30046453,Outram,Private room,1,1,0,MATCH
+30058572,Kallang,Private room,1,1,0,MATCH
+30234271,Geylang,Private room,1,1,0,MATCH
+30274603,Bukit Merah,Private room,0,0,0,MATCH
+30385249,Outram,Hotel room,9,9,0,MATCH
+30385261,Outram,Hotel room,3,3,0,MATCH
+30385269,Outram,Hotel room,1,1,0,MATCH
+30385291,Outram,Hotel room,2,2,0,MATCH
+30385453,Outram,Hotel room,10,10,0,MATCH
+30407285,Museum,Entire home/apt,0,0,0,MATCH
+30410480,Outram,Private room,1,1,0,MATCH
+30687199,Marine Parade,Entire home/apt,110,110,0,MATCH
+30783602,Kallang,Private room,2,2,0,MATCH
+30966211,Kallang,Private room,2,2,0,MATCH
+31002918,Rochor,Shared room,4,4,0,MATCH
+31003554,Kallang,Entire home/apt,200,200,0,MATCH
+31081282,Kallang,Private room,1,1,0,MATCH
+31129905,Outram,Private room,1,1,0,MATCH
+31196834,Bedok,Private room,13,13,0,MATCH
+31201327,Geylang,Private room,62,62,0,MATCH
+31219674,Jurong West,Private room,15,15,0,MATCH
+31294965,Bedok,Private room,0,0,0,MATCH
+31357872,Woodlands,Private room,1,1,0,MATCH
+31424549,Outram,Entire home/apt,8,8,0,MATCH
+31424940,Outram,Entire home/apt,12,12,0,MATCH
+31457968,Rochor,Entire home/apt,19,19,0,MATCH
+31573008,Outram,Private room,25,25,0,MATCH
+31604515,Kallang,Entire home/apt,0,0,0,MATCH
+31604616,Southern Islands,Entire home/apt,0,0,0,MATCH
+31634142,Kallang,Private room,31,31,0,MATCH
+31658769,Tanglin,Entire home/apt,0,0,0,MATCH
+31664598,Kallang,Private room,6,6,0,MATCH
+31690736,Downtown Core,Entire home/apt,0,0,0,MATCH
+31812483,Downtown Core,Hotel room,20,20,0,MATCH
+31959810,Outram,Hotel room,6,6,0,MATCH
+31960343,Outram,Hotel room,11,11,0,MATCH
+31960810,Outram,Hotel room,7,7,0,MATCH
+31965730,Choa Chu Kang,Private room,13,13,0,MATCH
+32035890,Outram,Private room,0,0,0,MATCH
+32205289,Hougang,Private room,31,31,0,MATCH
+32296304,Queenstown,Entire home/apt,10,10,0,MATCH
+32303894,Kallang,Private room,1,1,0,MATCH
+32488562,Bukit Merah,Private room,4,4,0,MATCH
+32526213,Orchard,Hotel room,24,24,0,MATCH
+32621960,Downtown Core,Entire home/apt,2,2,0,MATCH
+32623479,Rochor,Entire home/apt,15,15,0,MATCH
+32729464,Outram,Private room,1,1,0,MATCH
+32732351,Bukit Merah,Entire home/apt,1,1,0,MATCH
+32748783,Bukit Merah,Private room,2,2,0,MATCH
+32777995,Kallang,Private room,1,1,0,MATCH
+32821771,Bukit Merah,Private room,2,2,0,MATCH
+32822582,Bukit Merah,Entire home/apt,0,0,0,MATCH
+32822945,Bukit Merah,Private room,1,1,0,MATCH
+32832467,Bukit Merah,Entire home/apt,1,1,0,MATCH
+32846195,Bukit Merah,Entire home/apt,6,6,0,MATCH
+32874731,Bukit Merah,Private room,1,1,0,MATCH
+32908981,Orchard,Entire home/apt,0,0,0,MATCH
+32949187,Bukit Merah,Private room,1,1,0,MATCH
+32949544,Bukit Merah,Private room,1,1,0,MATCH
+33050985,Bukit Merah,Entire home/apt,6,6,0,MATCH
+33076582,Bukit Merah,Private room,2,2,0,MATCH
+33079469,Bukit Merah,Private room,0,0,0,MATCH
+33085177,Kallang,Entire home/apt,0,0,0,MATCH
+33119907,Bukit Merah,Private room,0,0,0,MATCH
+33216747,Bukit Merah,Private room,2,2,0,MATCH
+33330793,Outram,Private room,1,1,0,MATCH
+33436577,Tanglin,Entire home/apt,23,23,0,MATCH
+33457052,Pasir Ris,Private room,1,1,0,MATCH
+33460906,Jurong West,Private room,8,8,0,MATCH
+33490643,Bishan,Private room,11,11,0,MATCH
+33515578,River Valley,Private room,0,0,0,MATCH
+33536365,Serangoon,Private room,33,33,0,MATCH
+33596983,Orchard,Private room,0,0,0,MATCH
+33622349,Bukit Merah,Entire home/apt,3,3,0,MATCH
+33634552,Rochor,Entire home/apt,68,68,0,MATCH
+33669171,Rochor,Entire home/apt,70,70,0,MATCH
+33722089,Outram,Private room,2,2,0,MATCH
+33734018,Bedok,Private room,4,4,0,MATCH
+33792104,Outram,Private room,1,1,0,MATCH
+33836101,Marine Parade,Entire home/apt,0,0,0,MATCH
+33885738,Outram,Private room,1,1,0,MATCH
+33982757,Outram,Hotel room,71,71,0,MATCH
+33999107,Bukit Merah,Private room,5,5,0,MATCH
+34052336,Queenstown,Entire home/apt,2,2,0,MATCH
+34068805,Queenstown,Entire home/apt,0,0,0,MATCH
+34071208,Outram,Hotel room,80,80,0,MATCH
+34071596,Outram,Hotel room,54,54,0,MATCH
+34071837,Outram,Hotel room,75,75,0,MATCH
+34072244,Outram,Hotel room,58,58,0,MATCH
+34073545,Outram,Hotel room,25,25,0,MATCH
+34076777,Kallang,Private room,2,2,0,MATCH
+34186257,Outram,Private room,14,14,0,MATCH
+34243743,Tanglin,Private room,0,0,0,MATCH
+34271538,Outram,Private room,0,0,0,MATCH
+34288316,Kallang,Private room,1,1,0,MATCH
+34346401,Geylang,Private room,1,1,0,MATCH
+34454047,Outram,Private room,12,12,0,MATCH
+34489654,Serangoon,Private room,19,19,0,MATCH
+34526007,Rochor,Entire home/apt,46,46,0,MATCH
+34569244,Downtown Core,Private room,1,1,0,MATCH
+34569884,Museum,Entire home/apt,6,6,0,MATCH
+34579286,Rochor,Entire home/apt,46,46,0,MATCH
+34627895,Outram,Private room,1,1,0,MATCH
+34654117,Kallang,Private room,1,1,0,MATCH
+34675596,Outram,Private room,0,0,0,MATCH
+34819352,Geylang,Entire home/apt,28,28,0,MATCH
+34909010,Geylang,Private room,0,0,0,MATCH
+34909012,Geylang,Private room,1,1,0,MATCH
+34930444,Kallang,Private room,0,0,0,MATCH
+34950613,Hougang,Private room,1,1,0,MATCH
+34990577,Clementi,Private room,0,0,0,MATCH
+35026116,Outram,Private room,1,1,0,MATCH
+35030220,Rochor,Entire home/apt,0,0,0,MATCH
+35077531,Singapore River,Hotel room,7,7,0,MATCH
+35077950,Singapore River,Hotel room,3,3,0,MATCH
+35082329,Singapore River,Hotel room,16,16,0,MATCH
+35102472,Rochor,Entire home/apt,52,52,0,MATCH
+35185755,Queenstown,Entire home/apt,1,1,0,MATCH
+35185822,Queenstown,Entire home/apt,2,2,0,MATCH
+35300552,Bukit Merah,Hotel room,1,1,0,MATCH
+35300977,Bukit Merah,Hotel room,4,4,0,MATCH
+35302676,Bukit Merah,Hotel room,7,7,0,MATCH
+35335972,Bukit Merah,Hotel room,1,1,0,MATCH
+35336070,Bukit Merah,Hotel room,2,2,0,MATCH
+35359778,Singapore River,Entire home/apt,7,7,0,MATCH
+35363901,Clementi,Entire home/apt,1,1,0,MATCH
+35397761,Bukit Merah,Hotel room,1,1,0,MATCH
+35429425,Bukit Timah,Private room,0,0,0,MATCH
+35469684,Singapore River,Hotel room,3,3,0,MATCH
+35483332,Bukit Merah,Entire home/apt,3,3,0,MATCH
+35483354,Singapore River,Entire home/apt,3,3,0,MATCH
+35483358,Novena,Entire home/apt,0,0,0,MATCH
+35505259,Bukit Timah,Entire home/apt,0,0,0,MATCH
+35506661,Bukit Timah,Entire home/apt,0,0,0,MATCH
+35656521,Queenstown,Entire home/apt,0,0,0,MATCH
+35656871,Novena,Entire home/apt,0,0,0,MATCH
+35693228,River Valley,Entire home/apt,0,0,0,MATCH
+35723337,Clementi,Private room,6,6,0,MATCH
+35742330,Clementi,Private room,0,0,0,MATCH
+35747289,Kallang,Hotel room,4,4,0,MATCH
+35818107,Kallang,Hotel room,15,15,0,MATCH
+35878570,Kallang,Hotel room,0,0,0,MATCH
+35883311,Singapore River,Hotel room,6,6,0,MATCH
+35883439,Singapore River,Hotel room,6,6,0,MATCH
+35885309,Singapore River,Hotel room,16,16,0,MATCH
+35991648,Kallang,Private room,27,27,0,MATCH
+36009935,Central Water Catchment,Entire home/apt,2,2,0,MATCH
+36016056,Orchard,Entire home/apt,0,0,0,MATCH
+36080117,Woodlands,Private room,2,2,0,MATCH
+36129690,Downtown Core,Private room,1,1,0,MATCH
+36156090,River Valley,Entire home/apt,0,0,0,MATCH
+36156663,River Valley,Entire home/apt,1,1,0,MATCH
+36216542,Geylang,Private room,33,33,0,MATCH
+36226718,Jurong West,Private room,6,6,0,MATCH
+36264042,Geylang,Private room,38,38,0,MATCH
+36285087,Geylang,Private room,26,26,0,MATCH
+36333873,Singapore River,Entire home/apt,0,0,0,MATCH
+36354920,Bukit Timah,Private room,2,2,0,MATCH
+36490863,Newton,Entire home/apt,0,0,0,MATCH
+36530311,Kallang,Private room,1,1,0,MATCH
+36570785,Sengkang,Private room,10,10,0,MATCH
+36581961,Downtown Core,Private room,15,15,0,MATCH
+36618900,Singapore River,Hotel room,6,6,0,MATCH
+36652759,Bedok,Entire home/apt,0,0,0,MATCH
+36681333,Novena,Entire home/apt,0,0,0,MATCH
+36760495,Bedok,Entire home/apt,28,28,0,MATCH
+36785495,Woodlands,Private room,0,0,0,MATCH
+36983957,Novena,Entire home/apt,0,0,0,MATCH
+37219959,Bukit Merah,Private room,1,1,0,MATCH
+37219965,Bukit Merah,Private room,1,1,0,MATCH
+37219971,Bukit Merah,Private room,2,2,0,MATCH
+37234668,Novena,Entire home/apt,0,0,0,MATCH
+37334803,Clementi,Entire home/apt,2,2,0,MATCH
+37484436,Bedok,Private room,69,69,0,MATCH
+37586357,Kallang,Private room,0,0,0,MATCH
+37587133,Clementi,Entire home/apt,1,1,0,MATCH
+37605217,Kallang,Private room,1,1,0,MATCH
+37905248,Kallang,Private room,1,1,0,MATCH
+37916346,Bukit Merah,Private room,139,139,0,MATCH
+37924217,Rochor,Private room,0,0,0,MATCH
+37947662,Pasir Ris,Private room,1,1,0,MATCH
+37958355,Downtown Core,Entire home/apt,0,0,0,MATCH
+37981411,Rochor,Private room,1,1,0,MATCH
+37981670,Rochor,Private room,0,0,0,MATCH
+37981883,Rochor,Private room,0,0,0,MATCH
+37982840,Rochor,Private room,0,0,0,MATCH
+37983056,Rochor,Private room,0,0,0,MATCH
+37984003,Novena,Private room,3,3,0,MATCH
+37984348,Novena,Private room,0,0,0,MATCH
+37984441,Novena,Private room,0,0,0,MATCH
+37984524,Novena,Private room,2,2,0,MATCH
+37986704,Novena,Private room,0,0,0,MATCH
+37999599,Bukit Merah,Private room,263,263,0,MATCH
+38005247,Geylang,Private room,1,1,0,MATCH
+38026889,Rochor,Entire home/apt,27,27,0,MATCH
+38035489,Kallang,Private room,1,1,0,MATCH
+38057160,Ang Mo Kio,Private room,0,0,0,MATCH
+38134989,Bukit Merah,Private room,341,341,0,MATCH
+38136195,Downtown Core,Private room,7,7,0,MATCH
+38305984,Serangoon,Private room,1,1,0,MATCH
+38307308,Serangoon,Private room,1,1,0,MATCH
+38307486,River Valley,Private room,0,0,0,MATCH
+38337287,Bukit Merah,Private room,0,0,0,MATCH
+38388737,Rochor,Private room,30,30,0,MATCH
+38399837,Pasir Ris,Private room,4,4,0,MATCH
+38498535,Bukit Merah,Entire home/apt,0,0,0,MATCH
+38526126,Novena,Entire home/apt,0,0,0,MATCH
+38530815,Outram,Private room,1,1,0,MATCH
+38639800,Outram,Private room,1,1,0,MATCH
+38837741,Tanglin,Entire home/apt,0,0,0,MATCH
+38914093,Rochor,Hotel room,42,42,0,MATCH
+38915453,Tanglin,Entire home/apt,0,0,0,MATCH
+38916143,Rochor,Hotel room,168,168,0,MATCH
+38935611,Kallang,Private room,3,3,0,MATCH
+38939902,Rochor,Hotel room,66,66,0,MATCH
+38951604,Downtown Core,Entire home/apt,3,3,0,MATCH
+38965851,Downtown Core,Private room,5,5,0,MATCH
+38986386,Rochor,Hotel room,14,14,0,MATCH
+38986709,Rochor,Hotel room,27,27,0,MATCH
+38987390,Rochor,Private room,19,19,0,MATCH
+39014250,Rochor,Hotel room,28,28,0,MATCH
+39014610,Rochor,Hotel room,38,38,0,MATCH
+39147495,Queenstown,Entire home/apt,0,0,0,MATCH
+39155845,Bukit Timah,Entire home/apt,0,0,0,MATCH
+39158146,Jurong East,Private room,4,4,0,MATCH
+39212348,Novena,Entire home/apt,0,0,0,MATCH
+39293936,Bishan,Entire home/apt,8,8,0,MATCH
+39325093,Queenstown,Private room,1,1,0,MATCH
+39326791,Queenstown,Private room,0,0,0,MATCH
+39338786,Bukit Merah,Private room,59,59,0,MATCH
+39345579,Kallang,Private room,0,0,0,MATCH
+39380253,Kallang,Private room,1,1,0,MATCH
+39401038,Singapore River,Entire home/apt,1,1,0,MATCH
+39403510,Newton,Entire home/apt,0,0,0,MATCH
+39404728,Newton,Entire home/apt,0,0,0,MATCH
+39404880,Orchard,Entire home/apt,0,0,0,MATCH
+39405623,Orchard,Entire home/apt,0,0,0,MATCH
+39451138,Bukit Timah,Private room,4,4,0,MATCH
+39451764,Kallang,Private room,1,1,0,MATCH
+39488084,Kallang,Private room,2,2,0,MATCH
+39589304,Rochor,Private room,114,114,0,MATCH
+39612598,Geylang,Private room,1,1,0,MATCH
+39638066,Kallang,Private room,4,4,0,MATCH
+39653480,Kallang,Private room,0,0,0,MATCH
+39657837,Downtown Core,Entire home/apt,3,3,0,MATCH
+39679521,Yishun,Private room,2,2,0,MATCH
+39689162,Bukit Merah,Entire home/apt,15,15,0,MATCH
+39732502,Tampines,Private room,1,1,0,MATCH
+39767724,Woodlands,Private room,0,0,0,MATCH
+39811470,Rochor,Private room,0,0,0,MATCH
+39822559,Kallang,Private room,1,1,0,MATCH
+39824181,Queenstown,Entire home/apt,4,4,0,MATCH
+40043690,Tanglin,Entire home/apt,0,0,0,MATCH
+40048607,Bedok,Entire home/apt,3,3,0,MATCH
+40149431,Bukit Merah,Private room,0,0,0,MATCH
+40185785,Hougang,Entire home/apt,0,0,0,MATCH
+40211954,Kallang,Private room,1,1,0,MATCH
+40213569,Downtown Core,Private room,4,4,0,MATCH
+40294463,Bukit Merah,Entire home/apt,0,0,0,MATCH
+40354419,Bukit Merah,Entire home/apt,0,0,0,MATCH
+40361907,Geylang,Private room,8,8,0,MATCH
+40384948,Geylang,Private room,0,0,0,MATCH
+40456301,Geylang,Private room,35,35,0,MATCH
+40509365,Bukit Panjang,Private room,0,0,0,MATCH
+40516462,Woodlands,Private room,1,1,0,MATCH
+40551114,Kallang,Private room,0,0,0,MATCH
+40567661,Outram,Private room,0,0,0,MATCH
+40605925,Clementi,Entire home/apt,0,0,0,MATCH
+40634584,Downtown Core,Private room,0,0,0,MATCH
+40642051,Bukit Merah,Private room,1,1,0,MATCH
+40687175,Bukit Merah,Private room,0,0,0,MATCH
+40690201,Bukit Merah,Entire home/apt,24,24,0,MATCH
+40712481,Bukit Merah,Entire home/apt,0,0,0,MATCH
+40736423,Rochor,Entire home/apt,5,5,0,MATCH
+40736566,Downtown Core,Entire home/apt,2,2,0,MATCH
+40769351,Bukit Merah,Private room,3,3,0,MATCH
+40816592,Bukit Panjang,Private room,3,3,0,MATCH
+40831251,Clementi,Private room,0,0,0,MATCH
+40833390,Jurong West,Private room,3,3,0,MATCH
+40855337,Marine Parade,Private room,16,16,0,MATCH
+40875632,Rochor,Entire home/apt,4,4,0,MATCH
+40881888,Marine Parade,Private room,25,25,0,MATCH
+40888220,Bedok,Entire home/apt,0,0,0,MATCH
+40902252,Yishun,Private room,0,0,0,MATCH
+40909907,Marine Parade,Private room,30,30,0,MATCH
+40930074,Museum,Private room,0,0,0,MATCH
+40941821,Marine Parade,Entire home/apt,12,12,0,MATCH
+40974363,Queenstown,Private room,3,3,0,MATCH
+40974569,Queenstown,Private room,2,2,0,MATCH
+40975409,Queenstown,Private room,3,3,0,MATCH
+40975518,Queenstown,Private room,0,0,0,MATCH
+40975603,Queenstown,Private room,18,18,0,MATCH
+40975736,Queenstown,Private room,8,8,0,MATCH
+40983826,Marine Parade,Private room,0,0,0,MATCH
+41032597,Outram,Private room,10,10,0,MATCH
+41032819,Rochor,Entire home/apt,39,39,0,MATCH
+41032965,Outram,Private room,1,1,0,MATCH
+41033189,Rochor,Entire home/apt,12,12,0,MATCH
+41070234,Rochor,Entire home/apt,9,9,0,MATCH
+41087343,Bukit Batok,Private room,0,0,0,MATCH
+41089548,Clementi,Entire home/apt,1,1,0,MATCH
+41090834,Queenstown,Private room,3,3,0,MATCH
+41090879,Queenstown,Private room,4,4,0,MATCH
+41091240,Queenstown,Private room,6,6,0,MATCH
+41091895,Queenstown,Private room,3,3,0,MATCH
+41116039,Queenstown,Private room,0,0,0,MATCH
+41116137,Queenstown,Private room,7,7,0,MATCH
+41116342,Queenstown,Private room,23,23,0,MATCH
+41117291,Queenstown,Private room,14,14,0,MATCH
+41158163,River Valley,Entire home/apt,5,5,0,MATCH
+41159508,Kallang,Private room,0,0,0,MATCH
+41160357,Kallang,Private room,1,1,0,MATCH
+41169873,Hougang,Private room,0,0,0,MATCH
+41202185,Downtown Core,Entire home/apt,0,0,0,MATCH
+41299496,Kallang,Private room,1,1,0,MATCH
+41323209,Kallang,Private room,3,3,0,MATCH
+41388877,Bukit Merah,Private room,1,1,0,MATCH
+41406564,Bedok,Shared room,0,0,0,MATCH
+41439350,Rochor,Shared room,8,8,0,MATCH
+41439736,Queenstown,Private room,11,11,0,MATCH
+41450369,Bukit Timah,Private room,2,2,0,MATCH
+41460941,Queenstown,Private room,8,8,0,MATCH
+41467431,Geylang,Private room,0,0,0,MATCH
+41476885,Queenstown,Private room,2,2,0,MATCH
+41481981,Queenstown,Entire home/apt,154,154,0,MATCH
+41482560,Queenstown,Entire home/apt,145,145,0,MATCH
+41566195,Kallang,Private room,1,1,0,MATCH
+41568582,Rochor,Entire home/apt,1,1,0,MATCH
+41570615,Sengkang,Private room,7,7,0,MATCH
+41611248,River Valley,Private room,1,1,0,MATCH
+41626102,River Valley,Entire home/apt,0,0,0,MATCH
+41650236,River Valley,Entire home/apt,0,0,0,MATCH
+41753013,Rochor,Entire home/apt,1,1,0,MATCH
+41848009,Kallang,Private room,0,0,0,MATCH
+41889066,Queenstown,Private room,1,1,0,MATCH
+41942466,Rochor,Private room,0,0,0,MATCH
+42011728,Bishan,Private room,0,0,0,MATCH
+42085924,Geylang,Private room,0,0,0,MATCH
+42104353,Outram,Private room,0,0,0,MATCH
+42104603,Outram,Private room,1,1,0,MATCH
+42124141,Rochor,Entire home/apt,0,0,0,MATCH
+42144452,Kallang,Private room,1,1,0,MATCH
+42184804,Queenstown,Private room,0,0,0,MATCH
+42186946,Geylang,Private room,0,0,0,MATCH
+42238629,Rochor,Entire home/apt,0,0,0,MATCH
+42239864,Newton,Private room,0,0,0,MATCH
+42240675,Novena,Private room,0,0,0,MATCH
+42337015,Orchard,Entire home/apt,5,5,0,MATCH
+42337552,Orchard,Entire home/apt,1,1,0,MATCH
+42337799,Orchard,Entire home/apt,9,9,0,MATCH
+42338112,Orchard,Entire home/apt,0,0,0,MATCH
+42545364,Yishun,Private room,6,6,0,MATCH
+42545850,Yishun,Private room,9,9,0,MATCH
+42555446,Rochor,Entire home/apt,1,1,0,MATCH
+42555518,Rochor,Entire home/apt,0,0,0,MATCH
+42588720,Tanglin,Private room,11,11,0,MATCH
+42672097,Serangoon,Private room,0,0,0,MATCH
+42693235,Kallang,Private room,0,0,0,MATCH
+42696868,Jurong West,Private room,27,27,0,MATCH
+42697304,Jurong West,Private room,6,6,0,MATCH
+42750393,Jurong West,Private room,1,1,0,MATCH
+42752743,Kallang,Private room,1,1,0,MATCH
+42813500,Bishan,Private room,0,0,0,MATCH
+42867108,Rochor,Entire home/apt,0,0,0,MATCH
+42885763,Rochor,Private room,62,62,0,MATCH
+42885911,Rochor,Private room,134,134,0,MATCH
+42913012,Ang Mo Kio,Private room,1,1,0,MATCH
+43080765,Kallang,Private room,0,0,0,MATCH
+43089999,Sengkang,Private room,5,5,0,MATCH
+43108706,Geylang,Private room,1,1,0,MATCH
+43112898,Kallang,Private room,1,1,0,MATCH
+43143215,Rochor,Private room,2,2,0,MATCH
+43145924,Tanglin,Entire home/apt,0,0,0,MATCH
+43177325,Kallang,Private room,16,16,0,MATCH
+43201738,Newton,Private room,0,0,0,MATCH
+43249498,Bedok,Private room,0,0,0,MATCH
+43313632,Novena,Entire home/apt,0,0,0,MATCH
+43313813,Singapore River,Private room,23,23,0,MATCH
+43344101,Bedok,Private room,0,0,0,MATCH
+43354292,Bedok,Private room,3,3,0,MATCH
+43354914,Bedok,Private room,3,3,0,MATCH
+43355016,Bedok,Private room,1,1,0,MATCH
+43358921,Bedok,Private room,2,2,0,MATCH
+43359021,Bedok,Private room,1,1,0,MATCH
+43359087,Bedok,Private room,1,1,0,MATCH
+43359359,Bedok,Private room,2,2,0,MATCH
+43359426,Bedok,Private room,2,2,0,MATCH
+43393378,Marine Parade,Private room,18,18,0,MATCH
+43406519,Bukit Timah,Private room,0,0,0,MATCH
+43414572,Bukit Timah,Private room,0,0,0,MATCH
+43424855,Central Water Catchment,Private room,0,0,0,MATCH
+43479862,Bedok,Private room,0,0,0,MATCH
+43481271,Bedok,Private room,0,0,0,MATCH
+43481361,Bedok,Private room,0,0,0,MATCH
+43492077,Bedok,Private room,0,0,0,MATCH
+43492196,Bedok,Private room,8,8,0,MATCH
+43493044,Bedok,Private room,2,2,0,MATCH
+43493128,Bedok,Private room,0,0,0,MATCH
+43542472,Jurong West,Private room,14,14,0,MATCH
+43584129,Bukit Merah,Private room,0,0,0,MATCH
+43629592,Geylang,Entire home/apt,22,22,0,MATCH
+43706347,Queenstown,Entire home/apt,0,0,0,MATCH
+43723774,Geylang,Private room,0,0,0,MATCH
+43922476,Outram,Entire home/apt,2,2,0,MATCH
+43947546,Geylang,Entire home/apt,0,0,0,MATCH
+44069414,Geylang,Entire home/apt,1,1,0,MATCH
+44090296,Bukit Timah,Entire home/apt,0,0,0,MATCH
+44255450,Novena,Entire home/apt,0,0,0,MATCH
+44283744,Rochor,Private room,8,8,0,MATCH
+44294078,Bukit Batok,Private room,0,0,0,MATCH
+44323246,Marine Parade,Private room,0,0,0,MATCH
+44420536,Outram,Private room,228,228,0,MATCH
+44525671,Downtown Core,Entire home/apt,0,0,0,MATCH
+44599757,Queenstown,Entire home/apt,0,0,0,MATCH
+44626865,Rochor,Private room,1,1,0,MATCH
+45005221,Outram,Private room,1,1,0,MATCH
+45131086,Rochor,Private room,3,3,0,MATCH
+45280147,Geylang,Entire home/apt,0,0,0,MATCH
+45319306,Jurong East,Entire home/apt,0,0,0,MATCH
+45474953,Novena,Entire home/apt,1,1,0,MATCH
+45524524,Southern Islands,Entire home/apt,0,0,0,MATCH
+45626850,Bukit Merah,Entire home/apt,0,0,0,MATCH
+45749682,Bedok,Private room,0,0,0,MATCH
+45777993,River Valley,Entire home/apt,0,0,0,MATCH
+45781348,Bedok,Private room,0,0,0,MATCH
+45803322,Bukit Merah,Private room,0,0,0,MATCH
+45803343,Bukit Merah,Private room,0,0,0,MATCH
+45835431,Newton,Entire home/apt,0,0,0,MATCH
+45871999,River Valley,Entire home/apt,1,1,0,MATCH
+45891734,Queenstown,Entire home/apt,0,0,0,MATCH
+45902566,Orchard,Entire home/apt,2,2,0,MATCH
+45960413,Orchard,Entire home/apt,0,0,0,MATCH
+45961316,Orchard,Entire home/apt,4,4,0,MATCH
+45961358,Orchard,Entire home/apt,1,1,0,MATCH
+45962405,Orchard,Entire home/apt,3,3,0,MATCH
+45962495,River Valley,Entire home/apt,1,1,0,MATCH
+45962749,Orchard,Entire home/apt,4,4,0,MATCH
+45962895,River Valley,Entire home/apt,15,15,0,MATCH
+45963002,Museum,Entire home/apt,0,0,0,MATCH
+45963685,River Valley,Entire home/apt,6,6,0,MATCH
+46000906,Queenstown,Entire home/apt,0,0,0,MATCH
+46057282,Hougang,Entire home/apt,11,11,0,MATCH
+46057773,Hougang,Entire home/apt,18,18,0,MATCH
+46057791,Hougang,Entire home/apt,4,4,0,MATCH
+46073890,Hougang,Entire home/apt,14,14,0,MATCH
+46075495,Hougang,Entire home/apt,1,1,0,MATCH
+46096669,Toa Payoh,Entire home/apt,8,8,0,MATCH
+46108799,Hougang,Entire home/apt,2,2,0,MATCH
+46114490,Kallang,Private room,0,0,0,MATCH
+46321781,Marine Parade,Entire home/apt,1,1,0,MATCH
+46401004,Punggol,Private room,0,0,0,MATCH
+46456107,Bukit Panjang,Private room,0,0,0,MATCH
+46473348,River Valley,Entire home/apt,3,3,0,MATCH
+46474181,Singapore River,Entire home/apt,9,9,0,MATCH
+46475439,Singapore River,Entire home/apt,3,3,0,MATCH
+46475535,River Valley,Entire home/apt,8,8,0,MATCH
+46475821,River Valley,Entire home/apt,10,10,0,MATCH
+46475943,River Valley,Entire home/apt,4,4,0,MATCH
+46476119,Singapore River,Entire home/apt,1,1,0,MATCH
+46476300,Singapore River,Entire home/apt,0,0,0,MATCH
+46476407,Singapore River,Entire home/apt,0,0,0,MATCH
+46491972,Tanglin,Entire home/apt,7,7,0,MATCH
+46589101,Jurong East,Entire home/apt,0,0,0,MATCH
+46589304,Clementi,Entire home/apt,0,0,0,MATCH
+46590239,Clementi,Entire home/apt,0,0,0,MATCH
+46590765,Clementi,Entire home/apt,0,0,0,MATCH
+46591065,Clementi,Entire home/apt,0,0,0,MATCH
+46605955,Clementi,Entire home/apt,6,6,0,MATCH
+46606151,Clementi,Entire home/apt,1,1,0,MATCH
+46606472,Clementi,Entire home/apt,0,0,0,MATCH
+46669109,Central Water Catchment,Entire home/apt,1,1,0,MATCH
+46698961,Jurong East,Entire home/apt,1,1,0,MATCH
+46803536,Downtown Core,Private room,0,0,0,MATCH
+46933172,Clementi,Entire home/apt,0,0,0,MATCH
+46973148,Queenstown,Entire home/apt,0,0,0,MATCH
+47060269,Kallang,Private room,0,0,0,MATCH
+47124048,Downtown Core,Private room,0,0,0,MATCH
+47188396,Rochor,Private room,1,1,0,MATCH
+47295571,Kallang,Private room,1,1,0,MATCH
+47477733,Bukit Merah,Private room,1,1,0,MATCH
+47555385,Bukit Merah,Entire home/apt,3,3,0,MATCH
+47736858,Bukit Merah,Entire home/apt,0,0,0,MATCH
+47774321,Downtown Core,Private room,0,0,0,MATCH
+47789812,Jurong East,Entire home/apt,0,0,0,MATCH
+47819395,River Valley,Entire home/apt,0,0,0,MATCH
+47838915,Kallang,Entire home/apt,0,0,0,MATCH
+47893438,Geylang,Private room,0,0,0,MATCH
+47927795,Novena,Entire home/apt,0,0,0,MATCH
+47927882,Novena,Entire home/apt,3,3,0,MATCH
+47931824,Queenstown,Entire home/apt,0,0,0,MATCH
+47945468,Outram,Private room,1519,1519,0,MATCH
+47945578,Downtown Core,Private room,20,20,0,MATCH
+47945703,Outram,Private room,153,153,0,MATCH
+47945986,Outram,Private room,45,45,0,MATCH
+48007776,Tanglin,Private room,0,0,0,MATCH
+48019222,Outram,Private room,931,931,0,MATCH
+48019325,Outram,Private room,88,88,0,MATCH
+48019417,Outram,Private room,125,125,0,MATCH
+48019515,Outram,Private room,83,83,0,MATCH
+48033280,Rochor,Private room,379,379,0,MATCH
+48033351,Rochor,Private room,1138,1138,0,MATCH
+48033436,Rochor,Private room,148,148,0,MATCH
+48034619,Clementi,Entire home/apt,0,0,0,MATCH
+48082868,Jurong East,Entire home/apt,0,0,0,MATCH
+48085243,Jurong West,Entire home/apt,0,0,0,MATCH
+48098802,Downtown Core,Private room,2,2,0,MATCH
+48127824,Clementi,Entire home/apt,1,1,0,MATCH
+48141144,Newton,Entire home/apt,0,0,0,MATCH
+48153394,Marine Parade,Entire home/apt,1,1,0,MATCH
+48176330,Kallang,Entire home/apt,4,4,0,MATCH
+48191140,Marine Parade,Entire home/apt,0,0,0,MATCH
+48246660,Jurong East,Private room,4,4,0,MATCH
+48261012,Rochor,Private room,1,1,0,MATCH
+48264716,Rochor,Private room,1,1,0,MATCH
+48265114,Rochor,Private room,6,6,0,MATCH
+48265411,Rochor,Private room,3,3,0,MATCH
+48286216,Orchard,Entire home/apt,0,0,0,MATCH
+48313505,Woodlands,Private room,8,8,0,MATCH
+48531484,Rochor,Private room,0,0,0,MATCH
+48531971,Jurong East,Entire home/apt,2,2,0,MATCH
+48613065,Outram,Private room,47,47,0,MATCH
+48688017,Yishun,Private room,0,0,0,MATCH
+48743492,Outram,Private room,3,3,0,MATCH
+49048346,Outram,Private room,245,245,0,MATCH
+49048569,Downtown Core,Private room,175,175,0,MATCH
+49081728,River Valley,Private room,0,0,0,MATCH
+49082170,River Valley,Private room,0,0,0,MATCH
+49082424,Orchard,Private room,0,0,0,MATCH
+49082585,Orchard,Private room,0,0,0,MATCH
+49083516,Orchard,Private room,0,0,0,MATCH
+49083651,Orchard,Private room,0,0,0,MATCH
+49099456,River Valley,Entire home/apt,0,0,0,MATCH
+49209267,Hougang,Private room,1,1,0,MATCH
+49428269,Kallang,Private room,0,0,0,MATCH
+49445304,Clementi,Entire home/apt,0,0,0,MATCH
+49535860,Rochor,Private room,1,1,0,MATCH
+49597391,Kallang,Entire home/apt,0,0,0,MATCH
+49693917,Downtown Core,Private room,0,0,0,MATCH
+49863259,Downtown Core,Entire home/apt,278,278,0,MATCH
+49936029,Outram,Private room,6,6,0,MATCH
+49937277,Queenstown,Entire home/apt,0,0,0,MATCH
+49951302,Rochor,Shared room,24,24,0,MATCH
+50220613,River Valley,Entire home/apt,0,0,0,MATCH
+50229786,Clementi,Entire home/apt,0,0,0,MATCH
+50294480,Orchard,Private room,6,6,0,MATCH
+50333798,Kallang,Private room,4,4,0,MATCH
+50340792,Kallang,Private room,0,0,0,MATCH
+50402384,Outram,Private room,0,0,0,MATCH
+50433019,Punggol,Entire home/apt,16,16,0,MATCH
+50476069,Queenstown,Private room,2,2,0,MATCH
+50562391,Downtown Core,Private room,1,1,0,MATCH
+50707898,Rochor,Entire home/apt,1,1,0,MATCH
+50708702,Downtown Core,Entire home/apt,7,7,0,MATCH
+50732473,Novena,Private room,0,0,0,MATCH
+50732541,Novena,Private room,0,0,0,MATCH
+50732900,Novena,Private room,0,0,0,MATCH
+50733196,Novena,Private room,0,0,0,MATCH
+50733227,Novena,Private room,0,0,0,MATCH
+50737006,Rochor,Entire home/apt,21,21,0,MATCH
+50822490,Downtown Core,Private room,3,3,0,MATCH
+50822918,Rochor,Entire home/apt,13,13,0,MATCH
+50823263,Downtown Core,Entire home/apt,0,0,0,MATCH
+50823476,Rochor,Entire home/apt,1,1,0,MATCH
+50823783,Rochor,Entire home/apt,0,0,0,MATCH
+50844665,Tanglin,Private room,2,2,0,MATCH
+51002244,Clementi,Private room,0,0,0,MATCH
+51075717,Outram,Private room,244,244,0,MATCH
+51076382,Rochor,Private room,346,346,0,MATCH
+51131949,Downtown Core,Private room,87,87,0,MATCH
+51223656,Downtown Core,Private room,1,1,0,MATCH
+51357661,Queenstown,Entire home/apt,0,0,0,MATCH
+51593286,Marine Parade,Entire home/apt,0,0,0,MATCH
+51660574,Singapore River,Entire home/apt,24,24,0,MATCH
+51660773,Singapore River,Entire home/apt,190,190,0,MATCH
+51661055,Singapore River,Entire home/apt,106,106,0,MATCH
+51661224,Singapore River,Entire home/apt,229,229,0,MATCH
+51759139,Downtown Core,Entire home/apt,3,3,0,MATCH
+51858493,Singapore River,Entire home/apt,7,7,0,MATCH
+51931255,Singapore River,Entire home/apt,80,80,0,MATCH
+51931450,Singapore River,Entire home/apt,33,33,0,MATCH
+51931632,Singapore River,Entire home/apt,22,22,0,MATCH
+51946794,Singapore River,Entire home/apt,21,21,0,MATCH
+51946940,Singapore River,Entire home/apt,34,34,0,MATCH
+51947045,Singapore River,Entire home/apt,52,52,0,MATCH
+51997726,Clementi,Entire home/apt,0,0,0,MATCH
+52062009,Singapore River,Entire home/apt,28,28,0,MATCH
+52062197,Singapore River,Entire home/apt,29,29,0,MATCH
+52157275,Clementi,Entire home/apt,2,2,0,MATCH
+52289477,Jurong East,Entire home/apt,0,0,0,MATCH
+52301070,Tampines,Private room,2,2,0,MATCH
+52357276,Rochor,Entire home/apt,195,195,0,MATCH
+52357563,Rochor,Entire home/apt,25,25,0,MATCH
+52357696,Rochor,Entire home/apt,47,47,0,MATCH
+52357956,Rochor,Entire home/apt,34,34,0,MATCH
+52358231,Bukit Merah,Entire home/apt,0,0,0,MATCH
+52359332,River Valley,Entire home/apt,14,14,0,MATCH
+52396348,Downtown Core,Entire home/apt,0,0,0,MATCH
+52522468,Downtown Core,Entire home/apt,0,0,0,MATCH
+52575543,Rochor,Entire home/apt,39,39,0,MATCH
+52575637,Rochor,Entire home/apt,82,82,0,MATCH
+52593506,Bedok,Private room,0,0,0,MATCH
+52663333,Novena,Entire home/apt,0,0,0,MATCH
+52664352,Novena,Entire home/apt,0,0,0,MATCH
+52680716,Novena,Entire home/apt,0,0,0,MATCH
+52681365,Museum,Entire home/apt,2,2,0,MATCH
+52767590,Tanglin,Entire home/apt,0,0,0,MATCH
+52786412,Tanglin,Entire home/apt,0,0,0,MATCH
+52815766,Downtown Core,Private room,0,0,0,MATCH
+52907491,Sembawang,Private room,0,0,0,MATCH
+52911736,Singapore River,Entire home/apt,5,5,0,MATCH
+52970740,Kallang,Private room,0,0,0,MATCH
+52970813,Kallang,Private room,0,0,0,MATCH
+52977792,River Valley,Entire home/apt,4,4,0,MATCH
+53014553,Sengkang,Private room,1,1,0,MATCH
+53035232,Yishun,Private room,0,0,0,MATCH
+53038612,Rochor,Entire home/apt,1,1,0,MATCH
+53057197,River Valley,Private room,0,0,0,MATCH
+53057294,Orchard,Private room,0,0,0,MATCH
+53070791,River Valley,Entire home/apt,1,1,0,MATCH
+53073961,Novena,Entire home/apt,8,8,0,MATCH
+53100793,Downtown Core,Private room,0,0,0,MATCH
+53103357,Downtown Core,Entire home/apt,0,0,0,MATCH
+53119442,Novena,Entire home/apt,6,6,0,MATCH
+53122920,Novena,Entire home/apt,3,3,0,MATCH
+53123488,Novena,Entire home/apt,1,1,0,MATCH
+53137763,Novena,Entire home/apt,0,0,0,MATCH
+53138620,Orchard,Entire home/apt,0,0,0,MATCH
+53166174,Novena,Entire home/apt,16,16,0,MATCH
+53174768,Novena,Entire home/apt,37,37,0,MATCH
+53175494,Novena,Entire home/apt,1,1,0,MATCH
+53175628,Novena,Entire home/apt,1,1,0,MATCH
+53175850,Novena,Entire home/apt,6,6,0,MATCH
+53193333,Novena,Entire home/apt,2,2,0,MATCH
+53196067,Novena,Entire home/apt,11,11,0,MATCH
+53196481,Novena,Entire home/apt,4,4,0,MATCH
+53209302,Kallang,Private room,0,0,0,MATCH
+53222711,Novena,Entire home/apt,23,23,0,MATCH
+53260515,Novena,Entire home/apt,25,25,0,MATCH
+53260824,Novena,Entire home/apt,4,4,0,MATCH
+53270162,Novena,Entire home/apt,4,4,0,MATCH
+53281701,Novena,Entire home/apt,24,24,0,MATCH
+53301824,Novena,Entire home/apt,10,10,0,MATCH
+53346651,Queenstown,Entire home/apt,0,0,0,MATCH
+53355259,Novena,Entire home/apt,21,21,0,MATCH
+53355991,Novena,Entire home/apt,8,8,0,MATCH
+53374606,Novena,Entire home/apt,3,3,0,MATCH
+53375485,Novena,Entire home/apt,0,0,0,MATCH
+53388036,Novena,Entire home/apt,37,37,0,MATCH
+53406678,Singapore River,Entire home/apt,5,5,0,MATCH
+53465105,Novena,Entire home/apt,30,30,0,MATCH
+53465265,Novena,Entire home/apt,3,3,0,MATCH
+53465478,Novena,Entire home/apt,22,22,0,MATCH
+53483449,Yishun,Private room,1,1,0,MATCH
+53503062,Bukit Merah,Private room,0,0,0,MATCH
+53564318,Bukit Merah,Private room,0,0,0,MATCH
+53618034,Novena,Entire home/apt,8,8,0,MATCH
+53622188,Novena,Entire home/apt,3,3,0,MATCH
+53632741,Novena,Entire home/apt,2,2,0,MATCH
+53633752,Novena,Entire home/apt,2,2,0,MATCH
+53697187,Novena,Entire home/apt,1,1,0,MATCH
+53697444,Novena,Entire home/apt,9,9,0,MATCH
+53745162,Orchard,Entire home/apt,0,0,0,MATCH
+53819000,Singapore River,Entire home/apt,20,20,0,MATCH
+53836629,Bukit Merah,Private room,4,4,0,MATCH
+53836902,Bukit Merah,Private room,1,1,0,MATCH
+53853183,River Valley,Entire home/apt,1,1,0,MATCH
+53905492,Bukit Merah,Private room,20,20,0,MATCH
+53905653,Bukit Merah,Private room,22,22,0,MATCH
+54042568,River Valley,Entire home/apt,0,0,0,MATCH
+54188078,Singapore River,Entire home/apt,6,6,0,MATCH
+54204802,Novena,Entire home/apt,28,28,0,MATCH
+54205551,Novena,Entire home/apt,4,4,0,MATCH
+54205610,Novena,Entire home/apt,5,5,0,MATCH
+54219139,Downtown Core,Private room,0,0,0,MATCH
+54219241,Kallang,Private room,0,0,0,MATCH
+54219324,Downtown Core,Private room,0,0,0,MATCH
+54219421,Rochor,Private room,0,0,0,MATCH
+54237144,Novena,Entire home/apt,36,36,0,MATCH
+54350213,Orchard,Entire home/apt,0,0,0,MATCH
+54381837,Newton,Private room,0,0,0,MATCH
+502480461710129750,Bukit Merah,Entire home/apt,1,1,0,MATCH
+514796456553970869,Tanglin,Entire home/apt,0,0,0,MATCH
+542953504353473979,Novena,Private room,0,0,0,MATCH
+543954982497337161,Novena,Private room,0,0,0,MATCH
+548205562892374425,Rochor,Private room,169,169,0,MATCH
+548960838575945386,Orchard,Private room,0,0,0,MATCH
+559688933624074066,Novena,Entire home/apt,0,0,0,MATCH
+562605971381613093,Rochor,Private room,12,12,0,MATCH
+564785489291649854,Queenstown,Entire home/apt,0,0,0,MATCH
+567225306259796229,Novena,Entire home/apt,30,30,0,MATCH
+567910789087190907,Novena,Entire home/apt,12,12,0,MATCH
+569225009327985337,Pasir Ris,Entire home/apt,7,7,0,MATCH
+570021053543593969,Downtown Core,Private room,0,0,0,MATCH
+571344298305335079,Queenstown,Entire home/apt,100,100,0,MATCH
+571352760576491118,Queenstown,Entire home/apt,168,168,0,MATCH
+580929065419656480,Marine Parade,Private room,0,0,0,MATCH
+584191116126433210,Newton,Private room,1,1,0,MATCH
+585804868046252353,Bukit Merah,Entire home/apt,0,0,0,MATCH
+590190636729859001,Marine Parade,Private room,0,0,0,MATCH
+593128448022183606,Geylang,Private room,0,0,0,MATCH
+594591631258539165,Novena,Entire home/apt,0,0,0,MATCH
+597236119117778121,Queenstown,Private room,4,4,0,MATCH
+598767056595178619,Queenstown,Private room,26,26,0,MATCH
+598911290335045537,Queenstown,Private room,3,3,0,MATCH
+599562996273670621,Clementi,Entire home/apt,1,1,0,MATCH
+599610659013320019,Queenstown,Private room,3,3,0,MATCH
+599626408734532176,Queenstown,Private room,13,13,0,MATCH
+601224010844237665,Novena,Entire home/apt,0,0,0,MATCH
+602404867602970361,Queenstown,Private room,10,10,0,MATCH
+602593937490027793,Marine Parade,Private room,0,0,0,MATCH
+604716361293678447,Downtown Core,Entire home/apt,1,1,0,MATCH
+606329696219047813,Rochor,Private room,407,407,0,MATCH
+610566475939497195,Rochor,Entire home/apt,1,1,0,MATCH
+611242881863514656,Museum,Entire home/apt,17,17,0,MATCH
+613551678122841604,Orchard,Entire home/apt,7,7,0,MATCH
+616269766989380503,Singapore River,Entire home/apt,3,3,0,MATCH
+617247173811632292,River Valley,Entire home/apt,55,55,0,MATCH
+620076438504000936,Orchard,Entire home/apt,0,0,0,MATCH
+620705327184829898,Queenstown,Entire home/apt,0,0,0,MATCH
+620777463829233961,Bukit Merah,Entire home/apt,1,1,0,MATCH
+622285459570305887,Toa Payoh,Entire home/apt,0,0,0,MATCH
+623042143455413093,Novena,Entire home/apt,40,40,0,MATCH
+623665139003422870,Bukit Merah,Entire home/apt,1,1,0,MATCH
+623694448987969436,Queenstown,Entire home/apt,0,0,0,MATCH
+624502504905625021,Hougang,Private room,0,0,0,MATCH
+627993362264237393,Rochor,Entire home/apt,1,1,0,MATCH
+628023655354972471,Queenstown,Entire home/apt,0,0,0,MATCH
+628738540839451766,Clementi,Entire home/apt,0,0,0,MATCH
+629189587525996416,Queenstown,Private room,23,23,0,MATCH
+629974653707138627,Novena,Entire home/apt,0,0,0,MATCH
+630925262965708245,Queenstown,Entire home/apt,0,0,0,MATCH
+631583437029511305,Queenstown,Entire home/apt,0,0,0,MATCH
+633108840702293787,Novena,Entire home/apt,0,0,0,MATCH
+634448889782680248,Toa Payoh,Entire home/apt,0,0,0,MATCH
+634569447314151746,Singapore River,Entire home/apt,2,2,0,MATCH
+635244041403809380,Queenstown,Entire home/apt,0,0,0,MATCH
+636006272729140259,Orchard,Entire home/apt,0,0,0,MATCH
+638121765679357415,Orchard,Entire home/apt,0,0,0,MATCH
+638176617437521778,Queenstown,Entire home/apt,1,1,0,MATCH
+640310042458311380,Novena,Entire home/apt,0,0,0,MATCH
+641747306596079521,River Valley,Entire home/apt,0,0,0,MATCH
+643090826146083210,Bedok,Entire home/apt,6,6,0,MATCH
+643168943861912173,Downtown Core,Entire home/apt,0,0,0,MATCH
+644632856218324757,Geylang,Private room,0,0,0,MATCH
+644687177611018577,Geylang,Private room,3,3,0,MATCH
+650218176234251489,Downtown Core,Private room,1,1,0,MATCH
+650228376728214129,Downtown Core,Private room,3,3,0,MATCH
+650233126736416423,Downtown Core,Private room,7,7,0,MATCH
+653941042197595346,Outram,Entire home/apt,0,0,0,MATCH
+654125120499714142,Geylang,Private room,9,9,0,MATCH
+654132220997701617,Geylang,Private room,8,8,0,MATCH
+654135534924135883,Geylang,Private room,11,11,0,MATCH
+654139939866622744,Geylang,Private room,2,2,0,MATCH
+654142837621609801,Geylang,Private room,0,0,0,MATCH
+657378468476117445,Outram,Private room,19,19,0,MATCH
+661126911495364978,Kallang,Private room,105,105,0,MATCH
+661141365144703397,Kallang,Private room,9,9,0,MATCH
+663003515223444114,Choa Chu Kang,Private room,3,3,0,MATCH
+665411423125094948,Bukit Timah,Entire home/apt,0,0,0,MATCH
+665782341111883883,Newton,Private room,0,0,0,MATCH
+669791782739891346,Kallang,Private room,2,2,0,MATCH
+669949193228817088,Jurong West,Private room,0,0,0,MATCH
+671343585522620592,Downtown Core,Entire home/apt,0,0,0,MATCH
+671503829725764558,Downtown Core,Entire home/apt,0,0,0,MATCH
+671978123001456727,Bishan,Entire home/apt,0,0,0,MATCH
+672237297185438229,Queenstown,Entire home/apt,0,0,0,MATCH
+675508190285378956,Geylang,Entire home/apt,0,0,0,MATCH
+683854645825177827,Novena,Entire home/apt,0,0,0,MATCH
+685971733066763213,Bedok,Entire home/apt,0,0,0,MATCH
+690173353285048045,Clementi,Entire home/apt,0,0,0,MATCH
+690829460604577382,Bukit Panjang,Private room,0,0,0,MATCH
+691733988252942677,Yishun,Private room,1,1,0,MATCH
+692747103576172175,Singapore River,Shared room,1,1,0,MATCH
+692748972763723372,Singapore River,Shared room,1,1,0,MATCH
+694094996634001422,Bedok,Entire home/apt,2,2,0,MATCH
+694577313257572204,Novena,Entire home/apt,0,0,0,MATCH
+696253795962998334,Novena,Entire home/apt,18,18,0,MATCH
+698050146882892963,Serangoon,Private room,0,0,0,MATCH
+701085941036328384,Bukit Merah,Entire home/apt,0,0,0,MATCH
+701117222425092041,Bukit Merah,Entire home/apt,0,0,0,MATCH
+701163182645910620,Bukit Merah,Entire home/apt,0,0,0,MATCH
+701775603166450047,Bukit Merah,Entire home/apt,0,0,0,MATCH
+703934454801368238,Bukit Merah,Entire home/apt,0,0,0,MATCH
+703982281516674713,Bukit Merah,Entire home/apt,0,0,0,MATCH
+706165133122408093,Outram,Entire home/apt,0,0,0,MATCH
+707565204178349010,Marina South,Entire home/apt,93,93,0,MATCH
+707791734054862091,Pasir Ris,Private room,0,0,0,MATCH
+709168206726915159,Bukit Merah,Entire home/apt,0,0,0,MATCH
+709939057124036960,Marina South,Entire home/apt,40,40,0,MATCH
+712103299601725785,Outram,Entire home/apt,0,0,0,MATCH
+713931790395344585,Marina South,Entire home/apt,41,41,0,MATCH
+716283486212132297,Marina South,Entire home/apt,25,25,0,MATCH
+719821104611749511,Tanglin,Private room,5,5,0,MATCH
+720065272403972550,Marine Parade,Entire home/apt,0,0,0,MATCH
+721480577716308823,Marine Parade,Entire home/apt,1,1,0,MATCH
+725927989859971677,Woodlands,Private room,0,0,0,MATCH
+729304013671976178,Bedok,Private room,0,0,0,MATCH
+730382221702215291,Queenstown,Private room,0,0,0,MATCH
+734335764900771607,Outram,Private room,7,7,0,MATCH
+734588947303112403,Kallang,Shared room,59,59,0,MATCH
+736166550462292842,Rochor,Entire home/apt,0,0,0,MATCH
+738632897937347982,Bedok,Entire home/apt,1,1,0,MATCH
+741440446304335288,Geylang,Private room,3,3,0,MATCH
+746289351820967930,Toa Payoh,Private room,0,0,0,MATCH
+749758789682527413,Singapore River,Entire home/apt,8,8,0,MATCH
+750587874133037662,Geylang,Private room,0,0,0,MATCH
+754730391420070479,River Valley,Entire home/apt,0,0,0,MATCH
+755422693666901841,Singapore River,Entire home/apt,16,16,0,MATCH
+756273570620615397,Bukit Merah,Entire home/apt,2,2,0,MATCH
+760558711125468185,Clementi,Entire home/apt,0,0,0,MATCH
+762626108952636785,Newton,Entire home/apt,0,0,0,MATCH
+764824832337587941,Queenstown,Private room,2,2,0,MATCH
+765434508191118626,Queenstown,Private room,0,0,0,MATCH
+765693052421269833,Clementi,Entire home/apt,0,0,0,MATCH
+772751858111782112,Queenstown,Entire home/apt,0,0,0,MATCH
+772771788186961823,Singapore River,Entire home/apt,2,2,0,MATCH
+772794978295820785,Singapore River,Entire home/apt,8,8,0,MATCH
+772939810372343487,Bukit Merah,Entire home/apt,0,0,0,MATCH
+773516314294804172,Queenstown,Entire home/apt,0,0,0,MATCH
+774251290756654693,Downtown Core,Private room,9,9,0,MATCH
+774894186564801864,Singapore River,Entire home/apt,0,0,0,MATCH
+774905259693457913,Bukit Merah,Entire home/apt,0,0,0,MATCH
+775240664166599463,Hougang,Private room,0,0,0,MATCH
+776402004146423339,Jurong East,Entire home/apt,0,0,0,MATCH
+776405587327729817,Queenstown,Private room,9,9,0,MATCH
+777050594898518389,Queenstown,Entire home/apt,0,0,0,MATCH
+778629593685832976,Bedok,Entire home/apt,0,0,0,MATCH
+780073511005591824,Singapore River,Entire home/apt,10,10,0,MATCH
+780765568099881227,Jurong East,Entire home/apt,0,0,0,MATCH
+782824856046007586,Queenstown,Private room,13,13,0,MATCH
+782868929312051922,Queenstown,Private room,8,8,0,MATCH
+782994624558127242,River Valley,Entire home/apt,0,0,0,MATCH
+783139509330681568,Singapore River,Entire home/apt,0,0,0,MATCH
+783686743328860886,Clementi,Entire home/apt,0,0,0,MATCH
+783702312407337238,River Valley,Entire home/apt,0,0,0,MATCH
+784625662380076384,Queenstown,Private room,0,0,0,MATCH
+784633886415640302,Queenstown,Private room,0,0,0,MATCH
+786769060719658691,Newton,Entire home/apt,0,0,0,MATCH
+786962032021673825,Kallang,Entire home/apt,0,0,0,MATCH
+787356712557404822,Orchard,Entire home/apt,0,0,0,MATCH
+788032671275584829,Southern Islands,Entire home/apt,0,0,0,MATCH
+789762213793578390,Singapore River,Private room,9,9,0,MATCH
+791220299796324757,Singapore River,Shared room,15,15,0,MATCH
+791464178877735331,Bedok,Private room,0,0,0,MATCH
+791628554095781832,Southern Islands,Entire home/apt,0,0,0,MATCH
+791656227144870908,Orchard,Entire home/apt,0,0,0,MATCH
+791701445015747746,Newton,Entire home/apt,0,0,0,MATCH
+791721591826644800,Newton,Entire home/apt,0,0,0,MATCH
+791740870471323064,Orchard,Entire home/apt,0,0,0,MATCH
+791827163601709023,Downtown Core,Private room,5,5,0,MATCH
+791849721681232177,Downtown Core,Private room,10,10,0,MATCH
+791860562256839256,Downtown Core,Private room,8,8,0,MATCH
+792605945909474968,Bedok,Private room,0,0,0,MATCH
+794637745493796351,Queenstown,Private room,0,0,0,MATCH
+795610316764755392,River Valley,Entire home/apt,11,11,0,MATCH
+796557098118782780,Queenstown,Private room,1,1,0,MATCH
+797466283592149468,Bukit Merah,Private room,0,0,0,MATCH
+797803598869629444,River Valley,Entire home/apt,7,7,0,MATCH
+798224495747266527,Singapore River,Entire home/apt,3,3,0,MATCH
+798264417222834841,Outram,Private room,30,30,0,MATCH
+798279586997331039,Outram,Private room,3,3,0,MATCH
+798757666767840092,Newton,Private room,0,0,0,MATCH
+798800453487590434,Newton,Private room,0,0,0,MATCH
+800298184755363889,Kallang,Private room,25,25,0,MATCH
+801186555335313462,Outram,Entire home/apt,20,20,0,MATCH
+801190296928381142,Orchard,Entire home/apt,0,0,0,MATCH
+801244918922277430,Orchard,Entire home/apt,0,0,0,MATCH
+801920114737130933,Outram,Entire home/apt,32,32,0,MATCH
+806295889763785088,Outram,Entire home/apt,4,4,0,MATCH
+806312921176965101,Outram,Entire home/apt,144,144,0,MATCH
+806321235832587602,Outram,Entire home/apt,23,23,0,MATCH
+807695166982817445,Rochor,Private room,0,0,0,MATCH
+809553938268692523,Geylang,Entire home/apt,0,0,0,MATCH
+810376811309754844,Outram,Private room,8,8,0,MATCH
+819865960419314544,Choa Chu Kang,Private room,1,1,0,MATCH
+821368634251644679,Kallang,Entire home/apt,0,0,0,MATCH
+821552256539345322,Clementi,Entire home/apt,0,0,0,MATCH
+822059164708734993,Outram,Private room,7,7,0,MATCH
+822747512409031740,Pasir Ris,Private room,0,0,0,MATCH
+822888625164562641,Novena,Entire home/apt,0,0,0,MATCH
+822923084996611859,Rochor,Entire home/apt,0,0,0,MATCH
+823005527495504331,Rochor,Entire home/apt,0,0,0,MATCH
+823723343533782820,Novena,Entire home/apt,0,0,0,MATCH
+823988366264665533,Kallang,Private room,0,0,0,MATCH
+824228729224079234,Kallang,Entire home/apt,0,0,0,MATCH
+824328676429321602,Novena,Entire home/apt,0,0,0,MATCH
+825166191429610435,Kallang,Private room,0,0,0,MATCH
+825255331473955825,Jurong East,Entire home/apt,1,1,0,MATCH
+825579456713831810,Downtown Core,Entire home/apt,5,5,0,MATCH
+825778372859012212,Novena,Entire home/apt,0,0,0,MATCH
+825798658694498618,Novena,Entire home/apt,0,0,0,MATCH
+826508772917498456,Queenstown,Entire home/apt,1,1,0,MATCH
+827875125532071454,Bukit Merah,Entire home/apt,0,0,0,MATCH
+827991952733479579,Downtown Core,Entire home/apt,0,0,0,MATCH
+829322076860791922,Orchard,Entire home/apt,1,1,0,MATCH
+829369314741369503,Orchard,Entire home/apt,0,0,0,MATCH
+830754747969256751,River Valley,Entire home/apt,3,3,0,MATCH
+831518184194402625,Bukit Merah,Entire home/apt,1,1,0,MATCH
+831612439304811977,Bukit Merah,Entire home/apt,0,0,0,MATCH
+831688296592919472,Novena,Entire home/apt,0,0,0,MATCH
+832538193209880053,River Valley,Entire home/apt,14,14,0,MATCH
+833133699413019522,Geylang,Entire home/apt,0,0,0,MATCH
+833763737295484530,Bukit Merah,Private room,0,0,0,MATCH
+833899373927609367,Clementi,Entire home/apt,0,0,0,MATCH
+833977887503098646,Clementi,Entire home/apt,0,0,0,MATCH
+835904017609907338,River Valley,Entire home/apt,0,0,0,MATCH
+836738298166681497,Toa Payoh,Entire home/apt,0,0,0,MATCH
+837278001762525399,Marine Parade,Private room,0,0,0,MATCH
+837949620721483341,Marine Parade,Private room,0,0,0,MATCH
+838851522557267244,Jurong East,Entire home/apt,0,0,0,MATCH
+838867174319410951,Pasir Ris,Private room,1,1,0,MATCH
+840338886577189778,Marine Parade,Private room,0,0,0,MATCH
+841098685339489415,Tanglin,Entire home/apt,0,0,0,MATCH
+843285569659447374,Toa Payoh,Entire home/apt,0,0,0,MATCH
+846085840657880506,Bishan,Entire home/apt,0,0,0,MATCH
+846297658713595280,Southern Islands,Entire home/apt,0,0,0,MATCH
+851052793984170859,Bukit Merah,Entire home/apt,0,0,0,MATCH
+851980188132812708,Bukit Timah,Entire home/apt,0,0,0,MATCH
+852019499248537738,Geylang,Entire home/apt,0,0,0,MATCH
+852593319292806152,Downtown Core,Entire home/apt,0,0,0,MATCH
+852697989812131944,Bukit Merah,Entire home/apt,0,0,0,MATCH
+852711649412382555,Bukit Merah,Entire home/apt,2,2,0,MATCH
+853124282207206763,Southern Islands,Private room,6,6,0,MATCH
+853329364720420427,Outram,Entire home/apt,38,38,0,MATCH
+853329655146229701,Outram,Entire home/apt,43,43,0,MATCH
+853333353954940277,Outram,Entire home/apt,69,69,0,MATCH
+854000299997801222,Bukit Merah,Entire home/apt,2,2,0,MATCH
+854229329259305463,Clementi,Entire home/apt,0,0,0,MATCH
+855442493247789422,Tuas,Entire home/apt,0,0,0,MATCH
+856131872826507885,Novena,Entire home/apt,0,0,0,MATCH
+856214508230277566,Clementi,Entire home/apt,0,0,0,MATCH
+856237979894932179,Jurong West,Private room,1,1,0,MATCH
+856338018320193673,Jurong East,Entire home/apt,0,0,0,MATCH
+856350135874540052,Jurong West,Private room,0,0,0,MATCH
+856893840908837829,Rochor,Entire home/apt,2,2,0,MATCH
+856903119772673106,Clementi,Entire home/apt,0,0,0,MATCH
+856920920842811808,Orchard,Entire home/apt,0,0,0,MATCH
+857738312058474471,Clementi,Entire home/apt,0,0,0,MATCH
+857776843491356459,Clementi,Entire home/apt,0,0,0,MATCH
+857794766634277790,Clementi,Entire home/apt,0,0,0,MATCH
+859162396804139167,Clementi,Entire home/apt,0,0,0,MATCH
+859166984543739649,Queenstown,Entire home/apt,0,0,0,MATCH
+859171597002185671,Clementi,Entire home/apt,0,0,0,MATCH
+859186207745669919,Clementi,Entire home/apt,0,0,0,MATCH
+859837503480355610,Toa Payoh,Entire home/apt,0,0,0,MATCH
+861528967359064492,Bedok,Private room,0,0,0,MATCH
+861583739734518986,Jurong West,Private room,0,0,0,MATCH
+863260350382867564,Singapore River,Private room,2,2,0,MATCH
+863992542062626637,Singapore River,Entire home/apt,6,6,0,MATCH
+864099010095266648,Outram,Private room,4,4,0,MATCH
+864117612353918427,Outram,Private room,3,3,0,MATCH
+865140811030135378,River Valley,Entire home/apt,0,0,0,MATCH
+866448854492965889,Bukit Merah,Entire home/apt,1,1,0,MATCH
+867296050291666116,Bukit Merah,Entire home/apt,4,4,0,MATCH
+867784939403972660,Outram,Private room,0,0,0,MATCH
+869099179388879329,Singapore River,Private room,9,9,0,MATCH
+870150798623777606,Singapore River,Private room,9,9,0,MATCH
+870182864930871777,Singapore River,Private room,5,5,0,MATCH
+872033189275592946,Singapore River,Shared room,5,5,0,MATCH
+873140844618962944,River Valley,Entire home/apt,7,7,0,MATCH
+873151302770286080,River Valley,Entire home/apt,19,19,0,MATCH
+873151554401594108,River Valley,Entire home/apt,18,18,0,MATCH
+873151881500059276,River Valley,Entire home/apt,8,8,0,MATCH
+873159641216775580,River Valley,Entire home/apt,5,5,0,MATCH
+876437098945514540,Kallang,Entire home/apt,2,2,0,MATCH
+878016322780322976,River Valley,Entire home/apt,0,0,0,MATCH
+878488989399491669,Southern Islands,Entire home/apt,1,1,0,MATCH
+878489235812091594,Southern Islands,Entire home/apt,0,0,0,MATCH
+878489359707000351,Southern Islands,Entire home/apt,5,5,0,MATCH
+878489587692756300,Southern Islands,Entire home/apt,8,8,0,MATCH
+880183982958295952,River Valley,Entire home/apt,0,0,0,MATCH
+882163842842675031,Downtown Core,Entire home/apt,0,0,0,MATCH
+883475889105289539,Geylang,Entire home/apt,0,0,0,MATCH
+883508348606122817,Tanglin,Entire home/apt,0,0,0,MATCH
+883530197768740963,Clementi,Private room,0,0,0,MATCH
+883902659568943778,Clementi,Private room,0,0,0,MATCH
+888118099586309880,Orchard,Entire home/apt,0,0,0,MATCH
+888118429060687509,Rochor,Entire home/apt,0,0,0,MATCH
+888195484053493832,Geylang,Entire home/apt,0,0,0,MATCH
+891745035450355750,Novena,Entire home/apt,0,0,0,MATCH
+892371127605772614,Queenstown,Entire home/apt,0,0,0,MATCH
+894818904935257922,Rochor,Private room,0,0,0,MATCH
+895226443049231974,Rochor,Private room,0,0,0,MATCH
+895228320520386779,Rochor,Private room,0,0,0,MATCH
+895241436883831194,Rochor,Private room,0,0,0,MATCH
+895271741256105433,Rochor,Private room,0,0,0,MATCH
+895307096931503765,Rochor,Entire home/apt,0,0,0,MATCH
+896425471247877253,River Valley,Entire home/apt,5,5,0,MATCH
+896425506202393462,River Valley,Entire home/apt,2,2,0,MATCH
+896425516042224853,River Valley,Entire home/apt,7,7,0,MATCH
+896425553049881174,River Valley,Entire home/apt,4,4,0,MATCH
+897448879002896896,River Valley,Entire home/apt,2,2,0,MATCH
+897507768783898539,Queenstown,Private room,2,2,0,MATCH
+898183406680359456,River Valley,Private room,1,1,0,MATCH
+898295862778234145,Singapore River,Entire home/apt,1,1,0,MATCH
+899732642408799379,Serangoon,Private room,0,0,0,MATCH
+899868229915270512,Jurong East,Entire home/apt,0,0,0,MATCH
+900478455755523033,Geylang,Entire home/apt,0,0,0,MATCH
+901089041886609842,Serangoon,Private room,0,0,0,MATCH
+902551049632643801,Queenstown,Entire home/apt,1,1,0,MATCH
+903372817283527946,Rochor,Private room,0,0,0,MATCH
+903506199716240689,Rochor,Private room,0,0,0,MATCH
+904588436802887307,Rochor,Entire home/apt,0,0,0,MATCH
+906259459458420505,Rochor,Entire home/apt,1,1,0,MATCH
+906726281972631952,Rochor,Private room,0,0,0,MATCH
+907077257962946258,Rochor,Private room,1,1,0,MATCH
+907686638311383341,Marine Parade,Private room,2,2,0,MATCH
+909100019892803087,Jurong East,Entire home/apt,0,0,0,MATCH
+909348769769135505,Bukit Merah,Entire home/apt,0,0,0,MATCH
+912791958009826495,Novena,Entire home/apt,4,4,0,MATCH
+912802306072914469,Rochor,Entire home/apt,0,0,0,MATCH
+913522560000207283,Choa Chu Kang,Private room,0,0,0,MATCH
+913781510901929183,Novena,Entire home/apt,0,0,0,MATCH
+915452171883804682,Rochor,Private room,0,0,0,MATCH
+915480824792203623,Rochor,Private room,0,0,0,MATCH
+915480906467484416,Rochor,Private room,0,0,0,MATCH
+915491540353078007,Rochor,Private room,0,0,0,MATCH
+915496448580987418,Rochor,Private room,0,0,0,MATCH
+915670366666904246,Bukit Merah,Entire home/apt,2,2,0,MATCH
+915681736655786529,Novena,Entire home/apt,0,0,0,MATCH
+916360007394339156,Punggol,Private room,3,3,0,MATCH
+917001993750346677,Clementi,Entire home/apt,0,0,0,MATCH
+917268940021538414,Marine Parade,Entire home/apt,0,0,0,MATCH
+917705626758191088,Rochor,Private room,0,0,0,MATCH
+917878438514515055,Downtown Core,Private room,2,2,0,MATCH
+917885193029724900,Downtown Core,Private room,1,1,0,MATCH
+918098632975538206,Bedok,Private room,2,2,0,MATCH
+918670063389680037,Queenstown,Private room,0,0,0,MATCH
+919502228882474216,Ang Mo Kio,Private room,0,0,0,MATCH
+919968290403148056,Bukit Merah,Entire home/apt,2,2,0,MATCH
+923613640797995092,Marine Parade,Entire home/apt,0,0,0,MATCH
+924864455710407269,Bedok,Private room,0,0,0,MATCH
+925168994523733731,Geylang,Entire home/apt,0,0,0,MATCH
+927092195097805859,Rochor,Private room,12,12,0,MATCH
+927104359590866258,Rochor,Private room,29,29,0,MATCH
+928850044952941796,Jurong East,Entire home/apt,0,0,0,MATCH
+930060029464198671,Jurong East,Entire home/apt,0,0,0,MATCH
+933097055241827931,Jurong East,Entire home/apt,0,0,0,MATCH
+933141148831561918,Bedok,Private room,3,3,0,MATCH
+933259335282417831,Bedok,Private room,0,0,0,MATCH
+933267561689894166,Bedok,Private room,0,0,0,MATCH
+934346542744923153,Downtown Core,Private room,187,187,0,MATCH
+934354866476648898,Downtown Core,Private room,23,23,0,MATCH
+934368914326609002,Downtown Core,Private room,41,41,0,MATCH
+934381114246786901,Downtown Core,Private room,30,30,0,MATCH
+934386884436615245,Downtown Core,Private room,9,9,0,MATCH
+934459075537527502,Newton,Entire home/apt,0,0,0,MATCH
+935094489055741434,Bukit Panjang,Private room,2,2,0,MATCH
+936485750538024929,Jurong West,Entire home/apt,0,0,0,MATCH
+937227522262502962,Orchard,Entire home/apt,0,0,0,MATCH
+938174889624669271,Bukit Batok,Entire home/apt,0,0,0,MATCH
+938672532615874999,Rochor,Private room,13,13,0,MATCH
+938821130208338925,Downtown Core,Private room,26,26,0,MATCH
+938826741220769481,Rochor,Private room,20,20,0,MATCH
+939438617196139743,Marine Parade,Entire home/apt,0,0,0,MATCH
+939706932525817048,Rochor,Private room,21,21,0,MATCH
+939714606306548233,Rochor,Private room,5,5,0,MATCH
+940362959474669203,Marine Parade,Entire home/apt,0,0,0,MATCH
+942238998443573026,Kallang,Private room,1,1,0,MATCH
+942498058629533851,Marine Parade,Private room,6,6,0,MATCH
+943118105241784858,Marine Parade,Private room,2,2,0,MATCH
+943163894208432026,Marine Parade,Private room,1,1,0,MATCH
+943220901216594659,Marine Parade,Private room,5,5,0,MATCH
+943864507833744958,Bukit Merah,Entire home/apt,0,0,0,MATCH
+944449482210600103,Singapore River,Entire home/apt,5,5,0,MATCH
+944612487124738868,Marine Parade,Private room,5,5,0,MATCH
+944612549240049286,Bukit Merah,Entire home/apt,0,0,0,MATCH
+945118954811453086,Bukit Batok,Entire home/apt,0,0,0,MATCH
+946274113050996122,Marine Parade,Entire home/apt,0,0,0,MATCH
+947378293169299430,Kallang,Private room,0,0,0,MATCH
+948204813433816372,Bedok,Entire home/apt,0,0,0,MATCH
+948700412652397998,Marine Parade,Private room,8,8,0,MATCH
+949650431267779386,Rochor,Private room,4,4,0,MATCH
+951111788499858256,Jurong East,Entire home/apt,0,0,0,MATCH
+951114265487967593,Geylang,Private room,0,0,0,MATCH
+953924174741307769,Downtown Core,Entire home/apt,0,0,0,MATCH
+954625302085307833,Geylang,Private room,3,3,0,MATCH
+957684538892063912,Marine Parade,Private room,40,40,0,MATCH
+959465909045567964,River Valley,Entire home/apt,41,41,0,MATCH
+959816594895093321,Geylang,Private room,0,0,0,MATCH
+960610939781595021,Bukit Timah,Entire home/apt,0,0,0,MATCH
+962102060363767489,Marine Parade,Entire home/apt,0,0,0,MATCH
+962115187758611203,Marine Parade,Entire home/apt,0,0,0,MATCH
+962148073553755345,Marine Parade,Entire home/apt,0,0,0,MATCH
+962156092707353224,Marine Parade,Entire home/apt,0,0,0,MATCH
+962179495759598858,Bukit Merah,Entire home/apt,0,0,0,MATCH
+962179665760436992,Bukit Merah,Entire home/apt,0,0,0,MATCH
+962880218922843498,Rochor,Private room,0,0,0,MATCH
+966230139963508858,Punggol,Private room,0,0,0,MATCH
+967652598109248918,Pasir Ris,Private room,0,0,0,MATCH
+973054065787807697,Geylang,Private room,0,0,0,MATCH
+973485237183919925,Woodlands,Private room,0,0,0,MATCH
+974183835128911388,Kallang,Shared room,32,32,0,MATCH
+974194294235939529,Kallang,Shared room,6,6,0,MATCH
+976729949347636597,Toa Payoh,Private room,0,0,0,MATCH
+977840892351291114,Kallang,Entire home/apt,0,0,0,MATCH
+979215581517902662,Pasir Ris,Private room,0,0,0,MATCH
+984451267933484000,Singapore River,Entire home/apt,0,0,0,MATCH
+985940069189910173,Queenstown,Entire home/apt,0,0,0,MATCH
+988675919396273025,Singapore River,Entire home/apt,0,0,0,MATCH
+988896701671473303,Kallang,Entire home/apt,0,0,0,MATCH
+988948112956853302,Serangoon,Private room,0,0,0,MATCH
+991090415423461747,Hougang,Private room,0,0,0,MATCH
+992814061673098065,Bukit Batok,Private room,0,0,0,MATCH
+993145145410074505,Choa Chu Kang,Private room,0,0,0,MATCH
+994831838625612556,River Valley,Entire home/apt,8,8,0,MATCH
+996212506657357548,Kallang,Private room,273,273,0,MATCH
+997409009328273841,Bedok,Private room,0,0,0,MATCH
+997869767725636896,River Valley,Private room,14,14,0,MATCH
+998217592295049007,Downtown Core,Private room,0,0,0,MATCH
+998239661830045669,Bishan,Private room,0,0,0,MATCH
+998312291281514979,Downtown Core,Private room,0,0,0,MATCH
+999056201071274306,Hougang,Entire home/apt,0,0,0,MATCH
+999267804611326098,River Valley,Entire home/apt,38,38,0,MATCH
+999758275789912599,Downtown Core,Private room,0,0,0,MATCH
+999764011124437592,Downtown Core,Private room,0,0,0,MATCH
+1001704940131218226,Downtown Core,Private room,2,2,0,MATCH
+1001808164427189759,Novena,Entire home/apt,2,2,0,MATCH
+1003804545207627519,Geylang,Private room,1,1,0,MATCH
+1003923515839548471,Orchard,Entire home/apt,10,10,0,MATCH
+1004652336577626435,Orchard,Entire home/apt,0,0,0,MATCH
+1004668708355951146,Orchard,Entire home/apt,6,6,0,MATCH
+1004793478536324006,Newton,Entire home/apt,0,0,0,MATCH
+1007463266235891109,Geylang,Entire home/apt,0,0,0,MATCH
+1008596981366079541,Woodlands,Private room,3,3,0,MATCH
+1008723963440015334,River Valley,Entire home/apt,4,4,0,MATCH
+1009310616747753745,Kallang,Private room,71,71,0,MATCH
+1009651833336339483,Queenstown,Private room,6,6,0,MATCH
+1009662020699585686,Queenstown,Private room,12,12,0,MATCH
+1011919815635844395,Punggol,Private room,1,1,0,MATCH
+1012662608104053962,Pasir Ris,Private room,0,0,0,MATCH
+1012817610220906302,Rochor,Private room,0,0,0,MATCH
+1013057108052185979,Bishan,Private room,0,0,0,MATCH
+1015674434767532160,Singapore River,Entire home/apt,2,2,0,MATCH
+1021016464003246425,Downtown Core,Private room,0,0,0,MATCH
+1021016464222703177,Downtown Core,Private room,0,0,0,MATCH
+1021016479643828150,Downtown Core,Private room,0,0,0,MATCH
+1021016494182773262,Downtown Core,Private room,0,0,0,MATCH
+1021016496690681763,Downtown Core,Private room,16,16,0,MATCH
+1021016511276559526,Downtown Core,Private room,1,1,0,MATCH
+1021016519344090646,Downtown Core,Private room,0,0,0,MATCH
+1021016528440696755,Downtown Core,Private room,2,2,0,MATCH
+1021016532753376517,Downtown Core,Private room,1,1,0,MATCH
+1021016542430364492,Downtown Core,Private room,0,0,0,MATCH
+1021023258297618133,Orchard,Private room,0,0,0,MATCH
+1021024204303173232,Singapore River,Private room,16,16,0,MATCH
+1021695586762269747,Kallang,Private room,5,5,0,MATCH
+1023867600592669423,Bishan,Private room,0,0,0,MATCH
+1025026081961403901,Jurong West,Private room,0,0,0,MATCH
+1025281098926073017,Western Water Catchment,Private room,0,0,0,MATCH
+1025588886070864385,Orchard,Entire home/apt,8,8,0,MATCH
+1026566692577227079,Ang Mo Kio,Private room,0,0,0,MATCH
+1028010248386268173,Queenstown,Entire home/apt,0,0,0,MATCH
+1028259379953152956,Hougang,Entire home/apt,0,0,0,MATCH
+1028657682241218368,River Valley,Entire home/apt,1,1,0,MATCH
+1028744175173907229,Queenstown,Entire home/apt,0,0,0,MATCH
+1029639025854534584,Downtown Core,Private room,0,0,0,MATCH
+1032561593915196286,Jurong West,Private room,4,4,0,MATCH
+1033745170137385524,River Valley,Entire home/apt,30,30,0,MATCH
+1034830511655003002,Museum,Private room,0,0,0,MATCH
+1036002951580641037,Marine Parade,Private room,6,6,0,MATCH
+1036006273523988553,Jurong East,Entire home/apt,0,0,0,MATCH
+1037562150704397889,Downtown Core,Entire home/apt,0,0,0,MATCH
+1039628026138598190,River Valley,Entire home/apt,25,25,0,MATCH
+1040949271672193125,Bedok,Entire home/apt,2,2,0,MATCH
+1041089083978668521,River Valley,Private room,6,6,0,MATCH
+1043856635673230660,River Valley,Entire home/apt,4,4,0,MATCH
+1045254053769028094,Outram,Private room,53,53,0,MATCH
+1045315723123738903,Outram,Private room,78,78,0,MATCH
+1045618595860407671,Singapore River,Private room,0,0,0,MATCH
+1045810568104700436,Woodlands,Private room,0,0,0,MATCH
+1045810854593854682,Woodlands,Private room,0,0,0,MATCH
+1046085493906355076,Newton,Entire home/apt,0,0,0,MATCH
+1047435412003416811,Serangoon,Private room,1,1,0,MATCH
+1049770102565848612,Downtown Core,Entire home/apt,1,1,0,MATCH
+1050224923872590371,Bukit Merah,Private room,0,0,0,MATCH
+1050384755676077507,Marine Parade,Private room,4,4,0,MATCH
+1051126791807999318,Marine Parade,Entire home/apt,0,0,0,MATCH
+1051170933407727632,Marine Parade,Entire home/apt,0,0,0,MATCH
+1051186690382873378,Marine Parade,Entire home/apt,0,0,0,MATCH
+1051205953953722762,Marine Parade,Entire home/apt,0,0,0,MATCH
+1051844503970967768,River Valley,Entire home/apt,0,0,0,MATCH
+1051874859376252326,River Valley,Entire home/apt,0,0,0,MATCH
+1051894013258541747,River Valley,Entire home/apt,0,0,0,MATCH
+1051912453094168650,River Valley,Entire home/apt,0,0,0,MATCH
+1051926816739724054,River Valley,Entire home/apt,0,0,0,MATCH
+1052505901191091205,Bishan,Private room,0,0,0,MATCH
+1056991156987830405,Downtown Core,Entire home/apt,1,1,0,MATCH
+1057135157487651057,Downtown Core,Entire home/apt,0,0,0,MATCH
+1061349306448633698,Kallang,Private room,0,0,0,MATCH
+1063475665593160339,Downtown Core,Private room,0,0,0,MATCH
+1066283876987607462,Jurong West,Private room,0,0,0,MATCH
+1066313517033859330,Jurong West,Private room,0,0,0,MATCH
+1068419620186966968,Outram,Private room,83,83,0,MATCH
+1068813918482991779,Jurong West,Private room,0,0,0,MATCH
+1069978242571647934,River Valley,Entire home/apt,2,2,0,MATCH
+1070060724822268416,River Valley,Entire home/apt,8,8,0,MATCH
+1070081552859391917,Kallang,Private room,0,0,0,MATCH
+1070092240469943101,Kallang,Private room,3,3,0,MATCH
+1070100450728059767,Museum,Entire home/apt,0,0,0,MATCH
+1070106377457021814,Museum,Private room,0,0,0,MATCH
+1070110927076925837,Museum,Private room,0,0,0,MATCH
+1071539334294170511,Geylang,Private room,0,0,0,MATCH
+1072006172877875466,Tanglin,Private room,0,0,0,MATCH
+1072103225928678611,Kallang,Entire home/apt,20,20,0,MATCH
+1072406494380722661,Bukit Panjang,Entire home/apt,0,0,0,MATCH
+1072976465653153715,Kallang,Entire home/apt,19,19,0,MATCH
+1076009520742021280,Kallang,Private room,9,9,0,MATCH
+1077066160280158672,Kallang,Shared room,710,710,0,MATCH
+1078065199981407191,River Valley,Private room,0,0,0,MATCH
+1079631978496385968,Clementi,Entire home/apt,0,0,0,MATCH
+1080251577819735170,Singapore River,Entire home/apt,0,0,0,MATCH
+1080252514972352578,Queenstown,Entire home/apt,0,0,0,MATCH
+1081406657498050218,Downtown Core,Private room,104,104,0,MATCH
+1081488862927378833,Outram,Private room,0,0,0,MATCH
+1081595576755594103,Marine Parade,Entire home/apt,0,0,0,MATCH
+1081613865922147868,Kallang,Entire home/apt,10,10,0,MATCH
+1085329954814098268,Queenstown,Private room,2,2,0,MATCH
+1085886931988562621,Queenstown,Entire home/apt,0,0,0,MATCH
+1086056218918063408,Jurong East,Private room,0,0,0,MATCH
+1086646221902770506,Jurong East,Private room,0,0,0,MATCH
+1087226058736958732,River Valley,Entire home/apt,25,25,0,MATCH
+1087399824733854992,River Valley,Entire home/apt,15,15,0,MATCH
+1087695893758398925,Clementi,Private room,0,0,0,MATCH
+1087712071172259549,Clementi,Private room,0,0,0,MATCH
+1087721017567715315,Clementi,Private room,0,0,0,MATCH
+1090129808961222868,River Valley,Entire home/apt,6,6,0,MATCH
+1090844127265331476,River Valley,Private room,14,14,0,MATCH
+1090879887751460581,River Valley,Private room,0,0,0,MATCH
+1090904483007793927,River Valley,Entire home/apt,2,2,0,MATCH
+1090941645170098677,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1090956211361932959,River Valley,Private room,19,19,0,MATCH
+1092355175257121879,River Valley,Entire home/apt,14,14,0,MATCH
+1092420222696104820,River Valley,Private room,2,2,0,MATCH
+1093034320018826313,River Valley,Entire home/apt,0,0,0,MATCH
+1093053242865263058,River Valley,Entire home/apt,0,0,0,MATCH
+1093106707528615883,Downtown Core,Private room,0,0,0,MATCH
+1093201345960372692,Geylang,Private room,9,9,0,MATCH
+1094643941670619897,Jurong East,Private room,0,0,0,MATCH
+1095915705707549520,Southern Islands,Private room,6,6,0,MATCH
+1096415550767937134,Punggol,Private room,0,0,0,MATCH
+1096779373050532049,Queenstown,Entire home/apt,0,0,0,MATCH
+1098162437587327203,River Valley,Entire home/apt,5,5,0,MATCH
+1098225296145900661,Outram,Private room,0,0,0,MATCH
+1098242809370122967,Outram,Private room,56,56,0,MATCH
+1098253414973472403,Outram,Private room,8,8,0,MATCH
+1098269698956537803,River Valley,Entire home/apt,24,24,0,MATCH
+1098296033118804249,Outram,Private room,5,5,0,MATCH
+1106126075328872479,Bedok,Entire home/apt,0,0,0,MATCH
+1107011362652698703,Kallang,Entire home/apt,11,11,0,MATCH
+1107018143815630482,Kallang,Entire home/apt,25,25,0,MATCH
+1107038712991316166,Kallang,Entire home/apt,44,44,0,MATCH
+1107041089260455714,Queenstown,Entire home/apt,0,0,0,MATCH
+1108311518263138063,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1109204923733549481,Jurong West,Private room,1,1,0,MATCH
+1110520851167104665,Queenstown,Entire home/apt,1,1,0,MATCH
+1111968577417203132,Punggol,Private room,0,0,0,MATCH
+1115458557750785878,Downtown Core,Private room,0,0,0,MATCH
+1115481363250202384,Downtown Core,Private room,0,0,0,MATCH
+1116249575868557122,River Valley,Entire home/apt,2,2,0,MATCH
+1116355253405282454,Geylang,Entire home/apt,0,0,0,MATCH
+1116460949024167664,Kallang,Entire home/apt,0,0,0,MATCH
+1117257165555960868,Newton,Entire home/apt,2,2,0,MATCH
+1120764409959358945,River Valley,Entire home/apt,5,5,0,MATCH
+1120855427780055433,River Valley,Entire home/apt,16,16,0,MATCH
+1120883289538559724,Southern Islands,Private room,28,28,0,MATCH
+1122389407600886722,River Valley,Entire home/apt,5,5,0,MATCH
+1122405444122215497,River Valley,Entire home/apt,8,8,0,MATCH
+1125003659029367061,Bedok,Entire home/apt,0,0,0,MATCH
+1125061311682323382,Geylang,Private room,47,47,0,MATCH
+1125882563677665360,Serangoon,Private room,0,0,0,MATCH
+1126421826112076000,Kallang,Shared room,103,103,0,MATCH
+1126432655750314919,Kallang,Shared room,13,13,0,MATCH
+1126441295278848052,Kallang,Shared room,24,24,0,MATCH
+1126447135198317376,Kallang,Shared room,23,23,0,MATCH
+1126559763253932251,Outram,Shared room,30,30,0,MATCH
+1126795875691814261,Bukit Batok,Private room,0,0,0,MATCH
+1127120740050488165,Outram,Shared room,129,129,0,MATCH
+1127125314999238003,Outram,Shared room,16,16,0,MATCH
+1127129255987380110,Outram,Shared room,35,35,0,MATCH
+1127134859913654007,Outram,Shared room,15,15,0,MATCH
+1128102942748486025,Kallang,Private room,0,0,0,MATCH
+1128801796780562038,Bedok,Private room,0,0,0,MATCH
+1129474068512383673,Tanglin,Private room,0,0,0,MATCH
+1130188549747669861,Bedok,Private room,0,0,0,MATCH
+1130403897914167448,Geylang,Private room,24,24,0,MATCH
+1132723839482169367,Choa Chu Kang,Private room,0,0,0,MATCH
+1132956624704206292,Bukit Timah,Entire home/apt,0,0,0,MATCH
+1133126746608552480,Kallang,Entire home/apt,15,15,0,MATCH
+1133915070063689817,River Valley,Entire home/apt,10,10,0,MATCH
+1137577058899878309,River Valley,Entire home/apt,10,10,0,MATCH
+1138151240438377785,River Valley,Entire home/apt,1,1,0,MATCH
+1141680436397532183,Bukit Merah,Private room,0,0,0,MATCH
+1141730617803722380,Bukit Merah,Private room,0,0,0,MATCH
+1141836308969291531,Novena,Entire home/apt,1,1,0,MATCH
+1142759783174433363,Museum,Entire home/apt,0,0,0,MATCH
+1143921972375198193,Marine Parade,Private room,2,2,0,MATCH
+1143925942738013965,Marine Parade,Private room,5,5,0,MATCH
+1143929133718457590,Marine Parade,Private room,2,2,0,MATCH
+1143931262251071945,Marine Parade,Private room,1,1,0,MATCH
+1145378870944166294,Singapore River,Private room,1,1,0,MATCH
+1147038927980632245,River Valley,Entire home/apt,0,0,0,MATCH
+1147423722643637720,River Valley,Entire home/apt,2,2,0,MATCH
+1147625544649497971,River Valley,Entire home/apt,0,0,0,MATCH
+1148171142986946123,River Valley,Entire home/apt,2,2,0,MATCH
+1148289733044253588,Hougang,Private room,0,0,0,MATCH
+1148292370921424427,Queenstown,Private room,0,0,0,MATCH
+1148305387098585341,Queenstown,Entire home/apt,0,0,0,MATCH
+1148310726128055404,Queenstown,Entire home/apt,0,0,0,MATCH
+1149191758469030076,Changi,Private room,0,0,0,MATCH
+1150726261186875946,Outram,Private room,12,12,0,MATCH
+1151098118841583406,Choa Chu Kang,Private room,0,0,0,MATCH
+1151921017042310050,Downtown Core,Private room,45,45,0,MATCH
+1153541429873321651,Downtown Core,Entire home/apt,0,0,0,MATCH
+1153624684131899127,Outram,Private room,0,0,0,MATCH
+1154113358017640397,Toa Payoh,Entire home/apt,0,0,0,MATCH
+1155541275662895455,Marine Parade,Entire home/apt,3,3,0,MATCH
+1156055242666803330,Marine Parade,Entire home/apt,17,17,0,MATCH
+1156194445863734469,Downtown Core,Private room,21,21,0,MATCH
+1159877277633034540,Bedok,Private room,49,49,0,MATCH
+1162222516503661569,Hougang,Private room,0,0,0,MATCH
+1163425774429238249,Bedok,Private room,14,14,0,MATCH
+1163456834536895777,River Valley,Entire home/apt,6,6,0,MATCH
+1164079483534405707,Marine Parade,Private room,7,7,0,MATCH
+1164084983276437556,Marine Parade,Private room,4,4,0,MATCH
+1164088481511487446,Marine Parade,Private room,9,9,0,MATCH
+1164192407853655725,Tanglin,Entire home/apt,1,1,0,MATCH
+1166368730221769094,Novena,Entire home/apt,0,0,0,MATCH
+1167164655251198517,Outram,Private room,1,1,0,MATCH
+1167188051993601760,Outram,Private room,0,0,0,MATCH
+1167820849430768085,Novena,Entire home/apt,20,20,0,MATCH
+1167867333891082690,Outram,Private room,0,0,0,MATCH
+1167873997533155815,Outram,Private room,0,0,0,MATCH
+1168481015025943519,Marine Parade,Private room,1,1,0,MATCH
+1170771336878595122,Novena,Entire home/apt,16,16,0,MATCH
+1172167222883065630,Tampines,Private room,1,1,0,MATCH
+1172176919388341284,Novena,Entire home/apt,11,11,0,MATCH
+1172256190630797104,Pasir Ris,Private room,3,3,0,MATCH
+1172874108701526629,Clementi,Entire home/apt,0,0,0,MATCH
+1173055961605983055,Geylang,Private room,2,2,0,MATCH
+1173787944851792627,Pasir Ris,Private room,2,2,0,MATCH
+1175759511919555690,Geylang,Private room,1,1,0,MATCH
+1177157378172268071,Pasir Ris,Private room,1,1,0,MATCH
+1177266586048046335,River Valley,Entire home/apt,1,1,0,MATCH
+1178156015574107047,Pasir Ris,Private room,0,0,0,MATCH
+1180143851693999293,Woodlands,Private room,0,0,0,MATCH
+1180758818625255257,Geylang,Entire home/apt,0,0,0,MATCH
+1180906224303660510,Bukit Merah,Private room,2,2,0,MATCH
+1183872124315091222,Novena,Entire home/apt,0,0,0,MATCH
+1183906150836023782,Newton,Private room,0,0,0,MATCH
+1185197681072791802,Kallang,Entire home/apt,0,0,0,MATCH
+1185915191423357388,Queenstown,Entire home/apt,0,0,0,MATCH
+1185943171595849585,Queenstown,Entire home/apt,0,0,0,MATCH
+1185947576358641538,Queenstown,Entire home/apt,0,0,0,MATCH
+1185960624679186691,Queenstown,Private room,0,0,0,MATCH
+1185980898795655861,Queenstown,Entire home/apt,0,0,0,MATCH
+1185980922666295692,Queenstown,Entire home/apt,0,0,0,MATCH
+1185996420473299630,Queenstown,Entire home/apt,0,0,0,MATCH
+1186017127022771892,Bukit Timah,Entire home/apt,3,3,0,MATCH
+1186066289562000666,Bukit Panjang,Private room,0,0,0,MATCH
+1186549961463342281,Queenstown,Entire home/apt,0,0,0,MATCH
+1186868541390529861,Tampines,Entire home/apt,0,0,0,MATCH
+1188009951382171280,Geylang,Private room,0,0,0,MATCH
+1189547322218087029,Bukit Panjang,Private room,1,1,0,MATCH
+1195250012341744827,Pasir Ris,Private room,0,0,0,MATCH
+1195960444826776780,Bukit Timah,Private room,0,0,0,MATCH
+1195978643273072905,Pasir Ris,Private room,2,2,0,MATCH
+1196695636110912931,Punggol,Private room,0,0,0,MATCH
+1196827296326616861,Singapore River,Entire home/apt,0,0,0,MATCH
+1197600134466660700,Kallang,Private room,0,0,0,MATCH
+1197767433809719883,Geylang,Private room,3,3,0,MATCH
+1198444671916609250,Kallang,Entire home/apt,0,0,0,MATCH
+1201120607194274523,Punggol,Private room,0,0,0,MATCH
+1201866992155885536,Serangoon,Entire home/apt,0,0,0,MATCH
+1201971237883159675,Kallang,Shared room,5,5,0,MATCH
+1203539699255761646,Newton,Entire home/apt,1,1,0,MATCH
+1203586062379106402,Marine Parade,Private room,39,39,0,MATCH
+1207318281263563928,River Valley,Entire home/apt,7,7,0,MATCH
+1207844551442217013,Bukit Merah,Private room,0,0,0,MATCH
+1208976108760291000,Kallang,Shared room,3,3,0,MATCH
+1209115483295579932,Bukit Timah,Private room,1,1,0,MATCH
+1209750007577598619,Choa Chu Kang,Private room,1,1,0,MATCH
+1211541109420739270,Geylang,Private room,0,0,0,MATCH
+1212778208974906213,Sembawang,Private room,6,6,0,MATCH
+1213308678304633864,Bedok,Entire home/apt,0,0,0,MATCH
+1213692178756023876,Kallang,Shared room,108,108,0,MATCH
+1214386044475516046,Geylang,Private room,2,2,0,MATCH
+1214989558350921428,Kallang,Shared room,11,11,0,MATCH
+1215310989306586316,Downtown Core,Private room,0,0,0,MATCH
+1215647072509016582,Downtown Core,Entire home/apt,0,0,0,MATCH
+1217007724712172781,Tampines,Private room,0,0,0,MATCH
+1217612248414968885,Bedok,Private room,1,1,0,MATCH
+1218463134801542210,Outram,Entire home/apt,0,0,0,MATCH
+1220080250159546479,Clementi,Private room,0,0,0,MATCH
+1221533983278407899,Geylang,Private room,0,0,0,MATCH
+1221558086815918253,Kallang,Private room,0,0,0,MATCH
+1222360436810497593,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1222735570077900345,Outram,Private room,0,0,0,MATCH
+1223459678555999524,Novena,Entire home/apt,6,6,0,MATCH
+1225352616556540568,Singapore River,Private room,0,0,0,MATCH
+1225438079664618315,Singapore River,Private room,0,0,0,MATCH
+1225906045023625223,Singapore River,Private room,0,0,0,MATCH
+1225972660254798233,Singapore River,Private room,1,1,0,MATCH
+1226856435663364449,River Valley,Entire home/apt,29,29,0,MATCH
+1226856585106284966,River Valley,Entire home/apt,6,6,0,MATCH
+1226856613274248660,River Valley,Entire home/apt,3,3,0,MATCH
+1227154676044915085,Newton,Entire home/apt,0,0,0,MATCH
+1227302530704862749,Singapore River,Private room,0,0,0,MATCH
+1227318472840875048,Singapore River,Private room,0,0,0,MATCH
+1227374221257274983,Singapore River,Private room,0,0,0,MATCH
+1227387149074092124,Singapore River,Private room,15,15,0,MATCH
+1227822272006685625,Novena,Entire home/apt,2,2,0,MATCH
+1228330371205511016,Singapore River,Private room,1,1,0,MATCH
+1228800942317269763,Rochor,Private room,0,0,0,MATCH
+1229021715252281264,River Valley,Entire home/apt,3,3,0,MATCH
+1229028998701679313,River Valley,Private room,7,7,0,MATCH
+1231005395139604028,Bedok,Private room,0,0,0,MATCH
+1231531802719583902,Bedok,Private room,2,2,0,MATCH
+1231551276817126657,Rochor,Private room,0,0,0,MATCH
+1231566982294212720,Bedok,Private room,1,1,0,MATCH
+1231711853789900461,Clementi,Entire home/apt,0,0,0,MATCH
+1231908534008916973,River Valley,Entire home/apt,13,13,0,MATCH
+1231908654335688843,River Valley,Entire home/apt,0,0,0,MATCH
+1234127594707611730,River Valley,Entire home/apt,1,1,0,MATCH
+1234127729342770287,River Valley,Entire home/apt,0,0,0,MATCH
+1234127745004933134,River Valley,Entire home/apt,14,14,0,MATCH
+1234127940569953580,River Valley,Entire home/apt,1,1,0,MATCH
+1234127971959328439,River Valley,Entire home/apt,0,0,0,MATCH
+1237528895641202332,Bedok,Private room,0,0,0,MATCH
+1237545402386389392,Bedok,Private room,0,0,0,MATCH
+1238656994190513553,Geylang,Private room,0,0,0,MATCH
+1239879728744216302,Outram,Private room,2,2,0,MATCH
+1239985171891429870,Downtown Core,Private room,0,0,0,MATCH
+1241238978192145855,Singapore River,Entire home/apt,0,0,0,MATCH
+1241947087107704109,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1243199194517432903,Tanglin,Entire home/apt,0,0,0,MATCH
+1243831644267807183,Outram,Private room,2,2,0,MATCH
+1243882041882079966,Outram,Private room,10,10,0,MATCH
+1243968935509780473,Kallang,Private room,20,20,0,MATCH
+1243982290262063870,Kallang,Private room,43,43,0,MATCH
+1245008565055001529,Singapore River,Private room,0,0,0,MATCH
+1245008922960180463,Singapore River,Private room,2,2,0,MATCH
+1245009421467255295,Singapore River,Private room,3,3,0,MATCH
+1245009727166972007,Singapore River,Private room,0,0,0,MATCH
+1245035143461768096,Singapore River,Private room,0,0,0,MATCH
+1245035329117568652,Singapore River,Private room,1,1,0,MATCH
+1245035329137671409,Singapore River,Private room,0,0,0,MATCH
+1245036227533995479,Orchard,Private room,3,3,0,MATCH
+1245036465374172592,Orchard,Private room,3,3,0,MATCH
+1245036504532859018,Orchard,Private room,0,0,0,MATCH
+1245036577479981093,Orchard,Private room,0,0,0,MATCH
+1245038698926911796,Orchard,Private room,0,0,0,MATCH
+1245038735494024880,Orchard,Private room,0,0,0,MATCH
+1245038806356626105,Orchard,Private room,0,0,0,MATCH
+1245039292085214029,Orchard,Private room,0,0,0,MATCH
+1245039301875922656,Orchard,Private room,0,0,0,MATCH
+1245040592865068919,Singapore River,Private room,1,1,0,MATCH
+1245040697036756481,Singapore River,Private room,0,0,0,MATCH
+1245040811276713618,Singapore River,Private room,13,13,0,MATCH
+1245041425164865094,Singapore River,Private room,6,6,0,MATCH
+1245041457283215245,Singapore River,Private room,0,0,0,MATCH
+1245041559512155990,Singapore River,Private room,2,2,0,MATCH
+1245042094840209743,Downtown Core,Private room,2,2,0,MATCH
+1245042368693738144,Downtown Core,Private room,0,0,0,MATCH
+1245043284927406360,Singapore River,Private room,0,0,0,MATCH
+1245043805117116935,Singapore River,Private room,0,0,0,MATCH
+1245043836725601611,Singapore River,Private room,3,3,0,MATCH
+1245044201507770270,Singapore River,Private room,2,2,0,MATCH
+1245044231618369774,Singapore River,Private room,64,64,0,MATCH
+1245044348549678171,Singapore River,Private room,4,4,0,MATCH
+1245044712267075004,Singapore River,Private room,0,0,0,MATCH
+1245044712674227081,Singapore River,Private room,0,0,0,MATCH
+1245044844648218308,Singapore River,Private room,0,0,0,MATCH
+1245045754334948868,Singapore River,Private room,1,1,0,MATCH
+1245045759996750155,Singapore River,Private room,0,0,0,MATCH
+1245045896133419487,Singapore River,Private room,0,0,0,MATCH
+1245045900148258901,Singapore River,Private room,0,0,0,MATCH
+1247631280875913742,Downtown Core,Private room,0,0,0,MATCH
+1247631300344863691,Downtown Core,Private room,2,2,0,MATCH
+1248122162330316547,Pasir Ris,Entire home/apt,8,8,0,MATCH
+1249599562146029286,Pasir Ris,Private room,0,0,0,MATCH
+1249621253662167153,Pasir Ris,Private room,0,0,0,MATCH
+1250664127604301004,Orchard,Entire home/apt,0,0,0,MATCH
+1252083926209830706,Orchard,Entire home/apt,0,0,0,MATCH
+1253314317325403345,River Valley,Private room,90,90,0,MATCH
+1253974800414317414,Jurong West,Private room,0,0,0,MATCH
+1254061358660243009,River Valley,Private room,54,54,0,MATCH
+1254334294650326595,Bukit Panjang,Entire home/apt,0,0,0,MATCH
+1255359550720504351,Hougang,Private room,0,0,0,MATCH
+1257066182152340231,River Valley,Private room,3,3,0,MATCH
+1257671065223860808,Novena,Entire home/apt,10,10,0,MATCH
+1257883903839485305,Clementi,Private room,3,3,0,MATCH
+1262373686046113321,River Valley,Entire home/apt,1,1,0,MATCH
+1262373708236458790,River Valley,Private room,9,9,0,MATCH
+1262373719670688199,River Valley,Private room,9,9,0,MATCH
+1262373732305054823,River Valley,Entire home/apt,3,3,0,MATCH
+1262373745988496937,River Valley,Entire home/apt,10,10,0,MATCH
+1262373760538166499,River Valley,Entire home/apt,6,6,0,MATCH
+1263071652141265178,Serangoon,Entire home/apt,0,0,0,MATCH
+1265288738183696554,River Valley,Entire home/apt,0,0,0,MATCH
+1265288847858303408,River Valley,Entire home/apt,2,2,0,MATCH
+1265288878454238159,River Valley,Entire home/apt,2,2,0,MATCH
+1265288892759176989,River Valley,Entire home/apt,0,0,0,MATCH
+1265288907387767945,River Valley,Entire home/apt,3,3,0,MATCH
+1265289253814478892,River Valley,Entire home/apt,1,1,0,MATCH
+1265289437871228223,River Valley,Entire home/apt,9,9,0,MATCH
+1265289501797725426,River Valley,Entire home/apt,21,21,0,MATCH
+1267274248707779718,Downtown Core,Entire home/apt,0,0,0,MATCH
+1270088900132297049,River Valley,Entire home/apt,1,1,0,MATCH
+1270631361821065268,Bukit Panjang,Entire home/apt,0,0,0,MATCH
+1270739188048773184,Orchard,Entire home/apt,0,0,0,MATCH
+1270750916788857193,Orchard,Entire home/apt,0,0,0,MATCH
+1273146445598729319,River Valley,Entire home/apt,2,2,0,MATCH
+1273146473255063932,River Valley,Entire home/apt,0,0,0,MATCH
+1273146505287037021,River Valley,Entire home/apt,20,20,0,MATCH
+1273146892193924433,River Valley,Private room,4,4,0,MATCH
+1273146910324214626,River Valley,Entire home/apt,13,13,0,MATCH
+1273146922438941203,River Valley,Entire home/apt,1,1,0,MATCH
+1273146967432465760,River Valley,Entire home/apt,8,8,0,MATCH
+1273147089681029084,River Valley,Private room,17,17,0,MATCH
+1273147103665538835,River Valley,Private room,3,3,0,MATCH
+1273147373261930817,River Valley,Entire home/apt,0,0,0,MATCH
+1273147512621212350,River Valley,Entire home/apt,1,1,0,MATCH
+1273147526072083803,River Valley,Entire home/apt,0,0,0,MATCH
+1273147568804170130,River Valley,Private room,0,0,0,MATCH
+1273148228502796094,River Valley,Private room,0,0,0,MATCH
+1277122968554379586,Clementi,Private room,1,1,0,MATCH
+1278638563004389479,Queenstown,Private room,1,1,0,MATCH
+1280054485181233706,Newton,Entire home/apt,0,0,0,MATCH
+1281561275248057517,Ang Mo Kio,Private room,0,0,0,MATCH
+1284446834628989282,Tampines,Private room,0,0,0,MATCH
+1289024343920493450,Rochor,Private room,6,6,0,MATCH
+1289599933265613292,Rochor,Private room,8,8,0,MATCH
+1289634609448372677,Downtown Core,Private room,1,1,0,MATCH
+1289634609559578669,Downtown Core,Private room,0,0,0,MATCH
+1289634700587731508,Downtown Core,Private room,0,0,0,MATCH
+1289634704575357709,Downtown Core,Private room,0,0,0,MATCH
+1289634785191542896,Downtown Core,Private room,0,0,0,MATCH
+1289719008815143656,Rochor,Private room,23,23,0,MATCH
+1290347038313595595,Novena,Entire home/apt,0,0,0,MATCH
+1290947334777048082,Sungei Kadut,Private room,1,1,0,MATCH
+1291267976099099893,Rochor,Private room,0,0,0,MATCH
+1291926881199645857,Rochor,Private room,0,0,0,MATCH
+1291961811088348666,Rochor,Private room,0,0,0,MATCH
+1291975938986668058,Rochor,Private room,0,0,0,MATCH
+1291976420482563454,Rochor,Private room,0,0,0,MATCH
+1291993758503637592,Rochor,Private room,0,0,0,MATCH
+1292000714964253527,Rochor,Private room,0,0,0,MATCH
+1293947571192745546,River Valley,Entire home/apt,1,1,0,MATCH
+1293947590544606785,River Valley,Entire home/apt,0,0,0,MATCH
+1294098476942265354,Singapore River,Shared room,0,0,0,MATCH
+1294643455196374244,Clementi,Entire home/apt,0,0,0,MATCH
+1295238447814060622,Queenstown,Private room,0,0,0,MATCH
+1297609663625645209,River Valley,Entire home/apt,0,0,0,MATCH
+1298240569886538203,River Valley,Entire home/apt,6,6,0,MATCH
+1298248579510970503,River Valley,Entire home/apt,0,0,0,MATCH
+1298279713280635359,River Valley,Private room,0,0,0,MATCH
+1298280168073199401,River Valley,Private room,7,7,0,MATCH
+1298304693095813522,River Valley,Entire home/apt,0,0,0,MATCH
+1298306276925215082,River Valley,Entire home/apt,9,9,0,MATCH
+1298306821436355793,River Valley,Entire home/apt,0,0,0,MATCH
+1298338548938887576,River Valley,Entire home/apt,1,1,0,MATCH
+1298350621345394366,River Valley,Entire home/apt,4,4,0,MATCH
+1298367055912625397,Bedok,Private room,0,0,0,MATCH
+1298378959191976138,River Valley,Entire home/apt,0,0,0,MATCH
+1298394088890426354,River Valley,Entire home/apt,1,1,0,MATCH
+1298401999313639862,River Valley,Entire home/apt,0,0,0,MATCH
+1298486869378455777,Bukit Merah,Entire home/apt,3,3,0,MATCH
+1298499011850976732,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1299877828985823706,Novena,Entire home/apt,2,2,0,MATCH
+1299892458693777502,Downtown Core,Entire home/apt,3,3,0,MATCH
+1299928827892640344,Novena,Entire home/apt,3,3,0,MATCH
+1300432887991713647,Queenstown,Private room,0,0,0,MATCH
+1303955219727272437,River Valley,Entire home/apt,0,0,0,MATCH
+1303962577787818712,River Valley,Entire home/apt,0,0,0,MATCH
+1303967693681607649,River Valley,Entire home/apt,1,1,0,MATCH
+1304066465447656325,River Valley,Entire home/apt,14,14,0,MATCH
+1304068562876015691,River Valley,Entire home/apt,14,14,0,MATCH
+1304069572049684905,River Valley,Entire home/apt,21,21,0,MATCH
+1304074944274836942,River Valley,Entire home/apt,2,2,0,MATCH
+1304245612864353032,River Valley,Entire home/apt,0,0,0,MATCH
+1305015830508327690,River Valley,Entire home/apt,17,17,0,MATCH
+1305455432315941045,River Valley,Private room,0,0,0,MATCH
+1305708479714004669,River Valley,Entire home/apt,0,0,0,MATCH
+1305711384156095438,River Valley,Entire home/apt,0,0,0,MATCH
+1305712363471731665,River Valley,Entire home/apt,0,0,0,MATCH
+1305762870197957367,River Valley,Entire home/apt,2,2,0,MATCH
+1305764194609352155,River Valley,Entire home/apt,3,3,0,MATCH
+1305765125626579000,River Valley,Entire home/apt,0,0,0,MATCH
+1305767035220803546,River Valley,Entire home/apt,1,1,0,MATCH
+1306041215051067535,River Valley,Private room,0,0,0,MATCH
+1306041233447821840,River Valley,Entire home/apt,2,2,0,MATCH
+1306048811341918233,River Valley,Entire home/apt,4,4,0,MATCH
+1306243357788054049,River Valley,Entire home/apt,2,2,0,MATCH
+1306249380244056095,River Valley,Entire home/apt,0,0,0,MATCH
+1306274138096981390,River Valley,Entire home/apt,4,4,0,MATCH
+1306370957563529743,River Valley,Private room,2,2,0,MATCH
+1306372338389015777,River Valley,Private room,7,7,0,MATCH
+1306389617315785047,River Valley,Private room,0,0,0,MATCH
+1306440404307266528,River Valley,Private room,0,0,0,MATCH
+1306457637711337434,River Valley,Private room,0,0,0,MATCH
+1306458252774828087,River Valley,Private room,0,0,0,MATCH
+1306574239207960251,River Valley,Entire home/apt,4,4,0,MATCH
+1306750404800476311,River Valley,Entire home/apt,1,1,0,MATCH
+1306854554543308924,River Valley,Entire home/apt,4,4,0,MATCH
+1306859544303077350,River Valley,Entire home/apt,4,4,0,MATCH
+1306860255150533715,River Valley,Entire home/apt,1,1,0,MATCH
+1309312515411968346,Rochor,Private room,9,9,0,MATCH
+1311046284925535987,Novena,Entire home/apt,4,4,0,MATCH
+1312812567245126469,River Valley,Entire home/apt,5,5,0,MATCH
+1312850666714982292,River Valley,Entire home/apt,0,0,0,MATCH
+1312932716021699125,River Valley,Entire home/apt,0,0,0,MATCH
+1314437239671960203,Marine Parade,Entire home/apt,0,0,0,MATCH
+1315651915525125863,Kallang,Private room,0,0,0,MATCH
+1315651916134063029,Kallang,Private room,0,0,0,MATCH
+1315652008053341890,Kallang,Private room,0,0,0,MATCH
+1315652015159181079,Kallang,Private room,5,5,0,MATCH
+1315652091047185933,Kallang,Private room,5,5,0,MATCH
+1315652094356442416,Kallang,Private room,5,5,0,MATCH
+1315652514612739647,Novena,Private room,9,9,0,MATCH
+1315652515073850821,Novena,Private room,9,9,0,MATCH
+1315652604740497202,Novena,Private room,9,9,0,MATCH
+1315652610472728110,Novena,Private room,9,9,0,MATCH
+1315652688630554864,Novena,Private room,9,9,0,MATCH
+1315672031100794571,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1315672094739536482,Rochor,Entire home/apt,0,0,0,MATCH
+1316065943885927362,Bukit Batok,Private room,0,0,0,MATCH
+1317634105948886927,Geylang,Private room,0,0,0,MATCH
+1317636920061244332,Geylang,Private room,0,0,0,MATCH
+1320848285122971172,River Valley,Private room,0,0,0,MATCH
+1321362964936643732,River Valley,Private room,0,0,0,MATCH
+1321722084789469932,Southern Islands,Private room,6,6,0,MATCH
+1322758420420779598,Sembawang,Entire home/apt,0,0,0,MATCH
+1322768108718953327,Sembawang,Entire home/apt,0,0,0,MATCH
+1322947614503168163,Hougang,Private room,0,0,0,MATCH
+1323511908076398953,Museum,Private room,3,3,0,MATCH
+1325672655801870215,Bukit Merah,Private room,0,0,0,MATCH
+1326582346195667345,Bukit Timah,Entire home/apt,0,0,0,MATCH
+1327474735092440170,Novena,Private room,0,0,0,MATCH
+1331208941160275555,Outram,Private room,0,0,0,MATCH
+1331223971253499843,Outram,Private room,0,0,0,MATCH
+1333081876466895737,Novena,Entire home/apt,0,0,0,MATCH
+1333360144259034736,Choa Chu Kang,Private room,0,0,0,MATCH
+1333775744789750642,Queenstown,Private room,2,2,0,MATCH
+1335335017353294696,Outram,Private room,0,0,0,MATCH
+1335973675275281074,Novena,Entire home/apt,0,0,0,MATCH
+1336351356101307394,Ang Mo Kio,Entire home/apt,0,0,0,MATCH
+1336767663147239829,Geylang,Private room,0,0,0,MATCH
+1337620154431778248,Downtown Core,Entire home/apt,0,0,0,MATCH
+1338131598150897404,Kallang,Shared room,247,247,0,MATCH
+1339444586883104498,Pasir Ris,Entire home/apt,11,11,0,MATCH
+1340117225750178279,Bukit Batok,Private room,0,0,0,MATCH
+1340139141658285718,Choa Chu Kang,Private room,4,4,0,MATCH
+1340929750803163262,Singapore River,Entire home/apt,0,0,0,MATCH
+1341701597256289125,River Valley,Entire home/apt,2,2,0,MATCH
+1343180658186138318,River Valley,Entire home/apt,3,3,0,MATCH
+1343201042844114892,Singapore River,Shared room,83,83,0,MATCH
+1343206443923719513,Singapore River,Shared room,32,32,0,MATCH
+1343279650923634953,River Valley,Entire home/apt,0,0,0,MATCH
+1343419833722782300,River Valley,Entire home/apt,4,4,0,MATCH
+1343446362439764941,River Valley,Entire home/apt,0,0,0,MATCH
+1343450946474349880,River Valley,Entire home/apt,0,0,0,MATCH
+1343466485211923926,River Valley,Entire home/apt,0,0,0,MATCH
+1343570517071036051,River Valley,Private room,0,0,0,MATCH
+1343887435962889808,River Valley,Entire home/apt,1,1,0,MATCH
+1343974752354429672,River Valley,Entire home/apt,3,3,0,MATCH
+1344000382650486929,River Valley,Entire home/apt,0,0,0,MATCH
+1344014131118367064,River Valley,Entire home/apt,1,1,0,MATCH
+1344111998892645325,River Valley,Entire home/apt,0,0,0,MATCH
+1344547688385162840,River Valley,Private room,0,0,0,MATCH
+1344575891027257713,River Valley,Private room,0,0,0,MATCH
+1344809682698712822,River Valley,Entire home/apt,0,0,0,MATCH
+1344849433741431046,River Valley,Entire home/apt,0,0,0,MATCH
+1344881906566804219,River Valley,Entire home/apt,0,0,0,MATCH
+1344894591929119544,River Valley,Entire home/apt,2,2,0,MATCH
+1345135087751310048,River Valley,Entire home/apt,0,0,0,MATCH
+1345165115926817279,River Valley,Entire home/apt,0,0,0,MATCH
+1345203308848553425,River Valley,Entire home/apt,1,1,0,MATCH
+1345216532468535369,River Valley,Entire home/apt,1,1,0,MATCH
+1345652388793819094,River Valley,Entire home/apt,1,1,0,MATCH
+1345891939259136012,River Valley,Entire home/apt,0,0,0,MATCH
+1346027236788079433,Singapore River,Shared room,10,10,0,MATCH
+1346039598045648279,Singapore River,Shared room,2,2,0,MATCH
+1346354420159732076,Singapore River,Shared room,1,1,0,MATCH
+1346363354944047426,Singapore River,Shared room,0,0,0,MATCH
+1346639446239789585,Bedok,Private room,0,0,0,MATCH
+1348268344518940558,Geylang,Private room,3,3,0,MATCH
+1348338466507742115,Geylang,Private room,3,3,0,MATCH
+1348340856696751817,Geylang,Private room,1,1,0,MATCH
+1348343822357935398,Geylang,Private room,0,0,0,MATCH
+1348345238423635867,Geylang,Private room,0,0,0,MATCH
+1348819398026386604,Novena,Entire home/apt,1,1,0,MATCH
+1351210783305842043,Kallang,Private room,1,1,0,MATCH
+1352574929567977625,River Valley,Entire home/apt,0,0,0,MATCH
+1352873550327051901,Singapore River,Shared room,7,7,0,MATCH
+1352885337891104870,Bedok,Private room,0,0,0,MATCH
+1353337130843954987,Novena,Entire home/apt,2,2,0,MATCH
+1354005223820273636,Kallang,Private room,2,2,0,MATCH
+1354847783084731374,Novena,Entire home/apt,3,3,0,MATCH
+1354883996744969920,Hougang,Private room,30,30,0,MATCH
+1355386557880114266,Hougang,Entire home/apt,5,5,0,MATCH
+1355419869118053243,Hougang,Entire home/apt,7,7,0,MATCH
+1355449457774149376,Novena,Entire home/apt,0,0,0,MATCH
+1355503413610353995,Novena,Entire home/apt,0,0,0,MATCH
+1357229015696955203,Singapore River,Shared room,0,0,0,MATCH
+1357233633468835603,Singapore River,Shared room,0,0,0,MATCH
+1357259875101674536,Singapore River,Shared room,0,0,0,MATCH
+1357264239347023858,Singapore River,Shared room,0,0,0,MATCH
+1358405543973452486,Jurong West,Private room,0,0,0,MATCH
+1358432959206853778,Novena,Entire home/apt,2,2,0,MATCH
+1358433264523928724,Novena,Entire home/apt,0,0,0,MATCH
+1359148134280726663,River Valley,Entire home/apt,1,1,0,MATCH
+1359250427376506659,River Valley,Entire home/apt,0,0,0,MATCH
+1359270466450018804,River Valley,Private room,1,1,0,MATCH
+1359270510269636252,River Valley,Entire home/apt,2,2,0,MATCH
+1359446999908619845,Choa Chu Kang,Private room,4,4,0,MATCH
+1359514609732043693,River Valley,Entire home/apt,1,1,0,MATCH
+1359768974639975588,River Valley,Entire home/apt,0,0,0,MATCH
+1359786154595419891,River Valley,Entire home/apt,3,3,0,MATCH
+1359864223207987060,River Valley,Entire home/apt,2,2,0,MATCH
+1359885009093105801,River Valley,Entire home/apt,4,4,0,MATCH
+1359932137084856980,River Valley,Entire home/apt,0,0,0,MATCH
+1359978368464044529,River Valley,Entire home/apt,1,1,0,MATCH
+1360002782987306879,River Valley,Entire home/apt,8,8,0,MATCH
+1360081660665615872,River Valley,Entire home/apt,0,0,0,MATCH
+1360441929513870368,Rochor,Private room,8,8,0,MATCH
+1360442149406882719,Rochor,Private room,8,8,0,MATCH
+1360443252300949053,Rochor,Private room,8,8,0,MATCH
+1360520155928927546,River Valley,Private room,6,6,0,MATCH
+1360701017259711319,River Valley,Private room,1,1,0,MATCH
+1360762541234999803,River Valley,Entire home/apt,0,0,0,MATCH
+1360836308924957068,River Valley,Entire home/apt,1,1,0,MATCH
+1361073234550030022,River Valley,Entire home/apt,0,0,0,MATCH
+1361188661900581186,River Valley,Entire home/apt,0,0,0,MATCH
+1361209985850311082,River Valley,Entire home/apt,0,0,0,MATCH
+1361224735009612815,River Valley,Entire home/apt,0,0,0,MATCH
+1361473546561080198,River Valley,Entire home/apt,1,1,0,MATCH
+1361497917977363587,River Valley,Entire home/apt,1,1,0,MATCH
+1361524661283778455,River Valley,Private room,0,0,0,MATCH
+1361534795336469399,River Valley,Private room,0,0,0,MATCH
+1361550005755176176,River Valley,Entire home/apt,0,0,0,MATCH
+1361555189244649341,Newton,Private room,0,0,0,MATCH
+1361575186810254505,River Valley,Entire home/apt,0,0,0,MATCH
+1361584911889184757,River Valley,Private room,0,0,0,MATCH
+1361595974009298578,River Valley,Private room,1,1,0,MATCH
+1362163898873586933,Marine Parade,Private room,0,0,0,MATCH
+1365693872009063552,Outram,Shared room,96,96,0,MATCH
+1366350685509540470,Kallang,Private room,0,0,0,MATCH
+1366350937888032120,Kallang,Private room,0,0,0,MATCH
+1366351018779965888,Kallang,Private room,0,0,0,MATCH
+1367128624122045875,Outram,Shared room,31,31,0,MATCH
+1367258114838231197,River Valley,Entire home/apt,5,5,0,MATCH
+1367280084661745973,River Valley,Entire home/apt,0,0,0,MATCH
+1367312021032643575,River Valley,Entire home/apt,0,0,0,MATCH
+1367352350623885320,River Valley,Entire home/apt,0,0,0,MATCH
+1367385386918852056,River Valley,Entire home/apt,1,1,0,MATCH
+1367696801318491983,River Valley,Entire home/apt,0,0,0,MATCH
+1368429074505250934,Rochor,Private room,7,7,0,MATCH
+1368450537387221528,Rochor,Private room,35,35,0,MATCH
+1368477588279837868,Novena,Entire home/apt,2,2,0,MATCH
+1368584855731737819,Geylang,Private room,100,100,0,MATCH
+1368584855837908377,Geylang,Private room,100,100,0,MATCH
+1368584935520545050,Geylang,Private room,50,50,0,MATCH
+1368585784734865728,Marine Parade,Private room,50,50,0,MATCH
+1368585867047228190,Marine Parade,Private room,50,50,0,MATCH
+1368585875892463786,Marine Parade,Private room,50,50,0,MATCH
+1368587172062489095,Geylang,Private room,50,50,0,MATCH
+1368587172214912254,Geylang,Private room,50,50,0,MATCH
+1368587250975162113,Geylang,Private room,50,50,0,MATCH
+1368587269176073347,Geylang,Private room,50,50,0,MATCH
+1369311964362394287,Rochor,Private room,3,3,0,MATCH
+1370114888753604618,Serangoon,Private room,0,0,0,MATCH
+1370784245919443629,Marine Parade,Private room,0,0,0,MATCH
+1370784279981960498,Marine Parade,Private room,0,0,0,MATCH
+1370784368317080436,Marine Parade,Private room,0,0,0,MATCH
+1370784451327994444,Marine Parade,Private room,0,0,0,MATCH
+1370784492261658990,Marine Parade,Private room,0,0,0,MATCH
+1370784560296587005,Marine Parade,Private room,0,0,0,MATCH
+1370784601548532684,Marine Parade,Private room,0,0,0,MATCH
+1370784715989062175,Marine Parade,Private room,0,0,0,MATCH
+1370846997595359402,Bedok,Private room,0,0,0,MATCH
+1371343684203608067,Rochor,Private room,14,14,0,MATCH
+1371343684266810540,Rochor,Private room,14,14,0,MATCH
+1371350738767848404,Singapore River,Private room,1,1,0,MATCH
+1371350853718455843,Singapore River,Private room,2,2,0,MATCH
+1371361251068733907,Kallang,Private room,14,14,0,MATCH
+1371361587094194873,Kallang,Private room,14,14,0,MATCH
+1371379675379704767,Downtown Core,Private room,7,7,0,MATCH
+1371380025584025715,Downtown Core,Private room,7,7,0,MATCH
+1371457308995357360,Kallang,Private room,1,1,0,MATCH
+1371457309165282073,Kallang,Private room,1,1,0,MATCH
+1371468663052929115,Marine Parade,Private room,14,14,0,MATCH
+1371469321518028551,Marine Parade,Private room,14,14,0,MATCH
+1371473123354393557,Bukit Merah,Private room,14,14,0,MATCH
+1371473502703506427,Bukit Merah,Private room,14,14,0,MATCH
+1371477489399280410,Rochor,Private room,3,3,0,MATCH
+1371477870694124720,Rochor,Private room,3,3,0,MATCH
+1371483156073782484,Bukit Merah,Private room,5,5,0,MATCH
+1371483525810976309,Bukit Merah,Private room,5,5,0,MATCH
+1371483576343592465,Bukit Merah,Private room,5,5,0,MATCH
+1371702584351367780,Hougang,Private room,0,0,0,MATCH
+1372020136988890198,Hougang,Private room,0,0,0,MATCH
+1372333760095576456,Serangoon,Private room,0,0,0,MATCH
+1374544766177339821,Yishun,Private room,7,7,0,MATCH
+1380884400304985962,River Valley,Private room,0,0,0,MATCH
+1380884417723370929,River Valley,Private room,0,0,0,MATCH
+1380884455747956673,River Valley,Entire home/apt,0,0,0,MATCH
+1380884472560143790,River Valley,Entire home/apt,0,0,0,MATCH
+1380884526925505437,River Valley,Private room,0,0,0,MATCH
+1380884556282673361,River Valley,Entire home/apt,1,1,0,MATCH
+1381310380520420427,River Valley,Entire home/apt,0,0,0,MATCH
+1381891002702649907,Kallang,Private room,0,0,0,MATCH
+1382311297245411252,Singapore River,Shared room,34,34,0,MATCH
+1382376411379566157,Singapore River,Shared room,3,3,0,MATCH
+1383253400357101331,Ang Mo Kio,Entire home/apt,0,0,0,MATCH
+1383662753417352734,Kallang,Private room,0,0,0,MATCH
+1383835231312995022,Changi,Private room,0,0,0,MATCH
+1384018651538872739,Queenstown,Entire home/apt,0,0,0,MATCH
+1384517015736114901,Outram,Private room,36,36,0,MATCH
+1384517015828423287,Outram,Private room,0,0,0,MATCH
+1384517103479715521,Outram,Private room,36,36,0,MATCH
+1384517120290936732,Outram,Private room,36,36,0,MATCH
+1384517182849252537,Outram,Private room,36,36,0,MATCH
+1384517199377987383,Outram,Private room,36,36,0,MATCH
+1384517254369762689,Outram,Private room,36,36,0,MATCH
+1384517270605360381,Outram,Private room,36,36,0,MATCH
+1384517330327975627,Outram,Private room,36,36,0,MATCH
+1384517350667720107,Outram,Private room,36,36,0,MATCH
+1385119706478676480,Queenstown,Entire home/apt,0,0,0,MATCH
+1385288150029580253,Bukit Merah,Private room,0,0,0,MATCH
+1385288150259255653,Bukit Merah,Private room,0,0,0,MATCH
+1385288225802763902,Bukit Merah,Private room,0,0,0,MATCH
+1385288232565908597,Bukit Merah,Private room,0,0,0,MATCH
+1387408042593557128,Choa Chu Kang,Private room,2,2,0,MATCH
+1389533190215593188,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1389533380938994137,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1389533764785534395,Novena,Entire home/apt,0,0,0,MATCH
+1389555349122253966,Outram,Private room,0,0,0,MATCH
+1389555349655455917,Outram,Private room,2,2,0,MATCH
+1389555545649167126,Outram,Private room,2,2,0,MATCH
+1389555577264266082,Outram,Private room,0,0,0,MATCH
+1389555753330220978,Outram,Private room,0,0,0,MATCH
+1389555779741969639,Outram,Private room,0,0,0,MATCH
+1389566194461958321,Southern Islands,Entire home/apt,0,0,0,MATCH
+1389719015076838891,Bukit Merah,Private room,6,6,0,MATCH
+1390345756341834102,Bukit Merah,Private room,16,16,0,MATCH
+1390353923592624142,Bukit Merah,Private room,2,2,0,MATCH
+1395554513685532459,Rochor,Private room,1,1,0,MATCH
+1390398593776950959,Bukit Merah,Private room,7,7,0,MATCH
+1392148613575129474,River Valley,Entire home/apt,0,0,0,MATCH
+1392148686970639468,River Valley,Entire home/apt,0,0,0,MATCH
+1392148704106506499,River Valley,Entire home/apt,0,0,0,MATCH
+1392148773251865672,River Valley,Entire home/apt,4,4,0,MATCH
+1392148789827415746,River Valley,Entire home/apt,1,1,0,MATCH
+1392149550331600019,River Valley,Entire home/apt,0,0,0,MATCH
+1392151577179266942,River Valley,Entire home/apt,0,0,0,MATCH
+1392151662629487231,River Valley,Entire home/apt,1,1,0,MATCH
+1392151717752643368,River Valley,Entire home/apt,0,0,0,MATCH
+1392151868622174176,River Valley,Entire home/apt,1,1,0,MATCH
+1392153297395968123,River Valley,Entire home/apt,0,0,0,MATCH
+1392153315037867973,River Valley,Entire home/apt,0,0,0,MATCH
+1392153331661690368,River Valley,Entire home/apt,1,1,0,MATCH
+1392153345386236146,River Valley,Entire home/apt,1,1,0,MATCH
+1392153359825575807,River Valley,Entire home/apt,0,0,0,MATCH
+1392153374407651931,River Valley,Entire home/apt,0,0,0,MATCH
+1393815845515717275,Orchard,Private room,0,0,0,MATCH
+1393815845599287683,Orchard,Private room,4,4,0,MATCH
+1393816015853819977,Orchard,Private room,4,4,0,MATCH
+1393816036403364371,Orchard,Private room,0,0,0,MATCH
+1393816157690439133,Orchard,Private room,4,4,0,MATCH
+1393841562329056067,Novena,Entire home/apt,0,0,0,MATCH
+1394010755406287323,Queenstown,Private room,0,0,0,MATCH
+1394010755833429140,Queenstown,Private room,0,0,0,MATCH
+1394011011271066873,Queenstown,Private room,4,4,0,MATCH
+1394011016820945415,Queenstown,Private room,4,4,0,MATCH
+1394011202184529982,Queenstown,Private room,4,4,0,MATCH
+1394663161241144864,Rochor,Private room,10,10,0,MATCH
+1394666324163765911,Rochor,Private room,6,6,0,MATCH
+1394668105843170013,Rochor,Private room,46,46,0,MATCH
+1394672684089862075,Rochor,Private room,3,3,0,MATCH
+1394674779172785540,Rochor,Private room,4,4,0,MATCH
+1394676781618687980,Rochor,Private room,0,0,0,MATCH
+1394685741364212254,Rochor,Private room,28,28,0,MATCH
+1394685741453002638,Rochor,Private room,28,28,0,MATCH
+1394685914976279457,Rochor,Private room,28,28,0,MATCH
+1394685914977617385,Rochor,Private room,28,28,0,MATCH
+1394702544058428893,Geylang,Private room,50,50,0,MATCH
+1394703026051430950,Geylang,Private room,100,100,0,MATCH
+1394703026056897458,Geylang,Private room,100,100,0,MATCH
+1394703385494580491,Geylang,Private room,50,50,0,MATCH
+1394718015488280715,Rochor,Private room,16,16,0,MATCH
+1394718168318325975,Rochor,Private room,16,16,0,MATCH
+1394718173757102450,Rochor,Private room,16,16,0,MATCH
+1394729670288507976,Geylang,Private room,50,50,0,MATCH
+1394729670656417086,Geylang,Private room,123,123,0,MATCH
+1394730017816587571,Geylang,Private room,50,50,0,MATCH
+1394950639119386023,Geylang,Private room,12,12,0,MATCH
+1394950639340453150,Geylang,Private room,12,12,0,MATCH
+1394962519754001306,Geylang,Private room,50,50,0,MATCH
+1394962520701277726,Geylang,Private room,800,800,0,MATCH
+1394962792824689414,Geylang,Private room,400,400,0,MATCH
+1394978222407595971,Kallang,Private room,37,37,0,MATCH
+1394978222532285405,Kallang,Private room,37,37,0,MATCH
+1394978398642979217,Kallang,Private room,37,37,0,MATCH
+1394994397924631223,Geylang,Private room,50,50,0,MATCH
+1394994398033820132,Geylang,Private room,50,50,0,MATCH
+1394994526970657192,Geylang,Private room,50,50,0,MATCH
+1394994541926381500,Geylang,Private room,0,0,0,MATCH
+1395266256881762103,Geylang,Private room,100,100,0,MATCH
+1395266256898342873,Geylang,Private room,50,50,0,MATCH
+1395266638965542022,Geylang,Private room,50,50,0,MATCH
+1395277576310652984,Outram,Private room,50,50,0,MATCH
+1395277576395165307,Outram,Private room,50,50,0,MATCH
+1395290908470644662,Geylang,Private room,20,20,0,MATCH
+1395291530135724919,Geylang,Private room,20,20,0,MATCH
+1395307358362295674,Downtown Core,Private room,50,50,0,MATCH
+1395307358447767057,Downtown Core,Private room,50,50,0,MATCH
+1395307375263021229,Downtown Core,Private room,50,50,0,MATCH
+1395307383292766352,Downtown Core,Private room,50,50,0,MATCH
+1395356257809757923,Geylang,Private room,0,0,0,MATCH
+1395356258618899737,Geylang,Private room,181,181,0,MATCH
+1395356463499026620,Geylang,Private room,50,50,0,MATCH
+1395368597778982876,Rochor,Private room,114,114,0,MATCH
+1395368597999498098,Rochor,Private room,50,50,0,MATCH
+1395380707145055435,Bedok,Private room,50,50,0,MATCH
+1395380707847977045,Bedok,Private room,81,81,0,MATCH
+1395549728335595026,Rochor,Private room,3,3,0,MATCH
+1395874993355080426,Bedok,Private room,0,0,0,MATCH
+1396044501273984023,River Valley,Entire home/apt,0,0,0,MATCH
+1396044532206420809,River Valley,Entire home/apt,0,0,0,MATCH
+1396044548891688230,River Valley,Entire home/apt,1,1,0,MATCH
+1396044564624327572,River Valley,Entire home/apt,0,0,0,MATCH
+1396044734916549085,River Valley,Entire home/apt,0,0,0,MATCH
+1396044756452122365,River Valley,Entire home/apt,2,2,0,MATCH
+1396044810040567529,River Valley,Entire home/apt,0,0,0,MATCH
+1396044823884819892,River Valley,Entire home/apt,0,0,0,MATCH
+1396044837231024263,River Valley,Entire home/apt,0,0,0,MATCH
+1399035735508319862,Geylang,Private room,8,8,0,MATCH
+1399035735510769369,Geylang,Private room,8,8,0,MATCH
+1399036026934955445,Novena,Private room,16,16,0,MATCH
+1399036027085568077,Novena,Private room,16,16,0,MATCH
+1399036097376331536,Novena,Private room,16,16,0,MATCH
+1399036097772532450,Novena,Private room,16,16,0,MATCH
+1399039581103428109,Novena,Private room,50,50,0,MATCH
+1399039581330568175,Novena,Private room,50,50,0,MATCH
+1399039655627705224,Novena,Private room,50,50,0,MATCH
+1399039657808453221,Novena,Private room,50,50,0,MATCH
+1399039731157764974,Novena,Private room,50,50,0,MATCH
+1399039929126626824,Novena,Private room,39,39,0,MATCH
+1399039929165447230,Novena,Private room,39,39,0,MATCH
+1399040006353335994,Novena,Private room,39,39,0,MATCH
+1399040013280931908,Novena,Private room,0,0,0,MATCH
+1399041943815693360,Queenstown,Private room,1,1,0,MATCH
+1399907300112192633,Novena,Entire home/apt,5,5,0,MATCH
+1399935510733567753,Novena,Entire home/apt,12,12,0,MATCH
+1399959549412763631,Novena,Entire home/apt,0,0,0,MATCH
+1399978938884748165,Novena,Entire home/apt,2,2,0,MATCH
+1400368904972209814,River Valley,Private room,3,3,0,MATCH
+1400368922117711229,River Valley,Entire home/apt,0,0,0,MATCH
+1400368938510623415,River Valley,Private room,1,1,0,MATCH
+1400368955811311990,River Valley,Private room,0,0,0,MATCH
+1400369442098912574,River Valley,Private room,0,0,0,MATCH
+1400369457892465786,River Valley,Private room,2,2,0,MATCH
+1400369512502657848,River Valley,Private room,1,1,0,MATCH
+1400369529487210815,River Valley,Private room,0,0,0,MATCH
+1400369544428124610,River Valley,Private room,1,1,0,MATCH
+1400369559177788799,River Valley,Private room,0,0,0,MATCH
+1400369768072606413,River Valley,Private room,1,1,0,MATCH
+1400369781767830177,River Valley,Entire home/apt,0,0,0,MATCH
+1400369795776805538,River Valley,Private room,0,0,0,MATCH
+1400369815888770879,River Valley,Private room,0,0,0,MATCH
+1400369834047706549,River Valley,Entire home/apt,0,0,0,MATCH
+1400369850481107762,River Valley,Private room,1,1,0,MATCH
+1400369867107828865,River Valley,Entire home/apt,0,0,0,MATCH
+1401346342058998558,Novena,Entire home/apt,4,4,0,MATCH
+1402021731821413346,Jurong West,Private room,0,0,0,MATCH
+1402622842631621136,River Valley,Entire home/apt,0,0,0,MATCH
+1402623405222181237,River Valley,Entire home/apt,2,2,0,MATCH
+1402623650535755432,River Valley,Entire home/apt,0,0,0,MATCH
+1402623668297016289,River Valley,Entire home/apt,0,0,0,MATCH
+1402623752574309196,River Valley,Entire home/apt,5,5,0,MATCH
+1402623804425957068,River Valley,Entire home/apt,0,0,0,MATCH
+1402623818409748476,River Valley,Entire home/apt,4,4,0,MATCH
+1402897181881999755,Novena,Private room,0,0,0,MATCH
+1404164019871078326,Newton,Private room,0,0,0,MATCH
+1404164020176375966,Newton,Private room,0,0,0,MATCH
+1404164546821747540,Newton,Private room,0,0,0,MATCH
+1404164817754866938,Newton,Private room,0,0,0,MATCH
+1404164960836087577,Newton,Private room,0,0,0,MATCH
+1404212655217156981,Queenstown,Private room,0,0,0,MATCH
+1404212786714670802,Queenstown,Private room,1,1,0,MATCH
+1404212794431018897,Queenstown,Private room,0,0,0,MATCH
+1404212937957258747,Queenstown,Private room,1,1,0,MATCH
+1404284633276992951,Marine Parade,Entire home/apt,0,0,0,MATCH
+1404298663888384322,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1405142115018181574,River Valley,Entire home/apt,0,0,0,MATCH
+1405570804202731514,Geylang,Private room,50,50,0,MATCH
+1406133547004489962,Novena,Entire home/apt,2,2,0,MATCH
+1407690750517316197,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1408653669287741319,Queenstown,Private room,10,10,0,MATCH
+1409190445440015181,Orchard,Private room,15,15,0,MATCH
+1409190520937959773,Orchard,Private room,15,15,0,MATCH
+1409888809573843758,Novena,Entire home/apt,5,5,0,MATCH
+1409905718849895859,River Valley,Entire home/apt,0,0,0,MATCH
+1409905831443136176,River Valley,Private room,2,2,0,MATCH
+1409906057356459410,River Valley,Entire home/apt,0,0,0,MATCH
+1409906222467767597,River Valley,Entire home/apt,0,0,0,MATCH
+1409906272118300788,River Valley,Entire home/apt,2,2,0,MATCH
+1409906289055001421,River Valley,Private room,4,4,0,MATCH
+1409908805145531459,Novena,Entire home/apt,1,1,0,MATCH
+1409909525004778956,River Valley,Entire home/apt,2,2,0,MATCH
+1409909599605889825,River Valley,Private room,0,0,0,MATCH
+1409910367925046648,River Valley,Entire home/apt,0,0,0,MATCH
+1409922268645313212,River Valley,Entire home/apt,0,0,0,MATCH
+1409922302741653302,River Valley,Entire home/apt,0,0,0,MATCH
+1410671734871935233,River Valley,Entire home/apt,2,2,0,MATCH
+1410671744753449258,River Valley,Entire home/apt,0,0,0,MATCH
+1410689414253722688,River Valley,Entire home/apt,0,0,0,MATCH
+1410689430283525316,River Valley,Private room,0,0,0,MATCH
+1410701913162295182,River Valley,Entire home/apt,0,0,0,MATCH
+1410701926605057359,River Valley,Private room,1,1,0,MATCH
+1410701935160798073,River Valley,Entire home/apt,1,1,0,MATCH
+1410702694370038999,River Valley,Entire home/apt,0,0,0,MATCH
+1414498614019286612,Novena,Entire home/apt,1,1,0,MATCH
+1415167344973942853,Novena,Entire home/apt,3,3,0,MATCH
+1416685264303922091,Novena,Entire home/apt,3,3,0,MATCH
+1416694608722701168,Novena,Entire home/apt,0,0,0,MATCH
+1416707128264825703,Novena,Entire home/apt,4,4,0,MATCH
+1416723400282459966,Novena,Entire home/apt,9,9,0,MATCH
+1416735228073078822,Novena,Entire home/apt,5,5,0,MATCH
+1416742382892729894,Novena,Entire home/apt,1,1,0,MATCH
+1416754295641369881,Novena,Entire home/apt,7,7,0,MATCH
+1416837362114502276,River Valley,Entire home/apt,1,1,0,MATCH
+1416837630051745563,River Valley,Entire home/apt,0,0,0,MATCH
+1416837637162501414,River Valley,Entire home/apt,0,0,0,MATCH
+1416837969286248307,River Valley,Entire home/apt,1,1,0,MATCH
+1416838032552083367,River Valley,Entire home/apt,0,0,0,MATCH
+1416838042874822114,River Valley,Entire home/apt,3,3,0,MATCH
+1416838905060987970,River Valley,Entire home/apt,0,0,0,MATCH
+1416838953943004621,River Valley,Entire home/apt,2,2,0,MATCH
+1416840545282198828,River Valley,Entire home/apt,0,0,0,MATCH
+1417166590585085067,Kallang,Private room,63,63,0,MATCH
+1417918126204327052,Kallang,Private room,18,18,0,MATCH
+1418834375005907172,River Valley,Entire home/apt,1,1,0,MATCH
+1418840534190307514,River Valley,Entire home/apt,0,0,0,MATCH
+1418846351958440916,River Valley,Entire home/apt,1,1,0,MATCH
+1418851841834887365,River Valley,Entire home/apt,0,0,0,MATCH
+1418857163748940205,River Valley,Entire home/apt,1,1,0,MATCH
+1418861896474825524,River Valley,Entire home/apt,0,0,0,MATCH
+1418867174753684561,River Valley,Entire home/apt,6,6,0,MATCH
+1418871456058121803,River Valley,Entire home/apt,0,0,0,MATCH
+1418875558127560968,River Valley,Entire home/apt,0,0,0,MATCH
+1421658026230275431,Bedok,Entire home/apt,1,1,0,MATCH
+1422215104467222024,Singapore River,Private room,0,0,0,MATCH
+1423478539444627644,Rochor,Private room,0,0,0,MATCH
+1423643687021033482,Novena,Entire home/apt,6,6,0,MATCH
+1424249889302183139,Downtown Core,Private room,50,50,0,MATCH
+1424249889693894177,Downtown Core,Private room,100,100,0,MATCH
+1424250061326942515,Downtown Core,Private room,50,50,0,MATCH
+1424250184455481838,Downtown Core,Private room,50,50,0,MATCH
+1424250192582612508,Downtown Core,Private room,50,50,0,MATCH
+1424250311253500784,Downtown Core,Private room,50,50,0,MATCH
+1424250328367064627,Downtown Core,Private room,0,0,0,MATCH
+1424428701695755446,Rochor,Private room,4,4,0,MATCH
+1424428701819422499,Rochor,Private room,0,0,0,MATCH
+1424428852778246994,Rochor,Private room,0,0,0,MATCH
+1424428859217478768,Rochor,Private room,0,0,0,MATCH
+1424429010859475839,Rochor,Private room,0,0,0,MATCH
+1424429024247096195,Rochor,Private room,0,0,0,MATCH
+1424447545878309372,Kallang,Private room,100,100,0,MATCH
+1424447901026547906,Kallang,Private room,150,150,0,MATCH
+1424448202864398361,Kallang,Private room,50,50,0,MATCH
+1424448535540415363,Kallang,Private room,50,50,0,MATCH
+1424448868665846220,Kallang,Private room,50,50,0,MATCH
+1424449176794927641,Kallang,Private room,50,50,0,MATCH
+1424449449682044691,Kallang,Private room,50,50,0,MATCH
+1424449755563942631,Kallang,Private room,50,50,0,MATCH
+1424451303692713657,Rochor,Private room,17,17,0,MATCH
+1424451479378425413,Rochor,Private room,17,17,0,MATCH
+1424451649677359299,Rochor,Private room,0,0,0,MATCH
+1424451821530649780,Rochor,Private room,17,17,0,MATCH
+1424451993987500487,Rochor,Private room,0,0,0,MATCH
+1424452171980826009,Rochor,Private room,17,17,0,MATCH
+1424452343694908276,Rochor,Private room,0,0,0,MATCH
+1424452524803607575,Rochor,Private room,17,17,0,MATCH
+1424452540373293477,Rochor,Private room,17,17,0,MATCH
+1424453240122424899,Rochor,Private room,43,43,0,MATCH
+1424453410413643540,Rochor,Private room,43,43,0,MATCH
+1424453584550042478,Rochor,Private room,43,43,0,MATCH
+1424453733537150565,Rochor,Private room,43,43,0,MATCH
+1424453896291727850,Rochor,Private room,0,0,0,MATCH
+1425148665792726386,Southern Islands,Private room,4,4,0,MATCH
+1425148666145769141,Southern Islands,Private room,0,0,0,MATCH
+1425148799398654647,Southern Islands,Private room,4,4,0,MATCH
+1425190803665246013,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1425850105736531154,River Valley,Entire home/apt,5,5,0,MATCH
+1425859886450862222,River Valley,Entire home/apt,2,2,0,MATCH
+1425869806039287535,River Valley,Entire home/apt,0,0,0,MATCH
+1425945341014242579,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1426006783645356445,River Valley,Entire home/apt,0,0,0,MATCH
+1426012867560768936,River Valley,Entire home/apt,0,0,0,MATCH
+1426024511725718345,River Valley,Entire home/apt,7,7,0,MATCH
+1426031585133491230,River Valley,Private room,3,3,0,MATCH
+1426038347190089848,River Valley,Entire home/apt,0,0,0,MATCH
+1426560931919627515,River Valley,Entire home/apt,3,3,0,MATCH
+1426599867114331921,River Valley,Entire home/apt,0,0,0,MATCH
+1426606297178971826,River Valley,Entire home/apt,0,0,0,MATCH
+1426614939438407815,River Valley,Entire home/apt,0,0,0,MATCH
+1426629047767337878,River Valley,Entire home/apt,1,1,0,MATCH
+1426635538811001368,River Valley,Entire home/apt,6,6,0,MATCH
+1426641672195864918,River Valley,Private room,4,4,0,MATCH
+1426652696166505695,River Valley,Entire home/apt,1,1,0,MATCH
+1426678158162327809,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1426711164922860265,River Valley,Entire home/apt,0,0,0,MATCH
+1426716084446521737,River Valley,Entire home/apt,1,1,0,MATCH
+1426721534212908207,River Valley,Entire home/apt,0,0,0,MATCH
+1427058872148210776,River Valley,Entire home/apt,4,4,0,MATCH
+1427085518647834146,River Valley,Entire home/apt,0,0,0,MATCH
+1427097570520340078,River Valley,Entire home/apt,2,2,0,MATCH
+1427103146004160543,River Valley,Private room,0,0,0,MATCH
+1427402123872945345,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1429414387092626138,Novena,Entire home/apt,0,0,0,MATCH
+1429429611284443054,Kallang,Private room,9,9,0,MATCH
+1429430926777806945,Novena,Entire home/apt,0,0,0,MATCH
+1429740332048906981,Bedok,Private room,0,0,0,MATCH
+1430481507363441021,Kallang,Private room,36,36,0,MATCH
+1430492482373707758,Kallang,Private room,48,48,0,MATCH
+1430501637577930327,Kallang,Private room,3,3,0,MATCH
+1430778817396297658,Kallang,Private room,128,128,0,MATCH
+1430784800417314095,Kallang,Private room,12,12,0,MATCH
+1430858754525398893,Kallang,Private room,19,19,0,MATCH
+1430865086193483530,Kallang,Private room,2,2,0,MATCH
+1430875027214089077,Kallang,Private room,3,3,0,MATCH
+1430992511231233316,Outram,Private room,0,0,0,MATCH
+1430996581582926108,Outram,Private room,0,0,0,MATCH
+1430998684168143065,Outram,Private room,3,3,0,MATCH
+1431791012566723702,Novena,Entire home/apt,0,0,0,MATCH
+1434655658018687839,Novena,Entire home/apt,0,0,0,MATCH
+1435436798531615565,Novena,Entire home/apt,0,0,0,MATCH
+1435481170766922808,Novena,Entire home/apt,9,9,0,MATCH
+1435498739153769105,Novena,Entire home/apt,1,1,0,MATCH
+1435501207714217743,Novena,Entire home/apt,21,21,0,MATCH
+1435503782998461141,Novena,Entire home/apt,2,2,0,MATCH
+1435506379283528748,Novena,Entire home/apt,1,1,0,MATCH
+1435508276632037244,Novena,Entire home/apt,9,9,0,MATCH
+1435511229949562056,Novena,Entire home/apt,1,1,0,MATCH
+1436731706276503316,Downtown Core,Entire home/apt,0,0,0,MATCH
+1440459312316583288,Novena,Entire home/apt,1,1,0,MATCH
+1441699565088289084,Ang Mo Kio,Private room,0,0,0,MATCH
+1441747156241875893,Kallang,Entire home/apt,0,0,0,MATCH
+1444516778044940580,Bukit Merah,Private room,2,2,0,MATCH
+1444523827569902033,Bukit Merah,Entire home/apt,2,2,0,MATCH
+1444547568409718047,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1449345947252383766,Outram,Entire home/apt,1,1,0,MATCH
+1449362431787038446,Outram,Entire home/apt,10,10,0,MATCH
+1449745682595467553,River Valley,Entire home/apt,0,0,0,MATCH
+1450531852548562189,Queenstown,Entire home/apt,0,0,0,MATCH
+1453168478696970113,Jurong West,Private room,0,0,0,MATCH
+1453309223666872783,Yishun,Private room,0,0,0,MATCH
+1453652427627211407,Outram,Shared room,9,9,0,MATCH
+1454846206172103024,Tanglin,Private room,5,5,0,MATCH
+1454885867603099496,Tanglin,Private room,3,3,0,MATCH
+1454894973142599893,Tanglin,Private room,1,1,0,MATCH
+1455853323635714732,Geylang,Private room,0,0,0,MATCH
+1457063470445292038,Bukit Timah,Entire home/apt,0,0,0,MATCH
+1460766889092513142,River Valley,Entire home/apt,0,0,0,MATCH
+1461242562681876485,Southern Islands,Private room,8,8,0,MATCH
+1462196828937021193,Southern Islands,Private room,3,3,0,MATCH
+1462823694871478687,River Valley,Private room,1,1,0,MATCH
+1462834422858790539,River Valley,Private room,2,2,0,MATCH
+1462838261247305625,River Valley,Private room,10,10,0,MATCH
+1463662556790464966,River Valley,Entire home/apt,0,0,0,MATCH
+1463737606682181732,Rochor,Private room,0,0,0,MATCH
+1464494275136538266,Bedok,Entire home/apt,1,1,0,MATCH
+1464610174043996618,Bedok,Entire home/apt,0,0,0,MATCH
+1467926425879233888,Rochor,Private room,0,0,0,MATCH
+1467936474358101537,Kallang,Private room,0,0,0,MATCH
+1467945448979879180,Kallang,Private room,0,0,0,MATCH
+1467950257888380632,Kallang,Private room,1,1,0,MATCH
+1467952164715050190,Kallang,Private room,12,12,0,MATCH
+1468018053216604022,Rochor,Private room,43,43,0,MATCH
+1470060596734778022,River Valley,Private room,2,2,0,MATCH
+1471888189602127580,Bedok,Entire home/apt,0,0,0,MATCH
+1472984114652915855,River Valley,Private room,0,0,0,MATCH
+1472987864020236781,River Valley,Private room,0,0,0,MATCH
+1472990906858898417,River Valley,Private room,0,0,0,MATCH
+1473745746266510347,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1476055472555092851,Kallang,Private room,0,0,0,MATCH
+1479367175394020790,Hougang,Private room,0,0,0,MATCH
+1480442085196385740,River Valley,Entire home/apt,0,0,0,MATCH
+1481005699303905208,Kallang,Private room,0,0,0,MATCH
+1481779879993987767,Geylang,Entire home/apt,0,0,0,MATCH
+1482210118474008691,Geylang,Private room,0,0,0,MATCH
+1482336060835379615,Bukit Merah,Private room,50,50,0,MATCH
+1482336061242810150,Bukit Merah,Private room,150,150,0,MATCH
+1482336227451139003,Bukit Merah,Private room,50,50,0,MATCH
+1482344493013508711,Novena,Private room,236,236,0,MATCH
+1482344889095034161,Novena,Private room,49,49,0,MATCH
+1482348552454729497,Rochor,Private room,50,50,0,MATCH
+1482348552681809454,Rochor,Private room,100,100,0,MATCH
+1482350077493030891,Geylang,Private room,4,4,0,MATCH
+1482350301376566700,Hougang,Private room,2,2,0,MATCH
+1482350301412095431,Hougang,Private room,2,2,0,MATCH
+1482625474739238932,Novena,Entire home/apt,1,1,0,MATCH
+1483118130975083869,Kallang,Private room,3,3,0,MATCH
+1483118131026140324,Kallang,Private room,3,3,0,MATCH
+1483256161942981089,Geylang,Private room,0,0,0,MATCH
+1484750558546581098,Queenstown,Private room,1,1,0,MATCH
+1484757313421784884,Queenstown,Private room,66,66,0,MATCH
+1485263476081186653,Tampines,Entire home/apt,0,0,0,MATCH
+1485469452306568394,Geylang,Private room,1,1,0,MATCH
+1486242516753075161,Bukit Timah,Entire home/apt,1,1,0,MATCH
+1487440954785229290,Queenstown,Entire home/apt,0,0,0,MATCH
+1487539333274278390,Geylang,Entire home/apt,0,0,0,MATCH
+1489924245244842785,River Valley,Entire home/apt,0,0,0,MATCH
+1489940511653564615,River Valley,Entire home/apt,0,0,0,MATCH
+1490981728850858299,Bukit Merah,Private room,0,0,0,MATCH
+1491112514164260551,Clementi,Entire home/apt,0,0,0,MATCH
+1491160726824700242,Kallang,Private room,50,50,0,MATCH
+1491160897709764359,Kallang,Private room,50,50,0,MATCH
+1491161059850375744,Kallang,Private room,50,50,0,MATCH
+1491161263853003497,Kallang,Private room,50,50,0,MATCH
+1491161461423699555,Kallang,Private room,50,50,0,MATCH
+1491162043816775904,Kallang,Private room,50,50,0,MATCH
+1491703106286080215,Outram,Shared room,0,0,0,MATCH
+1491878234052573456,Choa Chu Kang,Private room,0,0,0,MATCH
+1492058548716686634,Novena,Entire home/apt,2,2,0,MATCH
+1493301012995504286,Rochor,Private room,14,14,0,MATCH
+1493301652450529466,Rochor,Private room,14,14,0,MATCH
+1493302524791532996,Rochor,Private room,0,0,0,MATCH
+1493320707639322356,Rochor,Private room,14,14,0,MATCH
+1493321103157082188,Rochor,Private room,14,14,0,MATCH
+1493340902966617273,Geylang,Entire home/apt,0,0,0,MATCH
+1493598155663078247,River Valley,Entire home/apt,0,0,0,MATCH
+1493598328098570210,River Valley,Entire home/apt,0,0,0,MATCH
+1494085111775419009,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1494135102346372429,Clementi,Entire home/apt,0,0,0,MATCH
+1494887281135886016,River Valley,Private room,1,1,0,MATCH
+1494887320601867335,River Valley,Private room,0,0,0,MATCH
+1495667656926912375,Pasir Ris,Entire home/apt,4,4,0,MATCH
+1496151732298903272,Clementi,Entire home/apt,0,0,0,MATCH
+1496193040989628166,Kallang,Entire home/apt,0,0,0,MATCH
+1496231766157815351,Geylang,Entire home/apt,0,0,0,MATCH
+1496272170156267558,Queenstown,Entire home/apt,0,0,0,MATCH
+1496295827957978650,Queenstown,Entire home/apt,0,0,0,MATCH
+1496310400207856454,Kallang,Entire home/apt,0,0,0,MATCH
+1496323183193781879,Geylang,Entire home/apt,0,0,0,MATCH
+1496841118799403519,Kallang,Entire home/apt,0,0,0,MATCH
+1496897530262402035,Bukit Merah,Entire home/apt,2,2,0,MATCH
+1497501411929097100,River Valley,Private room,0,0,0,MATCH
+1497502910779552587,River Valley,Private room,0,0,0,MATCH
+1497564515337300800,Marine Parade,Entire home/apt,0,0,0,MATCH
+1497759355112905740,River Valley,Entire home/apt,1,1,0,MATCH
+1498893172134420576,Downtown Core,Entire home/apt,0,0,0,MATCH
+1498933086425839983,Newton,Entire home/apt,0,0,0,MATCH
+1499023233541585869,Novena,Entire home/apt,3,3,0,MATCH
+1503328375771943833,Southern Islands,Entire home/apt,0,0,0,MATCH
+1505011749919855875,Bedok,Entire home/apt,0,0,0,MATCH
+1505574130689036948,Geylang,Private room,2,2,0,MATCH
+1505574131241576866,Geylang,Private room,2,2,0,MATCH
+1505574234147565550,Geylang,Private room,0,0,0,MATCH
+1505574249366146089,Geylang,Private room,0,0,0,MATCH
+1505620790609143899,Tampines,Entire home/apt,0,0,0,MATCH
+1506342191962439734,Bukit Merah,Private room,24,24,0,MATCH
+1507287508101064285,Bukit Merah,Private room,16,16,0,MATCH
+1507605851736796869,Bukit Merah,Private room,33,33,0,MATCH
+1509384651330379146,Geylang,Entire home/apt,0,0,0,MATCH
+1510139194403728212,River Valley,Entire home/apt,0,0,0,MATCH
+1511246418797027809,Serangoon,Private room,0,0,0,MATCH
+1511369769577036852,Downtown Core,Private room,0,0,0,MATCH
+1511424834671115693,Downtown Core,Private room,0,0,0,MATCH
+1511449671909596086,Hougang,Entire home/apt,1,1,0,MATCH
+1512097070503206292,Geylang,Private room,1,1,0,MATCH
+1512117785906207805,Geylang,Private room,0,0,0,MATCH
+1512329133212402881,River Valley,Entire home/apt,1,1,0,MATCH
+1512330429155080859,River Valley,Entire home/apt,0,0,0,MATCH
+1512931777755801247,Bukit Merah,Shared room,1,1,0,MATCH
+1512935021997986447,Rochor,Private room,0,0,0,MATCH
+1512947567862866359,Rochor,Private room,0,0,0,MATCH
+1512947581595017656,Rochor,Private room,0,0,0,MATCH
+1512947802280280075,Rochor,Private room,0,0,0,MATCH
+1513075651004479756,Singapore River,Shared room,65,65,0,MATCH
+1513540596234399467,Toa Payoh,Entire home/apt,0,0,0,MATCH
+1515173611230669615,Bedok,Private room,0,0,0,MATCH
+1515950777837294381,Tampines,Entire home/apt,0,0,0,MATCH
+1516621496295994717,Marine Parade,Entire home/apt,0,0,0,MATCH
+1517031869355239094,Bukit Merah,Shared room,0,0,0,MATCH
+1517064583213705389,Rochor,Private room,0,0,0,MATCH
+1517064583533093041,Rochor,Private room,0,0,0,MATCH
+1517064729158707374,Rochor,Private room,44,44,0,MATCH
+1517064733804360479,Rochor,Private room,44,44,0,MATCH
+1517064847808985192,Rochor,Private room,44,44,0,MATCH
+1517064857784708944,Rochor,Private room,44,44,0,MATCH
+1517849971813819572,Pasir Ris,Entire home/apt,4,4,0,MATCH
+1517866689870381620,Bukit Merah,Shared room,8,8,0,MATCH
+1517872918551641085,Bukit Merah,Shared room,44,44,0,MATCH
+1517875650522335553,Bukit Merah,Shared room,20,20,0,MATCH
+1517884183424884729,Bukit Merah,Shared room,20,20,0,MATCH
+1517967627823141719,Pasir Ris,Entire home/apt,0,0,0,MATCH
+1521405956894185758,Bukit Merah,Shared room,1,1,0,MATCH
+1521415661955704800,Bukit Merah,Shared room,0,0,0,MATCH
+1523537343908804726,Bukit Merah,Shared room,0,0,0,MATCH
+1526636899101939497,Rochor,Private room,43,43,0,MATCH
+1527159153134401161,River Valley,Private room,0,0,0,MATCH
+1530944479165978553,Woodlands,Private room,0,0,0,MATCH
+1531690581068543806,River Valley,Private room,24,24,0,MATCH
+1531714746744908217,Rochor,Private room,1,1,0,MATCH
+1532322628325546095,Kallang,Private room,0,0,0,MATCH
+1532436330889546987,Rochor,Private room,5,5,0,MATCH
+1532452291948349278,Tampines,Entire home/apt,0,0,0,MATCH
+1533008271128704744,Rochor,Private room,1,1,0,MATCH
+1535398173405517533,Rochor,Private room,0,0,0,MATCH
+1536768613848761439,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1536921248835062578,Rochor,Private room,1,1,0,MATCH
+1537608742036293495,Rochor,Private room,4,4,0,MATCH
+1537653418477359082,Rochor,Private room,2,2,0,MATCH
+1537674106390806989,River Valley,Private room,25,25,0,MATCH
+1538139298550271472,River Valley,Private room,35,35,0,MATCH
+1538757210402956826,River Valley,Private room,9,9,0,MATCH
+1541013400883939658,Singapore River,Private room,19,19,0,MATCH
+1541091076697146167,Singapore River,Private room,2,2,0,MATCH
+1541995366042480367,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1542129043721973486,Geylang,Private room,8,8,0,MATCH
+1542129044469493595,Geylang,Private room,0,0,0,MATCH
+1542129344201181727,Geylang,Private room,0,0,0,MATCH
+1542129348245092539,Geylang,Private room,8,8,0,MATCH
+1542129582087978413,Geylang,Private room,8,8,0,MATCH
+1542129621184731442,Geylang,Private room,8,8,0,MATCH
+1542129779561198814,Geylang,Private room,8,8,0,MATCH
+1542130045732989405,Geylang,Private room,0,0,0,MATCH
+1542583565744082369,Downtown Core,Private room,0,0,0,MATCH
+1542583565854316128,Downtown Core,Private room,3,3,0,MATCH
+1542583758315215649,Downtown Core,Private room,0,0,0,MATCH
+1542583793847040672,Downtown Core,Private room,0,0,0,MATCH
+1542583952725460168,Downtown Core,Private room,3,3,0,MATCH
+1542584497071109892,Kallang,Private room,8,8,0,MATCH
+1542584497208173462,Kallang,Private room,8,8,0,MATCH
+1542584736895014583,Kallang,Private room,0,0,0,MATCH
+1542584740775656461,Kallang,Private room,8,8,0,MATCH
+1542584907146822057,Kallang,Private room,0,0,0,MATCH
+1542584928609917730,Kallang,Private room,0,0,0,MATCH
+1542585035410028293,Kallang,Private room,8,8,0,MATCH
+1542588530212288486,Outram,Private room,0,0,0,MATCH
+1542588682964513938,Outram,Private room,0,0,0,MATCH
+1542588689453889321,Outram,Private room,0,0,0,MATCH
+1542593457556805597,Rochor,Private room,0,0,0,MATCH
+1542593457604724431,Rochor,Private room,0,0,0,MATCH
+1542593605072995531,Rochor,Private room,0,0,0,MATCH
+1542593751338636610,Rochor,Private room,0,0,0,MATCH
+1542593778892456040,Rochor,Private room,0,0,0,MATCH
+1542593903152256818,Rochor,Private room,3,3,0,MATCH
+1542593924228182931,Rochor,Private room,0,0,0,MATCH
+1550664522540846801,Tanglin,Entire home/apt,0,0,0,MATCH
+1552640016154280934,Rochor,Private room,0,0,0,MATCH
+1553226078140236894,Rochor,Private room,0,0,0,MATCH
+1553240809949789089,Rochor,Private room,0,0,0,MATCH
+1553261387400120338,Rochor,Private room,0,0,0,MATCH
+1553276429863649662,Rochor,Private room,0,0,0,MATCH
+1553317498142160787,Rochor,Private room,0,0,0,MATCH
+1558496772129596532,Kallang,Shared room,0,0,0,MATCH
+1558506444236408680,Serangoon,Entire home/apt,1,1,0,MATCH
+1561514805448048695,Queenstown,Entire home/apt,0,0,0,MATCH
+1561570192641136062,Marine Parade,Entire home/apt,0,0,0,MATCH
+1561929859295159095,Kallang,Private room,0,0,0,MATCH
+1561929859408061693,Kallang,Private room,0,0,0,MATCH
+1562330535313793849,Tampines,Private room,0,0,0,MATCH
+1563726374268927066,Novena,Entire home/apt,0,0,0,MATCH
+1566423732988001652,Yishun,Private room,5,5,0,MATCH
+1566465129273341933,Downtown Core,Private room,13,13,0,MATCH
+1566876732031846811,Pasir Ris,Private room,0,0,0,MATCH
+1567052836706283503,Outram,Private room,50,50,0,MATCH
+1567053653078601743,Outram,Private room,50,50,0,MATCH
+1567055345395614222,Outram,Private room,50,50,0,MATCH
+1567056710074937426,Outram,Private room,100,100,0,MATCH
+1567056710167350945,Outram,Private room,100,100,0,MATCH
+1567759945424911752,Tanglin,Entire home/apt,8,8,0,MATCH
+1567950110613817647,Novena,Entire home/apt,1,1,0,MATCH
+1569708549659853687,Outram,Private room,0,0,0,MATCH
+1570401247683928052,Outram,Private room,0,0,0,MATCH
+1571716572722387868,Tanglin,Entire home/apt,12,12,0,MATCH
+1571773702690886324,Singapore River,Private room,0,0,0,MATCH
+1572198465560342731,Bukit Merah,Private room,0,0,0,MATCH
+1572203310071938994,Bukit Merah,Private room,2,2,0,MATCH
+1572962815992846612,Kallang,Private room,0,0,0,MATCH
+1572962816056668693,Kallang,Private room,36,36,0,MATCH
+1572962816230980265,Kallang,Private room,36,36,0,MATCH
+1572962816530901322,Kallang,Private room,36,36,0,MATCH
+1573301212827660658,Downtown Core,Private room,0,0,0,MATCH
+1574815961888380969,Newton,Private room,0,0,0,MATCH
+1576481539950851536,Downtown Core,Private room,6,6,0,MATCH
+1578214555492046682,Downtown Core,Private room,0,0,0,MATCH
+1579093117428067489,River Valley,Entire home/apt,0,0,0,MATCH
+1580844947126663283,Downtown Core,Private room,0,0,0,MATCH
+1581129173551495593,Museum,Private room,0,0,0,MATCH
+1581551112688403430,Singapore River,Private room,8,8,0,MATCH
+1581696269832107352,River Valley,Entire home/apt,4,4,0,MATCH
+1581696284973991921,River Valley,Entire home/apt,1,1,0,MATCH
+1581696304486491289,River Valley,Private room,1,1,0,MATCH
+1581696325067664684,River Valley,Entire home/apt,1,1,0,MATCH
+1581696337879791507,River Valley,Entire home/apt,2,2,0,MATCH
+1582001024686327834,Orchard,Private room,0,0,0,MATCH
+1582084859847083202,River Valley,Private room,0,0,0,MATCH
+1582084875093322831,River Valley,Private room,3,3,0,MATCH
+1582084907419729981,River Valley,Entire home/apt,0,0,0,MATCH
+1582084929646706858,River Valley,Entire home/apt,0,0,0,MATCH
+1582085104908788630,River Valley,Entire home/apt,1,1,0,MATCH
+1582085284966102959,River Valley,Entire home/apt,1,1,0,MATCH
+1582085324534604995,River Valley,Private room,0,0,0,MATCH
+1582089801135670185,River Valley,Private room,0,0,0,MATCH
+1582089813381183439,River Valley,Private room,4,4,0,MATCH
+1582089843380405457,River Valley,Private room,1,1,0,MATCH
+1582089860879284358,River Valley,Entire home/apt,1,1,0,MATCH
+1582089878216308613,River Valley,Entire home/apt,3,3,0,MATCH
+1582414614055388048,Sengkang,Private room,0,0,0,MATCH
+1584561350096269679,Rochor,Private room,10,10,0,MATCH
+1584578093525009364,Downtown Core,Private room,1,1,0,MATCH
+1584602379309576986,Downtown Core,Private room,0,0,0,MATCH
+1584619376896792134,Rochor,Private room,3,3,0,MATCH
+1584630997025560445,Downtown Core,Private room,0,0,0,MATCH
+1584646447686417575,Downtown Core,Private room,1,1,0,MATCH
+1584656711449949046,Rochor,Private room,12,12,0,MATCH
+1584884816180810966,Orchard,Private room,0,0,0,MATCH
+1585276216512069111,Downtown Core,Private room,4,4,0,MATCH
+1586317118754162683,Newton,Private room,0,0,0,MATCH
+1586566834626357400,Rochor,Entire home/apt,6,6,0,MATCH
+1586578195797269307,Rochor,Entire home/apt,19,19,0,MATCH
+1586582366339012502,Rochor,Entire home/apt,11,11,0,MATCH
+1586586471919424306,Rochor,Entire home/apt,15,15,0,MATCH
+1586589945088184206,Rochor,Entire home/apt,4,4,0,MATCH
+1587260235915061499,Pasir Ris,Entire home/apt,0,0,0,MATCH
+1587336986241825284,Singapore River,Private room,13,13,0,MATCH
+1587343397510419556,Singapore River,Private room,9,9,0,MATCH
+1587484811031096685,Punggol,Private room,0,0,0,MATCH
+1587839189775191265,River Valley,Entire home/apt,2,2,0,MATCH
+1587839594454569592,River Valley,Private room,3,3,0,MATCH
+1587839607718327021,River Valley,Private room,8,8,0,MATCH
+1587839623362915744,River Valley,Private room,1,1,0,MATCH
+1600061301756797397,Marine Parade,Private room,1,1,0,MATCH
+1604151326456512662,Singapore River,Entire home/apt,1,1,0,MATCH
+1604337365921596569,Orchard,Private room,15,15,0,MATCH
+1604757868403731964,Rochor,Private room,0,0,0,MATCH
+1604847783603376888,Rochor,Private room,0,0,0,MATCH
+1604854366846668939,Rochor,Private room,8,8,0,MATCH
+1604862203444571796,Rochor,Private room,0,0,0,MATCH
+1604870589096291554,Rochor,Private room,0,0,0,MATCH
+1604875133455906970,Rochor,Private room,0,0,0,MATCH
+1605037332727309368,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1605550551698237683,Jurong West,Private room,0,0,0,MATCH
+1606860684917033757,Queenstown,Private room,0,0,0,MATCH
+1612026021078249070,Bukit Merah,Private room,0,0,0,MATCH
+1617275973873369856,Clementi,Private room,0,0,0,MATCH
+1617914302354276129,Clementi,Entire home/apt,0,0,0,MATCH
+1618035437060604708,Jurong East,Private room,0,0,0,MATCH
+1618254394248582541,Tanglin,Entire home/apt,5,5,0,MATCH
+1618483756297502821,Marine Parade,Entire home/apt,4,4,0,MATCH
+1620758914556399105,Bedok,Private room,0,0,0,MATCH
+1620795324360772747,Queenstown,Private room,2,2,0,MATCH
+1620818786337206904,Queenstown,Private room,0,0,0,MATCH
+1621095060765650183,Singapore River,Shared room,52,52,0,MATCH
+1623701809358620528,Hougang,Private room,0,0,0,MATCH
+1623783122242406950,Clementi,Private room,17,17,0,MATCH
+1628756738261633872,Orchard,Private room,4,4,0,MATCH
+1628756738265295313,Orchard,Private room,0,0,0,MATCH
+1628756738414867410,Orchard,Private room,4,4,0,MATCH
+1628756738470510801,Orchard,Private room,0,0,0,MATCH
+1628797052567156749,Rochor,Private room,0,0,0,MATCH
+1628797052621361715,Rochor,Private room,0,0,0,MATCH
+1628797052655860380,Rochor,Private room,0,0,0,MATCH
+1628797052804107796,Rochor,Private room,0,0,0,MATCH
+1628797053048575512,Rochor,Private room,0,0,0,MATCH
+1628797053480794491,Rochor,Private room,0,0,0,MATCH
+1628815095202093148,Downtown Core,Private room,4,4,0,MATCH
+1628858984982704585,Rochor,Private room,15,15,0,MATCH
+1629444878120249002,Hougang,Entire home/apt,1,1,0,MATCH
+1629471340585613042,Hougang,Entire home/apt,4,4,0,MATCH
+1629544389785204300,Hougang,Entire home/apt,5,5,0,MATCH
+1629550608123471826,Hougang,Entire home/apt,1,1,0,MATCH
+1629556743769807659,Hougang,Entire home/apt,0,0,0,MATCH
+1638913961251232837,Rochor,Private room,0,0,0,MATCH
+1638913961357838550,Rochor,Private room,2,2,0,MATCH
+1640220549607538148,Outram,Private room,1,1,0,MATCH
+1647110678873424876,Novena,Entire home/apt,0,0,0,MATCH
+1649020265845365472,Hougang,Entire home/apt,3,3,0,MATCH
+1649678287629188857,Hougang,Entire home/apt,2,2,0,MATCH
+1649840752596947502,Outram,Private room,24,24,0,MATCH
+1649840752622414747,Outram,Private room,24,24,0,MATCH
+1649840752815604771,Outram,Private room,24,24,0,MATCH
+1649840752902649471,Outram,Private room,0,0,0,MATCH
+1649840754164005803,Outram,Private room,24,24,0,MATCH
+1651763487975052523,Bedok,Private room,5,5,0,MATCH
+1652518462967552376,Singapore River,Private room,0,0,0,MATCH
+1652862360877034516,Museum,Private room,6,6,0,MATCH
+1652862360939034147,Museum,Private room,6,6,0,MATCH
+1652862504028460880,Museum,Private room,0,0,0,MATCH
+1652862504319150630,Museum,Private room,6,6,0,MATCH
+1652862504423744013,Museum,Private room,0,0,0,MATCH
+1652862504749036550,Museum,Private room,0,0,0,MATCH
+1655204872752750356,Novena,Shared room,2,2,0,MATCH
+1655550367434724140,Novena,Entire home/apt,0,0,0,MATCH
+1655905047814970095,Novena,Shared room,1,1,0,MATCH
+1658079969610064054,Novena,Private room,0,0,0,MATCH
+1658081889228152590,Novena,Private room,1,1,0,MATCH
+1658085930556712053,Novena,Private room,0,0,0,MATCH
+1660638949537378356,Rochor,Shared room,0,0,0,MATCH
+1660656962283392614,Downtown Core,Shared room,2,2,0,MATCH
+1661955554868560343,Bukit Timah,Entire home/apt,0,0,0,MATCH
+1662824629633788882,Novena,Entire home/apt,0,0,0,MATCH
+1663386674212732173,Singapore River,Private room,5,5,0,MATCH
+1664416292408971289,Singapore River,Private room,3,3,0,MATCH
+1664838628306144866,Hougang,Private room,0,0,0,MATCH
+1664875494206910165,Serangoon,Private room,2,2,0,MATCH
+1665651126119907704,Rochor,Private room,2,2,0,MATCH
+1665713823442366077,Hougang,Private room,1,1,0,MATCH
+1665727901335885126,Serangoon,Private room,0,0,0,MATCH
+1667024853476027945,Downtown Core,Private room,25,25,0,MATCH
+1668692617793786125,River Valley,Entire home/apt,0,0,0,MATCH
+1668695221577408390,River Valley,Entire home/apt,0,0,0,MATCH
+1668695235590825899,River Valley,Private room,0,0,0,MATCH
+1668695909757376326,River Valley,Entire home/apt,0,0,0,MATCH
+1668695923679632608,River Valley,Entire home/apt,1,1,0,MATCH
+1668704830941271048,River Valley,Private room,0,0,0,MATCH
+1668704868436027166,River Valley,Entire home/apt,0,0,0,MATCH
+1674330194753851649,River Valley,Entire home/apt,0,0,0,MATCH
+1678808130493321930,Downtown Core,Private room,0,0,0,MATCH
+1679488887663697526,Rochor,Private room,0,0,0,MATCH
+1683346474792748210,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1686012342539342454,Hougang,Entire home/apt,0,0,0,MATCH
+1686056340197239369,Choa Chu Kang,Private room,0,0,0,MATCH
+1686733206629062593,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1689117200832153299,Queenstown,Entire home/apt,0,0,0,MATCH
+1689761361811772554,Queenstown,Entire home/apt,0,0,0,MATCH
+1694221504544701899,Bukit Merah,Entire home/apt,1,1,0,MATCH
+1695351616783592248,Queenstown,Private room,0,0,0,MATCH
+1695366732701509754,Queenstown,Private room,0,0,0,MATCH
+1705224086935055648,Singapore River,Private room,0,0,0,MATCH
+1705731190895936095,Singapore River,Private room,3,3,0,MATCH
+1705731190928715338,Singapore River,Private room,0,0,0,MATCH
+1705731190971368742,Singapore River,Private room,0,0,0,MATCH
+1705731191166244223,Singapore River,Private room,3,3,0,MATCH
+1706049774301695338,Outram,Private room,0,0,0,MATCH
+1706907426644459511,Outram,Private room,0,0,0,MATCH
+1710200387154775651,Outram,Private room,0,0,0,MATCH
+1710217322520842323,Outram,Private room,0,0,0,MATCH
+1710223393982141743,Outram,Private room,0,0,0,MATCH
+1710233116365661996,Outram,Private room,0,0,0,MATCH
+1710248829582712470,Outram,Private room,0,0,0,MATCH
+1710255878191691057,Outram,Private room,0,0,0,MATCH
+1710264983556360555,Outram,Private room,0,0,0,MATCH
+1710272846609411039,Outram,Private room,0,0,0,MATCH
+1710972939136868601,Outram,Private room,0,0,0,MATCH
+1711010251922019609,Outram,Private room,0,0,0,MATCH
+1711027355184000217,Outram,Private room,0,0,0,MATCH
+1711228023592695662,Outram,Private room,0,0,0,MATCH
+1711393905127133912,Outram,Private room,0,0,0,MATCH
+1711410456518545901,Outram,Private room,0,0,0,MATCH
+1711419057036466057,Outram,Private room,0,0,0,MATCH
+1711428820065219106,Outram,Private room,0,0,0,MATCH
+1711439935031581901,Outram,Private room,0,0,0,MATCH
+1711450617566471696,Outram,Private room,1,1,0,MATCH
+1711462653332686433,Outram,Private room,0,0,0,MATCH
+1711471814935089138,Outram,Private room,0,0,0,MATCH
+1711676965974710509,Singapore River,Private room,0,0,0,MATCH
+1711768822597727857,Singapore River,Private room,0,0,0,MATCH
+1712320668769807976,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1712326596739619101,Bukit Merah,Entire home/apt,0,0,0,MATCH
+1712356968731976263,Outram,Private room,1,1,0,MATCH
+1712366921665597738,Outram,Private room,0,0,0,MATCH
+1712378422265699952,Outram,Private room,1,1,0,MATCH
+1712385688184571950,Outram,Private room,0,0,0,MATCH
+1713031387955309973,Outram,Private room,1,1,0,MATCH
+1713039999764413336,Outram,Private room,0,0,0,MATCH
+1713625446283432986,Rochor,Private room,0,0,0,MATCH
+1714410183710884627,Singapore River,Private room,0,0,0,MATCH
+1716663240504832204,Orchard,Private room,0,0,0,MATCH
+1716663759179738371,Orchard,Private room,0,0,0,MATCH
+1716664164632600517,Orchard,Private room,0,0,0,MATCH
+1716664556863064786,Orchard,Private room,0,0,0,MATCH
+1716664918821844436,Orchard,Private room,0,0,0,MATCH
+1716722756663260064,Jurong West,Private room,1,1,0,MATCH
+1716864183173166040,Rochor,Private room,0,0,0,MATCH
+1716877869359547646,Rochor,Private room,0,0,0,MATCH
+1719641945232642368,Rochor,Private room,0,0,0,MATCH
+1719664281228525112,Rochor,Private room,0,0,0,MATCH
+1720193958030184410,Rochor,Private room,0,0,0,MATCH
+1720216554927792754,Rochor,Private room,0,0,0,MATCH
+1720934825567736378,Novena,Private room,0,0,0,MATCH
+1722324956288957746,Bedok,Private room,2,2,0,MATCH
+1722591181503871040,Yishun,Private room,1,1,0,MATCH
+1729614458085391798,Serangoon,Private room,0,0,0,MATCH
+1729620038843169073,Serangoon,Private room,0,0,0,MATCH
+1730847265741064657,Bukit Merah,Private room,0,0,0,MATCH
+1730847733975298035,Bukit Merah,Private room,0,0,0,MATCH
+1730848029157062064,Bukit Merah,Private room,0,0,0,MATCH
+1733397220532039486,Kallang,Private room,37,37,0,MATCH
+1733397516121178989,Kallang,Private room,0,0,0,MATCH
+1733398275517461492,Geylang,Private room,0,0,0,MATCH
+1733398563696759301,Geylang,Private room,0,0,0,MATCH
+1733398903635453065,Geylang,Private room,0,0,0,MATCH
+1733399151704754215,Geylang,Private room,0,0,0,MATCH
+1733400579126552947,Rochor,Private room,28,28,0,MATCH
+1734662978149887831,Outram,Private room,0,0,0,MATCH
+1735946722613725718,Marine Parade,Private room,1,1,0,MATCH
+1736056584199824356,Rochor,Private room,0,0,0,MATCH
+1736742082901675179,Marine Parade,Private room,0,0,0,MATCH
+1739617603326064771,Downtown Core,Private room,0,0,0,MATCH
+1739691709305497571,Rochor,Private room,0,0,0,MATCH
+1739694430097166603,Novena,Private room,0,0,0,MATCH
+1747007869551962206,River Valley,Entire home/apt,1,1,0,MATCH
+1747701595557835139,Geylang,Shared room,0,0,0,MATCH
+1750520465456135773,Bukit Merah,Private room,0,0,0,MATCH
+1750520465642520476,Bukit Merah,Private room,0,0,0,MATCH
+1756371412405361529,River Valley,Entire home/apt,0,0,0,MATCH
+1760596848912876061,Outram,Private room,0,0,0,MATCH
+1760895102942358115,Novena,Entire home/apt,0,0,0,MATCH
+1760926570219452353,Novena,Entire home/apt,0,0,0,MATCH
+1760939225012658312,Novena,Entire home/apt,0,0,0,MATCH
+1760942996400160560,Novena,Entire home/apt,0,0,0,MATCH
+1760947429444773445,Novena,Entire home/apt,0,0,0,MATCH
+1760951285597449935,Novena,Entire home/apt,0,0,0,MATCH
+1761333885920801163,Serangoon,Entire home/apt,0,0,0,MATCH
+1762812779549497383,Serangoon,Private room,0,0,0,MATCH
+1772179790546918366,Downtown Core,Private room,0,0,0,MATCH
+1772204875407432392,Downtown Core,Private room,0,0,0,MATCH
+1772212966946567628,Downtown Core,Private room,0,0,0,MATCH
+1772219698553599972,Downtown Core,Private room,0,0,0,MATCH
+1772377028543433386,River Valley,Entire home/apt,0,0,0,MATCH
+1775264196565419940,Rochor,Private room,0,0,0,MATCH
+1775265152149162419,Rochor,Private room,0,0,0,MATCH
+1775266127973353754,Rochor,Private room,0,0,0,MATCH
+1776729921357236629,Museum,Entire home/apt,0,0,0,MATCH
