@@ -7,7 +7,7 @@
 - **Tệp bàn giao đi kèm:**
   - Bảng ánh xạ chi tiết 103 cột nguồn + 4 cột metadata: [`docs/source_to_target_mapping.csv`](source_to_target_mapping.csv)
   - Danh sách 20 kịch bản kiểm thử bàn giao cho Hồng/Minh: [`tests/etl_test_checklist.csv`](../tests/etl_test_checklist.csv)
-  - Kết quả kiểm chứng tự động trên dữ liệu thật: [`tests/task_2_4_2_5_verification.csv`](../tests/task_2_4_2_5_verification.csv)
+  - Kết quả kiểm tra raw và thiết kế tĩnh (chưa chạy SQL Gold): [`tests/task_2_4_2_5_verification.csv`](../tests/task_2_4_2_5_verification.csv)
 
 ---
 
@@ -89,7 +89,7 @@ Khi chuyển từ Data Dictionary (Task 2.2) sang bảng ánh xạ `docs/source_
   1. `Listings`: Khóa kiểm tra `(id, snapshot_date)`. Hiện tại: `0` dòng trùng trên `3,208` dòng. Quy tắc phòng vệ: nếu phát sinh trùng trong cùng file, giữ bản ghi có `last_scraped` mới nhất và ghi log cảnh báo.
   2. `Calendar`: Khóa kiểm tra `(listing_id, date, snapshot_date)`. Hiện tại: `0` dòng trùng trên `1,170,950` dòng.
   3. `Reviews`:
-     - **Không xóa theo `id` đơn lẻ:** Dữ liệu thực tế có `4,809` dòng lặp `id` xuất hiện ở `2,101` listing khác nhau (do Airbnb hiển thị đánh giá chung của host/cụm phòng trên các listing liên quan). Nếu xóa theo `id` đơn lẻ sẽ làm mất `4,809` bản ghi hợp lệ.
+     - **Không xóa theo `id` đơn lẻ:** Dữ liệu thực tế có `4,809` dòng dư theo `id` riêng lẻ; `2,101` mã review xuất hiện trên nhiều listing, liên quan `197` listing. Các mã này gắn với cùng host trong snapshot quan sát, nhưng chưa xác minh cơ chế chia sẻ review từ metadata nguồn. Không tự xóa theo `id`: khóa ghép là khóa ứng viên quan sát, chưa tự chứng minh tính đúng đắn nghiệp vụ cho mọi nguồn.
      - **Kiểm tra theo khóa ghép `(listing_id, id, snapshot_date)`:** Hiện tại có `0` dòng trùng trên `46,000` dòng. Nếu phát sinh bản ghi trùng cả cặp `(listing_id, id)` trong cùng snapshot, giữ dòng đầu tiên và ghi log.
   4. `Neighbourhoods`: Khóa kiểm tra `(neighbourhood_group, neighbourhood)`. Hiện tại: `0` dòng trùng trên `55` dòng.
 
@@ -147,3 +147,15 @@ Bảng dưới đây tóm tắt **20 kịch bản kiểm thử (`TC-01` $\righta
 | `TC-19` | `KPI-01..05`, `SUP-01..02` | Silver (Pandas) vs Gold (SQL) | 7 chỉ tiêu phân tích | Chênh lệch bằng `0` giữa kết quả truy vấn SQL trên MySQL Gold và tính toán độc lập bằng Pandas trên Silver. | Minh / Hồng |
 | `TC-20` | `TQ-05` | End-to-End Pipeline | Chạy lại lần 2 cùng snapshot `2026-09-23` | Số dòng mọi bảng và giá trị 7 KPI sau lần chạy thứ 2 khớp `100%` với lần chạy thứ 1 (`PASS` tính nhất quán khi chạy lại). | Thái / Minh / Tiên |
 
+
+## 8. Phạm vi nghiệm thu và đối chiếu Gold
+
+Task 2.4 bàn giao quy tắc/mapping/checklist; Task 2.5 bàn giao grain và schema
+nháp. Không cần triển khai xong pipeline để hoàn tất hai bản thiết kế này.
+`tests/task_2_4_2_5_verification.csv` chỉ ghi kiểm tra raw và thiết kế tĩnh;
+V-12 kiểm tra mapping đích/schema CSV/DDL, không xác nhận đã tạo bảng hoặc nạp Gold.
+
+Quy trình chạy SELECT MySQL, xuất CSV và đối chiếu độc lập với Pandas nằm tại
+[`docs/gold_reconciliation.md`](gold_reconciliation.md). SQL/ETL và TC-20 còn
+phải chạy trên môi trường nhóm trước khi nghiệm thu triển khai. Không thay
+`NOT_RUN` bằng `PASS` khi chưa có kết quả thực tế.
