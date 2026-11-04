@@ -15,6 +15,8 @@ from pathlib import Path
 import json
 import sys
 import pandas as pd
+import numpy as np
+from warehouse_validation import validate_design
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -821,7 +823,7 @@ REVIEWS_SPECS = {
         "review_id", "BIGINT UNSIGNED", "KEEP_CLEANED",
         "fact_review", "review_id", "BIGINT UNSIGNED",
         "Business Key (Composite)", "NOT NULL",
-        "Đổi tên id -> review_id; ép kiểu BIGINT UNSIGNED; thành phần thứ hai của khóa ghép (listing_id, review_id, snapshot_date). Không kiểm tra unique đơn lẻ vì có 4,809 dòng chia sẻ id giữa các listing cùng host.",
+        "Đổi tên id -> review_id; ép kiểu BIGINT UNSIGNED; thành phần thứ hai của khóa ghép (listing_id, review_id, snapshot_date). Không kiểm tra unique đơn lẻ vì có 4,809 dòng dư theo id riêng lẻ; không suy cơ chế nghiệp vụ từ việc trùng id.",
         "REJECT_ROW_IF_NULL", "review_id > 0 AND UNIQUE(listing_id, review_id, snapshot_date)",
         "SUP-02; RQ4; TQ-01; TQ-02; TQ-04"
     ),
@@ -954,13 +956,13 @@ def build_source_to_target_mapping(dd_df: pd.DataFrame) -> pd.DataFrame:
             "silver_column": "snapshot_date",
             "silver_target_dtype": "DATE",
             "gold_target_table": gold_targets,
-            "gold_target_column": "snapshot_date; snapshot_date_sk",
-            "gold_mysql_dtype": "DATE; INT",
+            "gold_target_column": "snapshot_date" if src_name == "Neighbourhoods" else "snapshot_date; snapshot_date_sk",
+            "gold_mysql_dtype": "DATE" if src_name == "Neighbourhoods" else "DATE; INT",
             "gold_nullable": "NOT NULL",
             "field_category": "Business Key / Snapshot Partition",
-            "transformation_rule": "Gán từ docs/source_inventory.csv theo file_name (snapshot hiện tại: '2026-09-23') và tạo snapshot_date_sk = 20260923.",
+            "transformation_rule": "Gán snapshot_date từ source_inventory theo file_name; chỉ sinh snapshot_date_sk cho dim_listing và các fact, không sinh cho dim_neighbourhood.",
             "null_handling_rule": "REJECT_IF_MISSING_IN_INVENTORY",
-            "validation_rule": "snapshot_date = '2026-09-23' AND EXISTS IN dim_date",
+            "validation_rule": "snapshot_date = '2026-09-23'" if src_name == "Neighbourhoods" else "snapshot_date = '2026-09-23' AND EXISTS IN dim_date",
             "kpi_and_rq_relevance": "All KPIs (Snapshot Grain Control); TQ-02; TQ-05",
         })
         seq += 1
@@ -1134,7 +1136,7 @@ def build_etl_test_checklist() -> pd.DataFrame:
         ("TC-05", "TQ-01", "Silver -> Gold", "fact_listing_snapshot", "listed_price_sgd, review_scores_rating", "Preserving Valid NULLs", "Không tự động thay NULL bằng 0: NULL count(listed_price_sgd)=483, NULL count(review_scores_rating)=1369", "Khớp chính xác số lượng NULL trước và sau ETL", "Hồng (QA) / Minh (DW)"),
         ("TC-06", "TQ-02", "Silver -> Gold", "dim_listing & fact_listing_snapshot", "(listing_id, snapshot_date)", "Grain Uniqueness", "COUNT(*) - COUNT(DISTINCT listing_id, snapshot_date) = 0", "0 dòng trùng khóa trên 3,208 dòng", "Minh (DW) / Hồng (QA)"),
         ("TC-07", "TQ-02", "Silver -> Gold", "fact_calendar", "(listing_id, calendar_date, snapshot_date)", "Grain Uniqueness", "COUNT(*) - COUNT(DISTINCT listing_id, calendar_date, snapshot_date) = 0", "0 dòng trùng khóa trên 1,170,950 dòng", "Minh (DW) / Hồng (QA)"),
-        ("TC-08", "TQ-02", "Silver -> Gold", "fact_review", "(listing_id, review_id, snapshot_date)", "Composite Grain Uniqueness", "COUNT(*) - COUNT(DISTINCT listing_id, review_id, snapshot_date) = 0; ghi nhận riêng 4,809 dòng chia sẻ review_id giữa các listing cùng host", "0 dòng trùng theo khóa ghép (46,000 dòng)", "Thái (ETL) / Minh (DW) / Hồng (QA)"),
+        ("TC-08", "TQ-02", "Silver -> Gold", "fact_review", "(listing_id, review_id, snapshot_date)", "Composite Grain Uniqueness", "COUNT(*) - COUNT(DISTINCT listing_id, review_id, snapshot_date) = 0; ghi nhận riêng 4,809 dòng dư theo review_id riêng lẻ; đối chiếu thêm host, không khẳng định nguyên nhân", "0 dòng trùng theo khóa ghép (46,000 dòng)", "Thái (ETL) / Minh (DW) / Hồng (QA)"),
         ("TC-09", "TQ-02", "Silver -> Gold", "dim_neighbourhood", "(neighbourhood_group, neighbourhood_name)", "Grain Uniqueness", "COUNT(*) - COUNT(DISTINCT neighbourhood_group, neighbourhood_name) = 0", "0 dòng trùng khóa trên 55 dòng", "Minh (DW) / Hồng (QA)"),
         ("TC-10", "TQ-03", "Silver -> Gold", "fact_calendar -> dim_listing", "listing_sk / (listing_id, snapshot_date)", "Referential Integrity", "LEFT JOIN dim_listing WHERE dim_listing.listing_sk IS NULL = 0", "100% (1,170,950/1,170,950 dòng khớp khóa cha, 0 orphan)", "Minh (DW) / Hồng (QA)"),
         ("TC-11", "TQ-03", "Silver -> Gold", "fact_review -> dim_listing", "listing_sk / (listing_id, snapshot_date)", "Referential Integrity", "LEFT JOIN dim_listing WHERE dim_listing.listing_sk IS NULL = 0", "100% (46,000/46,000 dòng khớp khóa cha, 0 orphan)", "Minh (DW) / Hồng (QA)"),
@@ -1144,8 +1146,8 @@ def build_etl_test_checklist() -> pd.DataFrame:
         ("TC-15", "TQ-04", "Silver -> Gold", "dim_listing & fact_listing_snapshot", "accommodates, minimum_nights_avg_ntm, maximum_nights_avg_ntm", "Data Type Fidelity (Feedback Fix)", "accommodates là INT (1..16); minimum_nights_avg_ntm (320 dòng lẻ) và maximum_nights_avg_ntm (426 dòng lẻ) giữ kiểu DECIMAL(10,2)", "Không mất phần thập phân của *_avg_ntm; accommodates không bị parse thành ngày 1970", "Thái (ETL) / Hồng (QA)"),
         ("TC-16", "TQ-04", "Silver -> Gold", "dim_listing & fact_calendar", "is_available, host_is_superhost, host_has_profile_pic, host_identity_verified, has_availability", "Boolean Standardization", "Ánh xạ 't'->1, 'f'->0, giữ NULL ở has_availability (42 dòng); không có giá trị ngoài {0, 1, NULL}", "100% dòng boolean thuộc miền {0, 1, NULL}", "Thái (ETL) / Hồng (QA)"),
         ("TC-17", "TQ-04; KPI-05", "Silver -> Gold", "fact_listing_snapshot", "review_scores_rating & 6 sub-scores", "Rating Range Validation", "Tất cả giá trị không NULL nằm trong [1.00, 5.00]", "1,839/1,839 dòng rating tổng thể nằm trong [1.00, 5.00], 0 vi phạm", "Thái (ETL) / Hồng (QA)"),
-        ("TC-18", "TQ-04", "Raw -> Silver -> Gold", "All 4 datasets", "Row Count Reconciliation", "Đối chiếu số dòng: Listings=3,208; Calendar=1,170,950; Reviews=46,000; Neighbourhoods=55", "0 dòng bị rơi âm thầm khi chuyển từ Raw -> Staging -> Silver -> Gold", "Thái (ETL) / Minh (DW) / Hồng (QA)"),
-        ("TC-19", "KPI-01..05; SUP-01..02", "Silver vs Gold SQL", "Warehouse Views vs Pandas Silver", "7 chỉ tiêu KPI/SUP", "KPI Reconciliation & Anti-Fanout", "So sánh kết quả SQL trên Gold (không JOIN trực tiếp fact_calendar với fact_review) với Pandas trên Silver", "Chênh lệch = 0 ở độ chính xác gốc (KPI-01=3208, KPI-02=202.83, KPI-04=76.94%, KPI-05=4.60, SUP-01=1.0, SUP-02=46000)", "Minh (SQL) / Hồng (Pandas QA)"),
+        ("TC-18", "TQ-04", "Raw -> Silver -> Gold", "All 4 datasets", "Row counts per source and snapshot", "Row Count Reconciliation", "Đối chiếu số dòng theo snapshot; giải thích mọi reject/orphan; không rơi dòng âm thầm", "Listings=3,208; Calendar=1,170,950; Reviews=46,000; Neighbourhoods=55 (snapshot chuẩn)", "Thái (ETL) / Minh (DW) / Hồng (QA)"),
+        ("TC-19", "KPI-01..05; SUP-01..02", "Silver vs Gold SQL", "Warehouse Views vs Pandas Silver", "7 chỉ tiêu KPI/SUP", "KPI Reconciliation & Anti-Fanout", "So sánh kết quả SQL trên Gold (không JOIN trực tiếp fact_calendar với fact_review) với Pandas trên Silver", "Chênh lệch = 0 ở độ chính xác gốc (KPI-01=3208, KPI-02=202.83, KPI-04=76.94%, KPI-05=4.54, SUP-01=1.0, SUP-02=46000)", "Minh (SQL) / Hồng (Pandas QA)"),
         ("TC-20", "TQ-05", "End-to-End Pipeline", "All Staging, Silver, Gold tables", "Row counts & KPI outputs after Run #1 vs Run #2", "Pipeline Re-run Idempotency", "Chạy lại pipeline lần 2 trên cùng snapshot 2026-09-23 (UPSERT / TRUNCATE-insert theo partition snapshot_date)", "Số dòng và 7 chỉ tiêu KPI/SUP sau lần chạy 2 bằng đúng lần chạy 1 (0 dòng nhân đôi)", "Thái (ETL) / Minh (DW) / Tiên (Sign-off)"),
     ]
     return pd.DataFrame(tests, columns=[
@@ -1205,7 +1207,7 @@ def verify_against_raw_data(mapping_df: pd.DataFrame, wh_df: pd.DataFrame) -> pd
 
     results.append(("V-03", "Grain Uniqueness: Listings(id, snapshot_date)", "Listings", 0, l_dup, "PASS" if l_dup == 0 else "FAIL", "3,208/3,208 dòng duy nhất."))
     results.append(("V-04", "Grain Uniqueness: Calendar(listing_id, date, snapshot_date)", "Calendar", 0, c_dup, "PASS" if c_dup == 0 else "FAIL", "1,170,950/1,170,950 dòng duy nhất."))
-    results.append(("V-05", "Grain Uniqueness: Reviews(listing_id, id, snapshot_date)", "Reviews", 0, r_dup_comp, "PASS" if r_dup_comp == 0 else "FAIL", f"0 dòng trùng theo khóa ghép (listing_id, id); có {r_dup_single} dòng lặp id đơn lẻ giữa các listing cùng host."))
+    results.append(("V-05", "Grain Uniqueness: Reviews(listing_id, id, snapshot_date)", "Reviews", 0, r_dup_comp, "PASS" if r_dup_comp == 0 else "FAIL", f"0 dòng trùng theo khóa ghép (listing_id, id); có {r_dup_single} dòng dư theo id riêng lẻ; chưa xác minh ngữ nghĩa khóa nghiệp vụ từ nguồn."))
     results.append(("V-06", "Grain Uniqueness: Neighbourhoods(neighbourhood_group, neighbourhood)", "Neighbourhoods", 0, n_dup, "PASS" if n_dup == 0 else "FAIL", "55/55 dòng duy nhất."))
 
     # 4. Kiểm tra toàn vẹn tham chiếu (Referential Integrity)
@@ -1231,7 +1233,7 @@ def verify_against_raw_data(mapping_df: pd.DataFrame, wh_df: pd.DataFrame) -> pd
             return None
 
     currencies = listings["price_quote_raw"].apply(extract_currency)
-    sgd_verified_mask = (price_num > 0) & (currencies == "SGD")
+    sgd_verified_mask = price_num.notna() & np.isfinite(price_num) & (price_num > 0) & (currencies == "SGD")
     sgd_count = int(sgd_verified_mask.sum())
     median_sgd = round(float(price_num[sgd_verified_mask].median()), 2)
     unverified_price_rows = int((price_num.notna() & (currencies != "SGD")).sum())
@@ -1243,20 +1245,34 @@ def verify_against_raw_data(mapping_df: pd.DataFrame, wh_df: pd.DataFrame) -> pd
         f"2,728 dòng có price dạng số; 2,725 dòng xác minh quote.currency='SGD' (Median = {median_sgd} SGD); {unverified_price_rows} dòng có price nhưng thiếu currency trong JSON được tách riêng."
     ))
 
-    # 6. Kiểm tra các giá trị KPI chuẩn trên mô hình
-    kpi01 = int(listings["id"].nunique())
-    kpi04 = round(float((calendar["available"] == "t").mean() * 100), 4)
-    kpi05 = round(float(listings["review_scores_rating"].dropna().mean()), 4)
-    sup01 = float(listings["number_of_reviews"].median())
-    sup02 = int(len(reviews))
+    # 6. Baseline raw: đây không phải kết quả truy vấn bảng Gold/MySQL.
+    available = calendar["available"].astype("string").str.strip().str.lower().map(
+        {"t": 1, "true": 1, "1": 1, "f": 0, "false": 0, "0": 0})
+    rating = pd.to_numeric(listings["review_scores_rating"], errors="coerce")
+    rating = rating[rating.notna() & np.isfinite(rating) & rating.between(1, 5)]
+    expected = {"KPI-01": 3208, "KPI-02": 202.83, "KPI-04": 76.9427,
+                "KPI-05": 4.5394, "SUP-01": 1.0, "SUP-02": 46000}
+    observed = {"KPI-01": int(listings["id"].nunique()), "KPI-02": median_sgd,
+                "KPI-04": round(float(available.mean() * 100), 4),
+                "KPI-05": round(float(rating.mean()), 4),
+                "SUP-01": float(listings["number_of_reviews"].median()),
+                "SUP-02": len(reviews.drop_duplicates(["listing_id", "id"]))}
+    expected_rooms = {"Private room": 1827, "Entire home/apt": 1232, "Hotel room": 83, "Shared room": 66}
+    observed_rooms = listings["room_type"].value_counts(dropna=False).to_dict()
+    expected["KPI-03_COUNTS"] = expected_rooms
+    observed["KPI-03_COUNTS"] = observed_rooms
+    baseline_ok = all(np.isclose(observed[k], expected[k], rtol=0, atol=0.00005)
+                      for k in expected if k != "KPI-03_COUNTS") and observed_rooms == expected_rooms
+    results.append(("V-11", "Raw KPI baseline vs pinned snapshot", "Raw only; NOT Gold/MySQL",
+        json.dumps(expected, sort_keys=True), json.dumps(observed, sort_keys=True),
+        "PASS" if baseline_ok else "FAIL",
+        "So sánh giá trị tính lại từ raw với baseline snapshot 2026-09-23; KPI-04 và share theo %, rating 1–5. Chưa chạy SQL Gold."))
 
-    results.append((
-        "V-11", "Baseline KPI Values on Proposed Grain", "All Gold Facts",
-        "KPI-01=3208; KPI-02=202.83; KPI-04=76.9427%; KPI-05=4.5974; SUP-01=1.0; SUP-02=46000",
-        f"KPI-01={kpi01}; KPI-02={median_sgd}; KPI-04={kpi04}%; KPI-05={kpi05}; SUP-01={sup01}; SUP-02={sup02}",
-        "PASS",
-        "Tất cả 5 Business KPI và 2 chỉ tiêu hỗ trợ SUP-01, SUP-02 tính toán chính xác trực tiếp từ các bảng Fact/Dimension đã thiết kế."
-    ))
+    # 7. Kiểm tra thiết kế đích thật sự: rỗng, mapping sai cột/kiểu hoặc CSV lệch DDL phải FAIL.
+    ddl_path = PROJECT_ROOT / "sql" / "02_warehouse_schema_draft.sql"
+    errors = validate_design(mapping_df.fillna(""), wh_df.fillna(""), ddl_path.read_text(encoding="utf-8"))
+    results.append(("V-12", "Mapping targets and schema CSV vs DDL", "Static design only; NOT executed DDL",
+        0, len(errors), "FAIL" if errors else "PASS", "; ".join(errors) if errors else "Mọi cột/kiểu mapping đích tồn tại; CSV và DDL khớp tên/kiểu/NULL. Không thay thế chạy DDL trên MySQL."))
 
     return pd.DataFrame(results, columns=[
         "check_id", "check_name", "scope", "expected", "observed", "status", "detail"
@@ -1292,9 +1308,8 @@ def main():
 
     if len(failed) > 0:
         sys.exit(1)
-    print("\n[PASS] Hoàn tất kiểm chứng Task 2.4 & 2.5 với 0 lỗi.")
+    print("\n[PASS] Kiểm tra raw và thiết kế tĩnh không phát hiện lỗi. Gold/MySQL: NOT_RUN; xem docs/gold_reconciliation.md.")
 
 
 if __name__ == "__main__":
     main()
-
