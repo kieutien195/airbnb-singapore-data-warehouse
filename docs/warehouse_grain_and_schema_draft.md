@@ -31,14 +31,14 @@ Dựa trên 5 câu hỏi nghiên cứu (`RQ1`–`RQ5`) và 7 chỉ tiêu phân t
 
 > [!IMPORTANT]
 > **Vì sao Grain của `fact_review` dùng khóa ghép `(listing_id, review_id, snapshot_date)`?**
-> Kết quả khảo sát thực nghiệm (Task 2.2 & 2.3) trên `reviews.csv.gz` (`46,000` dòng) cho thấy cột `id` (`review_id`) đơn lẻ chỉ có `41,191` giá trị phân biệt (có `4,809` dòng lặp `id` xuất hiện ở `2,101` listing khác nhau do cơ chế chia sẻ đánh giá cấp host/cụm phòng của Airbnb), nhưng cặp **`(listing_id, id)` đạt độ duy nhất 100% (`46,000/46,000` dòng, `0` dòng trùng)**. Việc bổ sung `snapshot_date` giúp mô hình sẵn sàng mở rộng nhiều snapshot mà không xung đột khóa.
+> Kết quả khảo sát thực nghiệm (Task 2.2 & 2.3) trên `reviews.csv.gz` (`46,000` dòng) cho thấy cột `id` (`review_id`) đơn lẻ chỉ có `41,191` giá trị phân biệt (có `4,809` dòng dư theo `id` riêng lẻ; `2,101` mã review xuất hiện ở nhiều listing, liên quan `197` listing; quan sát các mã này cùng host chưa chứng minh nguyên nhân nghiệp vụ), nhưng cặp **`(listing_id, id)` đạt độ duy nhất 100% (`46,000/46,000` dòng, `0` dòng trùng)**. Việc bổ sung `snapshot_date` giúp mô hình sẵn sàng mở rộng nhiều snapshot mà không xung đột khóa.
 
 ### Bước 3: Xác định các bảng chiều dùng chung (Conformed Dimensions)
 Nhóm thiết kế **3 bảng Dimension chuẩn hóa (Conformed Dimensions)** dùng chung cho cả 3 bảng Fact, tạo thành cấu trúc **Fact Constellation**:
-1. **`dim_date`:** Chiều thời gian dùng chung (Role-playing Dimension) cho ngày snapshot (`snapshot_date_sk`), ngày lịch (`calendar_date_sk`) và ngày đánh giá (`review_date_sk`). Bao phủ liên tục từ `2011-01-01` đến `2027-12-31` (`6,209` ngày).
+1. **`dim_date`:** Một bảng thời gian vật lý trong warehouse (các vai trò tách rõ trong Power BI ở mục 5.4) cho ngày snapshot (`snapshot_date_sk`), ngày lịch (`calendar_date_sk`) và ngày đánh giá (`review_date_sk`). Bao phủ liên tục từ `2011-01-01` đến `2027-12-31` (`6,209` ngày).
 2. **`dim_neighbourhood`:** Chiều phân cấp địa lý tại Singapore (`neighbourhood_group` $\rightarrow$ `neighbourhood_name`), gồm `55` khu vực quy hoạch chuẩn từ `neighbourhoods.csv`.
 3. **`dim_listing`:** Chiều mô tả đặc điểm tin đăng (`room_type`, `property_type`, `accommodates`, `bedrooms`, `beds`, `latitude`, `longitude`, ...) **kết hợp (denormalized) các thuộc tính mô tả của chủ nhà (`host_id`, `host_name`, `host_is_superhost`, ...)**.
-   - *Lý do không tách bảng `dim_host` riêng:* Các câu hỏi nghiên cứu `RQ1`–`RQ4` và 7 chỉ tiêu KPI đều phân tích ở cấp `listing`, `room_type` và `neighbourhood`. Gộp các thuộc tính mô tả `host_*` vào `dim_listing` giúp giữ đúng mô hình Star Schema 1 cấp (tránh Snowflaking không cần thiết) và khớp hoàn toàn với Mục 6.2 của `docs/project_scope.md` cũng như yêu cầu của Task 3.5.
+   - *Lý do không tách bảng `dim_host` riêng:* Các câu hỏi nghiên cứu `RQ1`–`RQ4` và 7 chỉ tiêu KPI đều phân tích ở cấp `listing`, `room_type` và `neighbourhood`. Gộp các thuộc tính mô tả `host_*` vào `dim_listing` giảm số bảng tra cứu host; sơ đồ warehouse và mô hình lọc Power BI phải được cấu hình riêng theo mục 5.4 và khớp hoàn toàn với Mục 6.2 của `docs/project_scope.md` cũng như yêu cầu của Task 3.5.
 
 ### Bước 4: Phân loại Facts (Thước đo định lượng) vs. Thuộc tính mô tả (Descriptive Attributes)
 
@@ -205,7 +205,7 @@ erDiagram
    - `SUP-02` (Review Records in Period) **chỉ truy vấn từ `fact_review`** (kết hợp `dim_listing`, `dim_neighbourhood`, `dim_date`).
 2. **Quy tắc 2 – Khi cần kết hợp chỉ số từ nhiều Fact trên cùng báo cáo (Drill-across):**
    - Trong **SQL**: Bắt buộc **tổng hợp (GROUP BY `listing_sk` hoặc `neighbourhood_sk`, `room_type`) từng bảng Fact trong CTE riêng biệt** để đưa về cùng một grain đích trước khi `JOIN` các CTE lại với nhau. Tuyệt đối cấm `FROM fact_calendar JOIN fact_review ON ...` ở mức dòng chi tiết.
-   - Trong **Power BI**: Các bảng `dim_date`, `dim_neighbourhood`, `dim_listing` đóng vai trò bảng chiều ở phía **`1`**, nối chiều lọc một chiều (`Single Direction: 1 -> *`) xuống 3 bảng Fact ở phía **`*`**. Tuyệt đối không tạo quan hệ trực tiếp giữa các bảng Fact với nhau.
+   - Trong **Power BI**: Không tự động bật tất cả FK của ERD thành quan hệ active. Dùng bảng quan hệ ở mục 5.4; không nối fact với fact và không tạo nhiều đường lọc active tới cùng fact.
 3. **Quy tắc 3 – Quản lý đa Snapshot:**
    - Mọi bảng Fact và `dim_listing` đều chứa `snapshot_date` và `snapshot_date_sk`.
    - Khi nạp lại cùng một snapshot (`2026-09-23`), sử dụng cơ chế `INSERT ... ON DUPLICATE KEY UPDATE` (hoặc xóa phân vùng `WHERE snapshot_date = '2026-09-23'` trước khi nạp) dựa trên `UNIQUE KEY` của grain để đảm bảo chạy lại nhiều lần không sinh dòng trùng (`TQ-05`).
@@ -213,9 +213,47 @@ erDiagram
 
 ---
 
+### 5.4. Mô hình semantic Power BI: quan hệ active tách khỏi FK vật lý
+
+Một bảng `dim_date` trong MySQL vẫn phù hợp cho SQL với các vai trò ngày riêng.
+Trong Power BI, tạo ba query tham chiếu từ nó: `dim_snapshot_date`,
+`dim_calendar_date`, `dim_review_date`. Không import rồi bật tất cả FK trong ERD.
+
+| Bảng chiều / khóa phía 1 | Cột đích phía nhiều | Trạng thái và chiều lọc |
+|---|---|---|
+| `dim_listing.listing_sk` | `listing_sk` của cả 3 fact | Active, Single 1 -> * |
+| `dim_neighbourhood.neighbourhood_sk` | `neighbourhood_sk` của cả 3 fact | Active, Single 1 -> * |
+| `dim_snapshot_date.date_sk` | `snapshot_date_sk` của cả 3 fact | Active, Single 1 -> * |
+| `dim_calendar_date.date_sk` | `fact_calendar.calendar_date_sk` | Active, Single 1 -> * |
+| `dim_review_date.date_sk` | `fact_review.review_date_sk` | Active, Single 1 -> * |
+| `dim_neighbourhood` -> `dim_listing` | FK vật lý warehouse | Không tạo quan hệ lọc trong Power BI |
+| `dim_snapshot_date` -> `dim_listing` | FK vật lý warehouse | Không tạo quan hệ lọc trong Power BI |
+| Fact -> Fact | Bất kỳ khóa nào | Không tạo |
+
+Như vậy mỗi chiều chỉ có một đường lọc active tới mỗi fact. `dim_listing`
+được lọc qua measure dựa trên fact; tắt Show items with no data khi cần ẩn
+listing ngoài snapshot chọn. Không thêm quan hệ ngược để làm slicer cascade.
+Nếu cần slicer listing tự thu hẹp theo snapshot/khu vực, dùng measure lọc
+visual hoặc query dimension phù hợp; không bật đường lọc kép qua dim_listing.
+Các dimension có thể giữ cột FK nguồn để audit nhưng ẩn khỏi trường BI khi cần.
+
+Slicer snapshot phải single-select, bắt buộc chọn một snapshot. Ngày Calendar
+chỉ lọc fact_calendar; ngày Reviews chỉ lọc fact_review. Không dùng một slicer
+ngày chung để đồng thời lọc snapshot 2026-09-23 và lịch 2026-09-25..2027-09-25.
+Các measure listing/KPI-03 lấy số liệu từ fact_listing_snapshot, không đếm toàn
+bộ dim_listing đa snapshot. Dùng cột khu vực từ dim_neighbourhood để nhóm địa lý.
+
+Phương án dùng một dim_date với quan hệ inactive/USERELATIONSHIP cũng có thể
+thiết kế, nhưng không trộn với phương án active ở bảng trên. Đây là đặc tả
+cấu hình dự kiến; chưa xác nhận trên file PBIX thực tế.
+Tham khảo: [Microsoft — Model relationships](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-relationships-understand)
+và [Role-playing dimensions](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema#role-playing-dimensions).
+
+---
+
 ## 6. Xác nhận Độ tương thích Trường Dữ liệu Nguồn cùng Hồng và Thái
 
-Script [`scripts/task_2_4_2_5_mapping_and_schema.py`](../scripts/task_2_4_2_5_mapping_and_schema.py) đã chạy kiểm chứng tự động toàn bộ thiết kế Schema (Task 2.5) và Mapping (Task 2.4) trực tiếp trên 4 tệp dữ liệu nguồn trong `data/raw/`. Kết quả đạt **14/14 PASS** (lưu tại [`tests/task_2_4_2_5_verification.csv`](../tests/task_2_4_2_5_verification.csv)):
+Script [`scripts/task_2_4_2_5_mapping_and_schema.py`](../scripts/task_2_4_2_5_mapping_and_schema.py) kiểm tra 4 file raw và tính nhất quán thiết kế tĩnh. Kết quả lần chạy hiện tại gồm **15 kiểm tra**, lưu tại [`tests/task_2_4_2_5_verification.csv`](../tests/task_2_4_2_5_verification.csv). Các kết quả PASS này **không khẳng định đã chạy DDL, nạp Gold hay đối chiếu MySQL**; xem [`gold_reconciliation.md`](gold_reconciliation.md).
 
 | Mã kiểm chứng | Hạng mục xác nhận | Kết quả thực nghiệm trên dữ liệu nguồn | Trạng thái |
 |---|---|---|---|
@@ -223,5 +261,6 @@ Script [`scripts/task_2_4_2_5_mapping_and_schema.py`](../scripts/task_2_4_2_5_ma
 | `V-03` .. `V-06` | Tính duy nhất của khóa Grain | `0` dòng trùng trên `Listings(id, snapshot_date)`, `Calendar(listing_id, date, snapshot_date)`, `Reviews(listing_id, id, snapshot_date)` và `Neighbourhoods(neighbourhood_group, neighbourhood)`. | **PASS** |
 | `V-07` .. `V-09` | Toàn vẹn khóa ngoại (`FK`) | `100%` `listing_id` của Calendar (`1,170,950`) và Reviews (`46,000`) tồn tại trong Listings (`3,208`); `42/42` cặp khu vực của Listings tồn tại trong `55` dòng của Neighbourhoods (`0` orphan). | **PASS** |
 | `V-10` | Đáp ứng quy tắc `KPI-02` (Giá & SGD) | Tách chính xác `2,728` dòng có giá số và **`2,725` dòng xác nhận `quote.currency = 'SGD'`** (`Median = 202.83 SGD/đêm`). | **PASS** |
-| `V-11` | Đáp ứng toàn bộ 7 chỉ tiêu KPI & SUP | `KPI-01 = 3,208`; `KPI-02 = 202.83 SGD`; `KPI-03` đủ 4 loại phòng (`Private room: 1,827`, `Entire home/apt: 1,232`, `Hotel room: 83`, `Shared room: 66`); `KPI-04 = 76.9427%`; `KPI-05 = 4.5974` (`1,839` listing); `SUP-01 = 1.0`; `SUP-02 = 46,000`. | **PASS** |
+| `V-11` | Baseline raw của 7 chỉ tiêu KPI & SUP (so sánh thật) | `KPI-01 = 3,208`; `KPI-02 = 202.83 SGD`; `KPI-03` đủ 4 loại phòng (`Private room: 1,827`, `Entire home/apt: 1,232`, `Hotel room: 83`, `Shared room: 66`); `KPI-04 = 76.9427%`; `KPI-05 = 4.5394` (`1,839` listing); `SUP-01 = 1.0`; `SUP-02 = 46,000`. | **PASS** |
 
+| `V-12` | Mapping đích và schema CSV so với DDL | Kiểm tra có đủ 6 bảng; mọi cột/kiểu mapping tồn tại; 128 cột schema khớp tên/kiểu/NULL với DDL. Schema rỗng hoặc mapping cột không tồn tại phải FAIL. | **PASS thiết kế tĩnh** |
