@@ -3,9 +3,8 @@ import json
 import re
 import pandas as pd
 import nbformat
-from nbclient import NotebookClient
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 RAW_DIR = ROOT / "data" / "raw"
 DD_DIR = ROOT / "docs" / "data_dictionary"
 KPI_DIR = ROOT / "docs" / "kpi_definitions"
@@ -19,7 +18,7 @@ SOURCES = {
 }
 
 # Đọc metadata để xác định snapshot_date của từng nguồn
-INVENTORY_PATH = ROOT / "source_inventory.csv"
+INVENTORY_PATH = ROOT / "docs" / "source_inventory.csv"
 
 if not INVENTORY_PATH.exists():
     raise FileNotFoundError(
@@ -251,26 +250,64 @@ def key_role(source, col):
             "(neighbourhood_group, neighbourhood) "
             "của danh mục khu vực."
         )
-    if source == "Listings" and col == "neighbourhood_cleansed":
-        return "Khóa ngoại dự kiến tham chiếu Neighbourhoods.neighbourhood."
+    if source == "Listings" and col in {"neighbourhood_group_cleansed", "neighbourhood_cleansed"}:
+        return "Thành phần khóa ngoại dự kiến (neighbourhood_group_cleansed, neighbourhood_cleansed) tham chiếu Neighbourhoods.(neighbourhood_group, neighbourhood)."
 
     return "Không phải khóa chính/khóa ngoại đã xác nhận."
 
 
+# Kiểu nghiệp vụ độc lập với dtype suy đoán từ CSV, nhất là cột toàn NULL.
+DATE_COLUMNS = {"date", "last_scraped", "calendar_last_scraped", "host_since",
+                "first_review", "last_review", "price_quote_checkin_date",
+                "price_quote_checkout_date"}
+BOOLEAN_COLUMNS = {"available", "host_is_superhost", "host_has_profile_pic",
+                   "host_identity_verified", "has_availability", "instant_bookable"}
+TEXT_COLUMNS = {"host_response_time", "neighbourhood", "host_neighbourhood",
+                "neighbourhood_cleansed", "neighbourhood_group_cleansed",
+                "neighbourhood_group", "host_thumbnail_url", "calendar_updated"}
+INTEGER_COLUMNS = {"accommodates", "bedrooms", "beds", "host_listings_count",
+                   "host_total_listings_count", "minimum_nights", "maximum_nights",
+                   "minimum_minimum_nights", "maximum_minimum_nights",
+                   "minimum_maximum_nights", "maximum_maximum_nights",
+                   "hosts_time_as_user_years", "hosts_time_as_user_months",
+                   "hosts_time_as_host_years", "hosts_time_as_host_months"}
+
+
 def transformation(col, dtype):
-    c=col.lower()
-    if c in {"id","listing_id","reviewer_id","host_id","host_profile_id","scrape_id"}: return "Lưu kiểu số nguyên đủ miền giá trị (BIGINT); không chuyển sang số thực."
-    if c=="price": return "Loại ký hiệu tiền tệ/dấu phân tách để chuyển DECIMAL; chỉ giữ giá khi xác định được currency là SGD từ price_quote_raw."
-    if "price_quote_raw"==c: return "Giữ JSON gốc để truy vết; trích quote.currency và đối chiếu price_quote_price_per_night với price."
-    if "price" in c: return "Chuyển sang DECIMAL khi phù hợp; lưu ý đây có thể là giá báo tham chiếu, không mặc định là giá giao dịch."
-    if c=="available": return "Chuẩn hóa t/true/1 thành TRUE và f/false/0 thành FALSE; giá trị khác đưa vào nhóm không hợp lệ."
-    if "date" in c or "scraped" in c or c in {"host_since","first_review","last_review"}: return "Chuẩn hóa thành DATE hoặc DATETIME; ghi nhận giá trị không parse được."
-    if "rating" in c or "score" in c: return "Chuyển DECIMAL; kiểm tra miền 1–5 theo giá trị quan sát của snapshot; giữ NULL."
-    if c in {"latitude","longitude"}: return "Chuyển DECIMAL với độ chính xác phù hợp; kiểm tra phạm vi tọa độ."
-    if "comment" in c or "description" in c or c in {"amenities","host_about","neighborhood_overview"}: return "Giữ dạng TEXT; chuẩn hóa encoding; không dùng văn bản để suy ra điểm review."
-    if dtype.startswith("int"): return "Lưu kiểu số nguyên INT/BIGINT tùy miền giá trị; kiểm tra giá trị âm nếu không hợp lệ."
-    if dtype.startswith("float"): return "Lưu DECIMAL nếu dùng tính toán; xác định precision/scale và giữ NULL."
-    return "Chuẩn hóa khoảng trắng và NULL; chọn VARCHAR/TEXT hoặc kiểu phù hợp sau khi xác định mục đích sử dụng."
+    c = col.lower()
+    if c in {"id", "listing_id", "reviewer_id", "host_id", "host_profile_id", "scrape_id"}:
+        return "Lưu BIGINT; giữ chính xác chữ số, không chuyển ID sang số thực."
+    if c in DATE_COLUMNS:
+        return "Chuẩn hóa thành DATE; giữ NULL; ghi nhận giá trị không parse được."
+    if c in BOOLEAN_COLUMNS:
+        return "Chuẩn hóa t/true/1 thành TRUE, f/false/0 thành FALSE; giữ NULL và báo giá trị ngoài miền."
+    if c == "price":
+        return "Parse giá sang DECIMAL; giữ NULL; chỉ đưa vào KPI giá khi quote.currency trong price_quote_raw xác định là SGD."
+    if c == "price_quote_raw":
+        return "Giữ JSON gốc để truy vết; kiểm tra parse JSON và trích quote.currency khi cần."
+    if c in {"price_quote_total_price", "price_quote_price_per_night"}:
+        return "Lưu DECIMAL; giữ NULL và thông tin currency; đây là báo giá tham chiếu, không phải doanh thu."
+    if c == "host_verifications" or c == "amenities":
+        return "Giữ TEXT/JSON gốc; chỉ parse danh sách sau kiểm tra cấu trúc; không suy kiểu số từ cột toàn NULL."
+    if c in TEXT_COLUMNS or c.endswith("_url"):
+        return "Lưu VARCHAR/TEXT; chuẩn hóa khoảng trắng và NULL; không suy kiểu số từ dtype của cột toàn NULL."
+    if c in INTEGER_COLUMNS or c.startswith(("number_of_reviews", "calculated_host_listings_count", "availability_")):
+        return "Lưu số nguyên có thể NULL; kiểm tra tính nguyên và miền không âm; không làm tròn giá trị không hợp lệ."
+    if c in {"minimum_nights_avg_ntm", "maximum_nights_avg_ntm", "bathrooms", "reviews_per_month"}:
+        return "Lưu DECIMAL với precision/scale phù hợp; giữ phần thập phân và NULL."
+    if c.startswith("review_scores_"):
+        return "Lưu DECIMAL; kiểm tra miền quan sát 1–5 của snapshot; giữ NULL, không thay bằng 0."
+    if c in {"host_response_rate", "host_acceptance_rate"}:
+        return "Parse phần trăm sang DECIMAL theo đơn vị 0–100; giữ NULL; kiểm tra ký hiệu % và miền giá trị."
+    if c in {"latitude", "longitude"}:
+        return "Lưu DECIMAL với độ chính xác phù hợp; kiểm tra miền tọa độ."
+    if c in {"comments", "description", "host_about", "neighborhood_overview"}:
+        return "Giữ TEXT và NULL; không suy ra điểm review từ nội dung văn bản."
+    if dtype.startswith("int"):
+        return "Lưu INT/BIGINT đủ miền giá trị; xác minh đơn vị và miền nghiệp vụ trước khi dùng."
+    if dtype.startswith("float"):
+        return "Lưu DECIMAL nếu trường có ý nghĩa số; giữ NULL và xác nhận kiểu nghiệp vụ trước khi nạp đích."
+    return "Lưu VARCHAR/TEXT; chuẩn hóa khoảng trắng và NULL theo quy tắc đã duyệt."
 
 def inspect_source(name, path):
     if not path.exists(): raise FileNotFoundError(f"Thiếu file nguồn: {path}")
@@ -286,7 +323,7 @@ def inspect_source(name, path):
             if not samples[c]:
                 vals=chunk[c].dropna()
                 if len(vals): samples[c]=clean_sample(vals.iloc[0])
-            if c.lower() in {"date","last_scraped","calendar_last_scraped","first_review","last_review","host_since"}:
+            if c.lower() in DATE_COLUMNS:
                 d=pd.to_datetime(chunk[c],errors="coerce").dropna()
                 if len(d):
                     if c not in dates: dates[c]=[d.min(),d.max()]
@@ -349,7 +386,7 @@ Các CSV được sinh trực tiếp từ bốn file trong `data/raw/`. `busines
     return df
 
 BUSINESS_KPIS = [
-{"kpi_id":"KPI-01","kpi_name":"Số listing duy nhất theo snapshot","business_definition":"Số lượng mã listing phân biệt được ghi nhận trong một file Listings thuộc snapshot được chọn.","source_fields":"Listings.id; Listings.scrape_id; Listings.last_scraped","formula":"COUNT(DISTINCT id)","filters":"Chỉ dùng một snapshot; loại id NULL; xác nhận snapshot theo scrape_id và metadata nguồn. Với file hiện tại, scrape_id = 20260923225116; last_scraped quan sát là 2026-09-26.","numerator":"Số mã listing duy nhất hợp lệ.","denominator":"Không áp dụng.","unit":"Listing","grain":"Một listing tại snapshot","interpretation":"Quy mô tin đăng được ghi nhận tại snapshot, không phải số listing còn available trong một ngày.","caveats":"Không đếm dòng Calendar/Reviews; không gộp nhiều snapshot nếu chưa có quy tắc chọn snapshot."},
+{"kpi_id":"KPI-01","kpi_name":"Số listing duy nhất theo snapshot","business_definition":"Số lượng mã listing phân biệt được ghi nhận trong một file Listings thuộc snapshot được chọn.","source_fields":"Listings.id; Listings.scrape_id; Listings.last_scraped","formula":"COUNT(DISTINCT id)","filters":"Chỉ dùng một snapshot; loại id NULL; xác nhận snapshot theo scrape_id và metadata nguồn. Với file hiện tại, scrape_id = 20260923225116; last_scraped quan sát từ 2026-09-25 đến 2026-09-26.","numerator":"Số mã listing duy nhất hợp lệ.","denominator":"Không áp dụng.","unit":"Listing","grain":"Một listing tại snapshot","interpretation":"Quy mô tin đăng được ghi nhận tại snapshot, không phải số listing còn available trong một ngày.","caveats":"Không đếm dòng Calendar/Reviews; không gộp nhiều snapshot nếu chưa có quy tắc chọn snapshot."},
 {"kpi_id":"KPI-02","kpi_name":"Trung vị giá niêm yết mỗi đêm","business_definition":"Trung vị giá niêm yết mỗi đêm của các listing có giá hợp lệ và xác định được tiền tệ SGD tại snapshot.","source_fields":"Listings.id; Listings.price; Listings.price_quote_raw; Listings.price_quote_price_per_night","formula":"MEDIAN(price_clean), mỗi listing một lần; price_clean chỉ nhận khi quote.currency = 'SGD'.","filters":"Một snapshot; price không NULL, parse được, hữu hạn và > 0; trích currency từ quote.currency trong price_quote_raw; loại bản ghi không xác định được currency; đối chiếu price với price_quote_price_per_night.","numerator":"Không áp dụng cho median.","denominator":"Không áp dụng; báo cáo coverage = listing có giá SGD hợp lệ / tổng listing snapshot.","unit":"SGD/đêm","grain":"Một listing tại snapshot","interpretation":"Một nửa listing có giá hợp lệ có giá không lớn hơn median và một nửa không nhỏ hơn median.","caveats":"Trong dữ liệu hiện tại có 2.855 báo giá ghi rõ currency=SGD; 35 báo giá không có currency trong JSON. Không suy luận SGD chỉ từ ký hiệu '$'. Giá niêm yết/báo giá không phải giá giao dịch hay doanh thu."},
 {"kpi_id":"KPI-03","kpi_name":"Tỷ trọng loại phòng","business_definition":"Tỷ lệ listing thuộc từng room_type trên tổng listing có room_type hợp lệ trong cùng snapshot và phạm vi lọc.","source_fields":"Listings.id; Listings.room_type; Listings.neighbourhood_cleansed","formula":"Số listing duy nhất thuộc room_type X / tổng listing duy nhất có room_type hợp lệ × 100%.","filters":"Giữ bộ lọc snapshot và khu vực; khi tính tỷ trọng trong khu vực, bỏ riêng bộ lọc room_type ở mẫu số; chỉ nhận room_type không NULL/rỗng và mỗi id một lần.","numerator":"Số listing duy nhất thuộc room_type X trong phạm vi đang xét.","denominator":"Tổng listing duy nhất có room_type hợp lệ trong cùng phạm vi snapshot/khu vực; không áp bộ lọc room_type vào mẫu số.","unit":"% listing","grain":"Một listing tại snapshot","interpretation":"Mô tả cơ cấu loại phòng trong tổng tin đăng có phân loại của phạm vi đang xét.","caveats":"Không dùng số dòng Calendar/Reviews làm mẫu số. Nếu một id có nhiều room_type xung đột, đưa vào kiểm tra thay vì tự chọn."},
 {"kpi_id":"KPI-04","kpi_name":"Tỷ lệ bản ghi lịch còn available","business_definition":"Tỷ lệ bản ghi listing-ngày có trạng thái available trong tổng bản ghi listing-ngày có trạng thái hợp lệ.","source_fields":"Calendar.listing_id; Calendar.date; Calendar.available","formula":"SUM(CASE WHEN available = TRUE THEN 1 ELSE 0 END) / SUM(CASE WHEN available IN (TRUE,FALSE) THEN 1 ELSE 0 END) × 100%. Tử số là số dòng thỏa điều kiện, không viết COUNT(điều kiện).","filters":"listing_id và date hợp lệ; available chuẩn hóa thành TRUE/FALSE; kiểm tra và xử lý duplicate theo (listing_id,date) trong file RAW hiện tại vì chỉ có một snapshot; khi tích hợp nhiều snapshot trong Warehouse, grain gồm thêm snapshot_date; so sánh các khu vực và room_type trên cùng cửa sổ ngày 2026-09-25 đến 2027-09-25.","numerator":"Số dòng listing-ngày hợp lệ có available = TRUE.","denominator":"Số dòng listing-ngày hợp lệ có available = TRUE hoặc FALSE trong cùng cửa sổ ngày.","unit":"% bản ghi listing-ngày","grain":"Một listing tại một ngày lịch và một snapshot","interpretation":"Tỷ lệ trạng thái lịch được đánh dấu còn khả dụng trong cùng khoảng thời gian quan sát.","caveats":"FALSE chỉ là không khả dụng, không chứng minh đã có booking. Không gọi là occupancy rate. Chỉ so sánh nhóm trên cùng cửa sổ ngày; loại trùng theo grain trước khi tính."},
@@ -371,7 +408,7 @@ def write_kpis():
     pd.DataFrame(BUSINESS_KPIS).to_csv(KPI_DIR/"kpi_definitions.csv",index=False,encoding="utf-8-sig")
     pd.DataFrame(TECH_KPIS).to_csv(KPI_DIR/"technical_kpi_definitions.csv",index=False,encoding="utf-8-sig")
     lines=["# Định nghĩa KPI – Airbnb Singapore (Task 2.2)","","## Quy ước chung",
-    "- Phạm vi chính là một snapshot Listings; file hiện tại có scrape_id `20260923225116`, trong khi last_scraped quan sát là `2026-09-26`.",
+    "- Phạm vi chính là một snapshot Listings; file hiện tại có scrape_id `20260923225116`, trong khi last_scraped quan sát từ `2026-09-25` đến `2026-09-26`.",
     "- Grain: Listings = listing/snapshot; Calendar = listing/ngày/snapshot; Reviews = một review; Neighbourhoods = một khu vực.",
     "- KPI cấp listing tính từ Listings trước khi nối với Calendar/Reviews để tránh nhân bản.",
     "- Tập rỗng hoặc mẫu số bằng 0: trả NULL/không xác định, không trả 0%. NULL không được tự động thay bằng 0.",
@@ -851,9 +888,10 @@ def build_quality_results(dictionary):
 
     for label, child, parents in relations:
 
-        nonnull = (
-            child.notna()
-            & child.astype("string").str.strip().ne("")
+        nonnull = child.map(
+            lambda value: all(pd.notna(v) and str(v).strip() != "" for v in value)
+            if isinstance(value, tuple)
+            else pd.notna(value) and str(value).strip() != ""
         )
 
         values = child[nonnull]
@@ -1112,312 +1150,72 @@ def build_quality_results(dictionary):
         pd.DataFrame(details)
     )
 
-def build_executed_notebook():
-    """Tạo và thực thi notebook Task 2.2, lưu lại toàn bộ output."""
-
-    output_dir = ROOT / "outputs" / "task_2_2"
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    notebook_path = output_dir / "02_data_dictionary_kpi.ipynb"
-
+def build_executed_notebook(execute=False):
+    """Tạo notebook chạy trực tiếp các hàm từ raw và lưu output thực thi."""
+    notebook_path = ROOT / "notebooks" / "02_data_dictionary_kpi.ipynb"
+    notebook_path.parent.mkdir(parents=True, exist_ok=True)
     cells = [
-
         nbformat.v4.new_markdown_cell(
-            """
-# TASK 2.2 – DATA DICTIONARY & KPI
-
-## Mục tiêu
-Xây dựng Data Dictionary, định nghĩa Business KPI,
-Technical KPI và kiểm tra chất lượng dữ liệu Airbnb Singapore.
-
-Dữ liệu được đọc từ bốn nguồn:
-- Listings
-- Calendar
-- Reviews
-- Neighbourhoods
-
-Notebook không chỉnh sửa dữ liệu raw.
-"""
+            "# Task 2.2 – Data Dictionary và KPI\n"
+            "Chạy lại từ dữ liệu raw; CSV kết quả được tạo tự động. "
+            "Không chỉnh sửa raw. Định nghĩa và quy tắc được quản lý trong scripts/data_dictionary_kpi.py."
         ),
-
         nbformat.v4.new_code_cell(
-            """
-from pathlib import Path
-import pandas as pd
-from IPython.display import display
-
-pd.set_option("display.max_rows", None)
-pd.set_option("display.max_columns", None)
-
-
-from pathlib import Path
-import pandas as pd
-from IPython.display import display
-
-pd.set_option("display.max_rows", None)
-pd.set_option("display.max_columns", None)
-
-# Tìm thư mục gốc của project từ thư mục hiện tại
-current_path = Path.cwd()
-
-candidates = [current_path] + list(current_path.parents)
-
-ROOT = next(
-    (
-        path for path in candidates
-        if (
-            (path / "data" / "raw").exists()
-            and (path / "docs" / "data_dictionary").exists()
-            and (path / "outputs" / "task_2_2").exists()
-        )
-    ),
-    None
-)
-
-if ROOT is None:
-    raise FileNotFoundError(
-        "Không tìm thấy thư mục gốc Singapore_Airbnb."
-    )
-
-DD_DIR = ROOT / "docs" / "data_dictionary"
-KPI_DIR = ROOT / "docs" / "kpi_definitions"
-OUT_DIR = ROOT / "outputs" / "task_2_2"
-
-print("Thư mục dự án:", ROOT)
-print("Data Dictionary:", DD_DIR)
-print("KPI Definitions:", KPI_DIR)
-print("Kết quả kiểm tra:", OUT_DIR)
-
-
-print("Thư mục dự án:", ROOT)
-print("Data Dictionary:", DD_DIR)
-print("KPI Definitions:", KPI_DIR)
-print("Kết quả kiểm tra:", OUT_DIR)
-"""
+            "from pathlib import Path\nimport importlib.util\nfrom IPython.display import display\n"
+            "ROOT = next((p for p in [Path.cwd(), *Path.cwd().parents] "
+            "if (p / 'scripts' / 'data_dictionary_kpi.py').is_file() "
+            "and (p / 'data' / 'raw').is_dir()), None)\n"
+            "if ROOT is None: raise FileNotFoundError('Mở notebook trong thư mục repo có data/raw.')\n"
+            "spec = importlib.util.spec_from_file_location('dictionary_kpi', ROOT / 'scripts' / 'data_dictionary_kpi.py')\n"
+            "module = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\n"
+            "dictionary = module.build_dictionary()\nmodule.write_kpis()\n"
+            "audit, source_checks, technical_results, technical_detail = module.build_quality_results(dictionary)\n"
+            "print('Đã tái tạo dictionary và kiểm tra từ 4 nguồn raw.')"
         ),
-
-        nbformat.v4.new_markdown_cell(
-            "## 1. Tổng quan bốn nguồn dữ liệu"
-        ),
-
+        nbformat.v4.new_markdown_cell("## Schema và quy tắc chuyển đổi"),
         nbformat.v4.new_code_cell(
-            "source_profile = pd.read_csv(DD_DIR / 'source_profile_for_dictionary.csv')\n"
-            "print('Thông tin nguồn dữ liệu và snapshot:')\n"
-            "display(source_profile)\n"
-            "\n"
-            "sources = ['listings', 'calendar', 'reviews', 'neighbourhoods']\n"
-            "profiles = []\n"
-            "for source in sources:\n"
-            "    df = pd.read_csv(DD_DIR / f'data_dictionary_{source}.csv')\n"
-            "    profiles.append({\n"
-            "        'Nguồn': source.title(),\n"
-            "        'Số trường': len(df),\n"
-            "        'Số trường có mô tả': int(df['business_meaning'].notna().sum()),\n"
-            "        'Số dòng nguồn': int(df['row_count_source'].iloc[0])\n"
-            "    })\n"
-            "display(pd.DataFrame(profiles))"
+            "print('Số trường:', len(dictionary))\n"
+            "display(dictionary.groupby('source_name').size().rename('column_count').to_frame())\n"
+            "display(dictionary[['source_name', 'column_name', 'business_meaning', 'proposed_transformation']])"
         ),
-
-        nbformat.v4.new_markdown_cell(
-            "## 2. Data Dictionary – toàn bộ trường dữ liệu"
-        ),
-
+        nbformat.v4.new_markdown_cell("## Định nghĩa: 5 Business KPI, 2 chỉ tiêu hỗ trợ, 5 Technical KPI"),
         nbformat.v4.new_code_cell(
-            """
-dictionary = pd.read_csv(
-    DD_DIR / "data_dictionary_all_sources.csv"
-)
-
-print("Tổng số trường:", len(dictionary))
-print("Số nguồn:", dictionary["source_name"].nunique())
-
-display(dictionary)
-"""
+            "display(module.pd.DataFrame(module.BUSINESS_KPIS))\n"
+            "display(module.pd.DataFrame(module.TECH_KPIS))"
         ),
-
-        nbformat.v4.new_markdown_cell(
-            "## 3. Kiểm tra mô tả nghiệp vụ"
-        ),
-
+        nbformat.v4.new_markdown_cell("## Bằng chứng từ raw và Technical KPI tối thiểu"),
         nbformat.v4.new_code_cell(
-            """
-meaning_audit = pd.read_csv(
-    OUT_DIR / "dictionary_meaning_audit.csv"
-)
-
-print("Tổng hợp trạng thái mô tả:")
-
-display(
-    meaning_audit["audit_status"]
-    .value_counts()
-    .rename_axis("Trạng thái")
-    .reset_index(name="Số trường")
-)
-
-print("Các trường cần rà soát:")
-
-display(
-    meaning_audit[
-        meaning_audit["audit_status"]
-        != "Đạt – có mô tả nghiệp vụ"
-    ]
-)
-"""
+            "display(source_checks)\ndisplay(technical_results)\ndisplay(technical_detail)\n"
+            "assert len(dictionary) == 103\n"
+            "assert technical_results.loc[technical_results.technical_kpi_id == 'TQ-05', 'trang_thai'].iloc[0] == 'CHƯA ĐÁNH GIÁ'"
         ),
-
         nbformat.v4.new_markdown_cell(
-            "## 4. Kiểm tra Currency và Review Rating"
-        ),
-
-        nbformat.v4.new_code_cell(
-            """
-source_checks = pd.read_csv(
-    OUT_DIR / "source_validation_checks.csv"
-)
-
-display(source_checks)
-
-print(
-    "Lưu ý: Chỉ xác định tiền tệ SGD khi "
-    "price_quote_raw.quote.currency ghi rõ SGD."
-)
-
-print(
-    "Review Rating được kiểm tra trong miền từ 1 đến 5. "
-    "Giá trị NULL không được xem là 0."
-)
-"""
-        ),
-
-        nbformat.v4.new_markdown_cell(
-            "## 5. Business KPI và KPI hỗ trợ"
-        ),
-
-        nbformat.v4.new_code_cell(
-            """
-business_kpi = pd.read_csv(
-    KPI_DIR / "kpi_definitions.csv"
-)
-
-print("Số lượng Business KPI:", len(business_kpi))
-
-display(business_kpi)
-"""
-        ),
-
-        nbformat.v4.new_markdown_cell(
-            "## 6. Định nghĩa Technical KPI"
-        ),
-
-        nbformat.v4.new_code_cell(
-            """
-technical_kpi = pd.read_csv(
-    KPI_DIR / "technical_kpi_definitions.csv"
-)
-
-display(technical_kpi)
-"""
-        ),
-
-        nbformat.v4.new_markdown_cell(
-            "## 7. Kết quả tính toán Technical KPI"
-        ),
-
-        nbformat.v4.new_code_cell(
-            """
-technical_results = pd.read_csv(
-    OUT_DIR / "technical_kpi_results.csv"
-)
-
-display(technical_results)
-
-print(
-    "TQ-05 chưa được đánh giá vì cần bằng chứng "
-    "hai lần chạy ETL với cùng dữ liệu đầu vào."
-)
-"""
-        ),
-
-        nbformat.v4.new_markdown_cell(
-            "## 8. Chi tiết kiểm tra chất lượng dữ liệu"
-        ),
-
-        nbformat.v4.new_code_cell(
-            """
-technical_detail = pd.read_csv(
-    OUT_DIR / "technical_kpi_detail.csv"
-)
-
-for kpi in ["TQ-01", "TQ-02", "TQ-03", "TQ-04"]:
-
-    print("\\nKết quả chi tiết:", kpi)
-
-    display(
-        technical_detail[
-            technical_detail["technical_kpi_id"] == kpi
-        ]
-    )
-"""
-        ),
-
-        nbformat.v4.new_markdown_cell(
-            """
-## 9. Kết luận
-
-- Data Dictionary mô tả các trường dữ liệu thuộc bốn nguồn.
-- Mô tả nghiệp vụ được rà soát để phát hiện trường trống
-  hoặc sử dụng mô tả dự phòng.
-- Currency và Review Rating được kiểm tra trực tiếp
-  từ dữ liệu Listings.
-- TQ-01 đến TQ-04 được tính theo các quy tắc kiểm tra
-  đã công bố trong chương trình.
-- TQ-05 chưa thể kết luận nếu chưa có log của hai lần
-  chạy pipeline ETL trên cùng snapshot.
-
-Lưu ý: Kết quả TQ-04 phản ánh bộ quy tắc hợp lệ tối thiểu
-được khai báo, không đại diện cho mọi quy tắc nghiệp vụ.
-"""
+            "## Giới hạn\nTQ-01 đến TQ-04 ở đây là kiểm tra raw theo luật tối thiểu công bố, "
+            "chưa chứng minh chất lượng Gold. TQ-05 cần hai lần chạy ETL thực tế. "
+            "Miền rating 1–5 là miền quan sát; cần xác nhận metadata nguồn khi chốt ETL. "
+            "Các file outputs/task_2_2 được tạo lại khi chạy, không phải dữ liệu đầu vào."
         )
     ]
-
-    notebook = nbformat.v4.new_notebook(
-        cells=cells,
-        metadata={
-            "kernelspec": {
-                "display_name": "Python 3",
-                "language": "python",
-                "name": "python3"
-            },
-            "language_info": {
-                "name": "python"
-            }
-        }
-    )
-
-    client = NotebookClient(
-        notebook,
-        timeout=1800,
-        kernel_name="python3",
-        resources={
-            "metadata": {
-                "path": str(ROOT)
-            }
-        }
-    )
-
-    executed_notebook = client.execute()
-
-    nbformat.write(
-        executed_notebook,
-        notebook_path
-    )
-
-    print("[PASS] Notebook Task 2.2 đã chạy thành công.")
-    print("Notebook:", notebook_path)
-
+    notebook = nbformat.v4.new_notebook(cells=cells, metadata={
+        "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"}})
+    if not execute:
+        nbformat.write(notebook, notebook_path)
+        return notebook_path
+    from nbclient import NotebookClient
+    client = NotebookClient(notebook, timeout=600, kernel_name="python3",
+                            resources={"metadata": {"path": str(ROOT)}})
+    executed = client.execute()
+    # Tránh lưu đường dẫn của máy chạy trong metadata thời gian thực thi.
+    for cell in executed.cells:
+        cell.metadata.pop("execution", None)
+    nbformat.write(executed, notebook_path)
     return notebook_path
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Tái tạo Dictionary/KPI từ raw, không cần MySQL.")
+    parser.add_argument("--execute-notebook", action="store_true", help="Chạy notebook bằng Jupyter kernel và lưu output.")
+    args = parser.parse_args()
 
     print("TASK 2.2 - DATA DICTIONARY & KPI")
 
@@ -1431,7 +1229,7 @@ def main():
     build_quality_results(dictionary)
 
     # 4. Tạo và chạy Notebook
-    notebook_path = build_executed_notebook()
+    notebook_path = build_executed_notebook(execute=args.execute_notebook)
 
     print("\n========== KẾT QUẢ ==========")
 
@@ -1447,7 +1245,7 @@ def main():
     )
 
     print(
-        "[PASS] Business KPI:",
+        "[PASS] Business KPI và chỉ tiêu hỗ trợ:",
         len(BUSINESS_KPIS)
     )
 
