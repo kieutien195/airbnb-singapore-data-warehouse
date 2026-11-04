@@ -250,8 +250,8 @@ def key_role(source, col):
             "(neighbourhood_group, neighbourhood) "
             "của danh mục khu vực."
         )
-    if source == "Listings" and col == "neighbourhood_cleansed":
-        return "Khóa ngoại dự kiến tham chiếu Neighbourhoods.neighbourhood."
+    if source == "Listings" and col in {"neighbourhood_group_cleansed", "neighbourhood_cleansed"}:
+        return "Thành phần khóa ngoại dự kiến (neighbourhood_group_cleansed, neighbourhood_cleansed) tham chiếu Neighbourhoods.(neighbourhood_group, neighbourhood)."
 
     return "Không phải khóa chính/khóa ngoại đã xác nhận."
 
@@ -1245,7 +1245,7 @@ def main():
     )
 
     print(
-        "[PASS] Business KPI:",
+        "[PASS] Business KPI và chỉ tiêu hỗ trợ:",
         len(BUSINESS_KPIS)
     )
 
