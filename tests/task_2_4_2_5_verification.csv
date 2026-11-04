@@ -1,0 +1,15 @@
+﻿check_id,check_name,scope,expected,observed,status,detail
+V-01,Source Column Coverage,All 4 Raw Files,103,103,PASS,100% (103/103) cột từ 4 file nguồn đã có quy tắc mapping trong source_to_target_mapping.csv.
+V-02-Listings,Exact Column Name Match,Listings,90,90,PASS,Khớp 90/90 cột nguồn Listings.
+V-02-Calendar,Exact Column Name Match,Calendar,5,5,PASS,Khớp 5/5 cột nguồn Calendar.
+V-02-Reviews,Exact Column Name Match,Reviews,6,6,PASS,Khớp 6/6 cột nguồn Reviews.
+V-02-Neighbourhoods,Exact Column Name Match,Neighbourhoods,2,2,PASS,Khớp 2/2 cột nguồn Neighbourhoods.
+V-03,"Grain Uniqueness: Listings(id, snapshot_date)",Listings,0,0,PASS,"3,208/3,208 dòng duy nhất."
+V-04,"Grain Uniqueness: Calendar(listing_id, date, snapshot_date)",Calendar,0,0,PASS,"1,170,950/1,170,950 dòng duy nhất."
+V-05,"Grain Uniqueness: Reviews(listing_id, id, snapshot_date)",Reviews,0,0,PASS,"0 dòng trùng theo khóa ghép (listing_id, id); có 4809 dòng lặp id đơn lẻ giữa các listing cùng host."
+V-06,"Grain Uniqueness: Neighbourhoods(neighbourhood_group, neighbourhood)",Neighbourhoods,0,0,PASS,55/55 dòng duy nhất.
+V-07,FK Integrity: fact_calendar -> dim_listing,Calendar -> Listings,0,0,PASS,100% listing_id trong Calendar tồn tại trong Listings.
+V-08,FK Integrity: fact_review -> dim_listing,Reviews -> Listings,0,0,PASS,100% listing_id trong Reviews tồn tại trong Listings.
+V-09,FK Integrity: dim_listing -> dim_neighbourhood,Listings -> Neighbourhoods,0,0,PASS,42/42 cặp khu vực trong Listings đều nằm trong 55 khu vực của Neighbourhoods.
+V-10,KPI-02 Price & SGD Currency Rule,fact_listing_snapshot,2725,2725,PASS,"2,728 dòng có price dạng số; 2,725 dòng xác minh quote.currency='SGD' (Median = 202.83 SGD); 3 dòng có price nhưng thiếu currency trong JSON được tách riêng."
+V-11,Baseline KPI Values on Proposed Grain,All Gold Facts,KPI-01=3208; KPI-02=202.83; KPI-04=76.9427%; KPI-05=4.5974; SUP-01=1.0; SUP-02=46000,KPI-01=3208; KPI-02=202.83; KPI-04=76.9427%; KPI-05=4.5394; SUP-01=1.0; SUP-02=46000,PASS,"Tất cả 5 Business KPI và 2 chỉ tiêu hỗ trợ SUP-01, SUP-02 tính toán chính xác trực tiếp từ các bảng Fact/Dimension đã thiết kế."
