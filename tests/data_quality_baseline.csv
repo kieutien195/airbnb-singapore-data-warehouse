@@ -111,10 +111,11 @@ Out of domain,Listings,host_id,Numeric domain validation,0,3208,0.0,PASS,Host ID
 Out of domain,Listings,accommodates,Numeric domain validation,0,3208,0.0,PASS,Sức chứa phải lớn hơn 0.
 Out of domain,Listings,minimum_nights,Numeric domain validation,0,3011,0.0,PASS,Số đêm tối thiểu phải lớn hơn 0.
 Out of domain,Listings,maximum_nights,Numeric domain validation,0,3011,0.0,PASS,Số đêm tối đa phải lớn hơn 0.
-Out of domain,Listings,review_scores_rating,Numeric domain validation,0,1839,0.0,PASS,Điểm đánh giá phải nằm trong khoảng 0 đến 5.
+Out of domain,Listings,review_scores_rating,Numeric domain validation,0,1839,0.0,PASS,"Miền quan sát 1–5, thống nhất KPI; chưa xác minh metadata chính thức. NULL không đổi thành 0."
 Out of domain,Listings,latitude,Numeric domain validation,0,3208,0.0,PASS,Latitude phải nằm trong khoảng -90 đến 90.
 Out of domain,Listings,longitude,Numeric domain validation,0,3208,0.0,PASS,Longitude phải nằm trong khoảng -180 đến 180.
-Out of domain,Listings,price_quote_price_per_night,Numeric domain validation,0,2725,0.0,PASS,Giá thuê mỗi đêm không được âm.
+Out of domain,Listings,price,Parsed finite positive price,0,2728,,PASS,"Parse $ và dấu phẩy; giữ raw, không điền 0."
+Currency,Listings,price,Numeric positive price without confirmed SGD,3,2728,,WARN,Loại khỏi mẫu giá SGD; không suy currency từ ký hiệu $.
 Out of domain,Calendar,listing_id,Numeric domain validation,0,1170950,0.0,PASS,listing_id phải lớn hơn 0.
 Out of domain,Calendar,minimum_nights,Numeric domain validation,0,1170950,0.0,PASS,minimum_nights phải lớn hơn 0.
 Out of domain,Calendar,maximum_nights,Numeric domain validation,0,1170950,0.0,PASS,maximum_nights phải lớn hơn 0.
@@ -131,7 +132,11 @@ Out of domain,Calendar,available,Allowed values,0,1170950,0.0,PASS,Giá trị h�
 Out of domain,Neighbourhoods,neighbourhood_group,Empty string validation,0,55,0.0,PASS,Số giá trị chuỗi rỗng.
 Out of domain,Neighbourhoods,neighbourhood,Empty string validation,0,55,0.0,PASS,Số giá trị chuỗi rỗng.
 Out of domain,Listings,room_type,Allowed values,0,3208,0.0,PASS,Kiểm tra bốn loại phòng; NULL được thống kê riêng.
-Outliers,Listings,price_quote_price_per_night,IQR outlier detection,134,2725,4.9174,WARN,Q1=99.9000; Median=202.8300; Q3=333.3100; IQR=233.4100; lower=-250.2150; upper=683.4250. Outliers không tự động bị loại bỏ.
+Provenance,Raw,listings.csv.gz,SHA256 exact bytes,0,1,,PASS,EXACT_MATCH; không sửa raw hoặc checksum inventory.
+Provenance,Raw,calendar.csv.gz,SHA256 exact bytes,0,1,,PASS,EXACT_MATCH; không sửa raw hoặc checksum inventory.
+Provenance,Raw,reviews.csv.gz,SHA256 exact bytes,0,1,,PASS,EXACT_MATCH; không sửa raw hoặc checksum inventory.
+Provenance,Raw,neighbourhoods.csv,SHA256 exact bytes,0,1,,PASS,EXACT_MATCH; không sửa raw hoặc checksum inventory.
+Outliers,Listings,price,IQR outlier detection,134,2725,4.9174,WARN,Q1=99.9000; Median=202.8300; Q3=333.3100; IQR=233.4100; lower=-250.2150; upper=683.4250. Outliers không tự động bị loại bỏ.
 Outliers,Listings,accommodates,IQR outlier detection,56,3208,1.7456,WARN,Q1=2.0000; Median=2.0000; Q3=4.0000; IQR=2.0000; lower=-1.0000; upper=7.0000. Outliers không tự động bị loại bỏ.
 Outliers,Listings,bedrooms,IQR outlier detection,758,3206,23.6432,WARN,Q1=1.0000; Median=1.0000; Q3=1.0000; IQR=0.0000; lower=1.0000; upper=1.0000. Outliers không tự động bị loại bỏ.
 Outliers,Listings,beds,IQR outlier detection,203,3054,6.647,WARN,Q1=1.0000; Median=1.0000; Q3=2.0000; IQR=1.0000; lower=-0.5000; upper=3.5000. Outliers không tự động bị loại bỏ.
@@ -145,3 +150,5 @@ Referential integrity,Listings,neighbourhood_group_cleansed + neighbourhood_clea
 Data coverage,Calendar,listing_id,Listing coverage,3208,3208,100.0,INFO,Tỷ lệ listing xuất hiện trong Calendar.
 Data coverage,Reviews,listing_id,Listing coverage,1839,3208,57.3254,INFO,Tỷ lệ listing có ít nhất một review.
 JOIN fan-out,Listings - Calendar - Reviews,listing_id,Estimated join rows,16791449,3208,,INFO,Ước lượng số dòng sau khi JOIN Calendar và Reviews theo listing_id. Nên tổng hợp bảng con trước khi JOIN.
+Reconciliation,Listings - Reviews,number_of_reviews,Listings count minus file distinct review keys,0,3208,,PASS,"3,208/3,208 listing khớp; 0 lệch; 0 thiếu/sai số review ở Listings. File có 46,000 dòng khóa/ngày hợp lệ và 46,000 khóa (listing_id,id) phân biệt. Đối chiếu toàn bộ ngày review trong file với một snapshot Listings; không lọc theo năm. 0 ở observed_review_records nghĩa là không tìm thấy trong file; NULL từ Listings giữ NULL. Chênh lệch chưa chứng minh nguồn nào sai; cần xác minh phạm vi/lịch sử cập nhật từ nguồn, không ép bằng nhau."
+Reconciliation,Listings,number_of_reviews,Missing or invalid review count,0,3208,,PASS,Giữ NULL; không ép thành 0.
