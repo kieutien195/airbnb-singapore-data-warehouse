@@ -1,7 +1,7 @@
 # Định nghĩa KPI – Airbnb Singapore (Task 2.2)
 
 ## Quy ước chung
-- Phạm vi chính là một snapshot Listings; file hiện tại có scrape_id `20260923225116`, trong khi last_scraped quan sát là `2026-09-26`.
+- Phạm vi chính là một snapshot Listings; file hiện tại có scrape_id `20260923225116`, trong khi last_scraped quan sát từ `2026-09-25` đến `2026-09-26`.
 - Grain: Listings = listing/snapshot; Calendar = listing/ngày/snapshot; Reviews = một review; Neighbourhoods = một khu vực.
 - KPI cấp listing tính từ Listings trước khi nối với Calendar/Reviews để tránh nhân bản.
 - Tập rỗng hoặc mẫu số bằng 0: trả NULL/không xác định, không trả 0%. NULL không được tự động thay bằng 0.
@@ -19,7 +19,7 @@
 
 **Công thức:** COUNT(DISTINCT id)
 
-**Bộ lọc:** Chỉ dùng một snapshot; loại id NULL; xác nhận snapshot theo scrape_id và metadata nguồn. Với file hiện tại, scrape_id = 20260923225116; last_scraped quan sát là 2026-09-26.
+**Bộ lọc:** Chỉ dùng một snapshot; loại id NULL; xác nhận snapshot theo scrape_id và metadata nguồn. Với file hiện tại, scrape_id = 20260923225116; last_scraped quan sát từ 2026-09-25 đến 2026-09-26.
 
 **Tử số:** Số mã listing duy nhất hợp lệ.
 
