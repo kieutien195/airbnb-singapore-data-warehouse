@@ -88,7 +88,7 @@ trước khi JOIN nếu cần một dòng trên mỗi listing.
 | listings.csv.gz | 96dcc23048a03631aec9bbeee2f1e39b3bef871fc614e7a573df2e7dd42cb037 | 96dcc23048a03631aec9bbeee2f1e39b3bef871fc614e7a573df2e7dd42cb037 | None | EXACT_MATCH |
 | calendar.csv.gz | 62635a1ffd91bf87b43c7ec32f4a3059f9341e6eb82bd3ff71cc9592a0b0ece3 | 62635a1ffd91bf87b43c7ec32f4a3059f9341e6eb82bd3ff71cc9592a0b0ece3 | None | EXACT_MATCH |
 | reviews.csv.gz | a84abeddb76491520626678f979c64c8f8925c881413d0a4043dac457a689ea3 | a84abeddb76491520626678f979c64c8f8925c881413d0a4043dac457a689ea3 | None | EXACT_MATCH |
-| neighbourhoods.csv | b230353c2a7a71b53f6f79fa61b3010754b3b2260a70eff66e3e20df735ce38b | b230353c2a7a71b53f6f79fa61b3010754b3b2260a70eff66e3e20df735ce38b | b230353c2a7a71b53f6f79fa61b3010754b3b2260a70eff66e3e20df735ce38b | EXACT_MATCH |
+| neighbourhoods.csv | b230353c2a7a71b53f6f79fa61b3010754b3b2260a70eff66e3e20df735ce38b | 2a0ca66c76d8b21b08382091f1fa774d9de741103367a8d1accf869c956aa074 | b230353c2a7a71b53f6f79fa61b3010754b3b2260a70eff66e3e20df735ce38b | MATCH_AFTER_CRLF_TO_LF |
 
 NULL được thống kê theo cách đọc mặc định của Pandas, bao gồm các
 chuỗi như NA, N/A và None được nhận diện là thiếu. Không tự động

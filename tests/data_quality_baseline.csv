@@ -135,7 +135,7 @@ Out of domain,Listings,room_type,Allowed values,0,3208,0.0,PASS,Kiểm tra bốn
 Provenance,Raw,listings.csv.gz,SHA256 exact bytes,0,1,,PASS,EXACT_MATCH; không sửa raw hoặc checksum inventory.
 Provenance,Raw,calendar.csv.gz,SHA256 exact bytes,0,1,,PASS,EXACT_MATCH; không sửa raw hoặc checksum inventory.
 Provenance,Raw,reviews.csv.gz,SHA256 exact bytes,0,1,,PASS,EXACT_MATCH; không sửa raw hoặc checksum inventory.
-Provenance,Raw,neighbourhoods.csv,SHA256 exact bytes,0,1,,PASS,EXACT_MATCH; không sửa raw hoặc checksum inventory.
+Provenance,Raw,neighbourhoods.csv,SHA256 exact bytes,1,1,,WARN,MATCH_AFTER_CRLF_TO_LF; không sửa raw hoặc checksum inventory.
 Outliers,Listings,price,IQR outlier detection,134,2725,4.9174,WARN,Q1=99.9000; Median=202.8300; Q3=333.3100; IQR=233.4100; lower=-250.2150; upper=683.4250. Outliers không tự động bị loại bỏ.
 Outliers,Listings,accommodates,IQR outlier detection,56,3208,1.7456,WARN,Q1=2.0000; Median=2.0000; Q3=4.0000; IQR=2.0000; lower=-1.0000; upper=7.0000. Outliers không tự động bị loại bỏ.
 Outliers,Listings,bedrooms,IQR outlier detection,758,3206,23.6432,WARN,Q1=1.0000; Median=1.0000; Q3=1.0000; IQR=0.0000; lower=1.0000; upper=1.0000. Outliers không tự động bị loại bỏ.
