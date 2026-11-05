@@ -1,179 +1,337 @@
+"""Create-if-missing and verify the MySQL staging schema without deleting user data.
+
+Schema DDL statements are intentionally outside a transaction (MySQL commits DDL).
+The DML permission probe uses a transaction, identifies only rows it inserted by
+raw_id, and rolls the transaction back even when a check fails.
+"""
+from __future__ import annotations
+
 import os
+import re
 import sys
-import datetime
+import uuid
+from pathlib import Path
+
 import pymysql
-import dotenv
+from dotenv import load_dotenv
 
-sys.stdout.reconfigure(encoding='utf-8')
+ROOT = Path(__file__).resolve().parents[1]
+DDL_PATH = ROOT / "sql" / "01_staging_schema.sql"
+EXPECTED_TABLES = {
+    "stg_neighbourhoods",
+    "stg_calendar",
+    "stg_reviews",
+    "stg_listings",
+}
 
-def run_verification():
-    dotenv.load_dotenv()
-    host = os.getenv('MYSQL_HOST', '127.0.0.1')
-    port = int(os.getenv('MYSQL_PORT', '3306'))
-    user = os.getenv('MYSQL_USER')
-    password = os.getenv('MYSQL_PASSWORD')
-    database = os.getenv('MYSQL_DATABASE', 'airbnb_sg_2026')
 
-    print(f"Connecting to MySQL ({host}:{port}) as '{user}' on database '{database}'...")
-    conn = pymysql.connect(
-        host=host,
-        port=port,
-        user=user,
-        password=password,
-        database=database,
-        charset='utf8mb4',
-        autocommit=True
-    )
-    cur = conn.cursor()
+def fail(message: str) -> None:
+    raise RuntimeError(message)
 
-    print("\n--- BƯỚC 1: Thực thi tệp DDL sql/01_staging_schema.sql ---")
-    with open('sql/01_staging_schema.sql', 'r', encoding='utf-8') as f:
-        sql_script = f.read()
 
-    # Split statements by semicolon
-    statements = []
-    current = []
-    for line in sql_script.splitlines():
-        trimmed = line.strip()
-        if not trimmed or trimmed.startswith('--'):
+def split_sql_statements(script: str) -> list[str]:
+    """Split this simple DDL file on semicolons outside quoted strings/comments."""
+    statements: list[str] = []
+    current: list[str] = []
+    quote: str | None = None
+    line_comment = False
+    i = 0
+    while i < len(script):
+        char = script[i]
+        nxt = script[i + 1] if i + 1 < len(script) else ""
+        if line_comment:
+            if char == "\n":
+                line_comment = False
+                current.append(char)
+            i += 1
             continue
-        current.append(line)
-        if trimmed.endswith(';'):
-            statements.append('\n'.join(current))
+        if quote:
+            current.append(char)
+            if char == "\\" and i + 1 < len(script):
+                i += 1
+                current.append(script[i])
+            elif char == quote:
+                if nxt == quote:
+                    i += 1
+                    current.append(script[i])
+                else:
+                    quote = None
+            i += 1
+            continue
+        if char == "-" and nxt == "-":
+            line_comment = True
+            i += 2
+            continue
+        if char in ("'", '"', "`"):
+            quote = char
+            current.append(char)
+        elif char == ";":
+            statement = "".join(current).strip()
+            if statement:
+                statements.append(statement)
             current = []
+        else:
+            current.append(char)
+        i += 1
+    tail = "".join(current).strip()
+    if tail:
+        statements.append(tail)
+    if quote:
+        fail("DDL contains an unclosed quoted string.")
+    return statements
 
-    print(f"Tổng số câu lệnh DDL cần chạy: {len(statements)}")
-    for i, stmt in enumerate(statements, 1):
-        # strip trailing semicolon for pymysql
-        s = stmt.strip()
-        if s.endswith(';'):
-            s = s[:-1]
-        try:
-            cur.execute(s)
-            first_line = s.split('\n')[0][:70]
-            print(f"  [{i}/{len(statements)}] PASS: {first_line}")
-        except Exception as e:
-            print(f"  [{i}/{len(statements)}] FAIL: {e}")
-            raise e
 
-    print("\n--- BƯỚC 2: Kiểm tra SHOW TABLES LIKE 'stg_%' ---")
-    cur.execute("SHOW TABLES LIKE 'stg_%'")
-    staging_tables = [row[0] for row in cur.fetchall()]
-    print(f"Các bảng staging đã tạo: {staging_tables}")
-    expected_tables = ['stg_calendar', 'stg_listings', 'stg_neighbourhoods', 'stg_reviews']
-    for t in expected_tables:
-        assert t in staging_tables, f"Thiếu bảng {t}!"
-    print("Xác nhận đầy đủ 4 bảng staging: PASS")
+def parse_expected_ddl(script: str) -> dict[str, dict]:
+    """Read columns, indexes, and table options directly from the reviewed DDL."""
+    expected: dict[str, dict] = {}
+    table_pattern = re.compile(
+        r"CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+(\w+)\s*\((.*?)\)\s*"
+        r"ENGINE\s*=\s*(\w+)\s+DEFAULT\s+CHARSET\s*=\s*(\w+)\s+"
+        r"COLLATE\s*=\s*(\w+)\s+COMMENT\s*=\s*'((?:[^']|'')*)'",
+        re.IGNORECASE | re.DOTALL,
+    )
+    column_pattern = re.compile(
+        r"^\s*(\w+)\s+"
+        r"([A-Z]+(?:\(\s*\d+\s*(?:,\s*\d+\s*)?\))?(?:\s+UNSIGNED)?)\s+"
+        r"(NOT\s+NULL|NULL)\b(.*?),?\s*$",
+        re.IGNORECASE,
+    )
+    for match in table_pattern.finditer(script):
+        table, body, engine, charset, collation, comment = match.groups()
+        columns: list[dict] = []
+        indexes: dict[str, tuple[bool, tuple[str, ...]]] = {}
+        for line in body.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            primary = re.match(r"CONSTRAINT\s+\w+\s+PRIMARY\s+KEY\s*\(([^)]+)\)", line, re.I)
+            index = re.match(r"(?:UNIQUE\s+)?INDEX\s+(\w+)\s*\(([^)]+)\)", line, re.I)
+            if primary:
+                indexes["PRIMARY"] = (True, tuple(x.strip().strip("`") for x in primary.group(1).split(",")))
+                continue
+            if index:
+                unique = line.upper().startswith("UNIQUE")
+                indexes[index.group(1)] = (unique, tuple(x.strip().strip("`") for x in index.group(2).split(",")))
+                continue
+            col = column_pattern.match(line)
+            if not col:
+                fail(f"Cannot parse DDL line for {table}: {line}")
+            name, dtype, nullable, attrs = col.groups()
+            default = re.search(r"\bDEFAULT\s+(CURRENT_TIMESTAMP(?:\(\d+\))?|NULL|'(?:[^']|'')*'|[^\s,]+)", attrs, re.I)
+            comment_match = re.search(r"\bCOMMENT\s+'((?:[^']|'')*)'", attrs, re.I)
+            columns.append({
+                "name": name,
+                "type": re.sub(r"\s+", " ", dtype.upper()).replace("( ", "(").replace(" )", ")"),
+                "nullable": "NO" if nullable.upper().startswith("NOT") else "YES",
+                "default": default.group(1) if default else None,
+                "auto_increment": "auto_increment" in attrs.lower(),
+                "comment": comment_match.group(1).replace("''", "'") if comment_match else "",
+            })
+        expected[table] = {
+            "columns": columns,
+            "indexes": indexes,
+            "engine": engine.upper(),
+            "charset": charset.lower(),
+            "collation": collation.lower(),
+            "comment": comment.replace("''", "'"),
+        }
+    if set(expected) != EXPECTED_TABLES:
+        fail(f"DDL must define exactly the four expected staging tables; found {sorted(expected)}")
+    return expected
 
-    print("\n--- BƯỚC 3: Kiểm tra cấu trúc Schema và số lượng cột ---")
-    table_column_counts = {
-        'stg_neighbourhoods': 6,   # 2 raw + 3 meta + 1 raw_id
-        'stg_calendar': 9,         # 5 raw + 3 meta + 1 raw_id
-        'stg_reviews': 10,         # 6 raw + 3 meta + 1 raw_id
-        'stg_listings': 94         # 90 raw + 3 meta + 1 raw_id
-    }
-    for tbl, exp_cnt in table_column_counts.items():
-        cur.execute(f"""
-            SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_DEFAULT, COLUMN_COMMENT
-            FROM information_schema.COLUMNS
-            WHERE TABLE_SCHEMA = '{database}' AND TABLE_NAME = '{tbl}'
-            ORDER BY ORDINAL_POSITION
-        """)
-        cols = cur.fetchall()
-        print(f"Bảng {tbl:20}: {len(cols)} cột (kỳ vọng: {exp_cnt})")
-        assert len(cols) == exp_cnt, f"Sai lệch số cột ở bảng {tbl}: có {len(cols)}, kỳ vọng {exp_cnt}"
-        
-        # Verify 3 standard metadata columns + 1 raw_id
-        col_names = [c[0] for c in cols]
-        assert 'raw_id' in col_names
-        assert 'source_file' in col_names
-        assert 'snapshot_date' in col_names
-        assert 'ingestion_time' in col_names
 
-    print("Kiểm tra cấu trúc và metadata 4 bảng: PASS")
+def normalized_type(value: str) -> str:
+    return re.sub(r"\s+", "", str(value)).upper()
 
-    print("\n--- BƯỚC 4: Kiểm tra chỉ mục (INDEX) trên các bảng ---")
-    for tbl in expected_tables:
-        cur.execute(f"SHOW INDEX FROM {tbl}")
-        indexes = set(row[2] for row in cur.fetchall())
-        print(f"Bảng {tbl:20} có các index: {list(indexes)}")
-        assert 'PRIMARY' in indexes
-    print("Kiểm tra Primary Key và Index: PASS")
 
-    print("\n--- BƯỚC 5: Kiểm tra quyền nạp (INSERT, SELECT, UPDATE, DELETE) của tài khoản ETL ---")
-    test_snap = '2026-09-23'
+def normalized_default(value) -> str | None:
+    if value is None:
+        return None
+    text = str(value)
+    if len(text) >= 2 and text[0] == "'" and text[-1] == "'":
+        text = text[1:-1].replace("''", "'")
+    return text.upper() if text.upper().startswith("CURRENT_TIMESTAMP") else text
 
-    # Test stg_neighbourhoods
-    cur.execute("""
-        INSERT INTO stg_neighbourhoods (neighbourhood_group, neighbourhood, source_file, snapshot_date)
-        VALUES ('Test Region', 'Test Area', 'neighbourhoods.csv', %s)
-    """, (test_snap,))
-    assert cur.rowcount == 1
-    cur.execute("SELECT raw_id, neighbourhood FROM stg_neighbourhoods WHERE neighbourhood = 'Test Area'")
-    r = cur.fetchone()
-    assert r is not None and r[1] == 'Test Area'
-    cur.execute("DELETE FROM stg_neighbourhoods WHERE neighbourhood = 'Test Area'")
-    print("  Quyền nạp stg_neighbourhoods: PASS")
 
-    # Test stg_calendar
-    cur.execute("""
-        INSERT INTO stg_calendar (listing_id, date, available, minimum_nights, maximum_nights, source_file, snapshot_date)
-        VALUES (999999999, '2026-10-01', 't', 2, 365, 'calendar.csv.gz', %s)
-    """, (test_snap,))
-    assert cur.rowcount == 1
-    cur.execute("SELECT raw_id, available FROM stg_calendar WHERE listing_id = 999999999")
-    r = cur.fetchone()
-    assert r is not None and r[1] == 't'
-    cur.execute("DELETE FROM stg_calendar WHERE listing_id = 999999999")
-    print("  Quyền nạp stg_calendar: PASS")
+def execute_ddl(connection, statements: list[str]) -> None:
+    for statement in statements:
+        if not re.match(r"CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+stg_", statement, re.I):
+            fail("Refusing to execute a statement other than CREATE TABLE IF NOT EXISTS stg_*.")
+        with connection.cursor() as cursor:
+            cursor.execute(statement)
+        print(f"[DDL OK] {statement.splitlines()[0].strip()}")
 
-    # Test stg_reviews
-    cur.execute("""
-        INSERT INTO stg_reviews (listing_id, id, date, reviewer_id, reviewer_name, comments, source_file, snapshot_date)
-        VALUES (999999999, 888888888, '2026-09-20', 777777777, 'Nguyen Van Test', 'Phòng rất đẹp và sạch sẽ!', 'reviews.csv.gz', %s)
-    """, (test_snap,))
-    assert cur.rowcount == 1
-    cur.execute("SELECT raw_id, reviewer_name FROM stg_reviews WHERE id = 888888888")
-    r = cur.fetchone()
-    assert r is not None and r[1] == 'Nguyen Van Test'
-    cur.execute("DELETE FROM stg_reviews WHERE id = 888888888")
-    print("  Quyền nạp stg_reviews: PASS")
 
-    # Test stg_listings
-    cur.execute("""
-        INSERT INTO stg_listings (
-            id, listing_url, scrape_id, last_scraped, source, name, description,
-            price, price_quote_raw, minimum_nights, maximum_nights,
-            review_scores_rating, source_file, snapshot_date
-        ) VALUES (
-            999999999, 'https://www.airbnb.com/rooms/999999999', 20260923225116,
-            '2026-09-26', 'previous scrape', 'Studio Test Condo Orchard',
-            'Căn hộ cao cấp đầy đủ tiện nghi trung tâm', '$150.00',
-            '{"quote": {"price": 150}}', 2, 365, 4.85, 'listings.csv.gz', %s
+def verify_schema(connection, database: str, expected: dict[str, dict]) -> None:
+    with connection.cursor() as cursor:
+        cursor.execute(
+            "SELECT TABLE_NAME, ENGINE, TABLE_COLLATION, TABLE_COMMENT "
+            "FROM information_schema.TABLES WHERE TABLE_SCHEMA=%s AND TABLE_NAME IN (%s,%s,%s,%s)",
+            (database, *sorted(EXPECTED_TABLES)),
         )
-    """, (test_snap,))
-    assert cur.rowcount == 1
-    cur.execute("SELECT raw_id, name, price FROM stg_listings WHERE id = 999999999")
-    r = cur.fetchone()
-    assert r is not None and r[1] == 'Studio Test Condo Orchard' and r[2] == '$150.00'
-    cur.execute("DELETE FROM stg_listings WHERE id = 999999999")
-    print("  Quyền nạp stg_listings: PASS")
+        actual_tables = {row[0]: row[1:] for row in cursor.fetchall()}
+    if set(actual_tables) != EXPECTED_TABLES:
+        fail(f"Missing staging tables in {database}: {sorted(EXPECTED_TABLES - set(actual_tables))}")
 
-    print("\n--- BƯỚC 6: Kiểm tra tính khả lặp (Idempotency - chạy lại DDL lần 2) ---")
-    for s in statements:
-        stmt_clean = s.strip()
-        if stmt_clean.endswith(';'):
-            stmt_clean = stmt_clean[:-1]
-        cur.execute(stmt_clean)
-    print("Chạy lại DDL lần 2 thành công 100%, không phát sinh lỗi trùng lặp (Idempotent): PASS")
+    for table in sorted(EXPECTED_TABLES):
+        spec = expected[table]
+        engine, table_collation, table_comment = actual_tables[table]
+        if (engine or "").upper() != spec["engine"]:
+            fail(f"{table}: actual ENGINE={engine!r}; DDL={spec['engine']!r}")
+        if (table_collation or "").lower() != spec["collation"]:
+            fail(f"{table}: actual COLLATION={table_collation!r}; DDL={spec['collation']!r}")
+        if table_comment != spec["comment"]:
+            fail(f"{table}: table comment differs from DDL.")
 
-    cur.close()
-    conn.close()
-    print("\n=======================================================")
-    print("TOÀN BỘ 6 TIÊU CHÍ KIỂM THỬ CHO TASK 3.1 ĐẠT KẾT QUẢ PASS!")
-    print("Tài khoản ETL sẵn sàng để Thái nạp dữ liệu ở Task 3.2.")
-    print("=======================================================")
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_DEFAULT, EXTRA, "
+                "ORDINAL_POSITION, COLUMN_COMMENT FROM information_schema.COLUMNS "
+                "WHERE TABLE_SCHEMA=%s AND TABLE_NAME=%s ORDER BY ORDINAL_POSITION",
+                (database, table),
+            )
+            rows = cursor.fetchall()
+        actual_columns = [
+            {"name": r[0], "type": normalized_type(r[1]), "nullable": r[2],
+             "default": normalized_default(r[3]), "auto_increment": "auto_increment" in r[4].lower(),
+             "comment": r[6]}
+            for r in rows
+        ]
+        if len(actual_columns) != len(spec["columns"]):
+            fail(f"{table}: actual column count={len(actual_columns)}; DDL={len(spec['columns'])}.")
+        for position, (actual, wanted) in enumerate(zip(actual_columns, spec["columns"]), 1):
+            wanted_type = normalized_type(wanted["type"])
+            actual_type = normalized_type(actual["type"])
+            fields = ("name", "nullable", "default", "auto_increment", "comment")
+            mismatch = [
+                field for field in fields
+                if actual[field] != (normalized_default(wanted[field]) if field == "default" else wanted[field])
+            ]
+            if actual_type != wanted_type:
+                mismatch.append("type")
+            if mismatch:
+                fail(
+                    f"{table} column #{position} {wanted['name']}: mismatch {mismatch}; "
+                    f"actual={actual}; DDL={wanted}."
+                )
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT INDEX_NAME, NON_UNIQUE, SEQ_IN_INDEX, COLUMN_NAME "
+                "FROM information_schema.STATISTICS WHERE TABLE_SCHEMA=%s AND TABLE_NAME=%s "
+                "ORDER BY INDEX_NAME, SEQ_IN_INDEX",
+                (database, table),
+            )
+            index_rows = cursor.fetchall()
+        actual_indexes: dict[str, tuple[bool, tuple[str, ...]]] = {}
+        grouped: dict[str, list] = {}
+        for name, non_unique, seq, column in index_rows:
+            grouped.setdefault(name, []).append((seq, column, non_unique))
+        for name, parts in grouped.items():
+            actual_indexes[name] = (not bool(parts[0][2]), tuple(x[1] for x in sorted(parts)))
+        if actual_indexes != spec["indexes"]:
+            fail(f"{table}: indexes differ; actual={actual_indexes}; DDL={spec['indexes']}")
+        print(f"[SCHEMA PASS] {table}: {len(actual_columns)} columns; type, precision, scale, nullability, default, auto_increment, comments, and indexes match DDL")
 
-if __name__ == '__main__':
-    run_verification()
 
+def verify_dml_permissions(connection) -> None:
+    """Exercise INSERT/SELECT/UPDATE/DELETE on just-created rows then roll back."""
+    marker = "smoke-" + uuid.uuid4().hex
+    probes = {
+        "stg_neighbourhoods": ("INSERT INTO stg_neighbourhoods (neighbourhood_group, neighbourhood, source_file) VALUES (%s,%s,%s)", ("Smoke", "Smoke", marker)),
+        "stg_calendar": ("INSERT INTO stg_calendar (available, source_file) VALUES (%s,%s)", ("t", marker)),
+        "stg_reviews": ("INSERT INTO stg_reviews (reviewer_name, source_file) VALUES (%s,%s)", ("Smoke", marker)),
+        "stg_listings": ("INSERT INTO stg_listings (name, source_file) VALUES (%s,%s)", ("Smoke", marker)),
+    }
+    inserted_ids: dict[str, int] = {}
+    try:
+        with connection.cursor() as cursor:
+            for table, (insert_sql, values) in probes.items():
+                cursor.execute(insert_sql, values)
+                raw_id = cursor.lastrowid
+                if cursor.rowcount != 1 or not raw_id:
+                    fail(f"{table}: INSERT probe did not create exactly one row.")
+                inserted_ids[table] = raw_id
+                cursor.execute(f"SELECT raw_id, source_file FROM {table} WHERE raw_id=%s", (raw_id,))
+                row = cursor.fetchone()
+                if not row or row[0] != raw_id or row[1] != marker:
+                    fail(f"{table}: SELECT did not find the inserted row by raw_id={raw_id}.")
+                updated_marker = marker + "-updated"
+                cursor.execute(f"UPDATE {table} SET source_file=%s WHERE raw_id=%s AND source_file=%s", (updated_marker, raw_id, marker))
+                if cursor.rowcount != 1:
+                    fail(f"{table}: UPDATE did not affect exactly raw_id={raw_id}.")
+                cursor.execute(f"SELECT source_file FROM {table} WHERE raw_id=%s", (raw_id,))
+                if cursor.fetchone()[0] != updated_marker:
+                    fail(f"{table}: updated value did not read back correctly.")
+                cursor.execute(f"DELETE FROM {table} WHERE raw_id=%s AND source_file=%s", (raw_id, updated_marker))
+                if cursor.rowcount != 1:
+                    fail(f"{table}: DELETE did not affect exactly raw_id={raw_id}.")
+                cursor.execute(f"SELECT 1 FROM {table} WHERE raw_id=%s", (raw_id,))
+                if cursor.fetchone() is not None:
+                    fail(f"{table}: probe row remains after DELETE inside the transaction.")
+                print(f"[DML PASS] {table}: INSERT/SELECT/UPDATE/DELETE targeted only raw_id={raw_id}; not committed")
+    finally:
+        connection.rollback()
+    # The next reads run after ROLLBACK, so they cannot see the probe inserts.
+    with connection.cursor() as cursor:
+        for table, raw_id in inserted_ids.items():
+            cursor.execute(f"SELECT 1 FROM {table} WHERE raw_id=%s", (raw_id,))
+            if cursor.fetchone() is not None:
+                fail(f"{table}: probe raw_id={raw_id} still exists after ROLLBACK.")
+    print("[ROLLBACK PASS] Probe rows are absent after rollback; pre-existing rows were not targeted.")
+
+
+def main() -> int:
+    load_dotenv(ROOT / ".env")
+    required = ("MYSQL_HOST", "MYSQL_PORT", "MYSQL_USER", "MYSQL_PASSWORD", "MYSQL_DATABASE")
+    missing = [name for name in required if not os.getenv(name, "").strip()]
+    if missing:
+        fail("Missing environment variables: " + ", ".join(missing) + ". Copy .env.example to .env and fill the local values.")
+    database = os.environ["MYSQL_DATABASE"].strip()
+    if not re.fullmatch(r"[A-Za-z0-9_]+", database):
+        fail("MYSQL_DATABASE may contain only letters, digits, and underscores.")
+    ddl = DDL_PATH.read_text(encoding="utf-8")
+    expected = parse_expected_ddl(ddl)
+    statements = split_sql_statements(ddl)
+    if len(statements) != len(EXPECTED_TABLES):
+        fail(f"Expected {len(EXPECTED_TABLES)} CREATE TABLE statements; found {len(statements)}.")
+
+    connection = None
+    try:
+        connection = pymysql.connect(
+            host=os.environ["MYSQL_HOST"].strip(),
+            port=int(os.environ["MYSQL_PORT"]),
+            user=os.environ["MYSQL_USER"].strip(),
+            password=os.environ["MYSQL_PASSWORD"],
+            database=database,
+            charset="utf8mb4",
+            autocommit=False,
+            connect_timeout=5,
+        )
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT VERSION(), DATABASE()")
+            version, connected_database = cursor.fetchone()
+        if connected_database != database:
+            fail(f"Connected to {connected_database!r}, which differs from MYSQL_DATABASE={database!r}.")
+        print(f"[CONNECTION PASS] MySQL {version}; database={connected_database}")
+        print("[INFO] Only CREATE TABLE IF NOT EXISTS statements run; MySQL commits DDL automatically.")
+        execute_ddl(connection, statements)
+        verify_schema(connection, database, expected)
+        verify_dml_permissions(connection)
+        print("[PASS] DDL, complete schema/indexes, and DML permissions verified; probe rows rolled back.")
+        return 0
+    except Exception as exc:
+        if connection:
+            connection.rollback()
+        print(f"[FAIL] {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    finally:
+        if connection:
+            connection.close()
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except Exception as exc:
+        print(f"[FAIL] {type(exc).__name__}: {exc}", file=sys.stderr)
+        raise SystemExit(1)

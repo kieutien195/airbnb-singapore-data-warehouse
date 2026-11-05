@@ -219,7 +219,7 @@ def check_mysql(required: bool = False) -> None:
     port = int(os.getenv("MYSQL_PORT", "3306"))
     user = os.getenv("MYSQL_USER", "")
     password = os.getenv("MYSQL_PASSWORD", "")
-    database = os.getenv("MYSQL_DATABASE", "airbnb_sg_dw")
+    database = os.getenv("MYSQL_DATABASE", "").strip()
 
     if not user:
         msg = "MYSQL_USER chưa được thiết lập trong .env"
@@ -229,28 +229,34 @@ def check_mysql(required: bool = False) -> None:
         msg = "MYSQL_PASSWORD chưa được thiết lập trong .env"
         _fail(msg) if required else _warn(msg)
         return
+    if not database:
+        msg = "MYSQL_DATABASE chưa được thiết lập trong .env"
+        _fail(msg) if required else _warn(msg)
+        return
 
     # Thử kết nối bằng SQLAlchemy + PyMySQL
     try:
-        from sqlalchemy import create_engine, text
+        from sqlalchemy import URL, create_engine, text
 
-        url = f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
+        url = URL.create(
+            "mysql+pymysql", username=user, password=password, host=host,
+            port=port, database=database, query={"charset": "utf8mb4"}
+        )
         engine = create_engine(url, connect_args={"connect_timeout": 5})
-
-        with engine.connect() as conn:
-            result = conn.execute(text("SELECT VERSION()"))
-            version = result.scalar()
-            _ok(f"Kết nối MySQL thành công – Server version: {version}")
-
-            # Thử tạo bảng tạm để xác nhận quyền ghi
-            conn.execute(text(
-                "CREATE TEMPORARY TABLE _smoke_test_tmp (id INT)"
-            ))
-            conn.execute(text("DROP TEMPORARY TABLE _smoke_test_tmp"))
-            _ok("Tạo/xoá bảng tạm thành công – quyền ghi hợp lệ")
+        try:
+            with engine.connect() as conn:
+                result = conn.execute(text("SELECT VERSION(), DATABASE()"))
+                version, connected_database = result.one()
+                if connected_database != database:
+                    raise RuntimeError(
+                        f"Cấu hình yêu cầu database {database!r}, nhưng server trả về {connected_database!r}."
+                    )
+                _ok(f"Kết nối MySQL thành công – Server version: {version}; database: {connected_database}")
+        finally:
+            engine.dispose()
 
     except Exception as exc:
-        msg = f"Kết nối MySQL thất bại: {exc}"
+        msg = f"Kết nối MySQL thất bại ({type(exc).__name__}): {exc}"
         _fail(msg) if required else _warn(msg + " (Phối hợp Minh – Task 1.5 để cài MySQL)")
 
 

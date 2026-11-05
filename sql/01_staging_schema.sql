@@ -19,12 +19,10 @@
 -- 3. Bổ sung đầy đủ 3 trường metadata kiểm toán theo quy chuẩn kiến trúc:
 --    - source_file: Tên tệp dữ liệu nguồn
 --    - snapshot_date: Ngày snapshot dữ liệu nguồn (mặc định '2026-09-23')
---    - ingestion_time: Thời điểm nạp dữ liệu vào MySQL Staging
+--    - ingested_at: Thời điểm nạp dữ liệu vào MySQL Staging
 -- 4. Đánh chỉ mục (INDEX) inline tối ưu cho truy vấn lọc/JOIN của pipeline Silver (listing_id, date, snapshot_date)
 -- 5. Đảm bảo tính khả lặp (Idempotent): Chạy nhiều lần không gây lỗi trùng index hay mất cấu trúc.
 -- =============================================================================
-
-USE airbnb_sg_2026;
 
 -- =============================================================================
 -- 1. BẢNG STAGING: stg_neighbourhoods
@@ -36,7 +34,7 @@ CREATE TABLE IF NOT EXISTS stg_neighbourhoods (
     neighbourhood        VARCHAR(100)      NULL COMMENT 'Tên khu vực quy hoạch thô (55 khu vực)',
     source_file          VARCHAR(100)      NOT NULL DEFAULT 'neighbourhoods.csv' COMMENT 'Tên tệp nguồn',
     snapshot_date        DATE              NOT NULL DEFAULT '2026-09-23' COMMENT 'Ngày snapshot dữ liệu',
-    ingestion_time       DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời điểm nạp vào staging',
+    ingested_at          DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời điểm nạp vào staging',
     CONSTRAINT pk_stg_neighbourhoods PRIMARY KEY (raw_id),
     INDEX idx_stg_neighbourhoods_lookup (neighbourhood_group, neighbourhood),
     INDEX idx_stg_neighbourhoods_snapshot (snapshot_date)
@@ -57,7 +55,7 @@ CREATE TABLE IF NOT EXISTS stg_calendar (
     maximum_nights       INT               NULL COMMENT 'Số đêm lưu trú tối đa thô',
     source_file          VARCHAR(100)      NOT NULL DEFAULT 'calendar.csv.gz' COMMENT 'Tên tệp nguồn',
     snapshot_date        DATE              NOT NULL DEFAULT '2026-09-23' COMMENT 'Ngày snapshot dữ liệu',
-    ingestion_time       DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời điểm nạp vào staging',
+    ingested_at          DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời điểm nạp vào staging',
     CONSTRAINT pk_stg_calendar PRIMARY KEY (raw_id),
     INDEX idx_stg_calendar_listing_date (listing_id, date),
     INDEX idx_stg_calendar_date (date),
@@ -80,7 +78,7 @@ CREATE TABLE IF NOT EXISTS stg_reviews (
     comments             MEDIUMTEXT        NULL COMMENT 'Nội dung nhận xét thô (hỗ trợ xuống dòng và ký tự quốc tế)',
     source_file          VARCHAR(100)      NOT NULL DEFAULT 'reviews.csv.gz' COMMENT 'Tên tệp nguồn',
     snapshot_date        DATE              NOT NULL DEFAULT '2026-09-23' COMMENT 'Ngày snapshot dữ liệu',
-    ingestion_time       DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời điểm nạp vào staging',
+    ingested_at          DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời điểm nạp vào staging',
     CONSTRAINT pk_stg_reviews PRIMARY KEY (raw_id),
     INDEX idx_stg_reviews_listing_id (listing_id),
     INDEX idx_stg_reviews_id (id),
@@ -132,8 +130,8 @@ CREATE TABLE IF NOT EXISTS stg_listings (
     neighbourhood                                VARCHAR(100)      NULL COMMENT 'Tên khu phố chưa chuẩn hóa (100% NULL ở snapshot này)',
     neighbourhood_cleansed                       VARCHAR(100)      NULL COMMENT 'Tên khu vực quy hoạch chuẩn hóa',
     neighbourhood_group_cleansed                 VARCHAR(100)      NULL COMMENT 'Tên vùng địa lý lớn chuẩn hóa',
-    latitude                                     DECIMAL(11, 8)    NULL COMMENT 'Tọa độ vĩ độ địa lý WGS84',
-    longitude                                    DECIMAL(11, 8)    NULL COMMENT 'Tọa độ kinh độ địa lý WGS84',
+    latitude                                     VARCHAR(50)       NULL COMMENT 'Chuỗi vĩ độ thô từ nguồn; chuẩn hóa kiểu số ở Silver',
+    longitude                                    VARCHAR(50)       NULL COMMENT 'Chuỗi kinh độ thô từ nguồn; chuẩn hóa kiểu số ở Silver',
     property_type                                VARCHAR(100)      NULL COMMENT 'Loại hình bất động sản chi tiết',
     room_type                                    VARCHAR(50)       NULL COMMENT 'Phân loại hình thức thuê phòng',
     accommodates                                 SMALLINT          NULL COMMENT 'Sức chứa khách tối đa',
@@ -188,7 +186,7 @@ CREATE TABLE IF NOT EXISTS stg_listings (
     reviews_per_month                            DECIMAL(6, 2)     NULL COMMENT 'Tần suất đánh giá bình quân mỗi tháng',
     source_file                                  VARCHAR(100)      NOT NULL DEFAULT 'listings.csv.gz' COMMENT 'Tên tệp nguồn',
     snapshot_date                                DATE              NOT NULL DEFAULT '2026-09-23' COMMENT 'Ngày snapshot dữ liệu',
-    ingestion_time                               DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời điểm nạp vào staging',
+    ingested_at                                  DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Thời điểm nạp vào staging',
     CONSTRAINT pk_stg_listings PRIMARY KEY (raw_id),
     INDEX idx_stg_listings_id (id),
     INDEX idx_stg_listings_host_id (host_id),

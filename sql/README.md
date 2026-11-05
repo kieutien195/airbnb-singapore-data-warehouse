@@ -27,7 +27,11 @@ Tầng Staging đóng vai trò vùng đệm nạp thô (Raw Landing Zone), tuân
 ### 3 Cột Metadata kiểm toán chuẩn hóa:
 - `source_file VARCHAR(100)`: Tên tệp dữ liệu nguồn phát sinh bản ghi.
 - `snapshot_date DATE`: Ngày snapshot dữ liệu (`2026-09-23`).
-- `ingestion_time DATETIME`: Mốc thời gian bản ghi được nạp vào MySQL Staging (`CURRENT_TIMESTAMP`).
+- `ingested_at DATETIME`: Mốc thời gian bản ghi được nạp vào MySQL Staging (`CURRENT_TIMESTAMP`).
+
+`latitude` và `longitude` được lưu nguyên chuỗi nguồn ở Staging để không làm tròn tọa độ. Chuyển sang kiểu số và kiểm tra miền giá trị thuộc bước Silver. DDL không chọn database cố định: hãy chọn đúng schema trước khi chạy trong Workbench hoặc kết nối bằng `MYSQL_DATABASE` từ `.env` khi chạy script.
+
+Nếu database đã có các bảng Staging theo DDL cũ, kiểm tra row count trước. Chạy [`01_staging_schema_migration.sql`](01_staging_schema_migration.sql) một lần để đổi `ingestion_time` thành `ingested_at` và đổi kiểu tọa độ. Các tọa độ đã lưu dưới `DECIMAL(11,8)` không thể khôi phục phần thập phân đã mất; nếu bảng có dữ liệu, phải nạp lại từ CSV raw sau migration.
 
 ### Tiêu chí bàn giao cho Thái (Task 3.2 Ingestion):
 - Bảng chấp nhận dữ liệu thô: Chuỗi giá có ký hiệu `$` (`price: $86.63`), văn bản tự do, JSON array (`amenities`), JSON object (`price_quote_raw`).
@@ -41,11 +45,13 @@ Tầng Staging đóng vai trò vùng đệm nạp thô (Raw Landing Zone), tuân
 ### Chạy qua MySQL Workbench:
 1. Mở MySQL Workbench, kết nối tới local MySQL instance.
 2. Mở file `sql/01_staging_schema.sql`.
-3. Nhấn biểu tượng tia sét **Execute** (Ctrl + Shift + Enter).
-4. Quan sát cửa sổ Action Output: 4 bảng `stg_*` được khởi tạo thành công (0 errors).
+3. Chọn schema đúng theo `MYSQL_DATABASE` trong `.env` làm default schema trước khi chạy. DDL không chứa `USE` cố định.
+4. Nhấn biểu tượng tia sét **Execute** (Ctrl + Shift + Enter).
+5. Quan sát Action Output và xử lý mọi lỗi trước khi chạy verifier.
 
 ### Chạy kiểm tra tự động qua Python:
 ```bash
 .venv\Scripts\python.exe scripts/verify_staging_schema.py
+.venv\Scripts\python.exe scripts/test_staging_types.py
 ```
-Script sẽ tự động kiểm tra 6 tiêu chí: DDL syntax, SHOW TABLES, schema/column count, index, quyền nạp dữ liệu và tính khả lặp (idempotency).
+Verifier so sánh đầy đủ thứ tự cột, kiểu/precision/scale, NULL, default, auto-increment, comment, index và table options với DDL. Bài thử INSERT/SELECT/UPDATE/DELETE chỉ thao tác trên `raw_id` vừa tạo trong transaction rồi ROLLBACK. MySQL tự commit DDL; nếu schema hiện tại khác, script báo FAIL và không tự xóa/sửa bảng cũ.

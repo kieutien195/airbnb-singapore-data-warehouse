@@ -4,7 +4,7 @@
 -- Database: airbnb_sg_2026 | Charset: utf8mb4 | Collation: utf8mb4_0900_ai_ci
 -- =============================================================================
 
-USE airbnb_sg_2026;
+-- Chọn schema đích theo MYSQL_DATABASE trong .env trước khi chạy; không cố định USE ở đây.
 
 -- Tùy chọn: Xóa bảng cũ theo thứ tự khóa ngoại nếu muốn tạo lại từ đầu (uncomment khi cần):
 -- SET FOREIGN_KEY_CHECKS = 0;

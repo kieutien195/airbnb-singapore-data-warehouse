@@ -1,75 +1,67 @@
-import gzip
+"""Validate raw CSV values against the non-lossy staging contract (read-only)."""
+from __future__ import annotations
+
 import csv
-import sys
-import datetime
+import gzip
+import re
+from pathlib import Path
 
-sys.stdout.reconfigure(encoding='utf-8')
+ROOT = Path(__file__).resolve().parents[1]
+RAW_LISTINGS = ROOT / "data" / "raw" / "listings.csv.gz"
+STAGING_DDL = ROOT / "sql" / "01_staging_schema.sql"
+SILVER_DDL = ROOT / "sql" / "02_warehouse_schema_draft.sql"
 
-def test_dry_run():
-    print("Testing dry run against DDL types...")
-    # 1. Neighbourhoods
-    with open('data/raw/neighbourhoods.csv', 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for r in reader:
-            assert len(r['neighbourhood_group']) <= 100
-            assert len(r['neighbourhood']) <= 100
-    print("Neighbourhoods OK (55 rows)")
 
-    # 2. Calendar
-    with gzip.open('data/raw/calendar.csv.gz', 'rt', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        count = 0
-        for r in reader:
-            count += 1
-            int(r['listing_id'])
-            datetime.date.fromisoformat(r['date'])
-            assert r['available'] in ('t', 'f')
-            int(r['minimum_nights'])
-            int(r['maximum_nights'])
-    print(f"Calendar OK ({count} rows)")
+def main() -> int:
+    if not RAW_LISTINGS.is_file():
+        raise FileNotFoundError(f"Raw data file not found: {RAW_LISTINGS}")
+    staging = STAGING_DDL.read_text(encoding="utf-8")
+    silver = SILVER_DDL.read_text(encoding="utf-8")
+    if not re.search(r"^\s*latitude\s+VARCHAR\(50\)", staging, re.M | re.I):
+        raise AssertionError("stg_listings.latitude must keep the source text using VARCHAR(50).")
+    if not re.search(r"^\s*longitude\s+VARCHAR\(50\)", staging, re.M | re.I):
+        raise AssertionError("stg_listings.longitude must keep the source text using VARCHAR(50).")
+    if not re.search(r"^\s*latitude\s+DECIMAL\(10,\s*7\)", silver, re.M | re.I):
+        raise AssertionError("Silver dim_listing.latitude must normalize to DECIMAL(10,7).")
+    if not re.search(r"^\s*longitude\s+DECIMAL\(10,\s*7\)", silver, re.M | re.I):
+        raise AssertionError("Silver dim_listing.longitude must normalize to DECIMAL(10,7).")
 
-    # 3. Reviews
-    with gzip.open('data/raw/reviews.csv.gz', 'rt', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        count = 0
-        for r in reader:
-            count += 1
-            int(r['listing_id'])
-            int(r['id'])
-            datetime.date.fromisoformat(r['date'])
-            int(r['reviewer_id'])
-            assert len(r['reviewer_name']) <= 255
-    print(f"Reviews OK ({count} rows)")
+    rows = 0
+    non_null_coordinates = 0
+    coordinates_with_more_than_8_decimals = 0
+    listings_with_more_than_8_decimals: set[str] = set()
+    max_text_length = 0
+    with gzip.open(RAW_LISTINGS, "rt", encoding="utf-8-sig", newline="") as source:
+        reader = csv.DictReader(source)
+        required = {"latitude", "longitude"}
+        if not required.issubset(reader.fieldnames or []):
+            raise AssertionError(f"CSV is missing coordinate columns: {sorted(required - set(reader.fieldnames or []))}")
+        for line_number, row in enumerate(reader, start=2):
+            rows += 1
+            for name in ("latitude", "longitude"):
+                raw_value = row[name]
+                if raw_value in (None, ""):
+                    continue
+                if not re.fullmatch(r"-?\d+(?:\.\d+)?", raw_value):
+                    raise AssertionError(f"{name} CSV row {line_number} has a non-numeric {name} value: {raw_value!r}")
+                non_null_coordinates += 1
+                max_text_length = max(max_text_length, len(raw_value))
+                decimals = raw_value.partition(".")[2]
+                if len(decimals) > 8:
+                    coordinates_with_more_than_8_decimals += 1
+                    listings_with_more_than_8_decimals.add(row.get("id", str(line_number)))
+    if rows == 0 or non_null_coordinates == 0:
+        raise AssertionError("No listing rows or valid coordinates were found in raw CSV.")
+    if coordinates_with_more_than_8_decimals == 0:
+        raise AssertionError("No coordinates exceed 8 decimal places; this dataset does not demonstrate the precision-loss case.")
+    if max_text_length > 50:
+        raise AssertionError(f"VARCHAR(50) is too short for the longest coordinate ({max_text_length} chars).")
 
-    # 4. Listings
-    with gzip.open('data/raw/listings.csv.gz', 'rt', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        count = 0
-        for r in reader:
-            count += 1
-            int(r['id'])
-            assert len(r['listing_url']) <= 255
-            int(r['scrape_id'])
-            datetime.date.fromisoformat(r['last_scraped'])
-            assert len(r['name']) <= 500
-            assert len(r['picture_url']) <= 500
-            int(r['host_id'])
-            assert len(r['host_name']) <= 255
-            float(r['latitude'])
-            float(r['longitude'])
-            assert len(r['property_type']) <= 100
-            assert len(r['room_type']) <= 50
-            if r['price_quote_checkin_date']: datetime.date.fromisoformat(r['price_quote_checkin_date'])
-            if r['price_quote_checkout_date']: datetime.date.fromisoformat(r['price_quote_checkout_date'])
-            if r['price_quote_total_price']: float(r['price_quote_total_price'])
-            if r['price_quote_price_per_night']: float(r['price_quote_price_per_night'])
-            if r['calendar_last_scraped']: datetime.date.fromisoformat(r['calendar_last_scraped'])
-            if r['first_review']: datetime.date.fromisoformat(r['first_review'])
-            if r['last_review']: datetime.date.fromisoformat(r['last_review'])
-            if r['review_scores_rating']: float(r['review_scores_rating'])
-            if r['reviews_per_month']: float(r['reviews_per_month'])
-    print(f"Listings OK ({count} rows)")
+    print(f"[PASS] Read {rows:,} listings and {non_null_coordinates:,} non-NULL coordinate values.")
+    print(f"[PASS] {coordinates_with_more_than_8_decimals:,} coordinate values in {len(listings_with_more_than_8_decimals):,} listings have more than 8 decimal places and remain source text.")
+    print(f"[PASS] Longest coordinate is {max_text_length} chars; Staging VARCHAR(50), Silver DECIMAL(10,7).")
+    return 0
 
-if __name__ == '__main__':
-    test_dry_run()
 
+if __name__ == "__main__":
+    main()

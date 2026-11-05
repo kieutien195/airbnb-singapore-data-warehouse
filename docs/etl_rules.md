@@ -13,7 +13,7 @@
 
 ## 1. Nguyên tắc thiết kế quy trình Cleaning & Mapping
 
-1. **Bảo toàn dữ liệu gốc (Bronze/Raw Immutability):** Các tệp trong `data/raw/` và bảng `stg_*` giữ nguyên giá trị thô đọc từ nguồn, chỉ bổ sung metadata (`snapshot_date`, `source_file`, `ingested_at`).
+1. **Bảo toàn dữ liệu gốc (Bronze/Raw Immutability):** Các tệp trong `data/raw/` và bảng `stg_*` giữ nguyên giá trị thô đọc từ nguồn, chỉ bổ sung metadata (`snapshot_date`, `source_file`, `ingested_at`). Tọa độ `latitude`/`longitude` ở Staging được lưu dạng chuỗi đúng như CSV; khi đọc Listings để nạp Staging, dùng `dtype={"latitude": "string", "longitude": "string"}` hoặc `csv.DictReader`, không ép sang float trước khi ghi. Việc ép kiểu và kiểm tra miền giá trị chỉ thực hiện ở Silver.
 2. **Làm sạch dựa trên bằng chứng thực nghiệm (Evidence-based Cleaning):** Mọi quy tắc ép kiểu, xử lý `NULL`, khóa trùng và kiểm tra miền giá trị đều dựa trên kết quả khảo sát thực tế từ Task 2.2 (`docs/data_dictionary/`, `docs/kpi_definitions/`) và Task 2.3 (`docs/eda/cleaning_recommendations.md`, `tests/data_quality_baseline.csv`).
 3. **Không suy diễn hoặc làm giả dữ liệu nghiệp vụ:**
    - Tuyệt đối **không thay `NULL` bằng `0`** ở các cột giá (`price`, `price_quote_*`) hoặc điểm đánh giá (`review_scores_*`).
