@@ -1,0 +1,129 @@
+﻿table_name,table_type,ordinal_position,column_name,mysql_dtype,nullable,key_constraint,references_table_column,source_mapping,kimball_role,description
+dim_date,Dimension,1,date_sk,INT,NOT NULL,PK,,Derived from Calendar/Reviews/Snapshot dates,Surrogate Key,Khóa đại diện ngày định dạng số nguyên YYYYMMDD (ví dụ 20260923).
+dim_date,Dimension,2,full_date,DATE,NOT NULL,UNIQUE (BK),,Derived date range 2011-01-01..2027-12-31,Natural Key,Ngày dương lịch chuẩn YYYY-MM-DD.
+dim_date,Dimension,3,day_of_month,TINYINT UNSIGNED,NOT NULL,,,DAY(full_date),Descriptive Attribute,Ngày trong tháng (1–31).
+dim_date,Dimension,4,day_of_week_iso,TINYINT UNSIGNED,NOT NULL,,,WEEKDAY(full_date)+1,Descriptive Attribute,Thứ trong tuần theo chuẩn ISO (1=Thứ Hai .. 7=Chủ Nhật).
+dim_date,Dimension,5,day_name,VARCHAR(15),NOT NULL,,,DAYNAME(full_date),Descriptive Attribute,Tên thứ trong tuần (Monday..Sunday).
+dim_date,Dimension,6,is_weekend,TINYINT(1),NOT NULL,,,"day_of_week_iso IN (6,7)",Descriptive Attribute,"Cờ cuối tuần: 1 nếu Thứ Bảy/Chủ Nhật, 0 nếu ngày thường."
+dim_date,Dimension,7,week_of_year,TINYINT UNSIGNED,NOT NULL,,,"WEEK(full_date, 3)",Descriptive Attribute,Tuần ISO trong năm (1–53).
+dim_date,Dimension,8,month_num,TINYINT UNSIGNED,NOT NULL,,,MONTH(full_date),Descriptive Attribute,Tháng trong năm (1–12).
+dim_date,Dimension,9,month_name,VARCHAR(15),NOT NULL,,,MONTHNAME(full_date),Descriptive Attribute,Tên tháng (January..December).
+dim_date,Dimension,10,year_month,CHAR(7),NOT NULL,,,"DATE_FORMAT(full_date, '%Y-%m')",Descriptive Attribute,Chuỗi Năm-Tháng định dạng YYYY-MM phục vụ trục thời gian BI.
+dim_date,Dimension,11,quarter_num,TINYINT UNSIGNED,NOT NULL,,,QUARTER(full_date),Descriptive Attribute,Quý trong năm (1–4).
+dim_date,Dimension,12,year_quarter,CHAR(7),NOT NULL,,,"CONCAT(YEAR, '-Q', QUARTER)",Descriptive Attribute,Chuỗi Năm-Quý định dạng YYYY-Q#.
+dim_date,Dimension,13,year_num,SMALLINT UNSIGNED,NOT NULL,,,YEAR(full_date),Descriptive Attribute,Năm dương lịch (2011–2027).
+dim_neighbourhood,Dimension,1,neighbourhood_sk,INT UNSIGNED,NOT NULL,PK (AUTO_INCREMENT),,System generated,Surrogate Key,Khóa đại diện khu vực địa lý.
+dim_neighbourhood,Dimension,2,neighbourhood_group,VARCHAR(50),NOT NULL,UNIQUE (BK part 1),,Neighbourhoods.neighbourhood_group,Natural Key / Hierarchy,"Nhóm vùng địa lý lớn (5 vùng: Central, East, North, North-East, West Region)."
+dim_neighbourhood,Dimension,3,neighbourhood_name,VARCHAR(100),NOT NULL,UNIQUE (BK part 2),,Neighbourhoods.neighbourhood,Natural Key,Tên khu vực quy hoạch chuẩn hóa (55 khu vực).
+dim_neighbourhood,Dimension,4,snapshot_date,DATE,NOT NULL,,,source_inventory.snapshot_date,Audit / Metadata,Ngày snapshot danh mục nguồn (2026-09-23).
+dim_neighbourhood,Dimension,5,created_at,DATETIME,NOT NULL,,,CURRENT_TIMESTAMP,Audit / Metadata,Thời điểm nạp bản ghi vào kho.
+dim_listing,Dimension,1,listing_sk,BIGINT UNSIGNED,NOT NULL,PK (AUTO_INCREMENT),,System generated,Surrogate Key,Khóa đại diện của phiên bản tin đăng tại snapshot.
+dim_listing,Dimension,2,listing_id,BIGINT UNSIGNED,NOT NULL,UNIQUE (BK part 1),,Listings.id,Natural Key,Mã định danh tin đăng Airbnb gốc.
+dim_listing,Dimension,3,snapshot_date,DATE,NOT NULL,UNIQUE (BK part 2),,source_inventory.snapshot_date,Natural Key,Ngày snapshot của bản ghi tin đăng (hỗ trợ đa snapshot).
+dim_listing,Dimension,4,snapshot_date_sk,INT,NOT NULL,FK,dim_date.date_sk,Derived from snapshot_date,Foreign Key,Khóa ngoại tham chiếu dim_date.
+dim_listing,Dimension,5,neighbourhood_sk,INT UNSIGNED,NOT NULL,FK,dim_neighbourhood.neighbourhood_sk,"Listings.(neighbourhood_group_cleansed, neighbourhood_cleansed)",Foreign Key,Khóa ngoại tham chiếu khu vực của tin đăng.
+dim_listing,Dimension,6,scrape_id,BIGINT UNSIGNED,NOT NULL,,,Listings.scrape_id,Audit / Metadata,Mã phiên thu thập dữ liệu của Inside Airbnb.
+dim_listing,Dimension,7,last_scraped_date,DATE,NOT NULL,,,Listings.last_scraped,Audit / Metadata,Ngày thu thập thực tế của tin đăng.
+dim_listing,Dimension,8,calendar_last_scraped_date,DATE,NOT NULL,,,Listings.calendar_last_scraped,Audit / Metadata,Ngày thu thập lịch lần cuối.
+dim_listing,Dimension,9,source_type,VARCHAR(50),NULL,,,Listings.source,Descriptive Attribute,Nguồn bản ghi trong scrape (ví dụ 'previous scrape').
+dim_listing,Dimension,10,listing_name,VARCHAR(300),NOT NULL,,,Listings.name,Descriptive Attribute,Tên tiêu đề tin đăng.
+dim_listing,Dimension,11,listing_url,VARCHAR(255),NOT NULL,,,Listings.listing_url,Descriptive Attribute,URL trang tin đăng trên Airbnb.
+dim_listing,Dimension,12,picture_url,VARCHAR(500),NULL,,,Listings.picture_url,Descriptive Attribute,URL ảnh đại diện tin đăng.
+dim_listing,Dimension,13,property_type,VARCHAR(100),NOT NULL,,,Listings.property_type,Descriptive Attribute,Loại hình bất động sản chi tiết.
+dim_listing,Dimension,14,room_type,VARCHAR(50),NOT NULL,,,Listings.room_type,Descriptive Attribute,"Loại phòng (Entire home/apt, Private room, Hotel room, Shared room) — chiều phân tích chính cho RQ1–RQ4 & KPI-03."
+dim_listing,Dimension,15,accommodates,INT UNSIGNED,NOT NULL,,,Listings.accommodates,Descriptive Attribute,Sức chứa khách tối đa (số nguyên 1–16).
+dim_listing,Dimension,16,bedrooms,INT UNSIGNED,NULL,,,Listings.bedrooms,Descriptive Attribute,Số phòng ngủ (nullable INT).
+dim_listing,Dimension,17,beds,INT UNSIGNED,NULL,,,Listings.beds,Descriptive Attribute,Số giường (nullable INT).
+dim_listing,Dimension,18,bathrooms_text,VARCHAR(100),NULL,,,Listings.bathrooms_text,Descriptive Attribute,Mô tả số lượng và loại phòng tắm.
+dim_listing,Dimension,19,latitude,"DECIMAL(10,7)",NOT NULL,,,Listings.latitude,Descriptive Attribute,Vĩ độ địa lý của tin đăng.
+dim_listing,Dimension,20,longitude,"DECIMAL(10,7)",NOT NULL,,,Listings.longitude,Descriptive Attribute,Kinh độ địa lý của tin đăng.
+dim_listing,Dimension,21,has_availability,TINYINT(1),NULL,,,Listings.has_availability,Descriptive Attribute,"Cờ có thông tin mở lịch (1=True, 0=False, NULL)."
+dim_listing,Dimension,22,license,VARCHAR(150),NULL,,,Listings.license,Descriptive Attribute,Mã giấy phép đăng ký lưu trú.
+dim_listing,Dimension,23,host_id,BIGINT UNSIGNED,NOT NULL,,,Listings.host_id,Descriptive Attribute,Mã định danh chủ nhà (denormalized trong dim_listing).
+dim_listing,Dimension,24,host_profile_id,BIGINT UNSIGNED,NULL,,,Listings.host_profile_id,Descriptive Attribute,Mã hồ sơ chủ nhà.
+dim_listing,Dimension,25,host_name,VARCHAR(150),NOT NULL,,,Listings.host_name,Descriptive Attribute,Tên hiển thị của chủ nhà.
+dim_listing,Dimension,26,host_location,VARCHAR(150),NULL,,,Listings.host_location,Descriptive Attribute,Địa điểm khai báo của chủ nhà.
+dim_listing,Dimension,27,host_is_superhost,TINYINT(1),NULL,,,Listings.host_is_superhost,Descriptive Attribute,"Cờ chủ nhà Superhost (1=True, 0=False)."
+dim_listing,Dimension,28,host_has_profile_pic,TINYINT(1),NULL,,,Listings.host_has_profile_pic,Descriptive Attribute,"Cờ chủ nhà có ảnh đại diện (1=True, 0=False)."
+dim_listing,Dimension,29,host_identity_verified,TINYINT(1),NULL,,,Listings.host_identity_verified,Descriptive Attribute,"Cờ chủ nhà đã xác minh danh tính (1=True, 0=False)."
+dim_listing,Dimension,30,hosts_time_as_user_years,SMALLINT UNSIGNED,NULL,,,Listings.hosts_time_as_user_years,Descriptive Attribute,Số năm tham gia Airbnb của chủ nhà.
+dim_listing,Dimension,31,hosts_time_as_user_months,TINYINT UNSIGNED,NULL,,,Listings.hosts_time_as_user_months,Descriptive Attribute,Số tháng lẻ tham gia Airbnb của chủ nhà.
+dim_listing,Dimension,32,hosts_time_as_host_years,SMALLINT UNSIGNED,NULL,,,Listings.hosts_time_as_host_years,Descriptive Attribute,Số năm làm host.
+dim_listing,Dimension,33,hosts_time_as_host_months,TINYINT UNSIGNED,NULL,,,Listings.hosts_time_as_host_months,Descriptive Attribute,Số tháng lẻ làm host.
+dim_listing,Dimension,34,first_review_date,DATE,NULL,,,Listings.first_review,Descriptive Attribute,Ngày đánh giá đầu tiên của tin đăng.
+dim_listing,Dimension,35,last_review_date,DATE,NULL,,,Listings.last_review,Descriptive Attribute,Ngày đánh giá gần nhất của tin đăng.
+dim_listing,Dimension,36,created_at,DATETIME,NOT NULL,,,CURRENT_TIMESTAMP,Audit / Metadata,Thời điểm nạp bản ghi vào kho.
+fact_listing_snapshot,Fact (Periodic Snapshot),1,listing_snapshot_sk,BIGINT UNSIGNED,NOT NULL,PK (AUTO_INCREMENT),,System generated,Surrogate Key,Khóa đại diện bảng fact_listing_snapshot.
+fact_listing_snapshot,Fact (Periodic Snapshot),2,listing_sk,BIGINT UNSIGNED,NOT NULL,FK; UNIQUE (part 1),dim_listing.listing_sk,"Lookup from dim_listing(listing_id, snapshot_date)",Foreign Key,Khóa ngoại tham chiếu dim_listing.
+fact_listing_snapshot,Fact (Periodic Snapshot),3,neighbourhood_sk,INT UNSIGNED,NOT NULL,FK,dim_neighbourhood.neighbourhood_sk,Lookup from dim_neighbourhood,Foreign Key,Khóa ngoại tham chiếu dim_neighbourhood.
+fact_listing_snapshot,Fact (Periodic Snapshot),4,snapshot_date_sk,INT,NOT NULL,FK; UNIQUE (part 2),dim_date.date_sk,Derived from snapshot_date,Foreign Key,Khóa ngoại tham chiếu dim_date.
+fact_listing_snapshot,Fact (Periodic Snapshot),5,listing_id,BIGINT UNSIGNED,NOT NULL,UNIQUE (BK part 1),,Listings.id,Degenerate / Natural Key,Mã listing gốc phục vụ kiểm tra/đối chiếu nhanh KPI-01.
+fact_listing_snapshot,Fact (Periodic Snapshot),6,snapshot_date,DATE,NOT NULL,UNIQUE (BK part 2),,source_inventory.snapshot_date,Natural Key,Ngày snapshot (2026-09-23).
+fact_listing_snapshot,Fact (Periodic Snapshot),7,listed_price_raw_amount,"DECIMAL(12,2)",NULL,,,"Listings.price (stripped $,)",Non-Additive Fact,"Giá niêm yết dạng số sau khi bỏ ký hiệu tiền tệ (có giá trị ở 2,728 dòng)."
+fact_listing_snapshot,Fact (Periodic Snapshot),8,quote_currency,CHAR(3),NULL,,,Listings.price_quote_raw -> quote.currency,Audit / Metadata,"Mã tiền tệ trích từ JSON báo giá ('SGD' ở 2,855 dòng)."
+fact_listing_snapshot,Fact (Periodic Snapshot),9,is_price_sgd_verified,TINYINT(1),NOT NULL,,,1 if listed_price_raw_amount>0 and quote_currency='SGD' else 0,Audit / Flag,"Cờ xác nhận giá hợp lệ bằng SGD (1 ở 2,725 dòng, 0 ở 483 dòng)."
+fact_listing_snapshot,Fact (Periodic Snapshot),10,listed_price_sgd,"DECIMAL(12,2)",NULL,,,listed_price_raw_amount when is_price_sgd_verified=1,Non-Additive Fact,"Giá niêm yết mỗi đêm đã xác minh đơn vị SGD (2,725 dòng) — dùng tính trực tiếp KPI-02 (Median = 202.83 SGD)."
+fact_listing_snapshot,Fact (Periodic Snapshot),11,price_quote_price_per_night,"DECIMAL(12,2)",NULL,,,Listings.price_quote_price_per_night,Non-Additive Fact,"Giá mỗi đêm từ trường báo giá tham chiếu (2,725 dòng)."
+fact_listing_snapshot,Fact (Periodic Snapshot),12,price_quote_total_price,"DECIMAL(14,2)",NULL,,,Listings.price_quote_total_price,Semi-Additive Fact,Tổng giá báo tham chiếu cho kỳ lưu trú.
+fact_listing_snapshot,Fact (Periodic Snapshot),13,price_quote_checkin_date,DATE,NULL,,,Listings.price_quote_checkin_date,Audit / Metadata,Ngày check-in của báo giá tham chiếu.
+fact_listing_snapshot,Fact (Periodic Snapshot),14,price_quote_checkout_date,DATE,NULL,,,Listings.price_quote_checkout_date,Audit / Metadata,Ngày check-out của báo giá tham chiếu.
+fact_listing_snapshot,Fact (Periodic Snapshot),15,minimum_nights,INT UNSIGNED,NULL,,,Listings.minimum_nights,Non-Additive Fact,Số đêm lưu trú tối thiểu cấu hình ở cấp listing.
+fact_listing_snapshot,Fact (Periodic Snapshot),16,maximum_nights,INT UNSIGNED,NULL,,,Listings.maximum_nights,Non-Additive Fact,Số đêm lưu trú tối đa cấu hình ở cấp listing.
+fact_listing_snapshot,Fact (Periodic Snapshot),17,minimum_minimum_nights,INT UNSIGNED,NULL,,,Listings.minimum_minimum_nights,Non-Additive Fact,Cực tiểu của số đêm lưu trú tối thiểu.
+fact_listing_snapshot,Fact (Periodic Snapshot),18,maximum_minimum_nights,INT UNSIGNED,NULL,,,Listings.maximum_minimum_nights,Non-Additive Fact,Cực đại của số đêm lưu trú tối thiểu.
+fact_listing_snapshot,Fact (Periodic Snapshot),19,minimum_maximum_nights,INT UNSIGNED,NULL,,,Listings.minimum_maximum_nights,Non-Additive Fact,Cực tiểu của số đêm lưu trú tối đa.
+fact_listing_snapshot,Fact (Periodic Snapshot),20,maximum_maximum_nights,INT UNSIGNED,NULL,,,Listings.maximum_maximum_nights,Non-Additive Fact,Cực đại của số đêm lưu trú tối đa.
+fact_listing_snapshot,Fact (Periodic Snapshot),21,minimum_nights_avg_ntm,"DECIMAL(10,2)",NOT NULL,,,Listings.minimum_nights_avg_ntm,Non-Additive Fact,Trung bình số đêm tối thiểu 12 tháng tới (giữ phần thập phân).
+fact_listing_snapshot,Fact (Periodic Snapshot),22,maximum_nights_avg_ntm,"DECIMAL(10,2)",NOT NULL,,,Listings.maximum_nights_avg_ntm,Non-Additive Fact,Trung bình số đêm tối đa 12 tháng tới (giữ phần thập phân).
+fact_listing_snapshot,Fact (Periodic Snapshot),23,availability_30,SMALLINT UNSIGNED,NOT NULL,,,Listings.availability_30,Semi-Additive Fact,Số đêm mở lịch trong 30 ngày tới.
+fact_listing_snapshot,Fact (Periodic Snapshot),24,availability_60,SMALLINT UNSIGNED,NOT NULL,,,Listings.availability_60,Semi-Additive Fact,Số đêm mở lịch trong 60 ngày tới.
+fact_listing_snapshot,Fact (Periodic Snapshot),25,availability_90,SMALLINT UNSIGNED,NOT NULL,,,Listings.availability_90,Semi-Additive Fact,Số đêm mở lịch trong 90 ngày tới.
+fact_listing_snapshot,Fact (Periodic Snapshot),26,availability_365,SMALLINT UNSIGNED,NOT NULL,,,Listings.availability_365,Semi-Additive Fact,Số đêm mở lịch trong 365 ngày tới.
+fact_listing_snapshot,Fact (Periodic Snapshot),27,availability_eoy,SMALLINT UNSIGNED,NOT NULL,,,Listings.availability_eoy,Semi-Additive Fact,Số đêm mở lịch đến cuối năm.
+fact_listing_snapshot,Fact (Periodic Snapshot),28,number_of_reviews,INT UNSIGNED,NOT NULL,,,Listings.number_of_reviews,Semi-Additive Fact,Tổng số đánh giá tích lũy của listing tại snapshot — dùng tính SUP-01.
+fact_listing_snapshot,Fact (Periodic Snapshot),29,number_of_reviews_ltm,INT UNSIGNED,NOT NULL,,,Listings.number_of_reviews_ltm,Semi-Additive Fact,Số đánh giá trong 12 tháng gần nhất.
+fact_listing_snapshot,Fact (Periodic Snapshot),30,number_of_reviews_l30d,INT UNSIGNED,NOT NULL,,,Listings.number_of_reviews_l30d,Semi-Additive Fact,Số đánh giá trong 30 ngày gần nhất.
+fact_listing_snapshot,Fact (Periodic Snapshot),31,number_of_reviews_ly,INT UNSIGNED,NOT NULL,,,Listings.number_of_reviews_ly,Semi-Additive Fact,Số đánh giá trong năm lịch trước.
+fact_listing_snapshot,Fact (Periodic Snapshot),32,reviews_per_month,"DECIMAL(8,2)",NULL,,,Listings.reviews_per_month,Non-Additive Fact,Số đánh giá trung bình mỗi tháng.
+fact_listing_snapshot,Fact (Periodic Snapshot),33,review_scores_rating,"DECIMAL(4,2)",NULL,,,Listings.review_scores_rating,Non-Additive Fact,Điểm đánh giá tổng thể (miền 1.00–5.00) — dùng tính KPI-05.
+fact_listing_snapshot,Fact (Periodic Snapshot),34,review_scores_accuracy,"DECIMAL(4,2)",NULL,,,Listings.review_scores_accuracy,Non-Additive Fact,Điểm độ chính xác của mô tả.
+fact_listing_snapshot,Fact (Periodic Snapshot),35,review_scores_cleanliness,"DECIMAL(4,2)",NULL,,,Listings.review_scores_cleanliness,Non-Additive Fact,Điểm mức độ sạch sẽ.
+fact_listing_snapshot,Fact (Periodic Snapshot),36,review_scores_checkin,"DECIMAL(4,2)",NULL,,,Listings.review_scores_checkin,Non-Additive Fact,Điểm quy trình nhận phòng.
+fact_listing_snapshot,Fact (Periodic Snapshot),37,review_scores_communication,"DECIMAL(4,2)",NULL,,,Listings.review_scores_communication,Non-Additive Fact,Điểm giao tiếp chủ nhà.
+fact_listing_snapshot,Fact (Periodic Snapshot),38,review_scores_location,"DECIMAL(4,2)",NULL,,,Listings.review_scores_location,Non-Additive Fact,Điểm vị trí.
+fact_listing_snapshot,Fact (Periodic Snapshot),39,review_scores_value,"DECIMAL(4,2)",NULL,,,Listings.review_scores_value,Non-Additive Fact,Điểm giá trị tương xứng chi phí.
+fact_listing_snapshot,Fact (Periodic Snapshot),40,host_listings_count,INT UNSIGNED,NOT NULL,,,Listings.host_listings_count,Semi-Additive Fact,Số tin đăng của chủ nhà theo hồ sơ.
+fact_listing_snapshot,Fact (Periodic Snapshot),41,calculated_host_listings_count,INT UNSIGNED,NOT NULL,,,Listings.calculated_host_listings_count,Semi-Additive Fact,Tổng số tin đăng của chủ nhà trong snapshot.
+fact_listing_snapshot,Fact (Periodic Snapshot),42,calculated_host_listings_count_entire_homes,INT UNSIGNED,NOT NULL,,,Listings.calculated_host_listings_count_entire_homes,Semi-Additive Fact,Số tin đăng nguyên căn của chủ nhà.
+fact_listing_snapshot,Fact (Periodic Snapshot),43,calculated_host_listings_count_private_rooms,INT UNSIGNED,NOT NULL,,,Listings.calculated_host_listings_count_private_rooms,Semi-Additive Fact,Số tin đăng phòng riêng của chủ nhà.
+fact_listing_snapshot,Fact (Periodic Snapshot),44,calculated_host_listings_count_shared_rooms,INT UNSIGNED,NOT NULL,,,Listings.calculated_host_listings_count_shared_rooms,Semi-Additive Fact,Số tin đăng phòng chung của chủ nhà.
+fact_listing_snapshot,Fact (Periodic Snapshot),45,estimated_occupancy_l365d,INT UNSIGNED,NOT NULL,,,Listings.estimated_occupancy_l365d,Semi-Additive Fact (Estimate),Số ngày lấp đầy ước tính của nguồn (không phải giao dịch thực).
+fact_listing_snapshot,Fact (Periodic Snapshot),46,estimated_revenue_l365d,"DECIMAL(14,2)",NULL,,,Listings.estimated_revenue_l365d,Semi-Additive Fact (Estimate),Doanh thu ước tính của nguồn (không phải doanh thu thực).
+fact_listing_snapshot,Fact (Periodic Snapshot),47,created_at,DATETIME,NOT NULL,,,CURRENT_TIMESTAMP,Audit / Metadata,Thời điểm nạp bản ghi vào kho.
+fact_calendar,Fact (Daily Grain Snapshot),1,calendar_sk,BIGINT UNSIGNED,NOT NULL,PK (AUTO_INCREMENT),,System generated,Surrogate Key,Khóa đại diện dòng lịch theo ngày.
+fact_calendar,Fact (Daily Grain Snapshot),2,listing_sk,BIGINT UNSIGNED,NOT NULL,FK,dim_listing.listing_sk,"Lookup from dim_listing(listing_id, snapshot_date)",Foreign Key,Khóa ngoại tham chiếu dim_listing.
+fact_calendar,Fact (Daily Grain Snapshot),3,neighbourhood_sk,INT UNSIGNED,NOT NULL,FK,dim_neighbourhood.neighbourhood_sk,Inherited from dim_listing.neighbourhood_sk,Foreign Key (Conformed),Khóa ngoại tham chiếu dim_neighbourhood để tăng tốc lọc KPI-04 theo khu vực.
+fact_calendar,Fact (Daily Grain Snapshot),4,calendar_date_sk,INT,NOT NULL,FK,dim_date.date_sk,Derived from Calendar.date,Foreign Key,Khóa ngoại tham chiếu ngày lịch trong dim_date.
+fact_calendar,Fact (Daily Grain Snapshot),5,snapshot_date_sk,INT,NOT NULL,FK,dim_date.date_sk,Derived from snapshot_date,Foreign Key,Khóa ngoại tham chiếu ngày snapshot trong dim_date.
+fact_calendar,Fact (Daily Grain Snapshot),6,listing_id,BIGINT UNSIGNED,NOT NULL,UNIQUE (BK part 1),,Calendar.listing_id,Natural Key,Mã tin đăng gốc.
+fact_calendar,Fact (Daily Grain Snapshot),7,calendar_date,DATE,NOT NULL,UNIQUE (BK part 2),,Calendar.date,Natural Key,Ngày lịch được quan sát (2026-09-25..2027-09-25).
+fact_calendar,Fact (Daily Grain Snapshot),8,snapshot_date,DATE,NOT NULL,UNIQUE (BK part 3),,source_inventory.snapshot_date,Natural Key,Ngày snapshot (2026-09-23).
+fact_calendar,Fact (Daily Grain Snapshot),9,is_available,TINYINT(1),NOT NULL,,,"Calendar.available ('t'->1, 'f'->0)",Additive / Binary Fact,"Trạng thái mở lịch (1=Available, 0=Unavailable) — dùng tính KPI-04."
+fact_calendar,Fact (Daily Grain Snapshot),10,minimum_nights,INT UNSIGNED,NOT NULL,,,Calendar.minimum_nights,Non-Additive Fact,Số đêm lưu trú tối thiểu áp dụng cho ngày lịch.
+fact_calendar,Fact (Daily Grain Snapshot),11,maximum_nights,INT UNSIGNED,NOT NULL,,,Calendar.maximum_nights,Non-Additive Fact,Số đêm lưu trú tối đa áp dụng cho ngày lịch.
+fact_calendar,Fact (Daily Grain Snapshot),12,created_at,DATETIME,NOT NULL,,,CURRENT_TIMESTAMP,Audit / Metadata,Thời điểm nạp bản ghi vào kho.
+fact_review,Fact (Transaction / Event),1,review_sk,BIGINT UNSIGNED,NOT NULL,PK (AUTO_INCREMENT),,System generated,Surrogate Key,Khóa đại diện sự kiện đánh giá.
+fact_review,Fact (Transaction / Event),2,listing_sk,BIGINT UNSIGNED,NOT NULL,FK,dim_listing.listing_sk,"Lookup from dim_listing(listing_id, snapshot_date)",Foreign Key,Khóa ngoại tham chiếu dim_listing.
+fact_review,Fact (Transaction / Event),3,neighbourhood_sk,INT UNSIGNED,NOT NULL,FK,dim_neighbourhood.neighbourhood_sk,Inherited from dim_listing.neighbourhood_sk,Foreign Key (Conformed),Khóa ngoại tham chiếu dim_neighbourhood.
+fact_review,Fact (Transaction / Event),4,review_date_sk,INT,NOT NULL,FK,dim_date.date_sk,Derived from Reviews.date,Foreign Key,Khóa ngoại tham chiếu ngày đánh giá trong dim_date.
+fact_review,Fact (Transaction / Event),5,snapshot_date_sk,INT,NOT NULL,FK,dim_date.date_sk,Derived from snapshot_date,Foreign Key,Khóa ngoại tham chiếu ngày snapshot trong dim_date.
+fact_review,Fact (Transaction / Event),6,listing_id,BIGINT UNSIGNED,NOT NULL,UNIQUE (BK part 1),,Reviews.listing_id,Natural Key,Mã tin đăng được đánh giá.
+fact_review,Fact (Transaction / Event),7,review_id,BIGINT UNSIGNED,NOT NULL,UNIQUE (BK part 2),,Reviews.id,Degenerate Dimension / Natural Key,Mã đánh giá từ hệ thống nguồn (duy nhất khi kết hợp với listing_id).
+fact_review,Fact (Transaction / Event),8,review_date,DATE,NOT NULL,,,Reviews.date,Natural Attribute,Ngày đăng đánh giá (2011-05-04..2026-09-25).
+fact_review,Fact (Transaction / Event),9,snapshot_date,DATE,NOT NULL,UNIQUE (BK part 3),,source_inventory.snapshot_date,Natural Key,Ngày snapshot (2026-09-23).
+fact_review,Fact (Transaction / Event),10,reviewer_id,BIGINT UNSIGNED,NOT NULL,,,Reviews.reviewer_id,Degenerate Attribute,Mã người dùng viết đánh giá.
+fact_review,Fact (Transaction / Event),11,reviewer_name,VARCHAR(150),NOT NULL,,,Reviews.reviewer_name,Degenerate Attribute,Tên hiển thị của người đánh giá.
+fact_review,Fact (Transaction / Event),12,has_comment,TINYINT(1),NOT NULL,,,1 if Reviews.comments not null/blank else 0,Binary Flag,"Cờ có nội dung bình luận văn bản (45,983 dòng = 1; 17 dòng = 0)."
+fact_review,Fact (Transaction / Event),13,comment_length,INT UNSIGNED,NOT NULL,,,CHAR_LENGTH(TRIM(Reviews.comments)),Additive / Descriptive Fact,Độ dài ký tự của nội dung bình luận.
+fact_review,Fact (Transaction / Event),14,review_count,TINYINT UNSIGNED,NOT NULL,,,Constant 1,Additive Fact,Biến đếm sự kiện đánh giá (= 1) phục vụ tính SUP-02.
+fact_review,Fact (Transaction / Event),15,created_at,DATETIME,NOT NULL,,,CURRENT_TIMESTAMP,Audit / Metadata,Thời điểm nạp bản ghi vào kho.
