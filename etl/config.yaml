@@ -1,0 +1,67 @@
+# etl/config.yaml
+# Cấu hình quy trình ETL - Airbnb Singapore Data Warehouse 2026
+
+project:
+  name: "airbnb-singapore-data-warehouse"
+  snapshot_date: "2026-09-23"
+  scrape_id: 20260923225116
+  author: "Thái (Data Engineer)"
+
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  staging_dir: "data/processed/staging"
+  silver_dir: "data/processed/silver"
+  gold_dir: "data/processed/gold"
+  rejected_dir: "data/processed/rejected"
+  outputs_dir: "outputs"
+  logs_dir: "logs"
+
+sources:
+  listings:
+    file_name: "listings.csv.gz"
+    compression: "gzip"
+    encoding: "utf-8-sig"
+    staging_table: "stg_listings"
+    natural_key: ["id"]
+    chunk_size: 10000
+    expected_rows: 3208
+    expected_cols: 90
+
+  calendar:
+    file_name: "calendar.csv.gz"
+    compression: "gzip"
+    encoding: "utf-8-sig"
+    staging_table: "stg_calendar"
+    natural_key: ["listing_id", "date"]
+    chunk_size: 100000
+    expected_rows: 1170950
+    expected_cols: 5
+
+  reviews:
+    file_name: "reviews.csv.gz"
+    compression: "gzip"
+    encoding: "utf-8-sig"
+    staging_table: "stg_reviews"
+    natural_key: ["listing_id", "id"]
+    chunk_size: 20000
+    expected_rows: 46000
+    expected_cols: 6
+
+  neighbourhoods:
+    file_name: "neighbourhoods.csv"
+    compression: null
+    encoding: "utf-8-sig"
+    staging_table: "stg_neighbourhoods"
+    natural_key: ["neighbourhood_group", "neighbourhood"]
+    chunk_size: 1000
+    expected_rows: 55
+    expected_cols: 2
+
+database:
+  default_host: "localhost"
+  default_port: 3306
+  default_database: "airbnb_sg_2026"
+  default_user: "airbnb_app"
+  charset: "utf8mb4"
+  collation: "utf8mb4_0900_ai_ci"

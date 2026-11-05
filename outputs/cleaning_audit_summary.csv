@@ -1,0 +1,5 @@
+﻿dataset,initial_rows,clean_rows,rejected_rows,null_price_count,valid_sgd_count,median_price_sgd,null_rating_count,available_nights,unavailable_nights,available_ratio,null_comments_count,unique_listings_in_reviews,unique_groups,unique_neighbourhoods
+Listings,3208,3208,0,483.0,2725.0,202.83,1369.0,,,,,,,
+Calendar,1170950,1170950,0,,,,,900960.0,269990.0,76.94,,,,
+Reviews,46000,46000,0,,,,,,,,17.0,1839.0,,
+Neighbourhoods,55,55,0,,,,,,,,,,5.0,55.0
