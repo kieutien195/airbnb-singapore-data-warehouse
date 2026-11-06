@@ -37,6 +37,9 @@ etl/
 # Chạy toàn bộ 3 bước: Ingest -> Clean -> Transform
 python etl/run_pipeline.py
 
+# Chạy toàn bộ qua file, kể cả khi đã cấu hình MySQL
+python etl/run_pipeline.py --file-only
+
 # Hoặc chạy thử nghiệm nhanh ở chế độ mẫu (500 dòng đầu mỗi file):
 python etl/run_pipeline.py --sample 500
 ```
@@ -45,14 +48,14 @@ python etl/run_pipeline.py --sample 500
 
 #### Bước 1 – Ingestion (Task 3.2):
 ```bash
-# Chạy thử mẫu 500 dòng để kiểm tra kết nối:
+# Chạy thử mẫu 500 dòng, chỉ xuất file:
 python etl/ingest.py --sample 500
 
 # Chạy toàn bộ dữ liệu nguồn:
 python etl/ingest.py
 ```
 - **Đầu ra**: 
-  - MySQL Staging tables (nếu có kết nối): `stg_listings`, `stg_calendar`, `stg_reviews`, `stg_neighbourhoods`.
+  - MySQL Staging tables (khi có cấu hình MySQL và chạy toàn bộ): `stg_listings`, `stg_calendar`, `stg_reviews`, `stg_neighbourhoods`.
   - File Staging: `data/processed/staging/stg_*.csv`.
   - Log kiểm toán: `logs/ingest.log` và bảng `etl_ingest_log`.
 
@@ -78,7 +81,9 @@ python etl/transform.py
 ## 3. Các Nguyên tắc Kỹ thuật Đã Được Hiện Thực
 
 1. **Bảo mật**: Không bao giờ hardcode tài khoản/mật khẩu trong code. Toàn bộ kết nối được nạp an toàn từ `.env`.
-2. **Tính khả lặp (Idempotency - TQ-05 / TC-20)**: Cơ chế nạp dữ liệu luôn gắn với `snapshot_date` (`2026-09-23`), xóa sạch partition cũ trước khi nạp lại, đảm bảo chạy lần 2 không bao giờ phát sinh bản ghi nhân đôi.
+2. **Tính khả lặp (TQ-05 / TC-20)**: Ingest dùng và kiểm tra DDL Task 3.1 trong `sql/01_staging_schema.sql` bằng verifier cùng task. Nếu schema cũ không khớp, nâng cấp theo hướng dẫn Task 3.1 trước khi nạp. Mỗi bảng dùng khóa MySQL theo snapshot và một transaction cho cả DELETE lẫn INSERT. Lỗi nạp hoặc sai số dòng cấu hình sẽ rollback bảng đang nạp và dừng pipeline. Khi đổi snapshot, cập nhật `expected_rows` trong cấu hình tương ứng.
+   - Nếu đã cấu hình MySQL, lỗi kết nối làm lệnh thoát khác 0. Dùng `--file-only` khi muốn chạy toàn bộ qua file.
+   - Chế độ mẫu chỉ ghi vào thư mục con `sample/` của từng tầng và báo cáo. Calendar/Reviews có thể thiếu listing cha do lấy mẫu từng file độc lập; các dòng này được ghi lại và loại khỏi Gold mẫu.
 3. **Bảo toàn dữ liệu nghiệp vụ**:
    - `price` và `review_scores_*` có `NULL` hợp lệ được giữ nguyên `NULL`, tuyệt đối không thay bằng `0`.
    - Outliers (giá cao, sức chứa lớn) được giữ nguyên 100% trong Silver và Gold theo đúng phân phối tự nhiên của thị trường Singapore.
@@ -93,5 +98,5 @@ python etl/transform.py
 
 ## 4. Nghiệm thu Bàn giao (Handoff)
 
-- **Bàn giao cho Minh (Task 3.5 - Dựng Fact/Dimension trên MySQL)**: Các file Gold chuẩn tại `data/processed/gold/` và DDL `sql/02_warehouse_schema_draft.sql` đã khớp nhau 100% về tên cột và kiểu dữ liệu.
-- **Bàn giao cho Hồng (Task 3.7 - QA & Data Quality)**: Báo cáo `outputs/join_coverage.csv` (100% quan hệ đạt 0 orphan key) và `outputs/cleaning_audit_summary.csv` sẵn sàng để đối chiếu kiểm thử.
+- **Bàn giao Gold**: Khi thiếu listing cha hoặc khóa ngày, pipeline ghi coverage `FAIL` và thoát khác 0 trước khi xuất Gold mới. Dòng Calendar/Reviews thiếu listing cha nằm trong `outputs/etl_orphan_records.csv`. Khu vực mới được cảnh báo và ánh xạ vào `Unknown Neighbourhood` với SK 0. Chỉ dùng Gold cho bước 3.5 sau lần chạy toàn bộ thành công.
+- **Nghiệm thu MySQL**: Chạy trên database thử nghiệm với quyền tạo bảng và ghi staging. Chạy hai lần cùng snapshot và đối chiếu số dòng theo bảng. Xác nhận log ingest thành công và bốn quan hệ trong `outputs/join_coverage.csv`.

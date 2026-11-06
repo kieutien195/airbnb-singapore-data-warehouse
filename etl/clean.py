@@ -40,6 +40,8 @@ import yaml
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from etl.ingest import output_path
+
 LOG_DIR = PROJECT_ROOT / "logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 LOG_FILE = LOG_DIR / "clean.log"
@@ -69,7 +71,7 @@ def parse_price(val: Any) -> Optional[float]:
         return np.nan
     try:
         f = float(s)
-        return round(f, 2)
+        return round(f, 2) if np.isfinite(f) else np.nan
     except (ValueError, TypeError):
         return np.nan
 
@@ -113,7 +115,7 @@ def parse_iso_date(val: Any) -> Optional[str]:
     if not s or s.lower() in ("nan", "none", "nat"):
         return None
     try:
-        dt = pd.to_datetime(s, errors="coerce")
+        dt = pd.to_datetime(s, format="%Y-%m-%d", errors="coerce")
         if pd.isna(dt):
             return None
         return dt.strftime("%Y-%m-%d")
@@ -131,6 +133,36 @@ def date_to_sk(date_str: Optional[str]) -> Optional[int]:
         return None
 
 
+def positive_id(values: pd.Series) -> pd.Series:
+    tokens = values.astype("string").str.strip()
+    valid = tokens.str.fullmatch(r"[0-9]{1,19}", na=False)
+    valid &= tokens.str.len().lt(19) | tokens.le(str(np.iinfo(np.int64).max))
+    ids = tokens.where(valid).astype("Int64")
+    return ids.where(ids > 0)
+
+
+def iso_dates(values: pd.Series) -> pd.Series:
+    tokens = values.astype("string").str.strip()
+    parsed = pd.to_datetime(tokens.where(tokens.str.fullmatch(r"\d{4}-\d{2}-\d{2}")),
+                            format="%Y-%m-%d", errors="coerce")
+    return parsed.dt.strftime("%Y-%m-%d")
+
+
+def invalid_integer(values: pd.Series, minimum: int, maximum: int) -> pd.Series:
+    return ~values.between(minimum, maximum) | values.mod(1).ne(0)
+
+
+def reject_invalid(raw, clean, checks, rejected):
+    for reason, mask in checks.items():
+        bad_index = mask.reindex(clean.index).fillna(True)
+        if bad_index.any():
+            bad = raw.loc[clean.index[bad_index]].copy()
+            bad["rejection_reason"] = reason
+            rejected.append(bad)
+            clean = clean.loc[~bad_index].copy()
+    return clean
+
+
 # ---------------------------------------------------------------------------
 # 1. Làm sạch Listings
 # ---------------------------------------------------------------------------
@@ -141,13 +173,34 @@ def clean_listings(df: pd.DataFrame, snapshot_date: str) -> Tuple[pd.DataFrame, 
 
     clean_df = df.copy()
 
-    # Kiểm tra khóa chính bắt buộc
-    invalid_mask = clean_df["id"].isna() | (clean_df["id"] <= 0)
-    if invalid_mask.any():
-        bad = clean_df[invalid_mask].copy()
-        bad["rejection_reason"] = "Missing or invalid id"
-        rejected_rows.append(bad)
-        clean_df = clean_df[~invalid_mask]
+    checks = {}
+    for col in ("id", "scrape_id", "host_id"):
+        clean_df[col] = positive_id(df[col])
+        checks[f"Missing or invalid {col}"] = clean_df[col].isna()
+    clean_df["last_scraped"] = iso_dates(df["last_scraped"])
+    checks["Missing or invalid last_scraped"] = clean_df["last_scraped"].isna()
+    for col in ("room_type", "neighbourhood_cleansed", "neighbourhood_group_cleansed"):
+        checks[f"Missing {col}"] = df[col].astype("string").str.strip().fillna("").eq("")
+    for col, lower, upper in (("latitude", -90, 90), ("longitude", -180, 180)):
+        clean_df[col] = pd.to_numeric(df[col], errors="coerce")
+        checks[f"Missing or invalid {col}"] = ~clean_df[col].between(lower, upper)
+    for col, lower, upper in (("accommodates", 1, 16), ("number_of_reviews", 0, 2**32 - 1)):
+        clean_df[col] = pd.to_numeric(df[col], errors="coerce")
+        checks[f"Missing or invalid {col}"] = invalid_integer(clean_df[col], lower, upper)
+    for col in df.filter(regex=r"^review_scores_").columns:
+        clean_df[col] = pd.to_numeric(df[col], errors="coerce")
+        checks[f"Invalid {col} (expected 1–5)"] = df[col].notna() & ~clean_df[col].between(1, 5)
+    for col in ("minimum_nights", "maximum_nights"):
+        clean_df[col] = pd.to_numeric(df[col], errors="coerce")
+        checks[f"Invalid {col}"] = df[col].notna() & invalid_integer(clean_df[col], 1, 2**32 - 1)
+    checks["maximum_nights below minimum_nights"] = clean_df["maximum_nights"].lt(clean_df["minimum_nights"])
+    for col in ("host_is_superhost", "host_has_profile_pic", "host_identity_verified", "has_availability"):
+        if col in df:
+            checks[f"Invalid {col}"] = df[col].notna() & df[col].map(parse_boolean).isna()
+    # Missing price is allowed. A malformed or nonfinite source value is quarantined.
+    clean_df["listed_price_raw_amount"] = df["price"].map(parse_price)
+    checks["Invalid listed price"] = df["price"].notna() & clean_df["listed_price_raw_amount"].isna()
+    clean_df = reject_invalid(df, clean_df, checks, rejected_rows)
 
     # Kiểm tra trùng grain (id, snapshot_date)
     dup_mask = clean_df.duplicated(subset=["id"], keep="last")
@@ -158,7 +211,6 @@ def clean_listings(df: pd.DataFrame, snapshot_date: str) -> Tuple[pd.DataFrame, 
         clean_df = clean_df[~dup_mask]
 
     # 1. Giá & Xác minh tiền tệ SGD (KPI-02)
-    clean_df["listed_price_raw_amount"] = clean_df["price"].apply(parse_price)
     clean_df["quote_currency"] = clean_df["price_quote_raw"].apply(extract_currency_from_json)
 
     # is_price_sgd_verified = 1 khi price > 0 và quote_currency == 'SGD' (2,725 dòng)
@@ -195,7 +247,7 @@ def clean_listings(df: pd.DataFrame, snapshot_date: str) -> Tuple[pd.DataFrame, 
 
     # 5. Numerics
     # accommodates: giữ số nguyên (1..16), KHÔNG parse thành date
-    clean_df["accommodates"] = pd.to_numeric(clean_df["accommodates"], errors="coerce").fillna(1).astype(int)
+    clean_df["accommodates"] = clean_df["accommodates"].astype(int)
 
     # Giữ phần thập phân của *_avg_ntm
     clean_df["minimum_nights_avg_ntm"] = pd.to_numeric(clean_df["minimum_nights_avg_ntm"], errors="coerce").round(2)
@@ -216,7 +268,7 @@ def clean_listings(df: pd.DataFrame, snapshot_date: str) -> Tuple[pd.DataFrame, 
         "dataset": "Listings",
         "initial_rows": initial_rows,
         "clean_rows": len(clean_df),
-        "rejected_rows": len(clean_df) - initial_rows,
+        "rejected_rows": initial_rows - len(clean_df),
         "null_price_count": int(clean_df["listed_price_sgd"].isna().sum()),
         "valid_sgd_count": valid_sgd_count,
         "median_price_sgd": round(float(median_price_sgd), 2) if not pd.isna(median_price_sgd) else None,
@@ -237,27 +289,28 @@ def clean_calendar(df: pd.DataFrame, snapshot_date: str) -> Tuple[pd.DataFrame, 
 
     clean_df = df.copy()
 
-    # Kiểm tra trường bắt buộc
-    invalid_mask = clean_df["listing_id"].isna() | clean_df["date"].isna() | clean_df["available"].isna()
-    if invalid_mask.any():
-        bad = clean_df[invalid_mask].copy()
-        bad["rejection_reason"] = "Missing required fields (listing_id/date/available)"
-        rejected_rows.append(bad)
-        clean_df = clean_df[~invalid_mask]
-
-    # Chuẩn hóa ngày (vectorized - cực nhanh)
-    clean_df["calendar_date"] = clean_df["date"].astype(str).str.strip()
-    clean_df["calendar_date_sk"] = clean_df["calendar_date"].str.replace("-", "", regex=False).astype(np.int64)
+    clean_df["listing_id"] = positive_id(df["listing_id"])
+    clean_df["calendar_date"] = iso_dates(df["date"])
+    flags = df["available"].astype("string").str.strip().str.lower()
+    clean_df["is_available"] = flags.map({
+        "t": 1, "true": 1, "1": 1, "1.0": 1,
+        "f": 0, "false": 0, "0": 0, "0.0": 0,
+    })
+    checks = {
+        "Missing or invalid listing_id": clean_df["listing_id"].isna(),
+        "Missing or invalid calendar date": clean_df["calendar_date"].isna(),
+        "Missing or invalid available": clean_df["is_available"].isna(),
+    }
+    for col in ("minimum_nights", "maximum_nights"):
+        clean_df[col] = pd.to_numeric(df[col], errors="coerce")
+        checks[f"Missing or invalid {col}"] = invalid_integer(clean_df[col], 1, 2**32 - 1)
+    checks["maximum_nights below minimum_nights"] = clean_df["maximum_nights"].lt(clean_df["minimum_nights"])
+    clean_df = reject_invalid(df, clean_df, checks, rejected_rows)
+    clean_df["calendar_date_sk"] = clean_df["calendar_date"].str.replace("-", "", regex=False).astype("int64")
     clean_df["snapshot_date"] = snapshot_date
-    clean_df["snapshot_date_sk"] = int(snapshot_date.replace("-", ""))
-
-    # Chuẩn hóa available -> is_available (0 hoặc 1) vectorized
-    avail_str = clean_df["available"].astype(str).str.strip().str.lower()
-    clean_df["is_available"] = np.where(avail_str.isin(["t", "true", "1", "1.0"]), 1, 0)
-
-    # minimum_nights / maximum_nights vectorized
-    clean_df["minimum_nights"] = pd.to_numeric(clean_df["minimum_nights"], errors="coerce").fillna(1).astype(int)
-    clean_df["maximum_nights"] = pd.to_numeric(clean_df["maximum_nights"], errors="coerce").fillna(1125).astype(int)
+    clean_df["snapshot_date_sk"] = date_to_sk(snapshot_date)
+    for col in ("is_available", "minimum_nights", "maximum_nights"):
+        clean_df[col] = clean_df[col].astype("int64")
 
     # Khử trùng theo grain (listing_id, date)
     dup_mask = clean_df.duplicated(subset=["listing_id", "calendar_date"], keep="first")
@@ -294,21 +347,18 @@ def clean_reviews(df: pd.DataFrame, snapshot_date: str) -> Tuple[pd.DataFrame, p
 
     clean_df = df.copy()
 
-    # Kiểm tra trường bắt buộc
-    invalid_mask = clean_df["listing_id"].isna() | clean_df["id"].isna() | clean_df["date"].isna()
-    if invalid_mask.any():
-        bad = clean_df[invalid_mask].copy()
-        bad["rejection_reason"] = "Missing listing_id or id or date"
-        rejected_rows.append(bad)
-        clean_df = clean_df[~invalid_mask]
-
-    clean_df["review_id"] = clean_df["id"].astype(np.int64)
-    clean_df["review_date"] = clean_df["date"].astype(str).str.strip()
-    clean_df["review_date_sk"] = clean_df["review_date"].str.replace("-", "", regex=False).astype(np.int64)
+    checks = {}
+    for col in ("listing_id", "id", "reviewer_id"):
+        clean_df[col] = positive_id(df[col])
+        checks[f"Missing or invalid {col}"] = clean_df[col].isna()
+    clean_df["review_date"] = iso_dates(df["date"])
+    checks["Missing or invalid review date"] = clean_df["review_date"].isna()
+    clean_df = reject_invalid(df, clean_df, checks, rejected_rows)
+    clean_df["review_id"] = clean_df["id"].astype("int64")
+    clean_df["review_date_sk"] = clean_df["review_date"].str.replace("-", "", regex=False).astype("int64")
     clean_df["snapshot_date"] = snapshot_date
-    clean_df["snapshot_date_sk"] = int(snapshot_date.replace("-", ""))
+    clean_df["snapshot_date_sk"] = date_to_sk(snapshot_date)
 
-    clean_df["reviewer_id"] = pd.to_numeric(clean_df["reviewer_id"], errors="coerce").fillna(0).astype(np.int64)
     clean_df["reviewer_name"] = clean_df["reviewer_name"].fillna("Anonymous").astype(str).str.strip().replace({"": "Anonymous"})
 
     # Xử lý comments: trích cờ has_comment và comment_length
@@ -346,8 +396,8 @@ def clean_neighbourhoods(df: pd.DataFrame, snapshot_date: str) -> Tuple[pd.DataF
     rejected_rows = []
 
     clean_df = df.copy()
-    clean_df["neighbourhood_group"] = clean_df["neighbourhood_group"].astype(str).str.strip()
-    clean_df["neighbourhood_name"] = clean_df["neighbourhood"].astype(str).str.strip()
+    clean_df["neighbourhood_group"] = clean_df["neighbourhood_group"].astype("string").str.strip().fillna("")
+    clean_df["neighbourhood_name"] = clean_df["neighbourhood"].astype("string").str.strip().fillna("")
 
     invalid_mask = (clean_df["neighbourhood_group"] == "") | (clean_df["neighbourhood_name"] == "")
     if invalid_mask.any():
@@ -382,13 +432,13 @@ def clean_neighbourhoods(df: pd.DataFrame, snapshot_date: str) -> Tuple[pd.DataF
 # ---------------------------------------------------------------------------
 # Pipeline Làm sạch Chính
 # ---------------------------------------------------------------------------
-def run_cleaning_pipeline(config_path: Path) -> Dict[str, Any]:
+def run_cleaning_pipeline(config_path: Path, sample_size: Optional[int] = None) -> Dict[str, Any]:
     config = load_config(config_path)
     snapshot_date = config["project"]["snapshot_date"]
-    staging_dir = PROJECT_ROOT / config["paths"]["staging_dir"]
-    silver_dir = PROJECT_ROOT / config["paths"]["silver_dir"]
-    rejected_dir = PROJECT_ROOT / config["paths"]["rejected_dir"]
-    outputs_dir = PROJECT_ROOT / config["paths"]["outputs_dir"]
+    staging_dir = output_path(config, "staging_dir", sample_size)
+    silver_dir = output_path(config, "silver_dir", sample_size)
+    rejected_dir = output_path(config, "rejected_dir", sample_size)
+    outputs_dir = output_path(config, "outputs_dir", sample_size)
 
     for d in [silver_dir, rejected_dir, outputs_dir]:
         d.mkdir(parents=True, exist_ok=True)
@@ -398,24 +448,22 @@ def run_cleaning_pipeline(config_path: Path) -> Dict[str, Any]:
     print(f"  Snapshot Date: {snapshot_date}")
     print("=" * 70)
 
-    # Nạp dữ liệu từ Staging
-    stg_listings_path = staging_dir / "stg_listings.csv"
-    stg_calendar_path = staging_dir / "stg_calendar.csv"
-    stg_reviews_path = staging_dir / "stg_reviews.csv"
-    stg_neighbourhoods_path = staging_dir / "stg_neighbourhoods.csv"
+    # Read identifiers as strings so a single missing key cannot round a BIGINT.
+    dtypes = {col: "string" for col in (
+        "id", "listing_id", "scrape_id", "host_id", "reviewer_id", "host_profile_id",
+        "latitude", "longitude",
+    )}
+    staged = {}
+    for source, cfg in config["sources"].items():
+        path = staging_dir / f"{cfg['staging_table']}.csv"
+        staged[source] = pd.read_csv(path, dtype=dtypes, low_memory=False)
+        if not staged[source]["snapshot_date"].eq(snapshot_date).all():
+            raise ValueError(f"Staging snapshot differs from {snapshot_date}: {path}")
 
-    if not all(p.is_file() for p in [stg_listings_path, stg_calendar_path, stg_reviews_path, stg_neighbourhoods_path]):
-        logger.warning("Một số file staging chưa có, đang đọc trực tiếp từ raw_dir...")
-        raw_dir = PROJECT_ROOT / config["paths"]["raw_dir"]
-        stg_listings = pd.read_csv(raw_dir / "listings.csv.gz", compression="gzip", low_memory=False)
-        stg_calendar = pd.read_csv(raw_dir / "calendar.csv.gz", compression="gzip", low_memory=False)
-        stg_reviews = pd.read_csv(raw_dir / "reviews.csv.gz", compression="gzip", low_memory=False)
-        stg_neighbourhoods = pd.read_csv(raw_dir / "neighbourhoods.csv")
-    else:
-        stg_listings = pd.read_csv(stg_listings_path, low_memory=False)
-        stg_calendar = pd.read_csv(stg_calendar_path, low_memory=False)
-        stg_reviews = pd.read_csv(stg_reviews_path, low_memory=False)
-        stg_neighbourhoods = pd.read_csv(stg_neighbourhoods_path)
+    stg_listings = staged["listings"]
+    stg_calendar = staged["calendar"]
+    stg_reviews = staged["reviews"]
+    stg_neighbourhoods = staged["neighbourhoods"]
 
     all_rejected = []
     audit_records = []
@@ -424,28 +472,28 @@ def run_cleaning_pipeline(config_path: Path) -> Dict[str, Any]:
     silver_listings, rej_list, stat_list = clean_listings(stg_listings, snapshot_date)
     silver_listings.to_csv(silver_dir / "silver_listings.csv", index=False, encoding="utf-8-sig")
     if not rej_list.empty:
-        all_rejected.append(rej_list)
+        all_rejected.append(rej_list.assign(dataset="Listings"))
     audit_records.append(stat_list)
 
     # 2. Clean Calendar
     silver_calendar, rej_cal, stat_cal = clean_calendar(stg_calendar, snapshot_date)
     silver_calendar.to_csv(silver_dir / "silver_calendar.csv", index=False, encoding="utf-8-sig")
     if not rej_cal.empty:
-        all_rejected.append(rej_cal)
+        all_rejected.append(rej_cal.assign(dataset="Calendar"))
     audit_records.append(stat_cal)
 
     # 3. Clean Reviews
     silver_reviews, rej_rev, stat_rev = clean_reviews(stg_reviews, snapshot_date)
     silver_reviews.to_csv(silver_dir / "silver_reviews.csv", index=False, encoding="utf-8-sig")
     if not rej_rev.empty:
-        all_rejected.append(rej_rev)
+        all_rejected.append(rej_rev.assign(dataset="Reviews"))
     audit_records.append(stat_rev)
 
     # 4. Clean Neighbourhoods
     silver_neighbourhoods, rej_nb, stat_nb = clean_neighbourhoods(stg_neighbourhoods, snapshot_date)
     silver_neighbourhoods.to_csv(silver_dir / "silver_neighbourhoods.csv", index=False, encoding="utf-8-sig")
     if not rej_nb.empty:
-        all_rejected.append(rej_nb)
+        all_rejected.append(rej_nb.assign(dataset="Neighbourhoods"))
     audit_records.append(stat_nb)
 
     # Lưu bản ghi vi phạm (nếu có)
@@ -475,9 +523,9 @@ def run_cleaning_pipeline(config_path: Path) -> Dict[str, Any]:
         cln = rec["clean_rows"]
         rej = rec["rejected_rows"]
         print(f"  - {ds:<15}: Ban đầu {init:,} dòng -> Sạch {cln:,} dòng (Loại: {rej})")
-    print(f"  * Median Listed Price (SGD): {stat_list.get('median_price_sgd')} SGD (Khớp KPI-02 = 202.83)")
-    print(f"  * Valid SGD Price Count    : {stat_list.get('valid_sgd_count'):,} dòng (Khớp 2,725 dòng)")
-    print(f"  * Available Night Ratio    : {stat_cal.get('available_ratio')}% (Khớp KPI-04 ~ 76.94%)")
+    print(f"  * Median Listed Price (SGD): {stat_list.get('median_price_sgd')} SGD")
+    print(f"  * Valid SGD Price Count    : {stat_list.get('valid_sgd_count'):,} dòng")
+    print(f"  * Available Night Ratio    : {stat_cal.get('available_ratio')}%")
     print("=" * 70)
 
     return {"status": "SUCCESS", "audit": audit_records}

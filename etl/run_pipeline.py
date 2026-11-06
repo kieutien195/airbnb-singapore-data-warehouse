@@ -50,7 +50,10 @@ def main() -> None:
         action="store_true",
         help="Bỏ qua bước Clean nếu đã có Silver data",
     )
+    parser.add_argument("--file-only", action="store_true", help="Chỉ ghi file, không kết nối MySQL")
     args = parser.parse_args()
+    if args.sample is not None and args.sample <= 0:
+        parser.error("--sample phải lớn hơn 0")
 
     t_start = time.time()
     print("=" * 80)
@@ -61,25 +64,26 @@ def main() -> None:
     # Bước 1: Ingest (Task 3.2)
     if not args.skip_ingest:
         print("\n>>> BƯỚC 1: INGESTION DỮ LIỆU NGUỒN VÀO STAGING (TASK 3.2) <<<")
-        run_ingest_pipeline(config_path=args.config, sample_size=args.sample)
+        run_ingest_pipeline(config_path=args.config, sample_size=args.sample, file_only=args.file_only)
     else:
         print("\n>>> BƯỚC 1: ĐÃ BỎ QUA THEO YÊU CẦU (--skip-ingest) <<<")
 
     # Bước 2: Clean (Task 3.3)
     if not args.skip_clean:
         print("\n>>> BƯỚC 2: LÀM SẠCH VÀ CHUẨN HÓA DỮ LIỆU SILVER (TASK 3.3) <<<")
-        run_cleaning_pipeline(config_path=args.config)
+        run_cleaning_pipeline(config_path=args.config, sample_size=args.sample)
     else:
         print("\n>>> BƯỚC 2: ĐÃ BỎ QUA THEO YÊU CẦU (--skip-clean) <<<")
 
     # Bước 3: Transform (Task 3.4)
     print("\n>>> BƯỚC 3: MAPPING VÀ KIỂM TRA QUAN HỆ ĐA BẢNG GOLD (TASK 3.4) <<<")
-    run_transform_pipeline(config_path=args.config)
+    run_transform_pipeline(config_path=args.config, sample_size=args.sample)
 
     total_time = time.time() - t_start
     print("\n" + "=" * 80)
     print(f"  ✅ TOÀN BỘ PIPELINE ETL HOÀN TẤT THÀNH CÔNG TRONG {total_time:.2f} GIÂY!")
-    print("  Dữ liệu Gold và báo cáo độ phủ quan hệ đã sẵn sàng để bàn giao cho Minh (Task 3.5).")
+    if args.sample is None:
+        print("  Dữ liệu Gold và báo cáo độ phủ quan hệ đã sẵn sàng để bàn giao cho Minh (Task 3.5).")
     print("=" * 80)
 
 

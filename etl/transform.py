@@ -42,6 +42,8 @@ import yaml
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from etl.ingest import output_path
+
 LOG_DIR = PROJECT_ROOT / "logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 LOG_FILE = LOG_DIR / "transform.log"
@@ -116,7 +118,7 @@ def build_listing_dimensions_and_fact(
     # 1. Tra cứu neighbourhood_sk
     nb_lookup = dim_nb.set_index(["neighbourhood_group", "neighbourhood_name"])["neighbourhood_sk"].to_dict()
     df["neighbourhood_sk"] = df.apply(
-        lambda r: nb_lookup.get((r.get("neighbourhood_group_cleansed"), r.get("neighbourhood_cleansed")), np.nan),
+        lambda r: nb_lookup.get((r.get("neighbourhood_group_cleansed"), r.get("neighbourhood_cleansed")), 0),
         axis=1,
     )
     # Gán surrogate key cho listing (1..N)
@@ -242,15 +244,13 @@ def check_join_coverage_and_orphans(
     logger.info("-> Đang kiểm tra tính toàn vẹn tham chiếu và tỷ lệ orphan key...")
 
     coverage_rows = []
+    main_listings = silver_listings["id"]
 
     # 1. Calendar -> Listings
     total_cal = len(silver_cal)
-    cal_listings = set(silver_cal["listing_id"].unique())
-    main_listings = set(silver_listings["id"].unique())
-    orphans_cal = cal_listings - main_listings
-    cal_matched = total_cal if len(orphans_cal) == 0 else int((~silver_cal["listing_id"].isin(orphans_cal)).sum())
+    cal_matched = int(silver_cal["listing_id"].isin(main_listings).sum())
     cal_orphan_count = total_cal - cal_matched
-    cal_rate = round(cal_matched / total_cal * 100, 4)
+    cal_rate = round(cal_matched / total_cal * 100, 4) if total_cal else 100.0
 
     coverage_rows.append({
         "relationship_id": "REL-01",
@@ -263,16 +263,14 @@ def check_join_coverage_and_orphans(
         "orphan_records": cal_orphan_count,
         "match_rate_pct": cal_rate,
         "status": "PASS" if cal_orphan_count == 0 else "FAIL",
-        "notes": "100% bản ghi Calendar tham chiếu chính xác đến tin đăng Listings.",
+        "notes": "Dòng thiếu listing cha được ghi vào etl_orphan_records.csv.",
     })
 
     # 2. Reviews -> Listings
     total_rev = len(silver_rev)
-    rev_listings = set(silver_rev["listing_id"].unique())
-    orphans_rev = rev_listings - main_listings
-    rev_matched = total_rev if len(orphans_rev) == 0 else int((~silver_rev["listing_id"].isin(orphans_rev)).sum())
+    rev_matched = int(silver_rev["listing_id"].isin(main_listings).sum())
     rev_orphan_count = total_rev - rev_matched
-    rev_rate = round(rev_matched / total_rev * 100, 4)
+    rev_rate = round(rev_matched / total_rev * 100, 4) if total_rev else 100.0
 
     coverage_rows.append({
         "relationship_id": "REL-02",
@@ -285,17 +283,16 @@ def check_join_coverage_and_orphans(
         "orphan_records": rev_orphan_count,
         "match_rate_pct": rev_rate,
         "status": "PASS" if rev_orphan_count == 0 else "FAIL",
-        "notes": "100% bản ghi Reviews tham chiếu chính xác đến tin đăng Listings.",
+        "notes": "Dòng thiếu listing cha được ghi vào etl_orphan_records.csv.",
     })
 
     # 3. Listings -> Neighbourhoods
     total_list = len(silver_listings)
-    list_areas = set(zip(silver_listings["neighbourhood_group_cleansed"], silver_listings["neighbourhood_cleansed"]))
+    list_areas = zip(silver_listings["neighbourhood_group_cleansed"], silver_listings["neighbourhood_cleansed"])
     valid_areas = set(zip(silver_nb["neighbourhood_group"], silver_nb["neighbourhood_name"]))
-    orphans_area = list_areas - valid_areas
-    area_matched = total_list if len(orphans_area) == 0 else 0
+    area_matched = sum(area in valid_areas for area in list_areas)
     area_orphan_count = total_list - area_matched
-    area_rate = round(area_matched / total_list * 100, 4)
+    area_rate = round(area_matched / total_list * 100, 4) if total_list else 100.0
 
     coverage_rows.append({
         "relationship_id": "REL-03",
@@ -307,27 +304,33 @@ def check_join_coverage_and_orphans(
         "matched_records": area_matched,
         "orphan_records": area_orphan_count,
         "match_rate_pct": area_rate,
-        "status": "PASS" if area_orphan_count == 0 else "FAIL",
-        "notes": "3,208 tin đăng khớp vào 42/55 khu vực quy hoạch chuẩn, 0 orphan key.",
+        "status": "PASS" if area_orphan_count == 0 else "WARN",
+        "notes": "Khu vực không khớp được ánh xạ vào Unknown Neighbourhood (SK=0).",
     })
 
     # 4. Dates to dim_date
-    all_dates = set(silver_cal["calendar_date"].dropna()).union(set(silver_rev["review_date"].dropna()))
-    date_sk_set = set(dim_date["full_date"])
-    date_orphans = all_dates - date_sk_set
-
+    date_keys = dim_date["date_sk"]
+    matched = 0
+    total = 0
+    for frame, key in (
+        (silver_listings, "snapshot_date_sk"), (silver_cal, "calendar_date_sk"),
+        (silver_cal, "snapshot_date_sk"), (silver_rev, "review_date_sk"),
+        (silver_rev, "snapshot_date_sk"),
+    ):
+        matched += int(frame[key].isin(date_keys).sum())
+        total += len(frame)
     coverage_rows.append({
         "relationship_id": "REL-04",
-        "relationship_name": "Event Dates to dim_date",
+        "relationship_name": "Event and Snapshot Dates to dim_date",
         "parent_table": "dim_date",
-        "child_table": "fact_calendar & fact_review",
-        "foreign_key": "calendar_date, review_date",
-        "total_child_records": len(all_dates),
-        "matched_records": len(all_dates) - len(date_orphans),
-        "orphan_records": len(date_orphans),
-        "match_rate_pct": 100.0 if len(date_orphans) == 0 else 0.0,
-        "status": "PASS" if len(date_orphans) == 0 else "FAIL",
-        "notes": "Toàn bộ ngày trong lịch sử (2011-2027) đều tồn tại trong dim_date.",
+        "child_table": "fact_listing_snapshot & fact_calendar & fact_review",
+        "foreign_key": "snapshot_date_sk, calendar_date_sk, review_date_sk",
+        "total_child_records": total,
+        "matched_records": matched,
+        "orphan_records": total - matched,
+        "match_rate_pct": round(matched / total * 100, 4) if total else 100.0,
+        "status": "PASS" if matched == total else "FAIL",
+        "notes": "Đếm từng tham chiếu ngày sự kiện và snapshot.",
     })
 
     return pd.DataFrame(coverage_rows)
@@ -336,12 +339,12 @@ def check_join_coverage_and_orphans(
 # ---------------------------------------------------------------------------
 # Pipeline Transform Chính
 # ---------------------------------------------------------------------------
-def run_transform_pipeline(config_path: Path) -> Dict[str, Any]:
+def run_transform_pipeline(config_path: Path, sample_size: Optional[int] = None) -> Dict[str, Any]:
     config = load_config(config_path)
     snapshot_date = config["project"]["snapshot_date"]
-    silver_dir = PROJECT_ROOT / config["paths"]["silver_dir"]
-    gold_dir = PROJECT_ROOT / config["paths"]["gold_dir"]
-    outputs_dir = PROJECT_ROOT / config["paths"]["outputs_dir"]
+    silver_dir = output_path(config, "silver_dir", sample_size)
+    gold_dir = output_path(config, "gold_dir", sample_size)
+    outputs_dir = output_path(config, "outputs_dir", sample_size)
 
     for d in [gold_dir, outputs_dir]:
         d.mkdir(parents=True, exist_ok=True)
@@ -353,54 +356,78 @@ def run_transform_pipeline(config_path: Path) -> Dict[str, Any]:
 
     # Đọc dữ liệu Silver
     logger.info("Đang đọc dữ liệu Silver đã làm sạch...")
-    silver_listings = pd.read_csv(silver_dir / "silver_listings.csv", low_memory=False)
+    silver_listings = pd.read_csv(
+        silver_dir / "silver_listings.csv", low_memory=False,
+        dtype={"host_profile_id": "string"},
+    )
     silver_calendar = pd.read_csv(silver_dir / "silver_calendar.csv", low_memory=False)
     silver_reviews = pd.read_csv(silver_dir / "silver_reviews.csv", low_memory=False)
     silver_neighbourhoods = pd.read_csv(silver_dir / "silver_neighbourhoods.csv")
 
-    # 1. Sinh dim_date
+    for name, frame in (("listings", silver_listings), ("calendar", silver_calendar),
+                        ("reviews", silver_reviews), ("neighbourhoods", silver_neighbourhoods)):
+        if not frame["snapshot_date"].eq(snapshot_date).all():
+            raise ValueError(f"Silver {name} snapshot differs from {snapshot_date}")
+
     dim_date = build_dim_date()
-    dim_date.to_csv(gold_dir / "dim_date.csv", index=False, encoding="utf-8-sig")
-
-    # 2. Sinh dim_neighbourhood
-    dim_neighbourhood = build_dim_neighbourhood(silver_neighbourhoods, snapshot_date)
-    dim_neighbourhood.to_csv(gold_dir / "dim_neighbourhood.csv", index=False, encoding="utf-8-sig")
-
-    # 3. Sinh dim_listing & fact_listing_snapshot
-    dim_listing, fact_listing_snapshot = build_listing_dimensions_and_fact(
-        silver_listings, dim_neighbourhood, snapshot_date
-    )
-    dim_listing.to_csv(gold_dir / "dim_listing.csv", index=False, encoding="utf-8-sig")
-    fact_listing_snapshot.to_csv(gold_dir / "fact_listing_snapshot.csv", index=False, encoding="utf-8-sig")
-
-    # 4. Sinh fact_calendar
-    fact_calendar = build_fact_calendar(silver_calendar, dim_listing)
-    fact_calendar.to_csv(gold_dir / "fact_calendar.csv", index=False, encoding="utf-8-sig")
-
-    # 5. Sinh fact_review
-    fact_review = build_fact_review(silver_reviews, dim_listing)
-    fact_review.to_csv(gold_dir / "fact_review.csv", index=False, encoding="utf-8-sig")
-
-    # 6. Kiểm tra Referential Integrity & Orphan Check
     coverage_df = check_join_coverage_and_orphans(
         silver_listings, silver_calendar, silver_reviews, silver_neighbourhoods, dim_date
     )
+    orphan_rows = []
+    for name, frame in (("Calendar", silver_calendar), ("Reviews", silver_reviews)):
+        missing_parent = ~frame["listing_id"].isin(silver_listings["id"])
+        orphan_rows.append(frame.loc[missing_parent].assign(
+            dataset=name, rejection_reason="Missing listing in snapshot"
+        ))
+
+    pd.concat(orphan_rows, ignore_index=True).to_csv(
+        outputs_dir / "etl_orphan_records.csv", index=False, encoding="utf-8-sig"
+    )
+    if sample_size is not None:
+        # Independent sample limits can omit a valid parent from the listing sample.
+        child_failures = coverage_df["relationship_id"].isin(["REL-01", "REL-02"]) & coverage_df["status"].eq("FAIL")
+        coverage_df.loc[child_failures, "status"] = "WARN"
+        silver_calendar = silver_calendar.loc[silver_calendar["listing_id"].isin(silver_listings["id"])]
+        silver_reviews = silver_reviews.loc[silver_reviews["listing_id"].isin(silver_listings["id"])]
 
     join_coverage_path = outputs_dir / "join_coverage.csv"
     coverage_df.to_csv(join_coverage_path, index=False, encoding="utf-8-sig")
-    # Đồng bộ cả sang tests/ để phục vụ nghiệm thu
-    coverage_df.to_csv(PROJECT_ROOT / "tests" / "join_coverage.csv", index=False, encoding="utf-8-sig")
-    logger.info(f"Đã lưu báo cáo độ phủ quan hệ tại: {join_coverage_path}")
+    if sample_size is None:
+        tests_dir = PROJECT_ROOT / "tests"
+        tests_dir.mkdir(exist_ok=True)
+        coverage_df.to_csv(tests_dir / "join_coverage.csv", index=False, encoding="utf-8-sig")
+    if coverage_df["status"].eq("FAIL").any():
+        raise RuntimeError(f"Gold coverage failed; see {join_coverage_path}")
+
+    dim_neighbourhood = build_dim_neighbourhood(silver_neighbourhoods, snapshot_date)
+    if coverage_df.loc[coverage_df["relationship_id"].eq("REL-03"), "orphan_records"].iloc[0]:
+        unknown = pd.DataFrame([{
+            "neighbourhood_sk": 0, "neighbourhood_group": "Unknown",
+            "neighbourhood_name": "Unknown Neighbourhood", "snapshot_date": snapshot_date,
+        }])
+        dim_neighbourhood = pd.concat([dim_neighbourhood, unknown], ignore_index=True)
+    dim_listing, fact_listing_snapshot = build_listing_dimensions_and_fact(
+        silver_listings, dim_neighbourhood, snapshot_date
+    )
+    fact_calendar = build_fact_calendar(silver_calendar, dim_listing)
+    fact_review = build_fact_review(silver_reviews, dim_listing)
+
+    for name, frame in (
+        ("dim_date", dim_date), ("dim_neighbourhood", dim_neighbourhood),
+        ("dim_listing", dim_listing), ("fact_listing_snapshot", fact_listing_snapshot),
+        ("fact_calendar", fact_calendar), ("fact_review", fact_review),
+    ):
+        frame.to_csv(gold_dir / f"{name}.csv", index=False, encoding="utf-8-sig")
 
     print("\n" + "=" * 70)
     print("  KẾT QUẢ TỔNG HỢP MAPPING & QUAN HỆ ĐA BẢNG (TASK 3.4)")
     print("=" * 70)
     print(f"  - dim_date               : {len(dim_date):,} dòng ({dim_date['full_date'].min()} .. {dim_date['full_date'].max()})")
-    print(f"  - dim_neighbourhood      : {len(dim_neighbourhood):,} dòng (55 khu vực)")
-    print(f"  - dim_listing            : {len(dim_listing):,} dòng (3,208 listing)")
-    print(f"  - fact_listing_snapshot  : {len(fact_listing_snapshot):,} dòng (3,208 snapshot)")
-    print(f"  - fact_calendar          : {len(fact_calendar):,} dòng (1,170,950 dòng)")
-    print(f"  - fact_review            : {len(fact_review):,} dòng (46,000 dòng)")
+    print(f"  - dim_neighbourhood      : {len(dim_neighbourhood):,} dòng")
+    print(f"  - dim_listing            : {len(dim_listing):,} dòng")
+    print(f"  - fact_listing_snapshot  : {len(fact_listing_snapshot):,} dòng")
+    print(f"  - fact_calendar          : {len(fact_calendar):,} dòng")
+    print(f"  - fact_review            : {len(fact_review):,} dòng")
     print("\n  KIỂM TRA TÍNH TOÀN VẸN THAM CHIẾU (ORPHAN KEYS):")
     for _, row in coverage_df.iterrows():
         print(f"  * {row['relationship_name']:<32}: {row['match_rate_pct']}% khớp (Orphan = {row['orphan_records']}) -> [{row['status']}]")

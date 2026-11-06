@@ -32,12 +32,13 @@ import yaml
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from etl.db import (
-    create_staging_tables_ddl,
-    delete_snapshot_partition,
-    get_engine,
-    is_db_available,
-)
+from contextlib import nullcontext
+
+
+def output_path(config, key, sample_size=None):
+    path = PROJECT_ROOT / config["paths"][key]
+    return path / "sample" if sample_size is not None else path
+
 
 # ---------------------------------------------------------------------------
 # Cấu hình logging
@@ -123,6 +124,7 @@ def ingest_source(
     project_cfg: Dict[str, Any],
     sample_size: Optional[int] = None,
     save_staging_files: bool = True,
+    engine: Any = None,
 ) -> Dict[str, Any]:
     """
     Thực hiện ingestion cho một nguồn dữ liệu:
@@ -134,7 +136,11 @@ def ingest_source(
     t0 = time.time()
 
     raw_dir = PROJECT_ROOT / project_cfg["paths"]["raw_dir"]
-    staging_dir = PROJECT_ROOT / project_cfg["paths"]["staging_dir"]
+    if sample_size is not None and sample_size <= 0:
+        raise ValueError("--sample must be positive")
+    if sample_size is not None and engine is not None:
+        raise ValueError("Sample ingestion only supports file output")
+    staging_dir = output_path(project_cfg, "staging_dir", sample_size)
     staging_dir.mkdir(parents=True, exist_ok=True)
 
     file_name = source_cfg["file_name"]
@@ -151,13 +157,6 @@ def ingest_source(
     logger.info(f"=== Bắt đầu Ingestion: {source_name} ({file_name}) ===")
     if sample_size:
         logger.info(f"Chế độ chạy thử mẫu (Sample mode): tối đa {sample_size} dòng.")
-
-    # 1. Kiểm tra kết nối MySQL & Áp dụng Idempotency
-    db_ok = is_db_available()
-    engine = get_engine() if db_ok else None
-
-    if db_ok and sample_size is None:
-        delete_snapshot_partition(table_name, snapshot_date)
 
     total_rows_read = 0
     total_rows_inserted = 0
@@ -177,51 +176,60 @@ def ingest_source(
             encoding=encoding,
             chunksize=actual_chunk_size,
             low_memory=False,
+            dtype={col: "string" for col in (
+                "latitude", "longitude", "id", "listing_id", "scrape_id",
+                "host_id", "host_profile_id", "reviewer_id",
+            )},
         )
 
-        for chunk_df in reader:
-            if sample_size is not None and total_rows_read >= sample_size:
-                break
+        if table_name not in {"stg_listings", "stg_calendar", "stg_reviews", "stg_neighbourhoods"}:
+            raise ValueError(f"Invalid staging table: {table_name}")
+        transaction = nullcontext()
+        if engine is not None:
+            from etl.db import replace_snapshot
 
-            current_chunk = chunk_df
-            if sample_size is not None and (total_rows_read + len(current_chunk)) > sample_size:
-                needed = sample_size - total_rows_read
-                current_chunk = current_chunk.iloc[:needed]
+            transaction = replace_snapshot(engine, table_name, snapshot_date)
+        with reader, transaction as conn:
+            for chunk_df in reader:
+                if sample_size is not None and total_rows_read >= sample_size:
+                    break
 
-            rows_in_chunk = len(current_chunk)
-            total_rows_read += rows_in_chunk
+                current_chunk = chunk_df
+                if sample_size is not None and (total_rows_read + len(current_chunk)) > sample_size:
+                    needed = sample_size - total_rows_read
+                    current_chunk = current_chunk.iloc[:needed]
 
-            # Bổ sung 3 cột metadata kiểm toán
-            current_chunk = current_chunk.copy()
-            current_chunk["snapshot_date"] = snapshot_date
-            current_chunk["source_file"] = file_name
-            current_chunk["ingested_at"] = started_at.strftime("%Y-%m-%d %H:%M:%S")
+                rows_in_chunk = len(current_chunk)
+                total_rows_read += rows_in_chunk
 
-            # Nạp vào MySQL Staging nếu có kết nối
-            if db_ok and engine is not None:
-                try:
+                # Bổ sung 3 cột metadata kiểm toán
+                current_chunk = current_chunk.copy()
+                current_chunk["snapshot_date"] = snapshot_date
+                current_chunk["source_file"] = file_name
+                current_chunk["ingested_at"] = started_at.strftime("%Y-%m-%d %H:%M:%S")
+
+                if conn is not None and rows_in_chunk:
                     current_chunk.to_sql(
-                        name=table_name,
-                        con=engine,
-                        if_exists="append",
-                        index=False,
-                        method="multi",
-                        chunksize=1000,
+                        name=table_name, con=conn, if_exists="append",
+                        index=False, method="multi", chunksize=1000,
                     )
-                    total_rows_inserted += rows_in_chunk
-                except Exception as db_exc:
-                    logger.error(f"Lỗi ghi chunk vào MySQL: {db_exc}")
-                    total_rows_failed += rows_in_chunk
-            else:
-                total_rows_inserted += rows_in_chunk
 
-            # Lưu vào bộ nhớ để xuất file staging
-            if save_staging_files:
-                staging_data_frames.append(current_chunk)
+                # Lưu vào bộ nhớ để xuất file staging
+                if save_staging_files:
+                    staging_data_frames.append(current_chunk)
 
-            chunks_processed += 1
-            if chunks_processed % 5 == 0 or total_rows_read >= source_cfg.get("expected_rows", 0):
-                logger.info(f"  -> Đã đọc {total_rows_read:,} dòng ({chunks_processed} chunks)...")
+                chunks_processed += 1
+                if chunks_processed % 5 == 0 or total_rows_read >= source_cfg.get("expected_rows", 0):
+                    logger.info(f"  -> Đã đọc {total_rows_read:,} dòng ({chunks_processed} chunks)...")
+
+            if not total_rows_read:
+                raise ValueError(f"Empty source: {file_name}")
+            expected_rows = source_cfg.get("expected_rows")
+            if sample_size is None and expected_rows is not None and total_rows_read != expected_rows:
+                raise ValueError(
+                    f"{file_name}: expected {expected_rows:,} rows, read {total_rows_read:,}"
+                )
+        total_rows_inserted = total_rows_read
 
         # Xuất file staging Parquet & CSV (dành cho kiểm toán & chạy offline)
         if save_staging_files and staging_data_frames:
@@ -237,15 +245,8 @@ def ingest_source(
             logger.info(f"Đã lưu Staging data tại: {out_csv} ({len(combined_staging_df):,} dòng)")
 
         elapsed = time.time() - t0
-        status = "SUCCESS" if total_rows_failed == 0 else "PARTIAL"
+        status = "SUCCESS"
         completed_at = datetime.datetime.now()
-
-        # Kiểm tra đối chiếu số dòng đọc và kỳ vọng
-        expected_rows = source_cfg.get("expected_rows")
-        if sample_size is None and expected_rows and total_rows_read != expected_rows:
-            logger.warning(
-                f"CẢNH BÁO: Số dòng đọc ({total_rows_read:,}) khác số dòng kỳ vọng ({expected_rows:,})!"
-            )
 
         logger.info(
             f"Hoàn tất Ingestion {source_name}: Đọc {total_rows_read:,} dòng | "
@@ -294,13 +295,14 @@ def ingest_source(
             completed_at=datetime.datetime.now(),
             error_message=str(exc),
         )
-        raise exc
+        raise
 
 
 def run_ingest_pipeline(
     config_path: Path,
     sample_size: Optional[int] = None,
     target_source: Optional[str] = None,
+    file_only: bool = False,
 ) -> Dict[str, Any]:
     """Chạy toàn bộ pipeline ingestion theo cấu hình."""
     config = load_config(config_path)
@@ -311,16 +313,6 @@ def run_ingest_pipeline(
     print(f"  Target DB    : {config['database']['default_database']}")
     print("=" * 70)
 
-    # Khởi tạo bảng Staging nếu có kết nối MySQL
-    if is_db_available():
-        logger.info("Kết nối MySQL khả dụng. Đang kiểm tra DDL bảng Staging...")
-        create_staging_tables_ddl()
-    else:
-        logger.warning(
-            "MySQL hiện chưa kết nối được qua .env. "
-            "Pipeline sẽ chạy ở chế độ File-based Staging (lưu vào data/processed/staging/)."
-        )
-
     sources = config["sources"]
     if target_source and target_source.lower() != "all":
         if target_source not in sources:
@@ -330,14 +322,22 @@ def run_ingest_pipeline(
     results = {}
     total_start = time.time()
 
-    for sname, scfg in sources.items():
-        res = ingest_source(
-            source_name=sname,
-            source_cfg=scfg,
-            project_cfg=config,
-            sample_size=sample_size,
-        )
-        results[sname] = res
+    engine = None
+    try:
+        if sample_size is None and not file_only:
+            from etl.db import create_staging_tables_ddl, get_engine
+
+            engine = get_engine()
+            if engine is not None:
+                create_staging_tables_ddl(engine)
+        for sname, scfg in sources.items():
+            res = ingest_source(sname, scfg, config, sample_size=sample_size, engine=engine)
+            if res["status"] != "SUCCESS":
+                raise RuntimeError(f"Ingestion failed for {sname}: {res['status']}")
+            results[sname] = res
+    finally:
+        if engine is not None:
+            engine.dispose()
 
     total_time = time.time() - total_start
     print("\n" + "=" * 70)
@@ -371,12 +371,14 @@ def main() -> None:
         default="all",
         help="Chỉ định nguồn nạp (listings, calendar, reviews, neighbourhoods, hoặc all)",
     )
+    parser.add_argument("--file-only", action="store_true", help="Chỉ ghi staging CSV/Parquet")
     args = parser.parse_args()
 
     run_ingest_pipeline(
         config_path=args.config,
         sample_size=args.sample,
         target_source=args.source,
+        file_only=args.file_only,
     )
 
 
