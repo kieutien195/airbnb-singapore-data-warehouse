@@ -17,6 +17,11 @@ class WarehouseLoadTest(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "not enforced"):
             verify_checks("fact", expected, [("chk", "rating IS NULL OR rating BETWEEN 1 AND 5", "NO")])
 
+    def test_check_accepts_parenthesized_signed_scientific_literal(self):
+        expected = normalize_check("latitude BETWEEN -90.0 AND 90.0")
+        self.assertEqual(normalize_check("((latitude between (-9e1) and (9e1)))"), expected)
+        self.assertNotEqual(normalize_check("((latitude between (-8e1) and (9e1)))"), expected)
+
     def test_fact_uses_database_keys_and_omits_csv_primary_key(self):
         date = loader.SNAPSHOT
         frames = {

@@ -14,6 +14,7 @@ Minh phụ trách toàn bộ hệ thống SQL: khởi tạo database, tầng sta
 | [`02_warehouse_schema_draft.sql`](02_warehouse_schema_draft.sql) | Thiết kế lịch sử | Task 2.5 | Bản nháp thiết kế gốc; DDL triển khai hiện hành nằm ở `02_warehouse_schema.sql`. |
 | [`03_load_warehouse.sql`](03_load_warehouse.sql) | **Audit nạp Warehouse** | **Task 3.6** | DDL bảng kiểm toán được loader Python thực thi trước transaction. |
 | [`03_validate_gold_against_raw.sql`](03_validate_gold_against_raw.sql) | Kiểm thử & QA | Task 3.5 & 4.x | Bộ truy vấn đối chiếu số lượng dòng, kiểm tra khóa mồ côi và tính toàn vẹn giữa các tầng. |
+| [`04_warehouse_kpi_audit.sql`](04_warehouse_kpi_audit.sql) | KPI và kiểm tra kỹ thuật Gold | Task 3.6 | Các truy vấn chỉ đọc sau khi nạp Gold. |
 
 ---
 
@@ -64,3 +65,5 @@ Loader kiểm tra schema, nạp Dimension trước Fact, tra khóa MySQL theo bu
 Mặc định loader thử nạp lại cùng bộ CSV trong transaction để đối chiếu số dòng và KPI; dùng `--skip-idempotency-test` nếu chỉ cần nạp một lượt. Để nghiệm thu việc chạy lại qua hai phiên kết nối độc lập, chạy lệnh hai lần và kiểm tra hai kết quả đều đạt.
 
 Lượt thành công ghi log vào `etl_load_log` và xuất `outputs/warehouse_load_summary.csv`, `outputs/warehouse_raw_vs_gold.csv`. Xem `logs/load_warehouse.log` để kiểm tra kết quả của lần chạy gần nhất. Có thể đối chiếu độc lập bằng [quy trình Raw–Gold](../docs/gold_reconciliation.md).
+
+Chạy `04_warehouse_kpi_audit.sql` sau khi loader thành công để xem KPI và kiểm tra kỹ thuật ở tầng Gold. TQ-01 đến TQ-04 báo `NOT_RUN` nếu thiếu bảng có dữ liệu trong phạm vi kiểm tra và chưa phát hiện lỗi. Với TQ-05, dùng log replay của loader hoặc đối chiếu hai lần chạy độc lập cùng snapshot, vì SQL chỉ đọc một trạng thái của kho.
