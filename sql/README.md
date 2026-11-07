@@ -10,7 +10,8 @@ Minh phụ trách toàn bộ hệ thống SQL: khởi tạo database, tầng sta
 |---|---|---|---|
 | [`00_init_database.sql`](00_init_database.sql) | Môi trường MySQL | Task 1.5 | Tạo database `airbnb_sg_2026` với `utf8mb4`, kiểm tra phiên bản và collation. |
 | [`01_staging_schema.sql`](01_staging_schema.sql) | **Staging (Bronze / Raw Landing)** | **Task 3.1** | Tạo 4 bảng `stg_*` chứa dữ liệu thô từ 4 file nguồn (103 cột nguồn + 3 cột metadata + `raw_id`), đánh chỉ mục inline. |
-| [`02_warehouse_schema_draft.sql`](02_warehouse_schema_draft.sql) | **Warehouse (Gold Star Schema)** | **Task 2.5 & 3.5** | Tạo 3 bảng Dimension (`dim_date`, `dim_neighbourhood`, `dim_listing`) và 3 bảng Fact (`fact_calendar`, `fact_listing_snapshot`, `fact_review`). |
+| [`02_warehouse_schema.sql`](02_warehouse_schema.sql) | **Warehouse (Gold Fact Constellation)** | **Task 3.5** | DDL triển khai chính thức 3 Dimension và 3 Fact theo grain đã duyệt; UNIQUE theo grain, FK ghép bảo vệ listing/snapshot, index và CHECK. |
+| [`02_warehouse_schema_draft.sql`](02_warehouse_schema_draft.sql) | Thiết kế lịch sử | Task 2.5 | Bản nháp thiết kế gốc; DDL triển khai hiện hành nằm ở `02_warehouse_schema.sql`. |
 | [`03_validate_gold_against_raw.sql`](03_validate_gold_against_raw.sql) | Kiểm thử & QA | Task 3.5 & 4.x | Bộ truy vấn đối chiếu số lượng dòng, kiểm tra khóa mồ côi và tính toàn vẹn giữa các tầng. |
 
 ---
@@ -55,3 +56,12 @@ Nếu database đã có các bảng Staging theo DDL cũ, kiểm tra row count t
 .venv\Scripts\python.exe scripts/test_staging_types.py
 ```
 Verifier so sánh đầy đủ thứ tự cột, kiểu/precision/scale, NULL, default, auto-increment, comment, index và table options với DDL. Bài thử INSERT/SELECT/UPDATE/DELETE chỉ thao tác trên `raw_id` vừa tạo trong transaction rồi ROLLBACK. MySQL tự commit DDL; nếu schema hiện tại khác, script báo FAIL và không tự xóa/sửa bảng cũ.
+
+### Warehouse DDL – Task 3.5:
+```bash
+.venv\Scripts\python.exe scripts/verify_warehouse_schema.py --database <schema_moi>
+.venv\Scripts\python.exe scripts/verify_warehouse_schema.py --verify-only
+```
+Tạo schema đích trước bằng MySQL Workbench hoặc `00_init_database.sql`, sau đó cấp quyền cho tài khoản đang có trong `.env`. Lệnh đầu chỉ chạy khi chưa có bảng warehouse nào trong schema đích; script tạo sáu bảng rồi đối chiếu đủ cột, kiểu/precision/scale, NULL, default, PK/index, FK, CHECK, engine và collation. Lệnh thứ hai chỉ đọc schema hiện có và không chạy DDL. Không dùng `--verify-only` để tuyên bố đã thử tạo database trống.
+
+ERD, grain và nguyên tắc tránh nhân bản số listing: [`../docs/warehouse_erd.md`](../docs/warehouse_erd.md).

@@ -1,5 +1,7 @@
 # Thiết kế Grain, Dimension, Fact và Bản nháp Schema Kho Dữ liệu (Task 2.5)
 
+> Đây là tài liệu thiết kế được duyệt ở Task 2.5. Bản triển khai vật lý Task 3.5 nằm tại [`sql/02_warehouse_schema.sql`](../sql/02_warehouse_schema.sql), có ERD cập nhật tại [`warehouse_erd.md`](warehouse_erd.md) và script đối chiếu schema tại [`scripts/verify_warehouse_schema.py`](../scripts/verify_warehouse_schema.py).
+
 - **Mã công việc:** WBS 2.5 – Xác định grain, Dimension và Fact
 - **Phụ trách chính:** Minh (Data Warehouse / MySQL / SQL KPI)
 - **Phối hợp xác nhận:** Hồng (Data Dictionary / EDA) & Thái (ETL / Mapping)
