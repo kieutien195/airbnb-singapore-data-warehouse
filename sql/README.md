@@ -12,6 +12,7 @@ Minh phụ trách toàn bộ hệ thống SQL: khởi tạo database, tầng sta
 | [`01_staging_schema.sql`](01_staging_schema.sql) | **Staging (Bronze / Raw Landing)** | **Task 3.1** | Tạo 4 bảng `stg_*` chứa dữ liệu thô từ 4 file nguồn (103 cột nguồn + 3 cột metadata + `raw_id`), đánh chỉ mục inline. |
 | [`02_warehouse_schema.sql`](02_warehouse_schema.sql) | **Warehouse (Gold Fact Constellation)** | **Task 3.5** | DDL triển khai chính thức 3 Dimension và 3 Fact theo grain đã duyệt; UNIQUE theo grain, FK ghép bảo vệ listing/snapshot, index và CHECK. |
 | [`02_warehouse_schema_draft.sql`](02_warehouse_schema_draft.sql) | Thiết kế lịch sử | Task 2.5 | Bản nháp thiết kế gốc; DDL triển khai hiện hành nằm ở `02_warehouse_schema.sql`. |
+| [`03_load_warehouse.sql`](03_load_warehouse.sql) | **Load Warehouse (ETL/ELT to Gold)** | **Task 3.6** | Quy trình nạp Dimension trước Fact, ánh xạ khóa surrogate, kiểm soát trùng lặp và đối chiếu số dòng nạp. |
 | [`03_validate_gold_against_raw.sql`](03_validate_gold_against_raw.sql) | Kiểm thử & QA | Task 3.5 & 4.x | Bộ truy vấn đối chiếu số lượng dòng, kiểm tra khóa mồ côi và tính toàn vẹn giữa các tầng. |
 
 ---
@@ -30,38 +31,43 @@ Tầng Staging đóng vai trò vùng đệm nạp thô (Raw Landing Zone), tuân
 - `snapshot_date DATE`: Ngày snapshot dữ liệu (`2026-09-23`).
 - `ingested_at DATETIME`: Mốc thời gian bản ghi được nạp vào MySQL Staging (`CURRENT_TIMESTAMP`).
 
-`latitude` và `longitude` được lưu nguyên chuỗi nguồn ở Staging để không làm tròn tọa độ. Chuyển sang kiểu số và kiểm tra miền giá trị thuộc bước Silver. DDL không chọn database cố định: hãy chọn đúng schema trước khi chạy trong Workbench hoặc kết nối bằng `MYSQL_DATABASE` từ `.env` khi chạy script.
+---
 
-Nếu database đã có các bảng Staging theo DDL cũ, kiểm tra row count trước. Chạy [`01_staging_schema_migration.sql`](01_staging_schema_migration.sql) một lần để đổi `ingestion_time` thành `ingested_at` và đổi kiểu tọa độ. Các tọa độ đã lưu dưới `DECIMAL(11,8)` không thể khôi phục phần thập phân đã mất; nếu bảng có dữ liệu, phải nạp lại từ CSV raw sau migration.
+## 3. Warehouse Schema DDL (`02_warehouse_schema.sql` - Task 3.5)
 
-### Tiêu chí bàn giao cho Thái (Task 3.2 Ingestion):
-- Bảng chấp nhận dữ liệu thô: Chuỗi giá có ký hiệu `$` (`price: $86.63`), văn bản tự do, JSON array (`amenities`), JSON object (`price_quote_raw`).
-- Chưa áp ràng buộc khóa ngoại (Foreign Key) để cho phép nạp song song hoặc độc lập từng tệp nguồn.
-- Tài khoản ứng dụng ETL `airbnb_app_minh_fc487b` đã được cấp đầy đủ quyền `CREATE`, `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `DROP`, `INDEX`, `ALTER`.
+Triển khai mô hình **Fact Constellation** (Kimball) gồm 3 bảng Dimension và 3 bảng Fact:
+
+- **Dimension**: `dim_date` (6,209 dòng ngày), `dim_neighbourhood` (55 khu vực quy hoạch), `dim_listing` (3,208 tin đăng).
+- **Fact**: `fact_listing_snapshot` (3,208 dòng đo lường), `fact_calendar` (1,170,950 dòng lịch phòng), `fact_review` (46,000 dòng đánh giá).
+- **Khóa ngoại ghép (Composite FK)**: `(listing_sk, snapshot_date_sk, neighbourhood_sk)` liên kết 3 Fact với `dim_listing`, bảo vệ chống lệch snapshot hoặc địa lý.
+- **Ràng buộc Grain**: Khóa `UNIQUE` theo grain nghiệp vụ trên cả 3 bảng Fact.
+
+Kiểm tra đối chiếu schema tự động:
+```bash
+.venv\Scripts\python.exe scripts/verify_warehouse_schema.py --verify-only
+```
 
 ---
 
-## 3. Cách chạy và kiểm tra
+## 4. Quy trình nạp kho dữ liệu Gold (`03_load_warehouse.sql` - Task 3.6)
 
-### Chạy qua MySQL Workbench:
-1. Mở MySQL Workbench, kết nối tới local MySQL instance.
-2. Mở file `sql/01_staging_schema.sql`.
-3. Chọn schema đúng theo `MYSQL_DATABASE` trong `.env` làm default schema trước khi chạy. DDL không chứa `USE` cố định.
-4. Nhấn biểu tượng tia sét **Execute** (Ctrl + Shift + Enter).
-5. Quan sát Action Output và xử lý mọi lỗi trước khi chạy verifier.
+### Thứ tự nạp theo phụ thuộc khóa ngoại (Foreign Key Dependency):
+1. **`dim_date`**: Nạp dải ngày lịch 2011-01-01 .. 2027-12-31 (6,209 dòng).
+2. **`dim_neighbourhood`**: Nạp danh mục 55 khu vực quy hoạch từ Staging/Silver.
+3. **`dim_listing`**: Nạp 3,208 tin đăng, map surrogate key `neighbourhood_sk` và `snapshot_date_sk`.
+4. **`fact_listing_snapshot`**: Nạp 3,208 dòng chỉ số định lượng cấp listing.
+5. **`fact_calendar`**: Nạp 1,170,950 dòng lịch phòng 365 ngày.
+6. **`fact_review`**: Nạp 46,000 dòng đánh giá lịch sử.
 
-### Chạy kiểm tra tự động qua Python:
+### Bảng kiểm toán nạp kho (`etl_load_log`):
+Mỗi bước nạp đều ghi lại: `step_order`, `table_name`, `rows_source`, `rows_loaded`, `rows_failed`, `duration_seconds`, `status`, `started_at`, `completed_at`.
+
+### Chạy nạp kho dữ liệu và kiểm chứng tự động:
 ```bash
-.venv\Scripts\python.exe scripts/verify_staging_schema.py
-.venv\Scripts\python.exe scripts/test_staging_types.py
+.venv\Scripts\python.exe scripts/load_warehouse.py
 ```
-Verifier so sánh đầy đủ thứ tự cột, kiểu/precision/scale, NULL, default, auto-increment, comment, index và table options với DDL. Bài thử INSERT/SELECT/UPDATE/DELETE chỉ thao tác trên `raw_id` vừa tạo trong transaction rồi ROLLBACK. MySQL tự commit DDL; nếu schema hiện tại khác, script báo FAIL và không tự xóa/sửa bảng cũ.
-
-### Warehouse DDL – Task 3.5:
-```bash
-.venv\Scripts\python.exe scripts/verify_warehouse_schema.py --database <schema_moi>
-.venv\Scripts\python.exe scripts/verify_warehouse_schema.py --verify-only
-```
-Tạo schema đích trước bằng MySQL Workbench hoặc `00_init_database.sql`, sau đó cấp quyền cho tài khoản đang có trong `.env`. Lệnh đầu chỉ chạy khi chưa có bảng warehouse nào trong schema đích; script tạo sáu bảng rồi đối chiếu đủ cột, kiểu/precision/scale, NULL, default, PK/index, FK, CHECK, engine và collation. Lệnh thứ hai chỉ đọc schema hiện có và không chạy DDL. Không dùng `--verify-only` để tuyên bố đã thử tạo database trống.
-
-ERD, grain và nguyên tắc tránh nhân bản số listing: [`../docs/warehouse_erd.md`](../docs/warehouse_erd.md).
+Script sẽ tự động:
+1. Nạp đầy đủ 6 bảng Gold theo chuẩn batching và UPSERT (`ON DUPLICATE KEY UPDATE`).
+2. Kiểm tra tính toàn vẹn tham chiếu (Referential Integrity): Kiểm tra khóa mồ côi (Orphan Keys) bằng SQL, đạt 0 orphan.
+3. Kiểm tra tính khả lặp (Idempotency - TQ-05): Chạy lại lần 2 cùng snapshot, đối chiếu số dòng trước và sau nạp để chứng minh số dòng không bị nhân đôi.
+4. Truy vấn xác thực 5 KPI cốt lõi và xuất báo cáo `outputs/warehouse_load_summary.csv`.
