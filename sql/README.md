@@ -12,7 +12,7 @@ Minh phụ trách toàn bộ hệ thống SQL: khởi tạo database, tầng sta
 | [`01_staging_schema.sql`](01_staging_schema.sql) | **Staging (Bronze / Raw Landing)** | **Task 3.1** | Tạo 4 bảng `stg_*` chứa dữ liệu thô từ 4 file nguồn (103 cột nguồn + 3 cột metadata + `raw_id`), đánh chỉ mục inline. |
 | [`02_warehouse_schema.sql`](02_warehouse_schema.sql) | **Warehouse (Gold Fact Constellation)** | **Task 3.5** | DDL triển khai chính thức 3 Dimension và 3 Fact theo grain đã duyệt; UNIQUE theo grain, FK ghép bảo vệ listing/snapshot, index và CHECK. |
 | [`02_warehouse_schema_draft.sql`](02_warehouse_schema_draft.sql) | Thiết kế lịch sử | Task 2.5 | Bản nháp thiết kế gốc; DDL triển khai hiện hành nằm ở `02_warehouse_schema.sql`. |
-| [`03_load_warehouse.sql`](03_load_warehouse.sql) | **Load Warehouse (ETL/ELT to Gold)** | **Task 3.6** | Quy trình nạp Dimension trước Fact, ánh xạ khóa surrogate, kiểm soát trùng lặp và đối chiếu số dòng nạp. |
+| [`03_load_warehouse.sql`](03_load_warehouse.sql) | **Audit nạp Warehouse** | **Task 3.6** | DDL bảng kiểm toán được loader Python thực thi trước transaction. |
 | [`03_validate_gold_against_raw.sql`](03_validate_gold_against_raw.sql) | Kiểm thử & QA | Task 3.5 & 4.x | Bộ truy vấn đối chiếu số lượng dòng, kiểm tra khóa mồ côi và tính toàn vẹn giữa các tầng. |
 
 ---
@@ -49,25 +49,18 @@ Kiểm tra đối chiếu schema tự động:
 
 ---
 
-## 4. Quy trình nạp kho dữ liệu Gold (`03_load_warehouse.sql` - Task 3.6)
+## 4. Nạp kho dữ liệu Gold (Task 3.6)
 
-### Thứ tự nạp theo phụ thuộc khóa ngoại (Foreign Key Dependency):
-1. **`dim_date`**: Nạp dải ngày lịch 2011-01-01 .. 2027-12-31 (6,209 dòng).
-2. **`dim_neighbourhood`**: Nạp danh mục 55 khu vực quy hoạch từ Staging/Silver.
-3. **`dim_listing`**: Nạp 3,208 tin đăng, map surrogate key `neighbourhood_sk` và `snapshot_date_sk`.
-4. **`fact_listing_snapshot`**: Nạp 3,208 dòng chỉ số định lượng cấp listing.
-5. **`fact_calendar`**: Nạp 1,170,950 dòng lịch phòng 365 ngày.
-6. **`fact_review`**: Nạp 46,000 dòng đánh giá lịch sử.
+Đầu vào chính là sáu CSV Gold đã qua cleaning và mapping ở 3.3–3.4. Cần giữ bốn file raw trong `data/raw/` để tính độc lập các chỉ tiêu đối chiếu. Phiên bản này nghiệm thu snapshot `2026-09-23`.
 
-### Bảng kiểm toán nạp kho (`etl_load_log`):
-Mỗi bước nạp đều ghi lại: `step_order`, `table_name`, `rows_source`, `rows_loaded`, `rows_failed`, `duration_seconds`, `status`, `started_at`, `completed_at`.
+Trên database thử chưa có sáu bảng Gold, chạy `python scripts/verify_warehouse_schema.py` để tạo và kiểm tra DDL. Nếu đã có sáu bảng, dùng `--verify-only`.
 
-### Chạy nạp kho dữ liệu và kiểm chứng tự động:
 ```bash
-.venv\Scripts\python.exe scripts/load_warehouse.py
+python scripts/load_warehouse.py
 ```
-Script sẽ tự động:
-1. Nạp đầy đủ 6 bảng Gold theo chuẩn batching và UPSERT (`ON DUPLICATE KEY UPDATE`).
-2. Kiểm tra tính toàn vẹn tham chiếu (Referential Integrity): Kiểm tra khóa mồ côi (Orphan Keys) bằng SQL, đạt 0 orphan.
-3. Kiểm tra tính khả lặp (Idempotency - TQ-05): Chạy lại lần 2 cùng snapshot, đối chiếu số dòng trước và sau nạp để chứng minh số dòng không bị nhân đôi.
-4. Truy vấn xác thực 5 KPI cốt lõi và xuất báo cáo `outputs/warehouse_load_summary.csv`.
+
+Loader kiểm tra schema, nạp Dimension trước Fact, tra khóa MySQL theo business key, rồi đối chiếu số dòng và các chỉ tiêu Raw–Gold trước khi commit. KPI-02 được tính theo trung vị giá SGD và đối chiếu cả mẫu số. Nếu lỗi, lệnh thoát khác 0 và rollback các thay đổi dữ liệu của lượt nạp. DDL tạo bảng audit chạy riêng trước transaction.
+
+Mặc định loader thử nạp lại cùng bộ CSV trong transaction để đối chiếu số dòng và KPI; dùng `--skip-idempotency-test` nếu chỉ cần nạp một lượt. Để nghiệm thu việc chạy lại qua hai phiên kết nối độc lập, chạy lệnh hai lần và kiểm tra hai kết quả đều đạt.
+
+Lượt thành công ghi log vào `etl_load_log` và xuất `outputs/warehouse_load_summary.csv`, `outputs/warehouse_raw_vs_gold.csv`. Xem `logs/load_warehouse.log` để kiểm tra kết quả của lần chạy gần nhất. Có thể đối chiếu độc lập bằng [quy trình Raw–Gold](../docs/gold_reconciliation.md).

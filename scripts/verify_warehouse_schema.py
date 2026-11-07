@@ -6,6 +6,7 @@ never drops, alters, or truncates tables. Use --verify-only for an existing DB.
 from __future__ import annotations
 
 import argparse
+from decimal import Decimal
 import os
 import re
 import sys
@@ -95,6 +96,41 @@ def normalize_default(value) -> str | None:
     return text
 
 
+def normalize_check(expression: str) -> tuple:
+    """Normalize MySQL's quoting and redundant grouping in the current DDL checks."""
+    tokens = re.findall(r"`[^`]+`|\d+(?:\.\d+)?|[a-z_]\w*|\S", expression, re.I)
+
+    def canonical(parts):
+        while parts and parts[0] == "(" and parts[-1] == ")":
+            depth = 0
+            for index, token in enumerate(parts):
+                depth += (token == "(") - (token == ")")
+                if depth == 0:
+                    break
+            if index != len(parts) - 1:
+                break
+            parts = parts[1:-1]
+        depth = 0
+        for index, token in enumerate(parts):
+            depth += (token == "(") - (token == ")")
+            if depth == 0 and token.upper() == "OR":
+                return ("OR", canonical(parts[:index]), canonical(parts[index + 1:]))
+        return tuple(
+            str(Decimal(token).normalize()) if re.fullmatch(r"\d+(?:\.\d+)?", token)
+            else token.strip("`").lower()
+            for token in parts
+        )
+
+    return canonical(tokens)
+
+
+def verify_checks(table, expected, rows):
+    actual = {name: normalize_check(clause) for name, clause, enforced in rows
+              if str(enforced).upper() == "YES"}
+    if actual != expected:
+        fail(f"{table}: CHECK expressions differ or are not enforced; actual={actual}; DDL={expected}.")
+
+
 def parse_expected(script: str) -> dict[str, dict]:
     table_pattern = re.compile(
         r"CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+(\w+)\s*\((.*?)\)\s*"
@@ -109,7 +145,7 @@ def parse_expected(script: str) -> dict[str, dict]:
     expected: dict[str, dict] = {}
     for match in table_pattern.finditer(script):
         table, body, engine, charset, collation, comment = match.groups()
-        columns, indexes, foreign_keys, checks = [], {}, {}, set()
+        columns, indexes, foreign_keys, checks = [], {}, {}, {}
         for raw_line in body.splitlines():
             line = raw_line.strip().rstrip(",")
             if not line:
@@ -130,7 +166,7 @@ def parse_expected(script: str) -> dict[str, dict]:
                 foreign_keys[name] = (tuple(x.strip().strip("`") for x in cols.split(",")), ref_table,
                                       tuple(x.strip().strip("`") for x in ref_cols.split(",")))
             elif check:
-                checks.add(check.group(1))
+                checks[check.group(1)] = normalize_check(check.group(2))
             else:
                 col = column_pattern.match(line)
                 if not col:
@@ -227,10 +263,8 @@ def verify_schema(connection, database: str, expected: dict[str, dict]) -> None:
             actual_fks[name] = (prior[0] + (col,), ref_table, prior[2] + (ref_col,))
         if actual_fks != spec["foreign_keys"]:
             fail(f"{table}: foreign keys differ; actual={actual_fks}; DDL={spec['foreign_keys']}.")
-        actual_checks = {name for name, _, enforced in check_rows if str(enforced).upper() == "YES"}
-        if actual_checks != spec["checks"]:
-            fail(f"{table}: CHECK constraints differ/not enforced; actual={actual_checks}; DDL={spec['checks']}.")
-        print(f"[SCHEMA PASS] {table}: {len(actual_columns)} columns; exact types, nullability, defaults, PK/indexes, FKs, and CHECK names")
+        verify_checks(table, spec["checks"], check_rows)
+        print(f"[SCHEMA PASS] {table}: {len(actual_columns)} columns; exact types, nullability, defaults, PK/indexes, FKs, and enforced CHECK expressions")
 
 
 def main() -> int:
