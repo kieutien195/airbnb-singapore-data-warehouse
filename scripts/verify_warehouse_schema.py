@@ -98,7 +98,7 @@ def normalize_default(value) -> str | None:
 
 def normalize_check(expression: str) -> tuple:
     """Normalize MySQL's quoting and redundant grouping in the current DDL checks."""
-    tokens = re.findall(r"`[^`]+`|\d+(?:\.\d+)?|[a-z_]\w*|\S", expression, re.I)
+    tokens = re.findall(r"`[^`]+`|\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|[a-z_]\w*|\S", expression, re.I)
 
     def canonical(parts):
         while parts and parts[0] == "(" and parts[-1] == ")":
@@ -115,8 +115,20 @@ def normalize_check(expression: str) -> tuple:
             depth += (token == "(") - (token == ")")
             if depth == 0 and token.upper() == "OR":
                 return ("OR", canonical(parts[:index]), canonical(parts[index + 1:]))
+
+        cleaned = []
+        i = 0
+        while i < len(parts):
+            if i + 2 < len(parts) and parts[i] == "(" and parts[i + 2] == ")":
+                cleaned.append(parts[i + 1])
+                i += 3
+            else:
+                cleaned.append(parts[i])
+                i += 1
+        parts = cleaned
+
         return tuple(
-            str(Decimal(token).normalize()) if re.fullmatch(r"\d+(?:\.\d+)?", token)
+            str(Decimal(token).normalize()) if re.fullmatch(r"\d+(?:\.\d+)?(?:[eE][+-]?\d+)?", token, re.I)
             else token.strip("`").lower()
             for token in parts
         )
