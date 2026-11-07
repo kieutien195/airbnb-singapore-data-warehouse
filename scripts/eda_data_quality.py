@@ -46,7 +46,7 @@ RECOMMENDATIONS_MD_PATH = (
     EDA_DOCS_DIR / "cleaning_recommendations.md"
 )
 
-KERNEL_NAME = "airbnb-venv"
+KERNEL_NAME = "python3"
 
 EXPECTED_RAW_FILES = [
     "listings.csv.gz",
@@ -139,32 +139,15 @@ def check_raw_data():
 # ============================================================
 
 def build_notebook():
-    _header("2. TẠO NOTEBOOK EDA")
-
-    NOTEBOOK_DIR.mkdir(parents=True, exist_ok=True)
-    TEST_DIR.mkdir(parents=True, exist_ok=True)
-    EDA_DOCS_DIR.mkdir(parents=True, exist_ok=True)
-
-    notebook = nbformat.v4.new_notebook()
-
-    notebook.metadata = {
-        "kernelspec": {
-            "display_name": "Python (airbnb-venv)",
-            "language": "python",
-            "name": KERNEL_NAME,
-        },
-        "language_info": {
-            "name": "python",
-        },
-    }
-
+    """Tạo notebook có thể chạy từ repo hoặc notebooks; output do các cell sinh."""
+    for directory in (NOTEBOOK_DIR, TEST_DIR, EDA_DOCS_DIR):
+        directory.mkdir(parents=True, exist_ok=True)
+    notebook = nbformat.v4.new_notebook(metadata={
+        "kernelspec": {"display_name": "Python 3", "language": "python", "name": KERNEL_NAME},
+        "language_info": {"name": "python"},
+    })
     cells = []
-
-    # --------------------------------------------------------
-    # 4.1. GIỚI THIỆU
-    # --------------------------------------------------------
-
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 # Task 2.3 – EDA: Missing, Duplicates, Outliers và phân bố
 
 ## 1. Mục tiêu
@@ -196,11 +179,7 @@ Dữ liệu nguồn trong `data/raw` được giữ nguyên.
 - Calendar
 - Reviews
 - Neighbourhoods
-"""))
-
-    # --------------------------------------------------------
-    # 4.2. ĐỌC DỮ LIỆU
-    # --------------------------------------------------------
+'''))
 
     cells.append(nbformat.v4.new_code_cell(r'''
 from pathlib import Path
@@ -210,7 +189,17 @@ import matplotlib.pyplot as plt
 
 %matplotlib inline
 
-PROJECT_ROOT = Path.cwd()
+import importlib.util
+from IPython.display import display
+
+PROJECT_ROOT = next((p for p in [Path.cwd(), *Path.cwd().parents]
+    if (p / "scripts" / "eda_support.py").is_file()
+    and (p / "data" / "raw").is_dir()), None)
+if PROJECT_ROOT is None:
+    raise FileNotFoundError("Mở notebook từ repo hoặc thư mục notebooks có data/raw.")
+spec = importlib.util.spec_from_file_location("eda_support", PROJECT_ROOT / "scripts" / "eda_support.py")
+support = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(support)
 RAW_DATA_DIR = PROJECT_ROOT / "data" / "raw"
 
 TEST_DIR = PROJECT_ROOT / "tests"
@@ -268,16 +257,12 @@ for table_name, dataframe in data_tables.items():
     )
 '''))
 
-    # --------------------------------------------------------
-    # 4.3. TỔNG QUAN
-    # --------------------------------------------------------
-
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 ## 4. Khảo sát tổng quan dữ liệu
 
 Thống kê số dòng, số cột, tổng số ô NULL và số dòng trùng hoàn toàn
 của từng bảng dữ liệu.
-"""))
+'''))
 
     cells.append(nbformat.v4.new_code_cell(r'''
 overview_rows = []
@@ -297,7 +282,10 @@ display(overview_df)
 
 for table_name, dataframe in data_tables.items():
     print(f"\n===== {table_name} =====")
-    display(dataframe.head())
+    # Chỉ hiển thị khóa và trường phục vụ khảo sát, tránh văn bản cá nhân dài.
+    sample_columns = [c for c in ["id", "listing_id", "date", "price", "room_type",
+        "neighbourhood_group", "neighbourhood", "available"] if c in dataframe.columns]
+    display(dataframe[sample_columns].head())
 
 print("\nThông tin kiểu dữ liệu Listings:")
 display(
@@ -308,11 +296,7 @@ display(
 )
 '''))
 
-    # --------------------------------------------------------
-    # 4.4. NULL VÀ DUPLICATES
-    # --------------------------------------------------------
-
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 ## 5. Đánh giá NULL và Duplicates
 
 ### 5.1. NULL
@@ -334,7 +318,7 @@ Grain được sử dụng để kiểm tra:
 vì dữ liệu đang khảo sát có cùng id xuất hiện ở nhiều listing.
 Khóa ghép là khóa khảo sát trên nguồn hiện tại; tính duy nhất quan sát
 được không tự chứng minh đây là khóa nghiệp vụ đúng cho mọi nguồn.
-"""))
+'''))
 
     cells.append(nbformat.v4.new_code_cell(r'''
 baseline_rows = []
@@ -480,11 +464,7 @@ print("Kết quả kiểm tra Duplicates:")
 display(duplicate_df)
 '''))
 
-    # --------------------------------------------------------
-    # 4.5. OUT OF DOMAIN
-    # --------------------------------------------------------
-
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 ## 6. Kiểm tra giá trị ngoài miền hợp lệ
 
 Kiểm tra các trường số, ngày tháng và trường phân loại có miền
@@ -492,7 +472,7 @@ giá trị xác định.
 
 Các giá trị không hợp lệ được ghi nhận trong baseline để xem xét,
 không tự động chỉnh sửa dữ liệu.
-"""))
+'''))
 
     cells.append(nbformat.v4.new_code_cell(r'''
 def check_numeric_domain(
@@ -516,7 +496,7 @@ def check_numeric_domain(
     )
 
     invalid_domain = (
-        values.notna() & ~condition(values)
+        values.notna() & (~np.isfinite(values) | ~condition(values))
     )
 
     invalid_count = int(
@@ -609,8 +589,8 @@ listing_numeric_rules = {
         "Số đêm tối đa phải lớn hơn 0."
     ),
     "review_scores_rating": (
-        lambda x: x.between(0, 5),
-        "Điểm đánh giá phải nằm trong khoảng 0 đến 5."
+        lambda x: x.between(1, 5),
+        "Miền quan sát 1–5, thống nhất KPI; chưa xác minh metadata chính thức. NULL không đổi thành 0."
     ),
     "latitude": (
         lambda x: x.between(-90, 90),
@@ -632,29 +612,20 @@ for column, (condition, description) in listing_numeric_rules.items():
     )
 
 
-# Kiểm tra giá thuê
-price_candidates = [
-    "price_quote_price_per_night",
-    "price"
-]
-
-price_column = next(
-    (
-        column for column in price_candidates
-        if column in listings.columns
-    ),
-    None
-)
-
-if price_column:
-    check_numeric_domain(
-        listings,
-        "Listings",
-        price_column,
-        lambda x: x >= 0,
-        "Giá thuê mỗi đêm không được âm."
-    )
-
+# Giá chính theo KPI: Listings.price, hữu hạn, >0, currency SGD xác nhận từ JSON.
+price_analysis = support.prepare_prices(listings)
+price_column = "price"
+price_unit = "SGD/đêm"
+numeric_price = price_analysis["listed_price_numeric"]
+invalid_price = listings["price"].notna() & (
+    numeric_price.isna() | ~np.isfinite(numeric_price) | numeric_price.le(0))
+excluded_currency = numeric_price.notna() & np.isfinite(numeric_price) & numeric_price.gt(0) & price_analysis["currency"].ne("SGD")
+add_baseline("Out of domain", "Listings", "price", "Parsed finite positive price",
+    int(invalid_price.sum()), int(listings["price"].notna().sum()),
+    status="WARN" if invalid_price.any() else "PASS", note="Parse $ và dấu phẩy; giữ raw, không điền 0.")
+add_baseline("Currency", "Listings", "price", "Numeric positive price without confirmed SGD",
+    int(excluded_currency.sum()), int(numeric_price.notna().sum()),
+    status="WARN" if excluded_currency.any() else "PASS", note="Loại khỏi mẫu giá SGD; không suy currency từ ký hiệu $.")
 
 # Calendar
 calendar_numeric_rules = {
@@ -832,12 +803,12 @@ add_baseline(
 )
 '''))
 
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 ## Bằng chứng về thời gian, tiền tệ, xuất xứ và khóa Reviews
 
 Đối chiếu snapshot với ngày thực tế, tiền tệ từ JSON và checksum.
 Chuẩn hóa xuống dòng chỉ trong bộ nhớ; giữ nguyên file nguồn.
-"""))
+'''))
 
     cells.append(nbformat.v4.new_code_cell(r'''
 import json
@@ -870,36 +841,13 @@ inventory = pd.read_csv(
 )
 display(inventory[["file_name", "snapshot_date"]])
 
-def extract_currency(value):
-    if pd.isna(value):
-        return "MISSING_JSON"
-    try:
-        payload = json.loads(value)
-    except (TypeError, ValueError):
-        return "INVALID_JSON"
-    quote = payload.get("quote") if isinstance(payload, dict) else None
-    if not isinstance(quote, dict):
-        return "MISSING_CURRENCY"
-    currency = quote.get("currency")
-    if not isinstance(currency, str) or not currency.strip():
-        return "MISSING_CURRENCY"
-    return currency.strip().upper()
-
-quote_currency = listings["price_quote_raw"].map(extract_currency)
-numeric_quote_price = pd.to_numeric(
-    listings["price_quote_price_per_night"], errors="coerce"
-)
-priced_mask = numeric_quote_price.notna()
-priced_currencies = quote_currency[priced_mask]
-currency_evidence_df = (
-    pd.DataFrame({
-        "all_listings": quote_currency.value_counts(),
-        "listings_with_numeric_price": priced_currencies.value_counts(),
-    }).fillna(0).astype(int)
-)
+quote_currency = price_analysis["currency"]
+currency_evidence_df = pd.DataFrame({
+    "all_listings": quote_currency.value_counts(),
+    "listings_with_numeric_listed_price": quote_currency[price_analysis["listed_price_numeric"].notna()].value_counts(),
+    "listings_with_valid_sgd_listed_price": quote_currency[price_analysis["listed_price_sgd"].notna()].value_counts(),
+}).fillna(0).astype(int)
 display(currency_evidence_df)
-sgd_confirmed = bool(priced_mask.any()) and bool(priced_currencies.eq("SGD").all())
-price_unit = "SGD/đêm" if sgd_confirmed else "Đơn vị tiền chưa được xác nhận thống nhất"
 
 checksum_rows = []
 for _, item in inventory.iterrows():
@@ -909,7 +857,9 @@ for _, item in inventory.iterrows():
         raise ValueError("Inventory chứa đường dẫn ngoài data/raw")
     raw_bytes = source_path.read_bytes()
     observed = hashlib.sha256(raw_bytes).hexdigest()
-    lf_hash = hashlib.sha256(raw_bytes.replace(b"\r\n", b"\n")).hexdigest()
+    # Chỉ chẩn đoán CRLF trên CSV văn bản, tuyệt đối không chuẩn hóa byte gzip.
+    lf_hash = (hashlib.sha256(raw_bytes.replace(b"\r\n", b"\n")).hexdigest()
+               if source_path.suffix.lower() == ".csv" else None)
     expected = item["sha256"].strip().lower()
     if observed == expected:
         result = "EXACT_MATCH"
@@ -942,7 +892,7 @@ review_key_evidence_df = pd.DataFrame([{
 }])
 display(review_key_evidence_df)
 audit_summary = (
-    f"Đơn vị giá: {price_unit}. Giá là giá mỗi đêm trong báo giá tham chiếu; "
+    f"Đơn vị giá: {price_unit}. Giá chính là Listings.price, hữu hạn, >0 và SGD xác nhận từ JSON; "
     "không phải giá giao dịch hoặc doanh thu thực thu. "
     f"Reviews có {review_id_duplicate_excess:,} dòng dư theo id, "
     f"{review_id_cross_listing_count:,} id xuất hiện ở nhiều listing và "
@@ -953,13 +903,17 @@ audit_summary = (
     "xuống dòng không được gọi là khớp byte gốc."
 )
 print(audit_summary)
+
+for item in checksum_rows:
+    add_baseline("Provenance", "Raw", item["file_name"], "SHA256 exact bytes",
+        int(item["result"] != "EXACT_MATCH"), 1,
+        status="PASS" if item["result"] == "EXACT_MATCH" else ("WARN" if item["result"] == "MATCH_AFTER_CRLF_TO_LF" else "FAIL"),
+        note=item["result"] + "; không sửa raw hoặc checksum inventory.")
+if checksum_evidence_df["result"].eq("UNEXPLAINED_MISMATCH").any():
+    raise ValueError("Checksum raw lệch không giải thích được; xác minh nguồn trước khi dùng kết quả.")
 '''))
 
-    # --------------------------------------------------------
-    # 4.6. OUTLIERS
-    # --------------------------------------------------------
-
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 ## 7. Phân tích Outliers bằng IQR
 
 Phương pháp IQR được sử dụng để nhận diện các giá trị nằm ngoài
@@ -973,7 +927,7 @@ khoảng phân bố thông thường.
 - Ngưỡng trên = Q3 + 1.5 × IQR.
 
 Outliers chỉ được đánh dấu để kiểm tra, không đồng nghĩa với dữ liệu sai.
-"""))
+'''))
 
     cells.append(nbformat.v4.new_code_cell(r'''
 outlier_columns = [
@@ -995,10 +949,9 @@ for column in outlier_columns:
     if column not in listings.columns:
         continue
 
-    values = pd.to_numeric(
-        listings[column],
-        errors="coerce"
-    ).dropna()
+    values = (price_analysis["listed_price_sgd"] if column == "price"
+              else pd.to_numeric(listings[column], errors="coerce"))
+    values = values[values.notna() & np.isfinite(values)].astype(float)
 
     if len(values) == 0:
         continue
@@ -1061,26 +1014,22 @@ display(outlier_df)
 
 # Thống kê riêng giá thuê
 if price_column:
-    price_values = pd.to_numeric(
-        listings[price_column],
-        errors="coerce"
-    ).dropna()
+    price_values = price_analysis["listed_price_sgd"].dropna().astype(float)
 
-    price_values = price_values[price_values >= 0]
-
-    print(f"Thống kê giá mỗi đêm trong báo giá tham chiếu ({price_unit}):")
+    print(f"Thống kê giá niêm yết Listings.price ({price_unit}):")
     display(
         price_values.describe(
             percentiles=[0.25, 0.5, 0.75, 0.9, 0.95]
         ).to_frame("Price")
     )
+
+# Giá quote chỉ đối chiếu trên cùng tập listing, không thay giá KPI.
+price_comparison_df = support.compare_prices(price_analysis)
+display(price_comparison_df)
+display(price_analysis[["listed_price_sgd", "quote_price_sgd"]].describe())
 '''))
 
-    # --------------------------------------------------------
-    # 4.7. PHÂN BỐ VÀ BIỂU ĐỒ
-    # --------------------------------------------------------
-
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 ## 8. Phân tích phân bố dữ liệu
 
 Các nội dung được khảo sát:
@@ -1095,22 +1044,17 @@ Các nội dung được khảo sát:
 Đối với các trường địa lý của Listings, sử dụng:
 - `neighbourhood_group_cleansed`
 - `neighbourhood_cleansed`
-"""))
+'''))
 
     cells.append(nbformat.v4.new_code_cell(r'''
 # Biểu đồ 1: Phân bố giá thuê
 if price_column:
-    price_values = pd.to_numeric(
-        listings[price_column],
-        errors="coerce"
-    ).dropna()
-
-    price_values = price_values[price_values >= 0]
+    price_values = price_analysis["listed_price_sgd"].dropna().astype(float)
 
     plt.figure(figsize=(10, 5))
     plt.hist(price_values, bins=50)
-    plt.title("Phân bố giá mỗi đêm trong báo giá tham chiếu")
-    plt.xlabel(f"Giá báo tham chiếu ({price_unit})")
+    plt.title("Phân bố giá niêm yết Listings.price")
+    plt.xlabel(f"Giá niêm yết Listings.price ({price_unit})")
     plt.ylabel("Số lượng Listings")
     plt.tight_layout()
     plt.show()
@@ -1224,11 +1168,7 @@ if "available" in calendar.columns:
     display(available_counts.to_frame("Số lượng"))
 '''))
 
-    # --------------------------------------------------------
-    # 4.8. REFERENTIAL INTEGRITY
-    # --------------------------------------------------------
-
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 ## 9. Kiểm tra tính toàn vẹn tham chiếu
 
 Kiểm tra các quan hệ:
@@ -1240,7 +1180,7 @@ Kiểm tra các quan hệ:
   Neighbourhoods.neighbourhood_group và Neighbourhoods.neighbourhood.
 
 Ngoài ra, kiểm tra độ bao phủ của các bảng và nguy cơ JOIN fan-out.
-"""))
+'''))
 
     cells.append(nbformat.v4.new_code_cell(r'''
 listing_ids = set(listings["id"].dropna())
@@ -1513,18 +1453,58 @@ add_baseline(
 )
 '''))
 
-    # --------------------------------------------------------
-    # 4.9. XUẤT BASELINE VÀ KHUYẾN NGHỊ
-    # --------------------------------------------------------
-
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 ## 10. Xuất Data Quality Baseline và Cleaning Recommendations
 
 Tổng hợp kết quả kiểm tra vào `data_quality_baseline.csv`.
 
 Các khuyến nghị được lưu riêng để làm cơ sở cho bước xử lý dữ liệu
 tiếp theo. Notebook không thực hiện làm sạch dữ liệu.
-"""))
+'''))
+
+    cells.append(nbformat.v4.new_markdown_cell(r'''
+## 9.1. Số lượng review và đối chiếu hai nguồn
+
+Trung vị `Listings.number_of_reviews` theo khu vực/loại phòng, kèm mẫu số.
+Đối chiếu số khóa `(listing_id,id)` phân biệt, khóa số nguyên dương và ngày hợp lệ
+trong toàn bộ file Reviews. Không đồng nhất số bản ghi file với số review Listings.
+Xuất bảng đầy đủ 1 dòng/listing và bảng tất cả nhóm; không sửa raw.
+'''))
+
+    cells.append(nbformat.v4.new_code_cell(r'''
+review_comparison_df, review_summary_df, review_groups_df = support.reconcile_reviews(listings, reviews)
+review_comparison_df.to_csv(TEST_DIR / "review_reconciliation.csv", index=False, encoding="utf-8-sig")
+review_groups_df.to_csv(EDA_DOCS_DIR / "review_group_summary.csv", index=False, encoding="utf-8-sig")
+display(review_summary_df)
+display(review_groups_df)
+differences = review_comparison_df.query("comparison_status == 'DIFFERENT'")
+display(differences.sort_values("difference_listing_minus_file", key=lambda s: s.abs(), ascending=False).head(20))
+review_summary = review_summary_df.iloc[0]
+review_note = (
+    f"{int(review_summary['matched_listings']):,}/{len(listings):,} listing khớp; "
+    f"{int(review_summary['different_listings']):,} lệch; "
+    f"{int(review_summary['missing_or_invalid_listings_count']):,} thiếu/sai số review ở Listings. "
+    f"File có {int(review_summary['valid_review_rows']):,} dòng khóa/ngày hợp lệ và "
+    f"{int(review_summary['unique_review_keys']):,} khóa (listing_id,id) phân biệt. "
+    "Đối chiếu toàn bộ ngày review trong file với một snapshot Listings; không lọc theo năm. "
+    "0 ở observed_review_records nghĩa là không tìm thấy trong file; NULL từ Listings giữ NULL. "
+    "Chênh lệch chưa chứng minh nguồn nào sai; cần xác minh phạm vi/lịch sử cập nhật từ nguồn, không ép bằng nhau.")
+print(review_note)
+add_baseline("Reconciliation", "Listings - Reviews", "number_of_reviews", "Listings count minus file distinct review keys",
+    len(differences), len(listings), status="WARN" if len(differences) else "PASS", note=review_note)
+add_baseline("Reconciliation", "Listings", "number_of_reviews", "Missing or invalid review count",
+    int(review_summary["missing_or_invalid_listings_count"]), len(listings),
+    status="WARN" if review_summary["missing_or_invalid_listings_count"] else "PASS", note="Giữ NULL; không ép thành 0.")
+for dimension in ["neighbourhood_cleansed", "room_type"]:
+    grouped = review_groups_df.loc[review_groups_df["group_dimension"].eq(dimension)].sort_values("median_listing_review_count")
+    # Tất cả nhóm đều có trong CSV; biểu đồ khu vực hiển thị top 15 theo trung vị.
+    plotted = grouped.tail(15) if dimension == "neighbourhood_cleansed" else grouped
+    plt.figure(figsize=(10, 7 if dimension == "neighbourhood_cleansed" else 4))
+    plt.barh(plotted["group_value"].fillna("NULL").astype(str), plotted["median_listing_review_count"])
+    plt.title("Trung vị Listings.number_of_reviews — " + ("top 15 khu vực" if dimension == "neighbourhood_cleansed" else "theo loại phòng"))
+    plt.xlabel("Số review / listing (gồm listing có 0 review; NULL không điền 0)")
+    plt.tight_layout(); plt.show()
+'''))
 
     cells.append(nbformat.v4.new_code_cell(r'''
 # 10.1. Xuất baseline
@@ -1633,9 +1613,9 @@ for item in baseline_rows:
     field = item["field_or_key"]
     is_target = item["dataset"] == "Listings" and (
         (dimension == "NULL" and field in {
-            "price_quote_price_per_night", "review_scores_rating"
+            "price", "review_scores_rating"
         })
-        or (dimension == "Outliers" and field == "price_quote_price_per_night")
+        or (dimension == "Outliers" and field == "price")
     )
     if not is_target:
         continue
@@ -1678,6 +1658,11 @@ recommendation_rows.append({
     "note": audit_summary,
 })
 
+recommendation_rows.extend([
+    {"dataset": "Listings - Reviews", "issue": "Review count reconciliation", "recommendation": "Giữ hai chỉ tiêu riêng; xác minh phạm vi nguồn nếu lệch, không ghi đè số đếm.", "priority": "High", "note": review_note},
+    {"dataset": "Listings", "issue": "Rating domain", "recommendation": "Dùng 1–5 thống nhất với KPI; NULL không điền 0.", "priority": "Medium", "note": "Đây là miền quan sát snapshot, chưa có xác minh metadata chính thức."},
+    {"dataset": "Listings", "issue": "Price sample", "recommendation": "KPI và EDA dùng price >0, hữu hạn, currency SGD từ JSON; quote là đối chiếu trên cùng tập listing.", "priority": "High", "note": str(price_comparison_df.iloc[0].to_dict())},
+])
 recommendations_df = pd.DataFrame(recommendation_rows)
 
 recommendations_df.to_csv(
@@ -1778,7 +1763,27 @@ NULL được thống kê theo cách đọc mặc định của Pandas, bao gồ
 chuỗi như NA, N/A và None được nhận diện là thiếu. Không tự động
 coi đây là lý do xóa bản ghi.
 
-## 5. Kết luận
+## 5. Bằng chứng bổ sung
+
+### Giá niêm yết và quote trên cùng mẫu
+
+{dataframe_to_markdown(price_comparison_df)}
+
+### Số lượng review
+
+{review_note}
+
+{dataframe_to_markdown(review_summary_df)}
+
+Bảng đầy đủ: `tests/review_reconciliation.csv` và `docs/eda/review_group_summary.csv`.
+
+{dataframe_to_markdown(review_groups_df)}
+
+### Rating
+
+Miền 1–5 là miền quan sát và quy tắc thống nhất với KPI, chưa xác minh metadata chính thức.
+
+## 6. Kết luận
 
 Các kết quả trong data_quality_baseline.csv là cơ sở
 để xác định những trường và quan hệ dữ liệu cần được xem xét
@@ -1797,11 +1802,7 @@ print("Đã xuất cleaning_recommendations.md:")
 print(RECOMMENDATIONS_MD_PATH)
 '''))
 
-    # --------------------------------------------------------
-    # 4.10. KẾT LUẬN
-    # --------------------------------------------------------
-
-    cells.append(nbformat.v4.new_markdown_cell("""
+    cells.append(nbformat.v4.new_markdown_cell(r'''
 ## 11. Kết luận
 
 Notebook đã thực hiện khảo sát dữ liệu Singapore Airbnb theo phạm vi
@@ -1826,20 +1827,13 @@ Các kết quả được lưu trong:
 - `docs/eda/cleaning_recommendations.md`
 
 Đây là bước đánh giá chất lượng dữ liệu, không phải bước làm sạch.
-"""))
+'''))
 
     notebook.cells = cells
-
     nbformat.write(notebook, NOTEBOOK_PATH)
-
     _ok(f"Đã tạo notebook: {NOTEBOOK_PATH}")
-
     return NOTEBOOK_PATH
 
-
-# ============================================================
-# 5. THỰC THI NOTEBOOK VÀ LƯU OUTPUT
-# ============================================================
 
 def execute_notebook(notebook_path):
     _header("3. THỰC THI NOTEBOOK")
@@ -1893,7 +1887,9 @@ def check_outputs():
         NOTEBOOK_PATH,
         BASELINE_PATH,
         RECOMMENDATIONS_CSV_PATH,
-        RECOMMENDATIONS_MD_PATH
+        RECOMMENDATIONS_MD_PATH,
+        TEST_DIR / "review_reconciliation.csv",
+        EDA_DOCS_DIR / "review_group_summary.csv"
     ]
 
     all_exist = True
@@ -1916,6 +1912,13 @@ def check_outputs():
 # ============================================================
 
 def main():
+    import argparse
+    global KERNEL_NAME
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--kernel", default="python3", help="Tên kernelspec đang có trên máy")
+    parser.add_argument("--generate-only", action="store_true", help="Chỉ tạo notebook, chưa thực thi hay xác nhận output")
+    args = parser.parse_args()
+    KERNEL_NAME = args.kernel
     _set_console_encoding()
 
     _header(
@@ -1940,6 +1943,10 @@ def main():
         traceback.print_exc()
         _summary()
         return 1
+
+    if args.generate_only:
+        print("Đã tạo notebook chưa chạy; cần Run All hoặc chạy lại không có --generate-only.")
+        return 0
 
     # Bước 3: Thực thi notebook
     if not execute_notebook(notebook_path):

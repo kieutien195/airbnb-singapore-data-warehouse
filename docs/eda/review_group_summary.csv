@@ -1,0 +1,47 @@
+﻿group_dimension,group_value,listing_count,listings_with_valid_review_count,median_listing_review_count,total_observed_review_records
+neighbourhood_cleansed,Ang Mo Kio,16,16,0.0,97
+neighbourhood_cleansed,Bedok,134,134,1.0,1690
+neighbourhood_cleansed,Bishan,16,16,0.0,23
+neighbourhood_cleansed,Bukit Batok,18,18,0.5,99
+neighbourhood_cleansed,Bukit Merah,177,177,1.0,2106
+neighbourhood_cleansed,Bukit Panjang,14,14,0.0,9
+neighbourhood_cleansed,Bukit Timah,38,38,1.0,326
+neighbourhood_cleansed,Central Water Catchment,3,3,1.0,3
+neighbourhood_cleansed,Changi,2,2,0.0,0
+neighbourhood_cleansed,Choa Chu Kang,18,18,1.0,67
+neighbourhood_cleansed,Clementi,65,65,0.0,140
+neighbourhood_cleansed,Downtown Core,178,178,1.0,2808
+neighbourhood_cleansed,Geylang,178,178,2.0,4258
+neighbourhood_cleansed,Hougang,43,43,1.0,156
+neighbourhood_cleansed,Jurong East,29,29,0.0,81
+neighbourhood_cleansed,Jurong West,37,37,1.0,218
+neighbourhood_cleansed,Kallang,269,269,2.0,5658
+neighbourhood_cleansed,Marina South,4,4,40.5,199
+neighbourhood_cleansed,Marine Parade,89,89,1.0,1020
+neighbourhood_cleansed,Museum,22,22,0.0,67
+neighbourhood_cleansed,Newton,52,52,0.0,657
+neighbourhood_cleansed,Novena,198,198,1.0,1751
+neighbourhood_cleansed,Orchard,90,90,0.0,380
+neighbourhood_cleansed,Outram,257,257,2.0,8359
+neighbourhood_cleansed,Pasir Ris,30,30,1.0,205
+neighbourhood_cleansed,Punggol,12,12,0.0,94
+neighbourhood_cleansed,Queenstown,155,155,0.0,1117
+neighbourhood_cleansed,River Valley,456,456,1.0,1989
+neighbourhood_cleansed,Rochor,281,281,2.0,6852
+neighbourhood_cleansed,Sembawang,9,9,1.0,25
+neighbourhood_cleansed,Sengkang,7,7,5.0,36
+neighbourhood_cleansed,Serangoon,30,30,0.0,437
+neighbourhood_cleansed,Singapore River,151,151,3.0,3033
+neighbourhood_cleansed,Southern Islands,21,21,3.0,84
+neighbourhood_cleansed,Sungei Kadut,1,1,1.0,1
+neighbourhood_cleansed,Tampines,25,25,4.0,1443
+neighbourhood_cleansed,Tanglin,33,33,1.0,335
+neighbourhood_cleansed,Toa Payoh,14,14,0.0,20
+neighbourhood_cleansed,Tuas,2,2,2.5,5
+neighbourhood_cleansed,Western Water Catchment,2,2,0.0,0
+neighbourhood_cleansed,Woodlands,19,19,1.0,120
+neighbourhood_cleansed,Yishun,13,13,1.0,32
+room_type,Entire home/apt,1232,1232,0.0,12159
+room_type,Hotel room,83,83,12.0,2324
+room_type,Private room,1827,1827,1.0,29282
+room_type,Shared room,66,66,7.5,2235

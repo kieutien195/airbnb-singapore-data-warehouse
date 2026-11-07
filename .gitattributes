@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+# Preserve original downloaded bytes, including CSV line endings.
+data/raw/** -text
