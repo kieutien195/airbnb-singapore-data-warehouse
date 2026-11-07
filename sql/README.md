@@ -10,8 +10,11 @@ Minh phụ trách toàn bộ hệ thống SQL: khởi tạo database, tầng sta
 |---|---|---|---|
 | [`00_init_database.sql`](00_init_database.sql) | Môi trường MySQL | Task 1.5 | Tạo database `airbnb_sg_2026` với `utf8mb4`, kiểm tra phiên bản và collation. |
 | [`01_staging_schema.sql`](01_staging_schema.sql) | **Staging (Bronze / Raw Landing)** | **Task 3.1** | Tạo 4 bảng `stg_*` chứa dữ liệu thô từ 4 file nguồn (103 cột nguồn + 3 cột metadata + `raw_id`), đánh chỉ mục inline. |
-| [`02_warehouse_schema_draft.sql`](02_warehouse_schema_draft.sql) | **Warehouse (Gold Star Schema)** | **Task 2.5 & 3.5** | Tạo 3 bảng Dimension (`dim_date`, `dim_neighbourhood`, `dim_listing`) và 3 bảng Fact (`fact_calendar`, `fact_listing_snapshot`, `fact_review`). |
+| [`02_warehouse_schema.sql`](02_warehouse_schema.sql) | **Warehouse (Gold Fact Constellation)** | **Task 3.5** | DDL triển khai chính thức 3 Dimension và 3 Fact theo grain đã duyệt; UNIQUE theo grain, FK ghép bảo vệ listing/snapshot, index và CHECK. |
+| [`02_warehouse_schema_draft.sql`](02_warehouse_schema_draft.sql) | Thiết kế lịch sử | Task 2.5 | Bản nháp thiết kế gốc; DDL triển khai hiện hành nằm ở `02_warehouse_schema.sql`. |
+| [`03_load_warehouse.sql`](03_load_warehouse.sql) | **Audit nạp Warehouse** | **Task 3.6** | DDL bảng kiểm toán được loader Python thực thi trước transaction. |
 | [`03_validate_gold_against_raw.sql`](03_validate_gold_against_raw.sql) | Kiểm thử & QA | Task 3.5 & 4.x | Bộ truy vấn đối chiếu số lượng dòng, kiểm tra khóa mồ côi và tính toàn vẹn giữa các tầng. |
+| [`04_warehouse_kpi_audit.sql`](04_warehouse_kpi_audit.sql) | KPI và kiểm tra kỹ thuật Gold | Task 3.6 | Các truy vấn chỉ đọc sau khi nạp Gold. |
 
 ---
 
@@ -29,29 +32,38 @@ Tầng Staging đóng vai trò vùng đệm nạp thô (Raw Landing Zone), tuân
 - `snapshot_date DATE`: Ngày snapshot dữ liệu (`2026-09-23`).
 - `ingested_at DATETIME`: Mốc thời gian bản ghi được nạp vào MySQL Staging (`CURRENT_TIMESTAMP`).
 
-`latitude` và `longitude` được lưu nguyên chuỗi nguồn ở Staging để không làm tròn tọa độ. Chuyển sang kiểu số và kiểm tra miền giá trị thuộc bước Silver. DDL không chọn database cố định: hãy chọn đúng schema trước khi chạy trong Workbench hoặc kết nối bằng `MYSQL_DATABASE` từ `.env` khi chạy script.
+---
 
-Nếu database đã có các bảng Staging theo DDL cũ, kiểm tra row count trước. Chạy [`01_staging_schema_migration.sql`](01_staging_schema_migration.sql) một lần để đổi `ingestion_time` thành `ingested_at` và đổi kiểu tọa độ. Các tọa độ đã lưu dưới `DECIMAL(11,8)` không thể khôi phục phần thập phân đã mất; nếu bảng có dữ liệu, phải nạp lại từ CSV raw sau migration.
+## 3. Warehouse Schema DDL (`02_warehouse_schema.sql` - Task 3.5)
 
-### Tiêu chí bàn giao cho Thái (Task 3.2 Ingestion):
-- Bảng chấp nhận dữ liệu thô: Chuỗi giá có ký hiệu `$` (`price: $86.63`), văn bản tự do, JSON array (`amenities`), JSON object (`price_quote_raw`).
-- Chưa áp ràng buộc khóa ngoại (Foreign Key) để cho phép nạp song song hoặc độc lập từng tệp nguồn.
-- Tài khoản ứng dụng ETL `airbnb_app_minh_fc487b` đã được cấp đầy đủ quyền `CREATE`, `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `DROP`, `INDEX`, `ALTER`.
+Triển khai mô hình **Fact Constellation** (Kimball) gồm 3 bảng Dimension và 3 bảng Fact:
+
+- **Dimension**: `dim_date` (6,209 dòng ngày), `dim_neighbourhood` (55 khu vực quy hoạch), `dim_listing` (3,208 tin đăng).
+- **Fact**: `fact_listing_snapshot` (3,208 dòng đo lường), `fact_calendar` (1,170,950 dòng lịch phòng), `fact_review` (46,000 dòng đánh giá).
+- **Khóa ngoại ghép (Composite FK)**: `(listing_sk, snapshot_date_sk, neighbourhood_sk)` liên kết 3 Fact với `dim_listing`, bảo vệ chống lệch snapshot hoặc địa lý.
+- **Ràng buộc Grain**: Khóa `UNIQUE` theo grain nghiệp vụ trên cả 3 bảng Fact.
+
+Kiểm tra đối chiếu schema tự động:
+```bash
+.venv\Scripts\python.exe scripts/verify_warehouse_schema.py --verify-only
+```
 
 ---
 
-## 3. Cách chạy và kiểm tra
+## 4. Nạp kho dữ liệu Gold (Task 3.6)
 
-### Chạy qua MySQL Workbench:
-1. Mở MySQL Workbench, kết nối tới local MySQL instance.
-2. Mở file `sql/01_staging_schema.sql`.
-3. Chọn schema đúng theo `MYSQL_DATABASE` trong `.env` làm default schema trước khi chạy. DDL không chứa `USE` cố định.
-4. Nhấn biểu tượng tia sét **Execute** (Ctrl + Shift + Enter).
-5. Quan sát Action Output và xử lý mọi lỗi trước khi chạy verifier.
+Đầu vào chính là sáu CSV Gold đã qua cleaning và mapping ở 3.3–3.4. Cần giữ bốn file raw trong `data/raw/` để tính độc lập các chỉ tiêu đối chiếu. Phiên bản này nghiệm thu snapshot `2026-09-23`.
 
-### Chạy kiểm tra tự động qua Python:
+Trên database thử chưa có sáu bảng Gold, chạy `python scripts/verify_warehouse_schema.py` để tạo và kiểm tra DDL. Nếu đã có sáu bảng, dùng `--verify-only`.
+
 ```bash
-.venv\Scripts\python.exe scripts/verify_staging_schema.py
-.venv\Scripts\python.exe scripts/test_staging_types.py
+python scripts/load_warehouse.py
 ```
-Verifier so sánh đầy đủ thứ tự cột, kiểu/precision/scale, NULL, default, auto-increment, comment, index và table options với DDL. Bài thử INSERT/SELECT/UPDATE/DELETE chỉ thao tác trên `raw_id` vừa tạo trong transaction rồi ROLLBACK. MySQL tự commit DDL; nếu schema hiện tại khác, script báo FAIL và không tự xóa/sửa bảng cũ.
+
+Loader kiểm tra schema, nạp Dimension trước Fact, tra khóa MySQL theo business key, rồi đối chiếu số dòng và các chỉ tiêu Raw–Gold trước khi commit. KPI-02 được tính theo trung vị giá SGD và đối chiếu cả mẫu số. Nếu lỗi, lệnh thoát khác 0 và rollback các thay đổi dữ liệu của lượt nạp. DDL tạo bảng audit chạy riêng trước transaction.
+
+Mặc định loader thử nạp lại cùng bộ CSV trong transaction để đối chiếu số dòng và KPI; dùng `--skip-idempotency-test` nếu chỉ cần nạp một lượt. Để nghiệm thu việc chạy lại qua hai phiên kết nối độc lập, chạy lệnh hai lần và kiểm tra hai kết quả đều đạt.
+
+Lượt thành công ghi log vào `etl_load_log` và xuất `outputs/warehouse_load_summary.csv`, `outputs/warehouse_raw_vs_gold.csv`. Xem `logs/load_warehouse.log` để kiểm tra kết quả của lần chạy gần nhất. Có thể đối chiếu độc lập bằng [quy trình Raw–Gold](../docs/gold_reconciliation.md).
+
+Chạy `04_warehouse_kpi_audit.sql` sau khi loader thành công để xem KPI và kiểm tra kỹ thuật ở tầng Gold. TQ-01 đến TQ-04 báo `NOT_RUN` nếu thiếu bảng có dữ liệu trong phạm vi kiểm tra và chưa phát hiện lỗi. Với TQ-05, dùng log replay của loader hoặc đối chiếu hai lần chạy độc lập cùng snapshot, vì SQL chỉ đọc một trạng thái của kho.

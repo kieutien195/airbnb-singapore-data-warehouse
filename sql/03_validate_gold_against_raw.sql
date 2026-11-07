@@ -46,7 +46,7 @@ metrics AS (
     UNION ALL SELECT 'PRICE_VALID_COUNT', 'ALL', COUNT(*) FROM p_rank
     UNION ALL SELECT 'KPI-03_COUNT', room_type, n FROM room
     UNION ALL SELECT 'KPI-03_PERCENT', room_type, ROUND(n * 100.0 / NULLIF((SELECT COUNT(*) FROM l), 0), 4) FROM room
-    UNION ALL SELECT 'KPI-04', 'ALL', ROUND(AVG(is_available) * 100, 4) FROM cal_valid
+    UNION ALL SELECT 'KPI-04', 'ALL', ROUND(AVG(CAST(is_available AS DECIMAL(12,6))) * 100, 4) FROM cal_valid
     UNION ALL SELECT 'AVAILABLE_NIGHTS', 'ALL', COALESCE(SUM(is_available), 0) FROM cal_valid
     UNION ALL SELECT 'VALID_CALENDAR_NIGHTS', 'ALL', COUNT(*) FROM cal_valid
     UNION ALL SELECT 'KPI-05', 'ALL', ROUND(AVG(val), 4) FROM rating
