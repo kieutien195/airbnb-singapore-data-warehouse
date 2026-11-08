@@ -1,0 +1,323 @@
+﻿run_id,snapshot_date,check_id,layer,table_name,rule,observed,failed_count,status,severity,owner,evidence,note
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,Gold CSV,fact_listing_snapshot,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,Gold CSV,fact_calendar,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,Gold CSV,fact_review,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,Gold CSV,dim_listing,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,Gold CSV,dim_neighbourhood,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,Gold CSV,dim_date,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Gold CSV,fact_listing_snapshot,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Gold CSV,fact_listing_snapshot,Có dữ liệu để kiểm tra,3208,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Gold CSV,fact_listing_snapshot,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Gold CSV,fact_listing_snapshot,"Duy nhất: listing_id, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,fact_listing_snapshot,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,fact_listing_snapshot,price_quote_checkin_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,fact_listing_snapshot,price_quote_checkout_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Gold CSV,fact_listing_snapshot,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,Gold CSV,fact_listing_snapshot,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_LISTING,Gold CSV,fact_listing_snapshot,Khớp cả business key và khóa Listing/Snapshot/Geo,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_GEO,Gold CSV,fact_listing_snapshot,Khoá khu vực tồn tại,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,Gold CSV,fact_listing_snapshot,snapshot_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,PRICE,Gold CSV,fact_listing_snapshot,Giá SGD hữu hạn > 0; currency và cờ nhất quán; NULL được phép,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,RATING,Gold CSV,fact_listing_snapshot,Điểm hợp lệ từ 1 đến 5 hoặc NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Gold CSV,fact_calendar,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Gold CSV,fact_calendar,Có dữ liệu để kiểm tra,1170950,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Gold CSV,fact_calendar,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Gold CSV,fact_calendar,"Duy nhất: listing_id, calendar_date, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,fact_calendar,calendar_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,fact_calendar,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Gold CSV,fact_calendar,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,Gold CSV,fact_calendar,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_LISTING,Gold CSV,fact_calendar,Khớp cả business key và khóa Listing/Snapshot/Geo,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_GEO,Gold CSV,fact_calendar,Khoá khu vực tồn tại,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,Gold CSV,fact_calendar,snapshot_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,Gold CSV,fact_calendar,calendar_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,CALENDAR_DOMAIN,Gold CSV,fact_calendar,available 0/1; 1 ≤ minimum_nights ≤ maximum_nights,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Gold CSV,fact_review,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Gold CSV,fact_review,Có dữ liệu để kiểm tra,46000,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Gold CSV,fact_review,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Gold CSV,fact_review,"Duy nhất: listing_id, review_id, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,fact_review,review_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,fact_review,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Gold CSV,fact_review,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,Gold CSV,fact_review,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_LISTING,Gold CSV,fact_review,Khớp cả business key và khóa Listing/Snapshot/Geo,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_GEO,Gold CSV,fact_review,Khoá khu vực tồn tại,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,Gold CSV,fact_review,snapshot_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,Gold CSV,fact_review,review_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REVIEW_DOMAIN,Gold CSV,fact_review,review_count = 1 và has_comment 0/1,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Gold CSV,dim_listing,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Gold CSV,dim_listing,Có dữ liệu để kiểm tra,3208,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Gold CSV,dim_listing,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Gold CSV,dim_listing,"Duy nhất: listing_id, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,dim_listing,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,dim_listing,last_scraped_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,dim_listing,calendar_last_scraped_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,dim_listing,first_review_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,dim_listing,last_review_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Gold CSV,dim_listing,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,Gold CSV,dim_listing,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_GEO,Gold CSV,dim_listing,Khoá khu vực tồn tại,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,Gold CSV,dim_listing,snapshot_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Gold CSV,dim_neighbourhood,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Gold CSV,dim_neighbourhood,Có dữ liệu để kiểm tra,55,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Gold CSV,dim_neighbourhood,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Gold CSV,dim_neighbourhood,"Duy nhất: neighbourhood_group, neighbourhood_name",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,dim_neighbourhood,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Gold CSV,dim_neighbourhood,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,Gold CSV,dim_neighbourhood,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Gold CSV,dim_date,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Gold CSV,dim_date,Có dữ liệu để kiểm tra,6209,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Gold CSV,dim_date,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Gold CSV,dim_date,Duy nhất: full_date,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Gold CSV,dim_date,full_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,Gold CSV,dim_date,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,JOIN_FANOUT,Gold CSV,fact_listing_snapshot,JOIN Fact → dim_listing không nhân dòng,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,JOIN_FANOUT,Gold CSV,fact_calendar,JOIN Fact → dim_listing không nhân dòng,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,JOIN_FANOUT,Gold CSV,fact_review,JOIN Fact → dim_listing không nhân dòng,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,AVAILABLE_NIGHTS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,900960.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=900960.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,CALENDAR_ROWS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1170950.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=1170950.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,DUP_CALENDAR_GRAIN/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,DUP_LISTING_GRAIN/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,DUP_REVIEW_GRAIN/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-01/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,3208.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=3208.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-02/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,202.83,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=202.83; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-03_COUNT/Entire home/apt,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1232.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=1232.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-03_COUNT/Hotel room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,83.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=83.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-03_COUNT/Private room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1827.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=1827.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-03_COUNT/Shared room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,66.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=66.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-03_PERCENT/Entire home/apt,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,38.404,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=38.404; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-03_PERCENT/Hotel room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,2.5873,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=2.5873; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-03_PERCENT/Private room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,56.9514,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=56.9514; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-03_PERCENT/Shared room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,2.0574,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=2.0574; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-04/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,76.9427,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=76.9427; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,KPI-05/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,4.5394,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=4.5394; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,LISTING_ROWS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,3208.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=3208.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,ORPHAN_CALENDAR_LISTING/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,ORPHAN_REVIEW_LISTING/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,PRICE_NULL_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,483.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=483.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,PRICE_VALID_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,2725.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=2725.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,RATING_NULL_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1369.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=1369.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,RATING_VALID_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1839.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=1839.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,REVIEW_COUNT_VALID_LISTINGS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,3208.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=3208.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,REVIEW_ROWS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,46000.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=46000.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,SUP-01/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=1.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,SUP-02/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,46000.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=46000.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Gold CSV,VALID_CALENDAR_NIGHTS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1170950.0,0.0,PASS,CRITICAL,Thái,,snapshot=2026-09-23; raw=1170950.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,AVAILABLE_NIGHTS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,900960.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=900960.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,CALENDAR_ROWS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1170950.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1170950.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,DUP_CALENDAR_GRAIN/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,DUP_LISTING_GRAIN/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,DUP_REVIEW_GRAIN/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-01/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,3208.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=3208.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-02/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,202.83,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=202.83; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-03_COUNT/Entire home/apt,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1232.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1232.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-03_COUNT/Hotel room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,83.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=83.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-03_COUNT/Private room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1827.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1827.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-03_COUNT/Shared room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,66.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=66.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-03_PERCENT/Entire home/apt,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,38.404,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=38.404; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-03_PERCENT/Hotel room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,2.5873,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=2.5873; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-03_PERCENT/Private room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,56.9514,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=56.9514; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-03_PERCENT/Shared room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,2.0574,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=2.0574; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-04/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,76.9427,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=76.9427; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,KPI-05/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,4.5394,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=4.5394; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,LISTING_ROWS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,3208.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=3208.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,ORPHAN_CALENDAR_LISTING/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,ORPHAN_REVIEW_LISTING/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,PRICE_NULL_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,483.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=483.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,PRICE_VALID_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,2725.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=2725.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,RATING_NULL_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1369.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1369.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,RATING_VALID_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1839.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1839.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,REVIEW_COUNT_VALID_LISTINGS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,3208.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=3208.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,REVIEW_ROWS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,46000.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=46000.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,SUP-01/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,SUP-02/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,46000.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=46000.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,Workbench,VALID_CALENDAR_NIGHTS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1170950.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1170950.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Staging CSV,listings,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Staging CSV,listings,Có dữ liệu để kiểm tra,3208,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Staging CSV,listings,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Staging CSV,listings,"Duy nhất: id, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Staging CSV,listings,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Staging CSV,listings,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Silver CSV,listings,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Silver CSV,listings,Có dữ liệu để kiểm tra,3208,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Silver CSV,listings,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Silver CSV,listings,"Duy nhất: id, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Silver CSV,listings,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Silver CSV,listings,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_STAGING,Reconciliation,listings,Số dòng và khóa nguồn khớp staging,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,STAGING_SILVER,Reconciliation,listings,Staging = Silver + rejected; lý do và audit khớp,0,0.0,PASS,CRITICAL,Thái,outputs/cleaning_audit_summary.csv,
+2026-11-08T16:55:36+00:00,2026-09-23,SILVER_GOLD,Reconciliation,fact_listing_snapshot,Số dòng và grain Silver khớp bảng Gold tương ứng,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Staging CSV,calendar,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Staging CSV,calendar,Có dữ liệu để kiểm tra,1170950,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Staging CSV,calendar,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Staging CSV,calendar,"Duy nhất: listing_id, date, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Staging CSV,calendar,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Staging CSV,calendar,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Silver CSV,calendar,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Silver CSV,calendar,Có dữ liệu để kiểm tra,1170950,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Silver CSV,calendar,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Silver CSV,calendar,"Duy nhất: listing_id, calendar_date, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Silver CSV,calendar,calendar_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Silver CSV,calendar,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Silver CSV,calendar,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_STAGING,Reconciliation,calendar,Số dòng và khóa nguồn khớp staging,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,STAGING_SILVER,Reconciliation,calendar,Staging = Silver + rejected; lý do và audit khớp,0,0.0,PASS,CRITICAL,Thái,outputs/cleaning_audit_summary.csv,
+2026-11-08T16:55:36+00:00,2026-09-23,SILVER_GOLD,Reconciliation,fact_calendar,Số dòng và grain Silver khớp bảng Gold tương ứng,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Staging CSV,reviews,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Staging CSV,reviews,Có dữ liệu để kiểm tra,46000,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Staging CSV,reviews,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Staging CSV,reviews,"Duy nhất: listing_id, id, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Staging CSV,reviews,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Staging CSV,reviews,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Silver CSV,reviews,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Silver CSV,reviews,Có dữ liệu để kiểm tra,46000,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Silver CSV,reviews,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Silver CSV,reviews,"Duy nhất: listing_id, review_id, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Silver CSV,reviews,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Silver CSV,reviews,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_STAGING,Reconciliation,reviews,Số dòng và khóa nguồn khớp staging,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,STAGING_SILVER,Reconciliation,reviews,Staging = Silver + rejected; lý do và audit khớp,0,0.0,PASS,CRITICAL,Thái,outputs/cleaning_audit_summary.csv,
+2026-11-08T16:55:36+00:00,2026-09-23,SILVER_GOLD,Reconciliation,fact_review,Số dòng và grain Silver khớp bảng Gold tương ứng,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Staging CSV,neighbourhoods,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Staging CSV,neighbourhoods,Có dữ liệu để kiểm tra,55,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Staging CSV,neighbourhoods,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Staging CSV,neighbourhoods,"Duy nhất: neighbourhood_group, neighbourhood, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Staging CSV,neighbourhoods,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Staging CSV,neighbourhoods,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,Silver CSV,neighbourhoods,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,Silver CSV,neighbourhoods,Có dữ liệu để kiểm tra,55,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,Silver CSV,neighbourhoods,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,Silver CSV,neighbourhoods,"Duy nhất: neighbourhood_group, neighbourhood_name, snapshot_date",0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,Silver CSV,neighbourhoods,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,Silver CSV,neighbourhoods,Đúng snapshot,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_STAGING,Reconciliation,neighbourhoods,Số dòng và khóa nguồn khớp staging,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,STAGING_SILVER,Reconciliation,neighbourhoods,Staging = Silver + rejected; lý do và audit khớp,0,0.0,PASS,CRITICAL,Thái,outputs/cleaning_audit_summary.csv,
+2026-11-08T16:55:36+00:00,2026-09-23,SILVER_GOLD,Reconciliation,dim_neighbourhood,Số dòng và grain Silver khớp bảng Gold tương ứng,0,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,FACT_JOIN_RISK,Gold CSV,fact_calendar + fact_review,Định lượng số dòng INNER JOIN trực tiếp theo listing trong snapshot,16791449,,INFO,INFO,Minh,,Đây là minh chứng rủi ro của JOIN fact chi tiết. Tổng hợp từng fact trước khi ghép theo listing và snapshot.
+2026-11-08T16:55:36+00:00,2026-09-23,SAMPLE,Reconciliation,listing_id,Mẫu 25 listing seed 37; số dòng và giá trị đại diện,75,0.0,PASS,CRITICAL,Thái,tests/data_quality_checks/sample_validation.csv,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,MySQL,fact_listing_snapshot,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,MySQL,fact_calendar,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,MySQL,fact_review,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,MySQL,dim_listing,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,MySQL,dim_neighbourhood,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA_COLUMNS,MySQL,dim_date,Đủ cột theo DDL,,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,MySQL,fact_listing_snapshot,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,MySQL,fact_listing_snapshot,Có dữ liệu để kiểm tra,3208,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,MySQL,fact_listing_snapshot,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,MySQL,fact_listing_snapshot,"Duy nhất: listing_id, snapshot_date",0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,fact_listing_snapshot,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,fact_listing_snapshot,price_quote_checkin_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,fact_listing_snapshot,price_quote_checkout_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,MySQL,fact_listing_snapshot,Đúng snapshot,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,MySQL,fact_listing_snapshot,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_LISTING,MySQL,fact_listing_snapshot,Khớp cả business key và khóa Listing/Snapshot/Geo,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_GEO,MySQL,fact_listing_snapshot,Khoá khu vực tồn tại,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,MySQL,fact_listing_snapshot,snapshot_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,PRICE,MySQL,fact_listing_snapshot,Giá SGD hữu hạn > 0; currency và cờ nhất quán; NULL được phép,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,RATING,MySQL,fact_listing_snapshot,Điểm hợp lệ từ 1 đến 5 hoặc NULL,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,MySQL,fact_calendar,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,MySQL,fact_calendar,Có dữ liệu để kiểm tra,1170950,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,MySQL,fact_calendar,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,MySQL,fact_calendar,"Duy nhất: listing_id, calendar_date, snapshot_date",0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,fact_calendar,calendar_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,fact_calendar,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,MySQL,fact_calendar,Đúng snapshot,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,MySQL,fact_calendar,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_LISTING,MySQL,fact_calendar,Khớp cả business key và khóa Listing/Snapshot/Geo,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_GEO,MySQL,fact_calendar,Khoá khu vực tồn tại,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,MySQL,fact_calendar,snapshot_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,MySQL,fact_calendar,calendar_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,CALENDAR_DOMAIN,MySQL,fact_calendar,available 0/1; 1 ≤ minimum_nights ≤ maximum_nights,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,MySQL,fact_review,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,MySQL,fact_review,Có dữ liệu để kiểm tra,46000,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,MySQL,fact_review,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,MySQL,fact_review,"Duy nhất: listing_id, review_id, snapshot_date",0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,fact_review,review_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,fact_review,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,MySQL,fact_review,Đúng snapshot,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,MySQL,fact_review,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_LISTING,MySQL,fact_review,Khớp cả business key và khóa Listing/Snapshot/Geo,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_GEO,MySQL,fact_review,Khoá khu vực tồn tại,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,MySQL,fact_review,snapshot_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,MySQL,fact_review,review_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,REVIEW_DOMAIN,MySQL,fact_review,review_count = 1 và has_comment 0/1,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,MySQL,dim_listing,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,MySQL,dim_listing,Có dữ liệu để kiểm tra,3208,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,MySQL,dim_listing,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,MySQL,dim_listing,"Duy nhất: listing_id, snapshot_date",0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,dim_listing,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,dim_listing,last_scraped_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,dim_listing,calendar_last_scraped_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,dim_listing,first_review_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,dim_listing,last_review_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,MySQL,dim_listing,Đúng snapshot,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,MySQL,dim_listing,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_GEO,MySQL,dim_listing,Khoá khu vực tồn tại,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,FK_DATE,MySQL,dim_listing,snapshot_date_sk khớp ngày trong dim_date,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,MySQL,dim_neighbourhood,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,MySQL,dim_neighbourhood,Có dữ liệu để kiểm tra,55,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,MySQL,dim_neighbourhood,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,MySQL,dim_neighbourhood,"Duy nhất: neighbourhood_group, neighbourhood_name",0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,dim_neighbourhood,snapshot_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SNAPSHOT,MySQL,dim_neighbourhood,Đúng snapshot,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,MySQL,dim_neighbourhood,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SCHEMA,MySQL,dim_date,Các cột được kiểm tra tồn tại,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,NONEMPTY,MySQL,dim_date,Có dữ liệu để kiểm tra,6209,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,REQUIRED,MySQL,dim_date,Trường bắt buộc khác NULL,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,GRAIN,MySQL,dim_date,Duy nhất: full_date,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,DATE,MySQL,dim_date,full_date: ngày ISO hợp lệ,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,SURROGATE,MySQL,dim_date,Surrogate key duy nhất,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,JOIN_FANOUT,MySQL,fact_listing_snapshot,JOIN Fact → dim_listing không nhân dòng,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,JOIN_FANOUT,MySQL,fact_calendar,JOIN Fact → dim_listing không nhân dòng,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,JOIN_FANOUT,MySQL,fact_review,JOIN Fact → dim_listing không nhân dòng,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,AVAILABLE_NIGHTS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,900960.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=900960.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,CALENDAR_ROWS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1170950.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1170950.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,DUP_CALENDAR_GRAIN/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,DUP_LISTING_GRAIN/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,DUP_REVIEW_GRAIN/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-01/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,3208.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=3208.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-02/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,202.83,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=202.83; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-03_COUNT/Entire home/apt,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1232.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1232.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-03_COUNT/Hotel room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,83.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=83.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-03_COUNT/Private room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1827.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1827.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-03_COUNT/Shared room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,66.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=66.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-03_PERCENT/Entire home/apt,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,38.404,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=38.404; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-03_PERCENT/Hotel room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,2.5873,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=2.5873; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-03_PERCENT/Private room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,56.9514,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=56.9514; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-03_PERCENT/Shared room,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,2.0574,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=2.0574; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-04/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,76.9427,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=76.9427; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,KPI-05/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,4.5394,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=4.5394; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,LISTING_ROWS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,3208.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=3208.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,ORPHAN_CALENDAR_LISTING/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,ORPHAN_REVIEW_LISTING/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,0.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=0.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,PRICE_NULL_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,483.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=483.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,PRICE_VALID_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,2725.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=2725.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,RATING_NULL_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1369.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1369.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,RATING_VALID_COUNT/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1839.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1839.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,REVIEW_COUNT_VALID_LISTINGS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,3208.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=3208.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,REVIEW_ROWS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,46000.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=46000.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,SUP-01/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,SUP-02/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,46000.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=46000.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,RAW_GOLD_METRIC,MySQL,VALID_CALENDAR_NIGHTS/ALL,Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ,1170950.0,0.0,PASS,CRITICAL,Minh,,snapshot=2026-09-23; raw=1170950.0; delta=0.0
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_DATE_TYPE,MySQL,dim_date,Cột DATE khớp DDL,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_DATE_TYPE,MySQL,dim_neighbourhood,Cột DATE khớp DDL,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_DATE_TYPE,MySQL,dim_listing,Cột DATE khớp DDL,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_DATE_TYPE,MySQL,fact_listing_snapshot,Cột DATE khớp DDL,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_DATE_TYPE,MySQL,fact_calendar,Cột DATE khớp DDL,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_DATE_TYPE,MySQL,fact_review,Cột DATE khớp DDL,[],0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_GOLD,MySQL,fact_listing_snapshot,Số dòng và khóa khớp Gold CSV,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_GOLD,MySQL,fact_calendar,Số dòng và khóa khớp Gold CSV,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_GOLD,MySQL,fact_review,Số dòng và khóa khớp Gold CSV,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_GOLD,MySQL,dim_listing,Số dòng và khóa khớp Gold CSV,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_GOLD,MySQL,dim_neighbourhood,Số dòng và khóa khớp Gold CSV,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_GOLD,MySQL,dim_date,Số dòng và khóa khớp Gold CSV,0,0.0,PASS,CRITICAL,Minh,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_STAGING,MySQL,stg_listings,Số dòng staging MySQL khớp file,3208,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_STAGING,MySQL,stg_calendar,Số dòng staging MySQL khớp file,1170950,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_STAGING,MySQL,stg_reviews,Số dòng staging MySQL khớp file,46000,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,MYSQL_STAGING,MySQL,stg_neighbourhoods,Số dòng staging MySQL khớp file,55,0.0,PASS,CRITICAL,Thái,,
+2026-11-08T16:55:36+00:00,2026-09-23,PRIOR_LOAD_COUNT,Historical evidence,fact_listing_snapshot,Số dòng trong báo cáo load kèm ZIP khớp Gold tái tạo,3208,0.0,PASS,REVIEW,Minh,outputs/warehouse_load_summary.csv,Báo cáo kèm ZIP không có run_id/snapshot_date.
+2026-11-08T16:55:36+00:00,2026-09-23,PRIOR_LOAD_COUNT,Historical evidence,fact_calendar,Số dòng trong báo cáo load kèm ZIP khớp Gold tái tạo,1170950,0.0,PASS,REVIEW,Minh,outputs/warehouse_load_summary.csv,Báo cáo kèm ZIP không có run_id/snapshot_date.
+2026-11-08T16:55:36+00:00,2026-09-23,PRIOR_LOAD_COUNT,Historical evidence,fact_review,Số dòng trong báo cáo load kèm ZIP khớp Gold tái tạo,46000,0.0,PASS,REVIEW,Minh,outputs/warehouse_load_summary.csv,Báo cáo kèm ZIP không có run_id/snapshot_date.
+2026-11-08T16:55:36+00:00,2026-09-23,PRIOR_LOAD_COUNT,Historical evidence,dim_listing,Số dòng trong báo cáo load kèm ZIP khớp Gold tái tạo,3208,0.0,PASS,REVIEW,Minh,outputs/warehouse_load_summary.csv,Báo cáo kèm ZIP không có run_id/snapshot_date.
+2026-11-08T16:55:36+00:00,2026-09-23,PRIOR_LOAD_COUNT,Historical evidence,dim_neighbourhood,Số dòng trong báo cáo load kèm ZIP khớp Gold tái tạo,55,0.0,PASS,REVIEW,Minh,outputs/warehouse_load_summary.csv,Báo cáo kèm ZIP không có run_id/snapshot_date.
+2026-11-08T16:55:36+00:00,2026-09-23,PRIOR_LOAD_COUNT,Historical evidence,dim_date,Số dòng trong báo cáo load kèm ZIP khớp Gold tái tạo,6209,0.0,PASS,REVIEW,Minh,outputs/warehouse_load_summary.csv,Báo cáo kèm ZIP không có run_id/snapshot_date.
