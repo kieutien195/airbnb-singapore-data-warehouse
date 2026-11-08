@@ -33,3 +33,10 @@ __pycache__/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Agent configurations and skills (local AI workspace)
+.agent/
+.agents/
+_agent/
+_agents/
+
