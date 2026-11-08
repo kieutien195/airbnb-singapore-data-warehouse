@@ -7,7 +7,7 @@ Tài liệu này thuyết minh chi tiết việc thiết kế, cài đặt và k
 ## 1. Danh mục Bàn giao (Deliverables)
 
 1. **`sql/04_kpi_views.sql`**: Script DDL MySQL 8.0 khởi tạo 12 Views (7 Core & Supplemental Views, 3 Regional Breakdown Views, 1 Executive Summary View và 1 BI Analytical Base View).
-2. **`kpi_sql_results.csv`** (và bản sao tại `outputs/kpi_sql_results.csv`): Bảng kết quả truy vấn đối chiếu số liệu KPI toàn sàn và phân rã khu vực, kèm thời gian truy vấn ghi nhận ở lần chạy MySQL trước. Giá trị kỳ vọng theo vùng được tính độc lập từ raw. Chạy lại script trên MySQL để cập nhật kết quả và thời gian đo.
+2. **`outputs/kpi_sql_results.csv`**: Bảng kết quả truy vấn đối chiếu số liệu KPI toàn sàn và phân rã khu vực, kèm thời gian truy vấn ghi nhận ở lần chạy MySQL trước. Giá trị kỳ vọng theo vùng được tính độc lập từ raw. Chạy lại script trên MySQL để cập nhật kết quả và thời gian đo.
 3. **`scripts/generate_kpi_results.py`**: Pipeline tự động hóa triển khai DDL views, thực thi benchmark và xuất kết quả ra file CSV.
 
 ---

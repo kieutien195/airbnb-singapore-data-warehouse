@@ -392,15 +392,12 @@ def main():
         # 3. Export to CSV
         df = pd.DataFrame(results)
         
-        out_csv1 = PROJECT_ROOT / "kpi_sql_results.csv"
-        out_csv2 = PROJECT_ROOT / "outputs" / "kpi_sql_results.csv"
-        out_csv2.parent.mkdir(parents=True, exist_ok=True)
+        out_csv1 = PROJECT_ROOT / "outputs" / "kpi_sql_results.csv"
+        out_csv1.parent.mkdir(parents=True, exist_ok=True)
         
         df.to_csv(out_csv1, index=False, encoding="utf-8-sig")
-        df.to_csv(out_csv2, index=False, encoding="utf-8-sig")
         print(f"\n-> Đã xuất kết quả thành công ra:")
         print(f"   1. {out_csv1}")
-        print(f"   2. {out_csv2}")
 
         # In bảng tổng hợp
         print("\n" + "=" * 95)
