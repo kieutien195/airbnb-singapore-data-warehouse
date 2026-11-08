@@ -1,5 +1,5 @@
 -- =============================================================================
--- Task 3.7: Xây dựng các SQL View tính toán KPI từ Kho Dữ liệu (Gold Layer)
+-- Task 4.1: Xây dựng các SQL View tính toán KPI từ Kho Dữ liệu (Gold Layer)
 -- File: sql/04_kpi_views.sql
 -- Database: airbnb_sg_2026 | MySQL 8.0+
 -- Tác giả: Minh (Database Administrator / Data Modeler)
@@ -167,6 +167,7 @@ SELECT
 FROM fact_calendar
 WHERE snapshot_date = '2026-09-23'
   AND calendar_date BETWEEN '2026-09-25' AND '2027-09-25'
+  AND is_available IN (0, 1)
 GROUP BY snapshot_date;
 
 
@@ -192,6 +193,7 @@ FROM fact_calendar fc
 JOIN dim_neighbourhood dn ON fc.neighbourhood_sk = dn.neighbourhood_sk
 WHERE fc.snapshot_date = '2026-09-23'
   AND fc.calendar_date BETWEEN '2026-09-25' AND '2027-09-25'
+  AND fc.is_available IN (0, 1)
 GROUP BY fc.snapshot_date, dn.neighbourhood_group;
 
 
@@ -301,6 +303,7 @@ SELECT
     MAX(review_date) AS latest_review_date
 FROM fact_review
 WHERE snapshot_date = '2026-09-23'
+  AND review_date BETWEEN '2011-05-04' AND '2026-09-25'
 GROUP BY snapshot_date;
 
 
@@ -407,6 +410,7 @@ WITH cal_agg AS (
     FROM fact_calendar
     WHERE snapshot_date = '2026-09-23'
       AND calendar_date BETWEEN '2026-09-25' AND '2027-09-25'
+      AND is_available IN (0, 1)
     GROUP BY listing_sk
 ),
 rev_agg AS (
@@ -417,6 +421,7 @@ rev_agg AS (
         MAX(review_date) AS latest_review_date
     FROM fact_review
     WHERE snapshot_date = '2026-09-23'
+      AND review_date BETWEEN '2011-05-04' AND '2026-09-25'
     GROUP BY listing_sk
 )
 SELECT 

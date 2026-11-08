@@ -1,4 +1,4 @@
-# Hướng dẫn & Tài liệu Kỹ thuật: SQL Views Tính toán KPI (Task 3.7)
+# Hướng dẫn & Tài liệu Kỹ thuật: SQL Views Tính toán KPI (Task 4.1)
 
 Tài liệu này thuyết minh chi tiết việc thiết kế, cài đặt và kiểm chuẩn các **SQL Views tính toán KPI từ Kho Dữ liệu (Gold Layer)** theo yêu cầu của dự án **Airbnb Singapore Data Warehouse**.
 
@@ -7,7 +7,7 @@ Tài liệu này thuyết minh chi tiết việc thiết kế, cài đặt và k
 ## 1. Danh mục Bàn giao (Deliverables)
 
 1. **`sql/04_kpi_views.sql`**: Script DDL MySQL 8.0 khởi tạo 12 Views (7 Core & Supplemental Views, 3 Regional Breakdown Views, 1 Executive Summary View và 1 BI Analytical Base View).
-2. **`kpi_sql_results.csv`** (và bản sao tại `outputs/kpi_sql_results.csv`): Bảng kết quả truy vấn đối chiếu số liệu KPI toàn sàn và phân rã khu vực, đo lường thời gian thực thi (query time ms) và kiểm chuẩn 100% PASS so với Raw Data.
+2. **`kpi_sql_results.csv`** (và bản sao tại `outputs/kpi_sql_results.csv`): Bảng kết quả truy vấn đối chiếu số liệu KPI toàn sàn và phân rã khu vực, kèm thời gian truy vấn ghi nhận ở lần chạy MySQL trước. Giá trị kỳ vọng theo vùng được tính độc lập từ raw. Chạy lại script trên MySQL để cập nhật kết quả và thời gian đo.
 3. **`scripts/generate_kpi_results.py`**: Pipeline tự động hóa triển khai DDL views, thực thi benchmark và xuất kết quả ra file CSV.
 
 ---
@@ -77,3 +77,30 @@ Dữ liệu Gold Warehouse đã sẵn sàng 100% để kết nối trực tiếp
 2. **Kết nối các View KPI Tổng hợp**:
    - Sử dụng `vw_kpi_summary_overall` để tạo các thẻ KPI Card trên trang tổng quan (Executive Dashboard).
    - Sử dụng `vw_kpi03_regional_room_type_share` và `vw_kpi04_regional_calendar_availability` để vẽ các biểu đồ phân tích cơ cấu và so sánh giữa 5 vùng địa lý Singapore.
+
+
+### Chỉ tiêu review theo khu vực và loại phòng
+
+View BI đã tổng hợp đúng một dòng cho mỗi listing ở snapshot. Ví dụ dưới đây áp dụng cùng bộ lọc vùng và loại phòng cho SUP-01 và SUP-02. Đổi hai giá trị trong `WHERE` để chọn nhóm. SUP-01 giữ số review bằng 0. SUP-02 đếm bản ghi review trong kỳ 2011-05-04 đến 2026-09-25, gồm cả hai đầu mút.
+
+```sql
+WITH scoped AS (
+    SELECT number_of_reviews, historical_review_records
+    FROM vw_gold_bi_analytical_base
+    WHERE snapshot_date = '2026-09-23'
+      AND neighbourhood_group = 'Central Region'
+      AND room_type = 'Private room'
+), ranked AS (
+    SELECT number_of_reviews,
+           ROW_NUMBER() OVER (ORDER BY number_of_reviews) AS rn,
+           COUNT(*) OVER () AS n
+    FROM scoped
+    WHERE number_of_reviews >= 0
+)
+SELECT (SELECT AVG(number_of_reviews) FROM ranked
+        WHERE rn IN (FLOOR((n+1)/2), CEIL((n+1)/2))) AS sup01_median_reviews,
+       COALESCE(SUM(historical_review_records), 0) AS sup02_review_records
+FROM scoped;
+```
+
+Trong BI, tính KPI-04 bằng **tổng `calendar_available_nights` chia tổng `calendar_total_nights`** trong phạm vi đang lọc. Các view KPI toàn sàn đã được tổng hợp cho snapshot cố định. Khi cần thẻ phản hồi theo slicer, tính từ dữ liệu ở grain listing của BI Base.

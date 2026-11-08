@@ -64,8 +64,62 @@ def deploy_views(conn):
     print("-> Triển khai toàn bộ các View thành công!")
 
 
+def regional_raw_metrics(raw_dir):
+    listings = pd.read_csv(raw_dir / "listings.csv.gz", dtype={"id": str}, low_memory=False)
+    listings = listings.rename(columns={"neighbourhood_group_cleansed": "region"})
+    listings["region"] = listings["region"].str.strip()
+    listings["room_type"] = listings["room_type"].str.strip()
+    rooms = listings.groupby(["region", "room_type"]).size()
+    totals = rooms.groupby(level="region").sum()
+
+    calendar = pd.read_csv(raw_dir / "calendar.csv.gz", dtype={"listing_id": str})
+    calendar = calendar.loc[calendar["date"].between("2026-09-25", "2027-09-25")].copy()
+    calendar["available"] = calendar["available"].str.strip().str.lower().map({
+        "t": 1, "true": 1, "1": 1, "f": 0, "false": 0, "0": 0,
+    })
+    calendar = calendar.dropna(subset=["available"]).merge(
+        listings[["id", "region"]], left_on="listing_id", right_on="id", validate="many_to_one"
+    )
+    nights = calendar.groupby("region")["available"].agg(["sum", "size"])
+    ratings = listings.loc[listings["review_scores_rating"].between(1, 5)]
+    ratings = ratings.groupby("region")["review_scores_rating"].agg(["sum", "size"])
+
+    return {
+        "room": {key: (count, totals[key[0]], count * 100 / totals[key[0]])
+                 for key, count in rooms.items()},
+        "calendar": {region: (available, count, available * 100 / count)
+                     for region, available, count in nights.itertuples()},
+        "rating": {region: (total, count, total / count)
+                   for region, total, count in ratings.itertuples()},
+    }
+
+
+def reconcile_regional(rows, expected, keys, numerator, denominator, value):
+    observed = {}
+    for row in rows:
+        key = tuple(row[column] for column in keys)
+        key = key[0] if len(key) == 1 else key
+        if key in observed:
+            raise ValueError(f"Duplicate regional KPI group: {key}")
+        observed[key] = row
+    if observed.keys() != expected.keys():
+        raise ValueError(f"Regional groups differ: missing={sorted(expected.keys() - observed.keys())}; "
+                         f"unexpected={sorted(observed.keys() - expected.keys())}")
+    for key, row in observed.items():
+        num, den, raw_value = expected[key]
+        variance = abs(float(row[value]) - raw_value)
+        matches = (abs(float(row[numerator]) - num) < 0.00001
+                   and row[denominator] == den and variance <= 0.00500001)
+        yield row, {
+            "expected_raw_value": round(raw_value, 4),
+            "variance": round(variance, 4),
+            "reconciliation_status": "PASS" if matches else "FAIL",
+        }
+
+
 def run_benchmark_and_collect_results(conn):
     results = []
+    raw = regional_raw_metrics(PROJECT_ROOT / "data/raw")
 
     # Danh sách các câu truy vấn KPI và View
     benchmarks = [
@@ -178,7 +232,7 @@ def run_benchmark_and_collect_results(conn):
             "numerator": "SUM(review_scores_rating) = 8,347.90",
             "denominator": "COUNT(review_scores_rating) = 1,839 listings (Coverage = 57.33%)",
             "unit": "Points (1.00..5.00)",
-            "expected_raw": 4.5391,
+            "expected_raw": 4.5394,
             "query": "SELECT avg_review_score AS metric_value, rated_listings_count, sum_review_score FROM vw_kpi05_average_rating;"
         },
         {
@@ -250,7 +304,10 @@ def run_benchmark_and_collect_results(conn):
         rows = cur.fetchall()
         t1 = time.perf_counter()
         elapsed_ms = round((t1 - t0) * 1000, 2)
-        for r in rows:
+        for r, reconciliation in reconcile_regional(
+            rows, raw["room"], ("neighbourhood_group", "room_type"),
+            "listing_count", "regional_total_listings", "room_type_share_pct",
+        ):
             results.append({
                 "section": "3. Regional Dimensional Breakdown",
                 "kpi_id": "KPI-03-REGIONAL",
@@ -262,9 +319,7 @@ def run_benchmark_and_collect_results(conn):
                 "numerator": f"{r['listing_count']} listings",
                 "denominator": f"{r['regional_total_listings']} regional listings",
                 "observed_gold_value": float(r["room_type_share_pct"]),
-                "expected_raw_value": float(r["room_type_share_pct"]),
-                "variance": 0.0,
-                "reconciliation_status": "PASS",
+                **reconciliation,
                 "unit": "% listings",
                 "query_time_ms": elapsed_ms
             })
@@ -275,7 +330,10 @@ def run_benchmark_and_collect_results(conn):
         rows = cur.fetchall()
         t1 = time.perf_counter()
         elapsed_ms = round((t1 - t0) * 1000, 2)
-        for r in rows:
+        for r, reconciliation in reconcile_regional(
+            rows, raw["calendar"], ("neighbourhood_group",),
+            "available_nights_count", "total_nights_count", "available_nights_ratio_pct",
+        ):
             results.append({
                 "section": "3. Regional Dimensional Breakdown",
                 "kpi_id": "KPI-04-REGIONAL",
@@ -287,9 +345,7 @@ def run_benchmark_and_collect_results(conn):
                 "numerator": f"{r['available_nights_count']} available nights",
                 "denominator": f"{r['total_nights_count']} total nights",
                 "observed_gold_value": float(r["available_nights_ratio_pct"]),
-                "expected_raw_value": float(r["available_nights_ratio_pct"]),
-                "variance": 0.0,
-                "reconciliation_status": "PASS",
+                **reconciliation,
                 "unit": "% listing-nights",
                 "query_time_ms": elapsed_ms
             })
@@ -300,7 +356,10 @@ def run_benchmark_and_collect_results(conn):
         rows = cur.fetchall()
         t1 = time.perf_counter()
         elapsed_ms = round((t1 - t0) * 1000, 2)
-        for r in rows:
+        for r, reconciliation in reconcile_regional(
+            rows, raw["rating"], ("neighbourhood_group",),
+            "sum_review_score", "rated_listings_count", "avg_review_score",
+        ):
             results.append({
                 "section": "3. Regional Dimensional Breakdown",
                 "kpi_id": "KPI-05-REGIONAL",
@@ -312,9 +371,7 @@ def run_benchmark_and_collect_results(conn):
                 "numerator": f"{r['sum_review_score']} total score",
                 "denominator": f"{r['rated_listings_count']} rated listings",
                 "observed_gold_value": float(r["avg_review_score"]),
-                "expected_raw_value": float(r["avg_review_score"]),
-                "variance": 0.0,
-                "reconciliation_status": "PASS",
+                **reconciliation,
                 "unit": "Points (1.00..5.00)",
                 "query_time_ms": elapsed_ms
             })

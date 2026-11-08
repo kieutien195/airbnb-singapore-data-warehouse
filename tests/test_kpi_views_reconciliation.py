@@ -1,7 +1,8 @@
-"""Kiểm thử tính toàn vẹn, hiệu năng và đối chiếu Raw-Gold của các KPI Views (Task 3.7)."""
+"""Kiểm thử tính toàn vẹn, hiệu năng và đối chiếu Raw-Gold của các KPI Views (Task 4.1)."""
 from pathlib import Path
 import json
 import os
+import sys
 import unittest
 import numpy as np
 import pandas as pd
@@ -10,6 +11,9 @@ import pymysql.cursors
 from dotenv import load_dotenv
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PROJECT_ROOT))
+from scripts.generate_kpi_results import reconcile_regional
+
 load_dotenv(PROJECT_ROOT / ".env", override=True)
 
 
@@ -168,7 +172,8 @@ class KPIViewsReconciliationTests(unittest.TestCase):
 
         # SUP-02: Review records
         raw_reviews = pd.read_csv(self.raw_dir / "reviews.csv.gz", low_memory=False)
-        expected_sup02 = len(raw_reviews[["listing_id", "id"]].drop_duplicates())
+        in_review_window = raw_reviews["date"].between("2011-05-04", "2026-09-25")
+        expected_sup02 = len(raw_reviews.loc[in_review_window, ["listing_id", "id"]].drop_duplicates())
 
         with self.conn.cursor() as cur:
             cur.execute("SELECT review_records_count FROM vw_sup02_review_records_period;")
@@ -218,15 +223,24 @@ class KPIViewsReconciliationTests(unittest.TestCase):
                 msg=f"Khu vực {r['neighbourhood_group']} tổng tỷ trọng khác 100%!"
             )
 
-    def test_05_negative_mutation_catches_fake_pass(self):
-        """Kiểm tra đột biến (Mutation Test) để chứng minh kiểm thử sẽ FAIL nếu số liệu bị làm giả."""
-        # Giả lập số liệu sai lệch để kiểm tra tính trung thực của bộ test
-        real_value = 202.83
-        faked_value = 250.00
-        variance = abs(real_value - faked_value)
-        status = "PASS" if variance <= 0.05 else "FAIL"
-        
-        self.assertEqual(status, "FAIL", "CƠ CHẾ KIỂM THỬ KHÔNG PHÁT HIỆN ĐƯỢC DỮ LIỆU GIẢ!")
+class RegionalReconciliationTests(unittest.TestCase):
+    def test_regional_mismatch_in_metric_or_counts_fails(self):
+        expected = {"Central": (9, 12, 75.0)}
+        row = {"region": "Central", "num": 9, "den": 12, "value": 75.0}
+        for field, bad in [("num", 8), ("den", 13), ("value", 76.0)]:
+            with self.subTest(field=field):
+                _, result = next(reconcile_regional(
+                    [row | {field: bad}], expected, ("region",), "num", "den", "value"
+                ))
+                self.assertEqual(result["reconciliation_status"], "FAIL")
+                self.assertEqual(result["expected_raw_value"], 75.0)
+
+    def test_missing_or_duplicate_regional_group_fails(self):
+        expected = {"Central": (9, 12, 75.0)}
+        row = {"region": "Central", "num": 9, "den": 12, "value": 75.0}
+        for rows in ([], [row, row]):
+            with self.assertRaises(ValueError):
+                list(reconcile_regional(rows, expected, ("region",), "num", "den", "value"))
 
 
 if __name__ == "__main__":
