@@ -1,7 +1,7 @@
 ﻿step_order,table_name,table_type,source_file,rows_source,rows_loaded,actual_in_mysql,duration_seconds,status
-1,dim_date,DIMENSION,dim_date.csv,6209,6209,6209,0.26,PASS
+1,dim_date,DIMENSION,dim_date.csv,6209,6209,6209,0.23,PASS
 2,dim_neighbourhood,DIMENSION,dim_neighbourhood.csv,55,55,55,0.01,PASS
-3,dim_listing,DIMENSION,dim_listing.csv,3208,3208,3208,0.69,PASS
-4,fact_listing_snapshot,FACT,fact_listing_snapshot.csv,3208,3208,3208,0.57,PASS
-5,fact_calendar,FACT,fact_calendar.csv,1170950,1170950,1170950,107.12,PASS
-6,fact_review,FACT,fact_review.csv,46000,46000,46000,4.76,PASS
+3,dim_listing,DIMENSION,dim_listing.csv,3208,3208,3208,0.41,PASS
+4,fact_listing_snapshot,FACT,fact_listing_snapshot.csv,3208,3208,3208,0.28,PASS
+5,fact_calendar,FACT,fact_calendar.csv,1170950,1170950,1170950,167.57,PASS
+6,fact_review,FACT,fact_review.csv,46000,46000,46000,5.65,PASS

@@ -40,7 +40,7 @@ def ddl_columns(path):
     for match in re.finditer(r"CREATE TABLE IF NOT EXISTS (\w+)\s*\((.*?)\n\)\s*ENGINE", path.read_text(encoding="utf-8-sig"), re.S):
         tables[match[1]] = {}
         for line in match[2].splitlines():
-            col = re.match(r"\s*(\w+)\s+(DATE\b|BIGINT\b|INT\b|SMALLINT\b|TINYINT\b|BOOLEAN\b|DECIMAL\b|VARCHAR\b|CHAR\b|TEXT\b|DATETIME\b|ENUM\b|DOUBLE\b|FLOAT\b|YEAR\b|TIMESTAMP\b)", line)
+            col = re.match(r"\s*`?(\w+)`?\s+(DATE\b|BIGINT\b|INT\b|SMALLINT\b|TINYINT\b|BOOLEAN\b|DECIMAL\b|VARCHAR\b|CHAR\b|TEXT\b|DATETIME\b|ENUM\b|DOUBLE\b|FLOAT\b|YEAR\b|TIMESTAMP\b)", line)
             if col:
                 tables[match[1]][col[1]] = (col[2], "NOT NULL" in line.split("COMMENT", 1)[0])
     if set(GRAIN) - tables.keys():
@@ -106,6 +106,23 @@ class QA:
 
     def warehouse(self, layer, tables, contract):
         owner = "Minh" if layer == "MySQL" else "Thái"
+        schema_ok = True
+        for table in GRAIN:
+            expected = set(contract[table]) | set(GRAIN[table]) | {PRIMARY[table]}
+            if layer != "MySQL":
+                expected.discard("created_at")
+            present = set(tables[table]) if table in tables else set()
+            missing = sorted(expected - present)
+            self.record("SCHEMA_COLUMNS", layer, table, "Đủ cột theo DDL",
+                        ", ".join(missing), len(missing), owner)
+            schema_ok &= not missing
+        if not schema_ok:
+            self.record("DEPENDENT_CHECKS", layer, "warehouse",
+                        "Kiểm tra phụ thuộc schema", "", None, owner,
+                        note="Xem các dòng SCHEMA_COLUMNS FAIL trước khi chạy FK, JOIN và KPI.")
+            return False
+
+        owner = "Minh" if layer == "MySQL" else "Thái"
         for table, df in tables.items():
             required = [c for c, (_, mandatory) in contract[table].items()
                         if mandatory and (layer == "MySQL" or c != "created_at")]
@@ -152,11 +169,91 @@ class QA:
             multiplicity = keys(frame, join_keys).map(counts).fillna(0)
             extra = int(np.maximum(multiplicity.to_numpy() - 1, 0).sum())
             self.record("JOIN_FANOUT", layer, table, "JOIN Fact → dim_listing không nhân dòng", extra, extra, owner)
+        return True
+
+
+def gold_metrics(tables, context):
+    """Tính lại 29 chỉ tiêu trên dữ liệu hiện tại theo SQL 03_validate."""
+    snapshot = context["snapshot_date"]
+    l, c, r, d = [
+        tables[name].loc[tables[name]["snapshot_date"].eq(snapshot)].copy()
+        for name in ("fact_listing_snapshot", "fact_calendar", "fact_review", "dim_listing")
+    ]
+    rows = []
+
+    def add(metric, value, group="ALL"):
+        rows.append(dict(snapshot_date=snapshot, metric=metric, group_value=group,
+                         value=round(float(value), 4) if pd.notna(value) else np.nan))
+
+    prices = pd.to_numeric(l["listed_price_sgd"], errors="coerce").astype("float64")
+    currency_ok = l["quote_currency"].eq("SGD").fillna(False).astype(bool)
+    verified = l["is_price_sgd_verified"].isin(["1", "True"]).astype(bool)
+    prices = prices[prices.gt(0) & np.isfinite(prices) & currency_ok & verified]
+    ratings = pd.to_numeric(l["review_scores_rating"], errors="coerce")
+    ratings = ratings[ratings.between(1, 5)]
+    counts = pd.to_numeric(l["number_of_reviews"], errors="coerce")
+    counts = counts[counts.ge(0)]
+    available = c["is_available"].map({"0": 0, "1": 1, "True": 1, "False": 0})
+    available = available[c["calendar_date"].between(context["calendar_start"], context["calendar_end"])].dropna()
+    listing_join = ["listing_sk", "listing_id", "snapshot_date"]
+    rooms = l[listing_join].merge(d[listing_join + ["room_type"]], on=listing_join,
+                                  validate="many_to_one")["room_type"].value_counts(dropna=False)
+    valid_reviews = r["review_date"].between(context["review_start"], context["review_end"])
+    for col in ["listing_id", "review_id"]:
+        valid_reviews &= pd.to_numeric(r[col], errors="coerce").gt(0)
+
+    add("KPI-01", l["listing_id"].nunique())
+    add("KPI-02", prices.median())
+    add("PRICE_VALID_COUNT", len(prices))
+    for room, count in rooms.items():
+        add("KPI-03_COUNT", count, room)
+        add("KPI-03_PERCENT", count * 100 / len(l), room)
+    add("KPI-04", available.mean() * 100)
+    add("AVAILABLE_NIGHTS", available.sum())
+    add("VALID_CALENDAR_NIGHTS", len(available))
+    add("KPI-05", ratings.mean())
+    add("RATING_VALID_COUNT", len(ratings))
+    add("SUP-01", counts.median())
+    add("REVIEW_COUNT_VALID_LISTINGS", len(counts))
+    add("SUP-02", len(r.loc[valid_reviews, ["listing_id", "review_id"]].drop_duplicates()))
+    add("PRICE_NULL_COUNT", l["listed_price_sgd"].isna().sum())
+    add("RATING_NULL_COUNT", l["review_scores_rating"].isna().sum())
+    for label, frame, table in [
+        ("LISTING", l, "fact_listing_snapshot"), ("CALENDAR", c, "fact_calendar"),
+        ("REVIEW", r, "fact_review"),
+    ]:
+        add(f"{label}_ROWS", len(frame))
+        add(f"DUP_{label}_GRAIN", frame.duplicated(GRAIN[table]).sum())
+        if label != "LISTING":
+            add(f"ORPHAN_{label}_LISTING", mismatch(frame, d, listing_join, listing_join))
+    return pd.DataFrame(rows)
+
+
+def metric_checks(qa, expected, observed, layer):
+    from scripts.warehouse_validation import compare_metrics
+
+    comparison = compare_metrics(expected, observed)
+    for row in comparison.itertuples(index=False):
+        qa.record("RAW_GOLD_METRIC", layer, f"{row.metric}/{row.group_value}",
+                  "Đối chiếu raw và Gold cùng snapshot ở 4 chữ số lẻ",
+                  row.value_gold, int(row.status != "PASS"),
+                  "Thái" if layer == "Gold CSV" else "Minh",
+                  note=f"snapshot={row.snapshot_date}; raw={row.value_raw}; delta={row.difference_gold_minus_raw}")
+
+
+def save_results(qa):
+    out = ROOT / "tests/data_quality_checks"
+    results = pd.DataFrame(qa.results)
+    results.to_csv(ROOT / "tests/qa_results.csv", index=False, encoding="utf-8-sig")
+    results.loc[results.status.isin(["FAIL", "BLOCKED"])].to_csv(out / "issues.csv", index=False, encoding="utf-8-sig")
+    print(results.status.value_counts().to_string())
+    return 1 if results.status.eq("FAIL").any() else (2 if results.status.eq("BLOCKED").any() else 0)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mysql", action="store_true", help="Kiểm tra thêm bản load MySQL qua .env")
+    parser.add_argument("--workbench-csv", type=Path, help="CSV result grid của SQL 03_validate chạy trên Workbench")
     args = parser.parse_args()
     cfg = yaml.safe_load((ROOT / "etl/config.yaml").read_text(encoding="utf-8"))
     snapshot = date.fromisoformat(str(cfg["project"]["snapshot_date"])).isoformat()
@@ -176,11 +273,30 @@ def main():
     if missing:
         qa.record("INPUTS", "ETL", "snapshot", "Đủ dữ liệu full run", len(missing), None,
                   "Thái", note=" | ".join(missing))
-        pd.DataFrame(qa.results).to_csv(ROOT / "tests/qa_results.csv", index=False, encoding="utf-8-sig")
         print("BLOCKED: chạy full ETL trước. Xem tests/qa_results.csv.")
-        return 2
+        return save_results(qa)
     gold = {t: read(paths["gold_dir"] / f"{t}.csv") for t in GRAIN}
-    qa.warehouse("Gold CSV", gold, contract)
+    if not qa.warehouse("Gold CSV", gold, contract):
+        return save_results(qa)
+    from scripts.warehouse_validation import raw_metrics
+
+    try:
+        expected, context = raw_metrics(paths["raw_dir"], ROOT / "docs/source_inventory.csv")
+        if context["snapshot_date"] != snapshot:
+            raise ValueError("Snapshot trong inventory và ETL config không khớp")
+        metric_checks(qa, expected, gold_metrics(gold, context), "Gold CSV")
+    except (ValueError, KeyError, OSError) as exc:
+        qa.record("RAW_GOLD_METRIC_INPUT", "Gold CSV", "warehouse",
+                  "Tính và đối chiếu bộ chỉ tiêu", "", None, "Thái", note=str(exc))
+        return save_results(qa)
+    if args.workbench_csv:
+        try:
+            observed = pd.read_csv(args.workbench_csv, dtype=str, keep_default_na=False,
+                                   na_values=["", "NULL"])
+            metric_checks(qa, expected, observed, "Workbench")
+        except (ValueError, KeyError, OSError) as exc:
+            qa.record("WORKBENCH_EXPORT", "Workbench", "warehouse",
+                      "Đọc CSV chỉ tiêu từ Workbench", "", None, "Minh", note=str(exc))
     raw, staged, silver = {}, {}, {}
     counts = []
     audit = read(paths["outputs_dir"] / "cleaning_audit_summary.csv").set_index("dataset")
@@ -284,7 +400,9 @@ def main():
                     for table in GRAIN:
                         where = "" if table == "dim_date" else " WHERE snapshot_date = :snapshot"
                         live[table] = pd.read_sql(text(f"SELECT * FROM `{table}`" + where), conn, params={"snapshot": snapshot}).astype("string")
-                    qa.warehouse("MySQL", live, contract)
+                    if not qa.warehouse("MySQL", live, contract):
+                        return save_results(qa)
+                    metric_checks(qa, expected, gold_metrics(live, context), "MySQL")
                     native = conn.execute(text(
                         "SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE FROM information_schema.COLUMNS "
                         "WHERE TABLE_SCHEMA = DATABASE()"
@@ -320,11 +438,7 @@ def main():
                       "outputs/warehouse_load_summary.csv", "Báo cáo kèm ZIP không có run_id/snapshot_date.", severity="REVIEW")
     pd.DataFrame(counts).to_csv(out / "row_count_reconciliation.csv", index=False, encoding="utf-8-sig")
     pd.DataFrame(sample_rows).to_csv(out / "sample_validation.csv", index=False, encoding="utf-8-sig")
-    results = pd.DataFrame(qa.results)
-    results.to_csv(ROOT / "tests/qa_results.csv", index=False, encoding="utf-8-sig")
-    results.loc[results.status.isin(["FAIL", "BLOCKED"])].to_csv(out / "issues.csv", index=False, encoding="utf-8-sig")
-    print(results.status.value_counts().to_string())
-    return 1 if results.status.eq("FAIL").any() else (2 if results.status.eq("BLOCKED").any() else 0)
+    return save_results(qa)
 
 
 if __name__ == "__main__":
