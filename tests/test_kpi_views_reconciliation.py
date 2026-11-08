@@ -1,4 +1,5 @@
 """Kiểm thử tính toàn vẹn, hiệu năng và đối chiếu Raw-Gold của các KPI Views (Task 4.1)."""
+from decimal import Decimal
 from pathlib import Path
 import json
 import os
@@ -224,6 +225,17 @@ class KPIViewsReconciliationTests(unittest.TestCase):
             )
 
 class RegionalReconciliationTests(unittest.TestCase):
+    def test_pymysql_decimal_denominator_matches_numpy_count(self):
+        expected = {"Central": (np.int64(9), np.int64(12), 75.0)}
+        row = {"region": "Central", "num": 9, "value": Decimal("75.00")}
+        for denominator, status in [("12", "PASS"), ("12.5", "FAIL"), ("13", "FAIL")]:
+            with self.subTest(denominator=denominator):
+                _, result = next(reconcile_regional(
+                    [row | {"den": Decimal(denominator)}], expected,
+                    ("region",), "num", "den", "value"
+                ))
+                self.assertEqual(result["reconciliation_status"], status)
+
     def test_regional_mismatch_in_metric_or_counts_fails(self):
         expected = {"Central": (9, 12, 75.0)}
         row = {"region": "Central", "num": 9, "den": 12, "value": 75.0}

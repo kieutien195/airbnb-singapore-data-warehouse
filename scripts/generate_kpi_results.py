@@ -109,7 +109,7 @@ def reconcile_regional(rows, expected, keys, numerator, denominator, value):
         num, den, raw_value = expected[key]
         variance = abs(float(row[value]) - raw_value)
         matches = (abs(float(row[numerator]) - num) < 0.00001
-                   and row[denominator] == den and variance <= 0.00500001)
+                   and row[denominator] == int(den) and variance <= 0.00500001)
         yield row, {
             "expected_raw_value": round(raw_value, 4),
             "variance": round(variance, 4),
