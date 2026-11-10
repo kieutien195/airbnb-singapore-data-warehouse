@@ -1,36 +1,36 @@
 snapshot_date,kpi_id,region,room_type,metric_value,sample_count,support_value
-2026-09-23,KPI-01,ALL,ALL,3208.00,3208,NULL
-2026-09-23,KPI-02,ALL,ALL,202.83,2725,NULL
-2026-09-23,KPI-03,ALL,"Entire home/apt",38.40,3208,1232.00
-2026-09-23,KPI-03,ALL,"Hotel room",2.59,3208,83.00
-2026-09-23,KPI-03,ALL,"Private room",56.95,3208,1827.00
-2026-09-23,KPI-03,ALL,"Shared room",2.06,3208,66.00
-2026-09-23,KPI-03,"Central Region","Entire home/apt",40.09,2679,1074.00
-2026-09-23,KPI-03,"Central Region","Hotel room",3.10,2679,83.00
-2026-09-23,KPI-03,"Central Region","Private room",54.39,2679,1457.00
-2026-09-23,KPI-03,"Central Region","Shared room",2.43,2679,65.00
-2026-09-23,KPI-03,"East Region","Entire home/apt",23.04,191,44.00
-2026-09-23,KPI-03,"East Region","Private room",76.44,191,146.00
-2026-09-23,KPI-03,"East Region","Shared room",0.52,191,1.00
-2026-09-23,KPI-03,"North Region","Entire home/apt",11.11,45,5.00
-2026-09-23,KPI-03,"North Region","Private room",88.89,45,40.00
-2026-09-23,KPI-03,"North-East Region","Entire home/apt",28.70,108,31.00
-2026-09-23,KPI-03,"North-East Region","Private room",71.30,108,77.00
-2026-09-23,KPI-03,"West Region","Entire home/apt",42.16,185,78.00
-2026-09-23,KPI-03,"West Region","Private room",57.84,185,107.00
+2026-09-23,KPI-01,ALL,ALL,3208.00,3208,
+2026-09-23,KPI-02,ALL,ALL,202.83,2725,
+2026-09-23,KPI-03,ALL,Entire home/apt,38.40,3208,1232.00
+2026-09-23,KPI-03,ALL,Hotel room,2.59,3208,83.00
+2026-09-23,KPI-03,ALL,Private room,56.95,3208,1827.00
+2026-09-23,KPI-03,ALL,Shared room,2.06,3208,66.00
+2026-09-23,KPI-03,Central Region,Entire home/apt,40.09,2679,1074.00
+2026-09-23,KPI-03,Central Region,Hotel room,3.10,2679,83.00
+2026-09-23,KPI-03,Central Region,Private room,54.39,2679,1457.00
+2026-09-23,KPI-03,Central Region,Shared room,2.43,2679,65.00
+2026-09-23,KPI-03,East Region,Entire home/apt,23.04,191,44.00
+2026-09-23,KPI-03,East Region,Private room,76.44,191,146.00
+2026-09-23,KPI-03,East Region,Shared room,0.52,191,1.00
+2026-09-23,KPI-03,North Region,Entire home/apt,11.11,45,5.00
+2026-09-23,KPI-03,North Region,Private room,88.89,45,40.00
+2026-09-23,KPI-03,North-East Region,Entire home/apt,28.70,108,31.00
+2026-09-23,KPI-03,North-East Region,Private room,71.30,108,77.00
+2026-09-23,KPI-03,West Region,Entire home/apt,42.16,185,78.00
+2026-09-23,KPI-03,West Region,Private room,57.84,185,107.00
 2026-09-23,KPI-04,ALL,ALL,76.94,1170950,900960.00
-2026-09-23,KPI-04,"Central Region",ALL,77.95,977865,762248.00
-2026-09-23,KPI-04,"East Region",ALL,67.69,69715,47190.00
-2026-09-23,KPI-04,"North Region",ALL,75.73,16425,12438.00
-2026-09-23,KPI-04,"North-East Region",ALL,71.80,39420,28305.00
-2026-09-23,KPI-04,"West Region",ALL,75.20,67525,50779.00
+2026-09-23,KPI-04,Central Region,ALL,77.95,977865,762248.00
+2026-09-23,KPI-04,East Region,ALL,67.69,69715,47190.00
+2026-09-23,KPI-04,North Region,ALL,75.73,16425,12438.00
+2026-09-23,KPI-04,North-East Region,ALL,71.80,39420,28305.00
+2026-09-23,KPI-04,West Region,ALL,75.20,67525,50779.00
 2026-09-23,KPI-05,ALL,ALL,4.54,1839,8347.90
-2026-09-23,KPI-05,"Central Region",ALL,4.52,1577,7129.03
-2026-09-23,KPI-05,"East Region",ALL,4.69,112,525.18
-2026-09-23,KPI-05,"North Region",ALL,4.56,26,118.63
-2026-09-23,KPI-05,"North-East Region",ALL,4.61,52,239.73
-2026-09-23,KPI-05,"West Region",ALL,4.66,72,335.33
-2026-09-23,SUP-01,ALL,ALL,1.00,3208,NULL
-2026-09-23,SUP-01,"Central Region","Private room",1.00,1457,NULL
-2026-09-23,SUP-02,ALL,ALL,46000.00,1839,NULL
-2026-09-23,SUP-02,"Central Region","Private room",25079.00,895,NULL
+2026-09-23,KPI-05,Central Region,ALL,4.52,1577,7129.03
+2026-09-23,KPI-05,East Region,ALL,4.69,112,525.18
+2026-09-23,KPI-05,North Region,ALL,4.56,26,118.63
+2026-09-23,KPI-05,North-East Region,ALL,4.61,52,239.73
+2026-09-23,KPI-05,West Region,ALL,4.66,72,335.33
+2026-09-23,SUP-01,ALL,ALL,1.00,3208,
+2026-09-23,SUP-01,Central Region,Private room,1.00,1457,
+2026-09-23,SUP-02,ALL,ALL,46000.00,1839,
+2026-09-23,SUP-02,Central Region,Private room,25079.00,895,
