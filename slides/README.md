@@ -1,66 +1,58 @@
 # Phân hệ Slide Thuyết trình ETL/ELT & Kiểm thử Chất lượng Dữ liệu (Task 5.4)
 
-- **Phụ trách:** Thái (Data Engineer / ETL)
-- **Tệp trình chiếu chính:** [`5.4_slide_etl_pipeline_and_tests.pptx`](5.4_slide_etl_pipeline_and_tests.pptx)
-- **Mã nguồn assets:** [`../scripts/generate_slide_assets.py`](../scripts/generate_slide_assets.py) & [`../scripts/build_etl_slides.py`](../scripts/build_etl_slides.py)
+- **Thành viên phụ trách:** Thái (Data Engineer / ETL)
+- **Tệp trình chiếu chuẩn Outline (4 Trang: 09, 10, 12, 32):** [`thai_slides_09_10_12_32.pptx`](thai_slides_09_10_12_32.pptx) & [`5.4_slide_etl_pipeline_and_tests.pptx`](5.4_slide_etl_pipeline_and_tests.pptx)
+- **Tệp trình chiếu rút gọn (2 Trang tổng hợp cao độ):** [`5.4_slide_etl_summary_2slides.pptx`](5.4_slide_etl_summary_2slides.pptx)
+- **Mã nguồn sinh slide tự động:** [`../scripts/build_thai_slides_outline.py`](../scripts/build_thai_slides_outline.py) & [`../scripts/build_2_slides_summary.py`](../scripts/build_2_slides_summary.py)
 - **Script chạy demo tại chỗ:** [`../scripts/demo_etl_pipeline.py`](../scripts/demo_etl_pipeline.py) hoặc [`../scripts/run_demo.ps1`](../scripts/run_demo.ps1)
 - **Snapshot chuẩn:** `2026-09-23` | Inside Airbnb Singapore
 
 ---
 
-## 1. Cấu trúc Slide Bàn giao & Ánh xạ với Deck Tổng thể
+## 1. Cấu trúc 4 Trang Slide của Thái theo Đúng Slide Outline Dự án
 
-Bộ slide được thiết kế theo tỷ lệ **16:9 Widescreen**, tuân thủ phong cách giao diện hiện đại (Corporate Navy/Cyan/Emerald Palette), sử dụng biểu đồ trực quan độ phân giải cao (300 DPI), cấu trúc thẻ thông tin (Cards/Badges) súc tích và **tuyệt đối không dán code dài lên slide**.
+Tuân thủ nghiêm ngặt quy tắc trình bày của nhóm:
+1. **Đặt kết luận ngay ở tiêu đề**, dùng số lớn hoặc ma trận đối soát giải thích câu hỏi.
+2. **Hình / Bảng đọc được làm bằng chứng**, tuyệt đối không dán code dài lên slide.
+3. **Dải điều hướng dùng chung** (Breadcrumb) và **dòng chân trang chuẩn** (nguồn, snapshot, commit, số trang).
+4. **Kiểm soát tọa độ và padding chặt chẽ**, bảo đảm **100% không bị đè chữ / không tràn khung** trên mọi màn hình chiếu.
 
-| Trang PPTX | Mã trang đồ án | Tiêu đề nội dung | Vai trò & Minh chứng kỹ thuật |
-| :---: | :---: | :--- | :--- |
-| **Slide 1** | **Bìa phân hệ** | **Quy trình ETL/ELT Tích hợp Dữ liệu & Kiểm thử Đa tầng** | Tổng quan vai trò của Thái (Data Engineer), quy mô 1.17M dòng, 100% khớp khóa ngoại, 321 test cases QA pass. |
-| **Slide 2** | **Trang 12** | **Luồng Dữ liệu ETL/ELT Toàn trình (End-to-End Pipeline)** | Sơ đồ 5 chặng: Raw (CSV.GZ) $\rightarrow$ Staging $\rightarrow$ Silver $\rightarrow$ Gold (Star Schema) $\rightarrow$ MySQL Warehouse. Làm rõ tính khả lặp (Idempotency TQ-05), chunking 100k dòng và cấm JOIN chéo Calendar $\times$ Reviews. |
-| **Slide 3** | **Trang 09** | **Quy tắc Làm sạch & 4 Phép Biến đổi Dữ liệu Cốt lõi** | Ma trận xử lý lỗi: (1) Price & tiền tệ; (2) Date ISO & date_sk; (3) Available 1/0; (4) Khử trùng ID theo grain. Thống kê trước-sau bảo toàn 100% số bản ghi. |
-| **Slide 4** | **Trang 10** | **Kiểm định Tiền tệ SGD & Phân giải Giá Niêm yết** | Cơ chế 2 lớp kiểm tra mã tiền từ JSON raw; 2.725 tin SGD hợp lệ (Trung vị: **202.83 SGD**, khớp 100% baseline KPI-02); bảo toàn 483 NULL giá và 134 IQR outliers. |
-| **Slide 5** | **Trang 13-18** | **Ánh xạ Star Schema & Kiểm tra Quan hệ Đa bảng (Orphan Keys)** | Kết quả kiểm tra toàn vẹn tham chiếu trên 4 mối quan hệ (REL-01 đến REL-04): **100.0% Match Rate, 0 Orphan Key**. |
-| **Slide 6** | **Trang 32 (Phụ lục B)** | **Minh chứng Thực nghiệm, Kiểm thử Tự động & Hướng dẫn Tái lập** | Log chạy thật terminal (toàn trình 42.67s), kết quả 172 test cases QA Pass của Thái, hướng dẫn lệnh demo 1-2 phút phục vụ vấn đáp. |
+| Trang Outline | Tiêu đề Kết luận trên Slide | Bố cục & Bằng chứng Kỹ thuật |
+| :---: | :--- | :--- |
+| **Trang 09**<br>*(B. Dữ liệu & tiền xử lý)* | **BẢO TOÀN 100% FACT: KHÔNG LOẠI BẢN GHI NGOÀI Ý MUỐN, CHUẨN HÓA 4 NHÓM QUY TẮC** | • Bảng ma trận đối soát: Vấn đề $\rightarrow$ Quy tắc $\rightarrow$ Đầu ra $\rightarrow$ Số dòng tác động $\rightarrow$ Số dòng bị loại.<br>• Thống kê 3.208 listings, 1.17M calendar, 46k reviews sạch.<br>• Ghi rõ: Giữ nguyên 483 NULL giá và 134 IQR outliers. |
+| **Trang 10**<br>*(B. Dữ liệu & tiền xử lý)* | **KIỂM ĐỊNH 2 LỚP XÁC MINH 2.725 GIÁ SGD HỢP LỆ; TRUNG VỊ ĐẠT CHUẨN 202,83 SGD** | • Sơ đồ 2 lớp kiểm định: Bóc tách chuỗi giá + Đối chiếu mã tiền SGD từ JSON raw.<br>• Đối chiếu 2 ví dụ cụ thể: Ví dụ ĐẠT (ID 71609 - $150) vs Ví dụ LOẠI (ID 27534720 - NULL).<br>• Khớp chuẩn 100% baseline KPI-02 (202.83 SGD) và sửa lỗi accommodates kiểu INT. |
+| **Trang 12**<br>*(D. Triển khai & kiểm chứng)* | **MỘT LẦN CHẠY ETL TẠO ĐẦU RA TRUY VẾT 100%, HOÀN TẤT TOÀN BỘ 3 TẦNG TRONG 42,67 GIÂY** | • Bảng truy vết Stage $\rightarrow$ Script $\rightarrow$ Input $\rightarrow$ Output $\rightarrow$ Log.<br>• Trích xuất log chạy thật terminal với timestamp và snapshot 2026-09-23.<br>• Vận dụng lý thuyết Chương 3 (Idempotency TQ-05) và Chương 4 (Vector hóa & chặn Fan-out). |
+| **Trang 32**<br>*(F. Phụ lục & trang cuối)* | **PHỤ LỤC B: MÔI TRƯỜNG TÁI LẬP ĐỘC LẬP & BỘ TEST TỰ ĐỘNG ĐẠT 172/172 PASS** | • Thông số môi trường: Python 3.12, virtualenv, Git branch, bảo mật credentials qua .env.<br>• Bộ test tự động: 172/172 QA checks PASS, 5/5 regression tests OK, 0 orphan key.<br>• Hướng dẫn lệnh chạy live demo 2 giây phục vụ giảng viên vấn đáp tại chỗ. |
 
 ---
 
 ## 2. Kịch bản Thuyết trình 1–2 Phút (Elevator Pitch cho Thái)
 
-Khi đến phần trình bày của Thái trong buổi bảo vệ đồ án, hãy trình bày ngắn gọn, tự tin theo kịch bản sau:
+Khi trình bày 4 slide này trước hội đồng, Thái nói tự tin theo mạch:
 
-> *"Kính thưa quý Thầy Cô và Hội đồng, em là **Thái**, phụ trách phân hệ **ETL/ELT Pipeline** và **Kiểm thử chất lượng dữ liệu** của dự án.*
+> *"Kính thưa quý Thầy Cô và Hội đồng, em là **Thái**, phụ trách phân hệ **ETL/ELT Pipeline** và **Kiểm thử chất lượng dữ liệu** (Trang 09, 10, 12 và Phụ lục 32).*
 >
-> *Thách thức lớn nhất của đề tài là dữ liệu nguồn gồm 4 tệp có đơn vị quan sát (grain) hoàn toàn khác nhau, trong đó tệp `calendar.csv.gz` có hơn **1,17 triệu dòng**, tiềm ẩn rủi ro bùng nổ dữ liệu (fan-out) và sai lệch tiền tệ.*
+> *(Trang 09) Ở tầng tiền xử lý, nhóm em áp dụng nguyên tắc **bảo toàn 100% dữ liệu nghiệp vụ**. Toàn bộ 1,17 triệu dòng được chuẩn hóa theo 4 quy tắc mà **không có bản ghi nào bị loại bỏ ngoài ý muốn**. Các giá trị thiếu như 483 giá NULL hay 1.369 rating NULL đều được giữ nguyên NULL để tránh bóp méo phân phối.*
 >
-> *Để giải quyết triệt để, em đã triển khai pipeline khép kín với 3 điểm nhấn kỹ thuật quan trọng:*
-> 1. ***Tính khả lặp tuyệt đối (Idempotency - TQ-05)***: *Khi chạy lại cùng snapshot `2026-09-23`, pipeline tự động xóa sạch partition cũ trước khi nạp mới trong một transaction an toàn, bảo đảm không bao giờ sinh dòng trùng.*
-> 2. ***Kiểm định tiền tệ 2 lớp & Bảo toàn dữ liệu nghiệp vụ***: *Em bóc tách chuỗi giá và đối chiếu mã tiền tệ SGD từ trường JSON thô, xác minh được 2.725 tin niêm yết đúng SGD với giá trung vị chuẩn **202.83 SGD** (khớp 100% KPI-02). Đặc biệt, 483 tin thiếu giá được giữ nguyên `NULL` (không gán bừa bằng 0) và 134 ngoại lai IQR được bảo toàn trọn vẹn theo đúng phân phối thực tế.*
-> 3. ***Toàn vẹn tham chiếu & Triệt tiêu Fan-Out***: *Kết quả kiểm tra trên cả 4 quan hệ từ Calendar, Reviews đến Listings và dim_date đều đạt **100.0% độ phủ khớp (0 orphan key)**. Đồng thời, thiết kế nghiêm cấm JOIN trực tiếp Calendar với Reviews, giữ vững tính toàn vẹn cho tầng Data Warehouse.*
+> *(Trang 10) Đặc biệt với giá niêm yết, em xây dựng **cơ chế kiểm định 2 lớp**: vừa bóc tách chuỗi số, vừa đối chiếu mã tiền tệ từ trường JSON thô, qua đó xác minh chuẩn xác **2.725 tin niêm yết đúng SGD** với trung vị **202,83 SGD** khớp tuyệt đối 100% với baseline KPI-02. Đồng thời 134 ngoại lai IQR được bảo toàn trọn vẹn vì phản ánh đúng phân khúc biệt thự/penthouse cao cấp.*
 >
-> *Toàn bộ pipeline xử lý 1.17M dòng hoàn tất trong **42 giây**, vượt qua **172/172 bài test QA tự động** và có thể demo tái lập ngay tại chỗ trong 2 giây. Sau đây em xin bàn giao dữ liệu Gold cho bạn Minh tiếp tục phần triển khai MySQL Data Warehouse."*
+> *(Trang 12) Toàn bộ luồng ETL từ Ingest, Clean đến Transform được tự động hóa, hoàn tất xử lý 1,17 triệu dòng chỉ trong **42,67 giây**. Quy trình bảo đảm tính **khả lặp (Idempotency TQ-05)** nhờ xóa partition cũ theo snapshot trong một transaction an toàn, và triệt tiêu hoàn toàn rủi ro fan-out.*
+>
+> *(Trang 32) Hệ thống đã vượt qua **172/172 bài kiểm thử tự động**, đạt **100% tỷ lệ khớp khóa (0 orphan key)** và sẵn sàng demo tái lập tại chỗ trong 2 giây. Sau đây em xin bàn giao dữ liệu Gold cho bạn Minh trình bày tiếp phần kiến trúc kho dữ liệu MySQL."*
 
 ---
 
-## 3. Hướng dẫn Chạy Demo Trực tiếp (Live Demo Assets)
+## 3. Lệnh Chạy Demo Trực tiếp Khi Vấn đáp (Live Demo)
 
-Nhóm và giảng viên có thể kiểm chứng live pipeline bất kỳ lúc nào:
-
-### 3.1. Chạy Demo Nhanh (Sample Mode - Khuyến nghị khi vấn đáp, ~2 giây):
-```bash
-# Trong thư mục repo_temp:
-.venv\Scripts\python scripts/demo_etl_pipeline.py --sample 500
-
-# Hoặc dùng launcher PowerShell:
-.\scripts\run_demo.ps1
-```
-- **Kết quả hiển thị:** Thực thi tuần tự Ingest $\rightarrow$ Clean $\rightarrow$ Transform trên mẫu 500 dòng/nguồn, in bảng đối soát dữ liệu và tỷ lệ 0 orphan key tức thì.
-
-### 3.2. Chạy Toàn bộ 1.17M Dữ liệu Thật (Full Mode, ~42 giây):
-```bash
-.venv\Scripts\python scripts/demo_etl_pipeline.py --full
-```
-
-### 3.3. Chạy Kiểm thử Hồi quy Tự động (Automated Regression Tests, ~0.65 giây):
-```bash
-.venv\Scripts\python -m unittest tests/test_etl_regressions.py
-```
-- Kiểm chứng 5 kịch bản tự động: Idempotency, rollback transaction khi chunk lỗi, khử trùng grain, và chặn xuất Gold khi có orphan key.
+- **Demo mẫu siêu tốc (~2 giây, khuyến nghị):**
+  ```bash
+  python scripts/demo_etl_pipeline.py --sample 500
+  ```
+- **Demo toàn bộ 1.17M dòng thật (~42 giây):**
+  ```bash
+  python scripts/demo_etl_pipeline.py --full
+  ```
+- **Chạy bộ kiểm thử hồi quy tự động (~0.65 giây):**
+  ```bash
+  python -m unittest tests/test_etl_regressions.py
+  ```

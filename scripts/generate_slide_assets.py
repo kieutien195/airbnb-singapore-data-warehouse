@@ -363,3 +363,4 @@ if __name__ == "__main__":
     create_reconciliation_chart()
     create_terminal_proof_image()
     print("All slide assets generated successfully!")
+
