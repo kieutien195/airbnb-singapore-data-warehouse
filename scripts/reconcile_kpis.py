@@ -5,6 +5,7 @@ import hashlib
 from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
+from statistics import median
 
 import numpy as np
 import pandas as pd
@@ -61,10 +62,15 @@ def compute_silver(directory):
     def add(kpi, value, sample, support=None, region="ALL", room="ALL"):
         rows.append(dict(zip(KEYS + VALUES, [SNAPSHOT, kpi, region, room, value, sample, support])))
 
-    price = pd.to_numeric(l["listed_price_sgd"], errors="coerce").astype(float)
-    price = price[price.gt(0) & np.isfinite(price)
-                  & l["quote_currency"].eq("SGD").fillna(False).astype(bool)
-                  & l["is_price_sgd_verified"].isin(["1", "True"]).astype(bool)]
+    eligible = l["quote_currency"].eq("SGD").fillna(False) & l["is_price_sgd_verified"].isin(["1", "True"])
+    prices = []
+    for text in l.loc[eligible, "listed_price_sgd"].dropna():
+        try:
+            price = Decimal(text)
+        except InvalidOperation:
+            continue
+        if price.is_finite() and price > 0:
+            prices.append(price)
     review_count = pd.to_numeric(l["number_of_reviews"], errors="coerce").astype(float)
     review_count = review_count[review_count.ge(0) & np.isfinite(review_count)]
     l["rating"] = pd.to_numeric(l["review_scores_rating"], errors="coerce").astype(float)
@@ -79,7 +85,7 @@ def compute_silver(directory):
     filtered_counts = review_count[review_count.index.isin(subset.index)]
 
     add("KPI-01", l["listing_id"].nunique(), len(l))
-    add("KPI-02", price.median(), len(price))
+    add("KPI-02", median(prices) if prices else None, len(prices))
     add("KPI-04", c["available"].mean() * 100, len(c), c["available"].sum())
     add("KPI-05", rated["rating"].mean(), len(rated), rated["rating"].sum() if len(rated) else None)
     add("SUP-01", review_count.median(), len(review_count))
