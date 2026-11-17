@@ -82,4 +82,4 @@ erDiagram
 
 Các Fact tham chiếu `dim_listing` bằng bộ `(listing_sk, snapshot_date_sk, neighbourhood_sk)`. Khóa ngoại ghép này ngăn Fact gắn listing với snapshot hoặc khu vực khác. Mỗi Fact giữ UNIQUE theo đúng business grain để chặn nạp trùng cùng snapshot. `fact_calendar` và `fact_review` là các grain chi tiết riêng; không nối trực tiếp hai bảng này rồi cộng số listing. KPI cấp listing phải lấy từ `fact_listing_snapshot` hoặc tổng hợp từng Fact về grain đích trước khi kết hợp.
 
-DDL vật lý: [`sql/02_warehouse_schema.sql`](../sql/02_warehouse_schema.sql). Tài liệu thiết kế và mapping lịch sử: [`warehouse_grain_and_schema_draft.md`](warehouse_grain_and_schema_draft.md).
+DDL vật lý: [`sql/02_warehouse_schema.sql`](../sql/02_warehouse_schema.sql). Bảng ánh xạ nguồn–đích: [`source_to_target_mapping.csv`](source_to_target_mapping.csv).

@@ -1,5 +1,0 @@
-﻿relationship_id,relationship_name,parent_table,child_table,foreign_key,total_child_records,matched_records,orphan_records,match_rate_pct,status,notes
-REL-01,Calendar to Listings (1-N),dim_listing,fact_calendar,listing_id,1170950,1170950,0,100.0,PASS,Dòng thiếu listing cha được ghi vào etl_orphan_records.csv.
-REL-02,Reviews to Listings (1-N),dim_listing,fact_review,listing_id,46000,46000,0,100.0,PASS,Dòng thiếu listing cha được ghi vào etl_orphan_records.csv.
-REL-03,Listings to Neighbourhoods (N-1),dim_neighbourhood,dim_listing,"(neighbourhood_group, neighbourhood_name)",3208,3208,0,100.0,PASS,Khu vực không khớp được ánh xạ vào Unknown Neighbourhood (SK=0).
-REL-04,Event and Snapshot Dates to dim_date,dim_date,fact_listing_snapshot & fact_calendar & fact_review,"snapshot_date_sk, calendar_date_sk, review_date_sk",2437108,2437108,0,100.0,PASS,Đếm từng tham chiếu ngày sự kiện và snapshot.

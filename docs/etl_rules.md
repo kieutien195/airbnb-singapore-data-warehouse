@@ -23,7 +23,7 @@
 
 ---
 
-## 2. Đồng bộ và hiệu chỉnh các lưu ý từ Data Dictionary (`docs/feedback.md`)
+## 2. Đồng bộ và hiệu chỉnh các lưu ý từ Data Dictionary
 
 Khi chuyển từ Data Dictionary (Task 2.2) sang bảng ánh xạ `docs/source_to_target_mapping.csv` (Task 2.4), nhóm đã chuẩn hóa triệt để 7 nhóm trường dữ liệu dễ gây lỗi ép kiểu tự động trong Pandas:
 

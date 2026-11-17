@@ -1,6 +1,0 @@
-﻿technical_kpi_id,technical_kpi_name,ket_qua,don_vi,trang_thai,dien_giai
-TQ-01,Tỷ lệ thiếu dữ liệu,0.0,%,Đã tính,"0/3,657,376 ô ở các trường bắt buộc bị thiếu."
-TQ-02,Số bản ghi trùng khóa,0.0,Dòng trùng dư,Đã tính,Tổng số dòng trùng dư theo khóa/grain đã xác định. Khóa thiếu được báo cáo riêng.
-TQ-03,Tỷ lệ toàn vẹn tham chiếu,100.0,%,Đã tính,"1,220,158/1,220,158 khóa con có giá trị liên kết được."
-TQ-04,Tỷ lệ bản ghi hợp lệ,100.0,%,Đã tính theo luật tối thiểu công bố,"1,220,213/1,220,213 dòng đạt luật kiểm tra tối thiểu."
-TQ-05,Tính nhất quán khi chạy lại pipeline,PASS,PASS/FAIL,ĐÃ ĐÁNH GIÁ (PASS),"Đã kiểm chứng thực nghiệm 2 lần chạy cùng snapshot 2026-09-23. Lần 1 (23.66s) vs Lần 2 (26.16s): Chênh lệch số dòng = 0 trên toàn bộ 6 bảng, 0 dòng trùng phát sinh, 100% KPI (KPI-01..05) giữ nguyên giá trị tuyệt đối. Minh chứng: outputs/tq05_rerun_idempotency_evidence.csv."
