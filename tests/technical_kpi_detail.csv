@@ -15,3 +15,4 @@ TQ-04,Listings,,3208.0,,,100.0,,,,,,,,,,,,id và scrape_id không NULL; rating n
 TQ-04,Calendar,,1170950.0,,,100.0,,,,,,,,,,,,listing_id có giá trị; date hợp lệ; available thuộc t/f/true/false/1/0.,1170950.0,0.0
 TQ-04,Reviews,,46000.0,,,100.0,,,,,,,,,,,,"listing_id, id không NULL và date hợp lệ.",46000.0,0.0
 TQ-04,Neighbourhoods,,55.0,,,100.0,,,,,,,,,,,,Cả neighbourhood_group và neighbourhood đều không NULL hoặc rỗng; kiểm tra đầy đủ hai thành phần khóa ghép.,55.0,0.0
+TQ-05,Toàn trình Pipeline,Toàn bộ bảng và KPI,1170950.0,0.0,0.0,100.0,"Chạy lại 2 lần: Lần 1 23.66s, Lần 2 26.16s. Chênh lệch số dòng = 0, chênh lệch KPI = 0.00.",Snapshot Partition (2026-09-23),1170950.0,0.0,0.0,Run 1 vs Run 2,0.0,0.0,0.0,0.0,0.0,Idempotent partition clean before reload (TQ-05),1170950.0,0.0

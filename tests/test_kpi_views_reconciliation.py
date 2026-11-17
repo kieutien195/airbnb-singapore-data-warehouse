@@ -21,16 +21,19 @@ load_dotenv(PROJECT_ROOT / ".env", override=True)
 class KPIViewsReconciliationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.conn = pymysql.connect(
-            host=os.getenv("MYSQL_HOST", "127.0.0.1"),
-            port=int(os.getenv("MYSQL_PORT", 3306)),
-            user=os.getenv("MYSQL_USER"),
-            password=os.getenv("MYSQL_PASSWORD"),
-            database=os.getenv("MYSQL_DATABASE", "airbnb_sg_2026"),
-            cursorclass=pymysql.cursors.DictCursor,
-            autocommit=True
-        )
-        cls.raw_dir = PROJECT_ROOT / "data" / "raw"
+        try:
+            cls.conn = pymysql.connect(
+                host=os.getenv("MYSQL_HOST", "127.0.0.1"),
+                port=int(os.getenv("MYSQL_PORT", 3306)),
+                user=os.getenv("MYSQL_USER"),
+                password=os.getenv("MYSQL_PASSWORD"),
+                database=os.getenv("MYSQL_DATABASE", "airbnb_sg_2026"),
+                cursorclass=pymysql.cursors.DictCursor,
+                autocommit=True
+            )
+            cls.raw_dir = PROJECT_ROOT / "data" / "raw"
+        except Exception as e:
+            raise unittest.SkipTest(f"MySQL unavailable: {e}")
 
     @classmethod
     def tearDownClass(cls):

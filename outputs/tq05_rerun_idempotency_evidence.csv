@@ -1,0 +1,19 @@
+﻿category,metric_name,run_1_value,run_2_value,delta_run2_minus_run1,duplicate_count_run2,status,note
+TABLE_ROW_COUNT,dim_date,6209.0,6209.0,0.0,0,PASS,"Bảo toàn số dòng 100%, 0 dòng trùng phát sinh"
+TABLE_ROW_COUNT,dim_neighbourhood,55.0,55.0,0.0,0,PASS,"Bảo toàn số dòng 100%, 0 dòng trùng phát sinh"
+TABLE_ROW_COUNT,dim_listing,3208.0,3208.0,0.0,0,PASS,"Bảo toàn số dòng 100%, 0 dòng trùng phát sinh"
+TABLE_ROW_COUNT,fact_listing_snapshot,3208.0,3208.0,0.0,0,PASS,"Bảo toàn số dòng 100%, 0 dòng trùng phát sinh"
+TABLE_ROW_COUNT,fact_calendar,1170950.0,1170950.0,0.0,0,PASS,"Bảo toàn số dòng 100%, 0 dòng trùng phát sinh"
+TABLE_ROW_COUNT,fact_review,46000.0,46000.0,0.0,0,PASS,"Bảo toàn số dòng 100%, 0 dòng trùng phát sinh"
+BUSINESS_KPI,KPI-01 (Unique Listings),3208.0,3208.0,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+BUSINESS_KPI,KPI-02 (Median Price SGD),202.83,202.83,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+BUSINESS_KPI,KPI-03 (Entire Home %),38.4,38.4,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+BUSINESS_KPI,KPI-03 (Private Room %),56.95,56.95,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+BUSINESS_KPI,KPI-03 (Hotel Room %),2.59,2.59,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+BUSINESS_KPI,KPI-03 (Shared Room %),2.06,2.06,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+BUSINESS_KPI,KPI-04 (Available Night %),76.94,76.94,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+BUSINESS_KPI,KPI-05 (Average Rating),4.5394,4.5394,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+BUSINESS_KPI,Valid SGD Price Count,2725.0,2725.0,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+BUSINESS_KPI,Preserved NULL Price Count,483.0,483.0,0.0,0,PASS,Giá trị KPI nhất quán tuyệt đối giữa 2 lần chạy
+REFERENTIAL_INTEGRITY,orphan_calendar,0.0,0.0,0.0,0,PASS,"100% khớp khóa ngoại, 0 orphan key"
+REFERENTIAL_INTEGRITY,orphan_reviews,0.0,0.0,0.0,0,PASS,"100% khớp khóa ngoại, 0 orphan key"
