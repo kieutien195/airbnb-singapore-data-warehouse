@@ -1,4 +1,0 @@
-﻿check_id,noi_dung,so_ban_ghi_kiem_tra,ket_qua,trang_thai
-SRC-01,Currency trong price_quote_raw.quote.currency,2890,"JSON báo giá có dữ liệu: 2,890; SGD: 2,855; JSON có nhưng thiếu currency: 35; price_quote_raw NULL: 318; khác SGD: 0",Chỉ xác định SGD khi currency trong JSON bằng SGD
-SRC-02,Miền giá trị review_scores_rating,1839,"Min: 1.0; Max: 5.0; Hợp lệ 1–5: 1,839; Ngoài miền: 0",NULL không được tự động xem là điểm 0
-SRC-03,Đối chiếu Listings.price với price_quote_price_per_night,2725,"Có đủ hai giá trị để đối chiếu: 2,725; Khớp trong sai số 0,005 SGD: 2,725; Sai lệch vượt ngưỡng: 0",Chỉ đối chiếu các listing có currency SGD và đủ hai giá trị giá hợp lệ.
