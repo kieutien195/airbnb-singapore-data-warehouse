@@ -34,6 +34,9 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
+# Local slides and presentation assets
+slides/
+
 # Agent configurations and skills (local AI workspace)
 .agent/
 .agents/
